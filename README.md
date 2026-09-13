@@ -1,4 +1,14 @@
-﻿# Storage & Memory Global Compliance Management (GCM) Platform
+# Storage & Memory Global Compliance Management (GCM) Platform
+
+[![Release](https://img.shields.io/badge/Release-v1.0.0-emerald.svg)](https://github.com/convey2sathish/SanDisk-GCM/releases/tag/v1.0.0)
+[![Download EXE](https://img.shields.io/badge/Download-Standalone%20EXE-blue.svg)](https://github.com/convey2sathish/SanDisk-GCM/releases/download/v1.0.0/GCM_Platform.exe)
+[![Download ZIP](https://img.shields.io/badge/Download-ZIP%20Archive-sky.svg)](https://github.com/convey2sathish/SanDisk-GCM/releases/download/v1.0.0/GCM_Platform.zip)
+[![Coverage](https://img.shields.io/badge/Jurisdictions-205%20Countries-rose.svg)](#)
+[![Pillars](https://img.shields.io/badge/Pillars-Safety%20%7C%20EMC%20%7C%20Environmental-amber.svg)](#)
+
+> **Quick Download for Office Laptops (Zero-Install / No Python Required):**
+> * 🚀 **[Download Standalone Executable (GCM_Platform.exe)](https://github.com/convey2sathish/SanDisk-GCM/releases/download/v1.0.0/GCM_Platform.exe)** *(10.8 MB)*
+> * 📦 **[Download Portable ZIP Package (GCM_Platform.zip)](https://github.com/convey2sathish/SanDisk-GCM/releases/download/v1.0.0/GCM_Platform.zip)** *(10.6 MB)*
 
 An enterprise-grade **Global Compliance Management (GCM)** system built specifically for **Information Technology Equipment (ITE)**, focusing on Flash Memory, Removable Media, Solid State Drives, and Storage Peripherals.
 
