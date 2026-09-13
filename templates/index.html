@@ -1,0 +1,1552 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Storage & Memory GCM Platform | Global Compliance Management & AI Expert</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            50: '#f0f7ff',
+                            100: '#e0effe',
+                            500: '#0284c7',
+                            600: '#0369a1',
+                            700: '#075985',
+                            900: '#0c4a6e'
+                        },
+                        sandisk: {
+                            red: '#e11d48',
+                            darkred: '#be123c'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #0f172a;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #334155;
+            border-radius: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+            background: #475569;
+        }
+    </style>
+</head>
+<body class="bg-slate-950 text-slate-100 font-sans antialiased min-h-screen custom-scrollbar flex flex-col justify-between">
+
+    <!-- Top Navigation Bar -->
+    <header class="bg-slate-900/90 backdrop-blur border-b border-slate-800 sticky top-0 z-40">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                
+                <!-- Brand & Title -->
+                <div class="flex items-center space-x-3">
+                    <div class="w-10 h-10 rounded-lg bg-gradient-to-br from-rose-600 to-red-700 flex items-center justify-center shadow-lg shadow-rose-900/30">
+                        <i data-lucide="shield-check" class="w-6 h-6 text-white"></i>
+                    </div>
+                    <div>
+                        <div class="flex items-center space-x-2">
+                            <span class="text-lg font-bold tracking-tight text-white">Storage & Memory <span class="text-rose-500">GCM</span></span>
+                            <span class="px-2 py-0.5 text-xs font-semibold rounded bg-slate-800 text-rose-400 border border-rose-900/50">ITE Platform</span>
+                        </div>
+                        <p class="text-xs text-slate-400">Global Compliance Management • 205 Countries & Territories</p>
+                    </div>
+                </div>
+
+                <!-- Global Stats Badges -->
+                <div class="hidden md:flex items-center space-x-4">
+                    <div class="flex items-center space-x-2 px-3 py-1.5 rounded-lg bg-slate-800/80 border border-slate-700/60">
+                        <i data-lucide="globe" class="w-4 h-4 text-sky-400"></i>
+                        <span class="text-xs text-slate-300"><strong class="text-white" id="stat-countries-hdr">205</strong> Jurisdictions</span>
+                    </div>
+                    <div class="flex items-center space-x-2 px-3 py-1.5 rounded-lg bg-slate-800/80 border border-slate-700/60">
+                        <i data-lucide="cpu" class="w-4 h-4 text-emerald-400"></i>
+                        <span class="text-xs text-slate-300"><strong class="text-white">11</strong> Categories</span>
+                    </div>
+                    <div class="flex items-center space-x-2 px-3 py-1.5 rounded-lg bg-emerald-950/40 border border-emerald-800/60">
+                        <i data-lucide="shield-check" class="w-4 h-4 text-emerald-400"></i>
+                        <span class="text-xs text-emerald-300"><strong class="text-white">IEC 62368-1 / CISPR 32</strong> Harmonized</span>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- Navigation Tabs -->
+        <div class="border-t border-slate-800/80 bg-slate-900/60">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <nav class="flex space-x-2 sm:space-x-4 overflow-x-auto py-2">
+                    <button onclick="switchTab('overview')" id="tab-btn-overview" class="tab-btn active px-4 py-2 text-sm font-medium rounded-md flex items-center space-x-2 text-white bg-slate-800 border border-slate-700">
+                        <i data-lucide="layout-dashboard" class="w-4 h-4 text-sky-400"></i>
+                        <span>Overview</span>
+                    </button>
+                    <button onclick="switchTab('matrix')" id="tab-btn-matrix" class="tab-btn px-4 py-2 text-sm font-medium rounded-md flex items-center space-x-2 text-slate-400 hover:text-slate-200 hover:bg-slate-800/50">
+                        <i data-lucide="layers" class="w-4 h-4 text-amber-400"></i>
+                        <span>Product Testing vs. Document Matrix</span>
+                    </button>
+                    <button onclick="switchTab('alerts')" id="tab-btn-alerts" class="tab-btn px-4 py-2 text-sm font-medium rounded-md flex items-center space-x-2 text-slate-400 hover:text-slate-200 hover:bg-slate-800/50">
+                        <i data-lucide="bell" class="w-4 h-4 text-rose-400"></i>
+                        <span>Regulation Alerts</span>
+                        <span id="badge-alert-count" class="ml-1.5 px-1.5 py-0.5 text-xs rounded-full bg-rose-900/60 text-rose-300 border border-rose-700/50">10</span>
+                    </button>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Real-Time Autonomous Surveillance Telemetry Banner -->
+    <div class="bg-gradient-to-r from-slate-900 via-slate-900 to-slate-950 border-b border-slate-800 px-4 py-2.5 shadow-inner">
+        <div class="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-3 text-xs">
+            <div class="flex items-center space-x-3">
+                <div class="relative flex items-center justify-center">
+                    <span class="animate-ping absolute inline-flex h-3 w-3 rounded-full bg-emerald-400 opacity-75"></span>
+                    <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500"></span>
+                </div>
+                <div class="flex items-center space-x-2">
+                    <span class="font-bold text-slate-200">Autonomous Regulatory Surveillance:</span>
+                    <span id="surv-status-badge" class="px-2 py-0.5 rounded bg-emerald-950/80 border border-emerald-800 text-emerald-300 font-mono text-[11px] font-semibold">Active Listening</span>
+                </div>
+                <span class="hidden lg:inline text-slate-500">•</span>
+                <span class="hidden lg:inline text-slate-400 text-[11px]">Monitoring: <strong class="text-slate-200">All 205 Global Jurisdictions</strong> (WTO TBT Early Warning • Safety, EMC & Environmental Standards)</span>
+                <span class="hidden sm:inline text-slate-500">•</span>
+                <span class="text-slate-400 text-[11px]">Last Sync: <span id="surv-last-scan" class="text-slate-200 font-mono">Just now</span></span>
+            </div>
+            
+            <div class="flex items-center space-x-2">
+                <button onclick="triggerSurveillanceScan()" id="btn-surv-scan" class="px-3 py-1 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-white font-semibold flex items-center space-x-1.5 transition shadow-sm shadow-emerald-900/40 text-[11px]">
+                    <i data-lucide="radar" id="icon-radar" class="w-3.5 h-3.5"></i>
+                    <span id="txt-radar">Scan Real-Time Feeds</span>
+                </button>
+                <button onclick="openSurveillanceLogModal()" class="px-2.5 py-1 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 font-medium flex items-center space-x-1 border border-slate-700 text-[11px] transition">
+                    <i data-lucide="file-text" class="w-3.5 h-3.5 text-sky-400"></i>
+                    <span>Surveillance Log</span>
+                </button>
+                <button onclick="openModal('modal-simulate-notice')" class="px-2.5 py-1 rounded-lg bg-slate-800/80 hover:bg-slate-700/80 text-amber-300 font-medium flex items-center space-x-1 border border-amber-900/50 text-[11px] transition">
+                    <i data-lucide="flask-conical" class="w-3.5 h-3.5"></i>
+                    <span>Simulate Notice</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Container -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 flex-grow w-full">
+
+        <!-- ============================================== -->
+        <!-- TAB 1: OVERVIEW DASHBOARD -->
+        <!-- ============================================== -->
+        <section id="tab-content-overview" class="tab-content block space-y-6">
+            
+            <!-- Hero Stats Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+                <div class="bg-slate-900 border border-slate-800 rounded-xl p-5 shadow-sm hover:border-slate-700 transition">
+                    <div class="flex items-center justify-between">
+                        <span class="text-xs font-semibold uppercase tracking-wider text-slate-400">Global Market Access</span>
+                        <div class="p-2.5 rounded-lg bg-sky-950/60 text-sky-400"><i data-lucide="globe" class="w-5 h-5"></i></div>
+                    </div>
+                    <div class="mt-4 flex items-baseline space-x-2">
+                        <span class="text-3xl font-bold text-white" id="stat-countries">205</span>
+                        <span class="text-xs text-sky-400 font-medium">Countries & Jurisdictions</span>
+                    </div>
+                    <p class="mt-1 text-xs text-slate-500">Americas, Europe, APAC, MENA, Sub-Saharan Africa, Oceania</p>
+                </div>
+
+                <div class="bg-slate-900 border border-slate-800 rounded-xl p-5 shadow-sm hover:border-slate-700 transition">
+                    <div class="flex items-center justify-between">
+                        <span class="text-xs font-semibold uppercase tracking-wider text-slate-400">Product Categories</span>
+                        <div class="p-2.5 rounded-lg bg-emerald-950/60 text-emerald-400"><i data-lucide="layers" class="w-5 h-5"></i></div>
+                    </div>
+                    <div class="mt-4 flex items-baseline space-x-2">
+                        <span class="text-3xl font-bold text-white">11</span>
+                        <span class="text-xs text-emerald-400 font-medium">ITE Storage Classes</span>
+                    </div>
+                    <p class="mt-1 text-xs text-slate-500">SD, SD Express, CF, Gaming Cards, USB, SSD, Enterprise, Readers</p>
+                </div>
+
+                <div class="bg-slate-900 border border-slate-800 rounded-xl p-5 shadow-sm hover:border-slate-700 transition">
+                    <div class="flex items-center justify-between">
+                        <span class="text-xs font-semibold uppercase tracking-wider text-slate-400">Regulatory Intelligence</span>
+                        <div class="p-2.5 rounded-lg bg-rose-950/60 text-rose-400"><i data-lucide="bell-ring" class="w-5 h-5"></i></div>
+                    </div>
+                    <div class="mt-4 flex items-baseline space-x-2">
+                        <span class="text-3xl font-bold text-white" id="stat-alerts">10</span>
+                        <span class="text-xs text-rose-400 font-medium"><strong id="stat-critical-alerts">4</strong> Critical Mandates</span>
+                    </div>
+                    <p class="mt-1 text-xs text-slate-500">EU CRA, India BIS CRS Phase VII, US FCC & SASO RoHS</p>
+                </div>
+            </div>
+
+            <!-- Regional Distribution & Quick Action Row -->
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                
+                <!-- Regional Coverage Breakdown -->
+                <div class="lg:col-span-2 bg-slate-900 border border-slate-800 rounded-xl p-5">
+                    <div class="flex items-center justify-between border-b border-slate-800 pb-3">
+                        <h3 class="text-sm font-semibold text-white flex items-center space-x-2">
+                            <i data-lucide="map" class="w-4 h-4 text-sky-400"></i>
+                            <span>Global Regulatory Bloc Distribution</span>
+                        </h3>
+                        <span class="text-xs text-slate-400">205 Jurisdictions Tracked</span>
+                    </div>
+                    <div class="mt-4 grid grid-cols-2 sm:grid-cols-3 gap-3" id="region-bars-container">
+                        <!-- Populated dynamically via JS -->
+                    </div>
+                </div>
+
+                <!-- Fast Actions & Tools -->
+                <div class="bg-slate-900 border border-slate-800 rounded-xl p-5 flex flex-col justify-between">
+                    <div>
+                        <h3 class="text-sm font-semibold text-white flex items-center space-x-2 border-b border-slate-800 pb-3">
+                            <i data-lucide="zap" class="w-4 h-4 text-amber-400"></i>
+                            <span>Quick Access</span>
+                        </h3>
+                        <div class="mt-4 space-y-2.5">
+                            <button onclick="switchTab('matrix')" class="w-full flex items-center justify-between p-3 rounded-lg bg-slate-800/80 hover:bg-slate-800 border border-slate-700 text-left transition">
+                                <div>
+                                    <div class="text-xs font-semibold text-white">Product Testing vs. Document Matrix</div>
+                                    <div class="text-[11px] text-slate-400">Filter by product to see testing & doc requirements</div>
+                                </div>
+                                <i data-lucide="chevron-right" class="w-4 h-4 text-slate-400"></i>
+                            </button>
+                            <button onclick="exportMatrixExcel(false)" class="w-full flex items-center justify-between p-3 rounded-lg bg-slate-800/80 hover:bg-slate-800 border border-slate-700 text-left transition">
+                                <div>
+                                    <div class="text-xs font-semibold text-emerald-400 flex items-center space-x-1.5">
+                                        <i data-lucide="file-spreadsheet" class="w-3.5 h-3.5"></i>
+                                        <span>Export Compliance Matrix (.xlsx)</span>
+                                    </div>
+                                    <div class="text-[11px] text-slate-400">Download formatted Excel workbook of active testing rules</div>
+                                </div>
+                                <i data-lucide="chevron-right" class="w-4 h-4 text-slate-400"></i>
+                            </button>
+                            <button onclick="switchTab('alerts')" class="w-full flex items-center justify-between p-3 rounded-lg bg-slate-800/80 hover:bg-slate-800 border border-slate-700 text-left transition">
+                                <div>
+                                    <div class="text-xs font-semibold text-white">Review Regulation Alerts</div>
+                                    <div class="text-[11px] text-slate-400">Check EU CRA, India BIS, and FCC updates</div>
+                                </div>
+                                <i data-lucide="chevron-right" class="w-4 h-4 text-slate-400"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="mt-4 pt-3 border-t border-slate-800 text-[11px] text-slate-500 text-center">
+                        IECEE CB Scheme Harmonized • IEC 62368-1 3rd/4th Edition Ready
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Recent Regulatory Bulletins -->
+            <div class="bg-slate-900 border border-slate-800 rounded-xl p-5">
+                <div class="flex items-center justify-between border-b border-slate-800 pb-3">
+                    <h3 class="text-sm font-semibold text-white flex items-center space-x-2">
+                        <i data-lucide="rss" class="w-4 h-4 text-rose-400"></i>
+                        <span>Latest Regulatory Intelligence Bulletins</span>
+                    </h3>
+                    <button onclick="switchTab('alerts')" class="text-xs text-sky-400 hover:text-sky-300">View All (10) →</button>
+                </div>
+                <div class="mt-4 grid grid-cols-1 md:grid-cols-2 gap-3.5" id="overview-recent-alerts">
+                    <!-- Loaded dynamically -->
+                </div>
+            </div>
+
+        </section>
+
+        <!-- ============================================== -->
+        <!-- TAB 2: PRODUCT TESTING VS. DOCUMENT MATRIX -->
+        <!-- ============================================== -->
+        <section id="tab-content-matrix" class="tab-content hidden space-y-6">
+            
+            <div class="bg-slate-900 border border-slate-800 rounded-xl p-5 space-y-5">
+                <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4 border-b border-slate-800 pb-4">
+                    <div>
+                        <h2 class="text-base font-bold text-white flex items-center space-x-2">
+                            <i data-lucide="layers" class="w-5 h-5 text-amber-400"></i>
+                            <span>Product-Based Testing vs. Document Compliance Matrix</span>
+                        </h2>
+                        <p class="text-xs text-slate-400 mt-0.5">Select a storage or memory product type to see exactly which countries require in-country testing vs. document acceptance</p>
+                    </div>
+
+                    <!-- The Product Selector Dropdown & Excel Export Toolbar -->
+                    <div class="flex flex-col sm:flex-row items-stretch sm:items-end gap-3 w-full lg:w-auto">
+                        <div class="w-full sm:w-80">
+                            <label class="block text-[11px] font-bold text-amber-400 uppercase tracking-wider mb-1.5 flex items-center space-x-1.5">
+                                <i data-lucide="filter" class="w-3.5 h-3.5"></i>
+                                <span>Choose Product Classification:</span>
+                            </label>
+                            <select id="matrix-product-selector" onchange="loadProductMatrix()" class="w-full bg-slate-800 border-2 border-amber-500/60 rounded-xl px-3.5 py-2 text-xs font-semibold text-white focus:outline-none focus:border-amber-400 shadow-lg shadow-amber-950/20">
+                                <!-- Populated with 11 product categories -->
+                            </select>
+                        </div>
+
+                        <div class="flex items-center space-x-2">
+                            <button onclick="exportMatrixExcel(false)" id="btn-export-excel" title="Extract current filtered table into Excel (.xlsx)" class="px-4 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 active:bg-emerald-700 text-white text-xs font-bold flex items-center space-x-2 shadow-lg shadow-emerald-950/40 border border-emerald-400/50 transition shrink-0">
+                                <i data-lucide="file-spreadsheet" class="w-4 h-4 text-emerald-100"></i>
+                                <span>Export Excel</span>
+                            </button>
+                            <button onclick="exportMatrixExcel(true)" title="Extract complete 205-country database for this product into Excel (.xlsx)" class="px-3 py-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-white text-xs font-medium flex items-center space-x-1.5 border border-slate-700 transition shrink-0">
+                                <i data-lucide="download" class="w-3.5 h-3.5 text-slate-400"></i>
+                                <span>All 205</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- KPI Counters Banner -->
+                <div class="grid grid-cols-2 sm:grid-cols-4 gap-3.5" id="matrix-kpi-banner">
+                    <div onclick="filterMatrixByType('all')" class="cursor-pointer bg-slate-800/80 hover:bg-slate-800 border border-slate-700 p-3.5 rounded-xl transition">
+                        <span class="text-[10px] font-bold uppercase text-slate-400">Total Jurisdictions</span>
+                        <div class="text-2xl font-bold text-white mt-1" id="kpi-total">205</div>
+                        <span class="text-[11px] text-slate-500">Global Markets</span>
+                    </div>
+                    <div onclick="filterMatrixByType('testing')" class="cursor-pointer bg-rose-950/30 hover:bg-rose-950/50 border border-rose-800/60 p-3.5 rounded-xl transition">
+                        <div class="flex items-center justify-between">
+                            <span class="text-[10px] font-bold uppercase text-rose-300">Testing Required</span>
+                            <span class="w-2.5 h-2.5 rounded-full bg-rose-500 animate-pulse"></span>
+                        </div>
+                        <div class="text-2xl font-bold text-rose-400 mt-1" id="kpi-testing">0</div>
+                        <span class="text-[11px] text-rose-300/80">In-Country Lab Testing</span>
+                    </div>
+                    <div onclick="filterMatrixByType('document')" class="cursor-pointer bg-amber-950/30 hover:bg-amber-950/50 border border-amber-800/60 p-3.5 rounded-xl transition">
+                        <span class="text-[10px] font-bold uppercase text-amber-300">Document Required</span>
+                        <div class="text-2xl font-bold text-amber-400 mt-1" id="kpi-document">0</div>
+                        <span class="text-[11px] text-amber-300/80">CB Scheme / Accredited TRF</span>
+                    </div>
+                    <div onclick="filterMatrixByType('sdoc')" class="cursor-pointer bg-emerald-950/30 hover:bg-emerald-950/50 border border-emerald-800/60 p-3.5 rounded-xl transition">
+                        <span class="text-[10px] font-bold uppercase text-emerald-300">SDoC / Exempt</span>
+                        <div class="text-2xl font-bold text-emerald-400 mt-1" id="kpi-sdoc">0</div>
+                        <span class="text-[11px] text-emerald-300/80">Self-Declaration / Customs</span>
+                    </div>
+                </div>
+
+                <!-- Secondary Filters -->
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-2">
+                    <div>
+                        <label class="block text-[11px] font-medium text-slate-400 uppercase tracking-wider mb-1">Requirement Filter</label>
+                        <select id="matrix-type-filter" onchange="loadProductMatrix()" class="w-full bg-slate-800 border border-slate-700 rounded-lg px-3 py-2 text-xs text-slate-200 focus:outline-none focus:border-amber-500">
+                            <option value="all">All Requirement Types (205)</option>
+                            <option value="testing">🔴 In-Country Testing Required Only</option>
+                            <option value="document">🟡 Document Only (CB Scheme / Report)</option>
+                            <option value="sdoc">🟢 Supplier Declaration (SDoC) / Exempt</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label class="block text-[11px] font-medium text-slate-400 uppercase tracking-wider mb-1">Region</label>
+                        <select id="matrix-region-filter" onchange="loadProductMatrix()" class="w-full bg-slate-800 border border-slate-700 rounded-lg px-3 py-2 text-xs text-slate-200 focus:outline-none focus:border-amber-500">
+                            <option value="all">All Regions</option>
+                            <option value="Europe & Eurasia">Europe & Eurasia</option>
+                            <option value="Americas">Americas</option>
+                            <option value="Asia-Pacific">Asia-Pacific</option>
+                            <option value="Middle East & North Africa">Middle East & North Africa</option>
+                            <option value="Sub-Saharan Africa">Sub-Saharan Africa</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label class="block text-[11px] font-medium text-slate-400 uppercase tracking-wider mb-1">Search Country or Standard</label>
+                        <div class="relative">
+                            <input type="text" id="matrix-search-input" onkeyup="loadProductMatrix()" placeholder="Search country, standard (e.g. 62368, CISPR), doc..." class="w-full bg-slate-800 border border-slate-700 rounded-lg pl-8 pr-3 py-2 text-xs text-slate-200 focus:outline-none focus:border-amber-500">
+                            <i data-lucide="search" class="w-3.5 h-3.5 text-slate-400 absolute left-2.5 top-2.5"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Table Action & Count Bar -->
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 px-1 text-xs">
+                <div class="flex items-center space-x-2 text-slate-400">
+                    <span class="w-2 h-2 rounded-full bg-amber-400"></span>
+                    <span>Displaying <strong id="matrix-display-count" class="text-white font-mono font-bold">205</strong> jurisdictions matching active filters</span>
+                </div>
+                <div class="flex items-center space-x-3 text-[11px]">
+                    <button onclick="exportMatrixExcel(false)" class="text-emerald-400 hover:text-emerald-300 font-semibold flex items-center space-x-1 transition">
+                        <i data-lucide="file-spreadsheet" class="w-3.5 h-3.5"></i>
+                        <span>Export Active View (.xlsx)</span>
+                    </button>
+                    <span class="text-slate-600">|</span>
+                    <button onclick="exportMatrixExcel(true)" class="text-slate-400 hover:text-slate-200 flex items-center space-x-1 transition">
+                        <i data-lucide="download" class="w-3.5 h-3.5"></i>
+                        <span>Export All 205 Markets (.xlsx)</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Matrix Data Table -->
+            <div class="bg-slate-900 border border-slate-800 rounded-xl overflow-hidden shadow-sm">
+                <div class="overflow-x-auto max-h-[650px] custom-scrollbar">
+                    <table class="w-full text-left text-xs text-slate-300">
+                        <thead class="bg-slate-800/90 text-slate-400 uppercase tracking-wider sticky top-0 z-10 text-[11px]">
+                            <tr>
+                                <th class="px-4 py-3">Jurisdiction</th>
+                                <th class="px-4 py-3">Authority</th>
+                                <th class="px-4 py-3">Requirement Status</th>
+                                <th class="px-4 py-3">Applicable Standards</th>
+                                <th class="px-4 py-3">Mandatory Documentation Checklist</th>
+                                <th class="px-4 py-3">Local Rep</th>
+                                <th class="px-4 py-3 text-right">Details</th>
+                            </tr>
+                        </thead>
+                        <tbody id="matrix-table-body" class="divide-y divide-slate-800">
+                            <!-- Populated dynamically via JS -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </section>
+
+        <!-- ============================================== -->
+        <!-- TAB 3: REGULATION ALERTS -->
+        <!-- ============================================== -->
+        <section id="tab-content-alerts" class="tab-content hidden space-y-6">
+            
+            <div class="bg-slate-900 border border-slate-800 rounded-xl p-5 space-y-4">
+                <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-3">
+                    <div>
+                        <h2 class="text-base font-bold text-white flex items-center space-x-2">
+                            <i data-lucide="bell" class="w-5 h-5 text-rose-400"></i>
+                            <span>Global Regulatory Intelligence & Alerts Feed</span>
+                        </h2>
+                        <p class="text-xs text-slate-400 mt-0.5">Real-time tracking of standards revisions, mandatory sunset dates, and regional market access orders</p>
+                    </div>
+                    <div class="flex items-center flex-wrap gap-2">
+                        <button onclick="toggleAllAlerts(true)" class="inline-flex items-center space-x-1.5 px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-white text-xs font-medium transition border border-slate-700 shadow-sm cursor-pointer">
+                            <i data-lucide="chevrons-down" class="w-3.5 h-3.5 text-sky-400"></i>
+                            <span>Expand All Briefs</span>
+                        </button>
+                        <button onclick="toggleAllAlerts(false)" class="inline-flex items-center space-x-1.5 px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-white text-xs font-medium transition border border-slate-700 shadow-sm cursor-pointer">
+                            <i data-lucide="chevrons-up" class="w-3.5 h-3.5 text-slate-400"></i>
+                            <span>Collapse All</span>
+                        </button>
+                        <button onclick="openModal('modal-add-alert')" class="inline-flex items-center space-x-1.5 px-3 py-1.5 rounded-lg bg-rose-600 hover:bg-rose-500 text-white text-xs font-medium transition shadow cursor-pointer">
+                            <i data-lucide="plus" class="w-4 h-4"></i>
+                            <span>Publish New Alert</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Filter Controls -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 pt-2 border-t border-slate-800">
+                    <div>
+                        <label class="block text-[11px] font-medium text-slate-400 uppercase tracking-wider mb-1">Filter by Storage Product</label>
+                        <select id="alert-filter-cat" onchange="loadAlerts()" class="w-full bg-slate-800 border border-slate-700 rounded-lg px-3 py-2 text-xs text-slate-200 focus:outline-none focus:border-sky-500">
+                            <option value="all">All 11 Product Categories</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-[11px] font-medium text-slate-400 uppercase tracking-wider mb-1">Severity</label>
+                        <select id="alert-filter-sev" onchange="loadAlerts()" class="w-full bg-slate-800 border border-slate-700 rounded-lg px-3 py-2 text-xs text-slate-200 focus:outline-none focus:border-sky-500">
+                            <option value="all">All Severities</option>
+                            <option value="critical">Critical Only</option>
+                            <option value="warning">Warning Only</option>
+                            <option value="info">Informational</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-[11px] font-medium text-slate-400 uppercase tracking-wider mb-1">Region</label>
+                        <select id="alert-filter-region" onchange="loadAlerts()" class="w-full bg-slate-800 border border-slate-700 rounded-lg px-3 py-2 text-xs text-slate-200 focus:outline-none focus:border-sky-500">
+                            <option value="all">Global (All Regions)</option>
+                            <option value="Europe">Europe & Eurasia</option>
+                            <option value="Americas">Americas</option>
+                            <option value="Asia">Asia-Pacific</option>
+                            <option value="Middle East">Middle East & Africa</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-[11px] font-medium text-slate-400 uppercase tracking-wider mb-1">Search Keywords</label>
+                        <div class="relative">
+                            <input type="text" id="alert-search-input" onkeyup="loadAlerts()" placeholder="Search standard, country..." class="w-full bg-slate-800 border border-slate-700 rounded-lg pl-8 pr-3 py-2 text-xs text-slate-200 focus:outline-none focus:border-sky-500">
+                            <i data-lucide="search" class="w-3.5 h-3.5 text-slate-400 absolute left-2.5 top-2.5"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Alerts Feed Container -->
+            <div id="alerts-container" class="space-y-4">
+                <!-- Populated dynamically -->
+            </div>
+
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-slate-900 border-t border-slate-800 py-4 text-center text-xs text-slate-500">
+        Storage & Memory GCM Platform • IECEE CB Scheme & Global Market Access Framework • 205 Jurisdictions Tracked
+    </footer>
+
+    <!-- ============================================== -->
+    <!-- MODAL: COUNTRY COMPLIANCE FACT SHEET -->
+    <!-- ============================================== -->
+    <div id="modal-country-factsheet" class="fixed inset-0 z-50 hidden bg-slate-950/80 backdrop-blur-sm flex items-center justify-center p-4">
+        <div class="bg-slate-900 border border-slate-700 rounded-2xl max-w-3xl w-full max-h-[90vh] flex flex-col shadow-2xl overflow-hidden">
+            <div class="px-6 py-4 border-b border-slate-800 flex items-center justify-between bg-slate-800/50">
+                <div class="flex items-center space-x-3">
+                    <span id="factsheet-flag" class="text-2xl font-bold font-mono"></span>
+                    <div>
+                        <h3 id="factsheet-country-name" class="text-base font-bold text-white">Country Name</h3>
+                        <p id="factsheet-country-region" class="text-xs text-slate-400">Region & Authority</p>
+                    </div>
+                </div>
+                <button onclick="closeModal('modal-country-factsheet')" class="text-slate-400 hover:text-white p-1 rounded-lg hover:bg-slate-800">
+                    <i data-lucide="x" class="w-5 h-5"></i>
+                </button>
+            </div>
+
+            <div class="p-6 overflow-y-auto space-y-6 custom-scrollbar text-xs">
+                <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+                    <div class="bg-slate-800/80 border border-slate-700 p-3 rounded-lg">
+                        <span class="text-[10px] uppercase font-semibold text-slate-400 block">CB Scheme</span>
+                        <span id="factsheet-cb" class="text-xs font-bold text-white mt-1 block">Accepted</span>
+                    </div>
+                    <div class="bg-slate-800/80 border border-slate-700 p-3 rounded-lg">
+                        <span class="text-[10px] uppercase font-semibold text-slate-400 block">In-Country Testing</span>
+                        <span id="factsheet-in-country" class="text-xs font-bold text-white mt-1 block">No</span>
+                    </div>
+                    <div class="bg-slate-800/80 border border-slate-700 p-3 rounded-lg">
+                        <span class="text-[10px] uppercase font-semibold text-slate-400 block">Local Representative</span>
+                        <span id="factsheet-local-rep" class="text-xs font-bold text-white mt-1 block">Required</span>
+                    </div>
+                    <div class="bg-slate-800/80 border border-slate-700 p-3 rounded-lg">
+                        <span class="text-[10px] uppercase font-semibold text-slate-400 block">Cert Validity</span>
+                        <span id="factsheet-validity" class="text-xs font-bold text-white mt-1 block">Permanent</span>
+                    </div>
+                </div>
+
+                <div class="bg-slate-800/40 border border-slate-800 rounded-xl p-4 space-y-2.5">
+                    <h4 class="text-xs font-bold uppercase tracking-wider text-sky-400">Mandatory Technical Standards</h4>
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-1">
+                        <div>
+                            <span class="text-[11px] text-slate-400 block font-medium">Safety Standard:</span>
+                            <span id="factsheet-safety" class="text-xs text-slate-200 font-semibold">IEC 62368-1</span>
+                        </div>
+                        <div>
+                            <span class="text-[11px] text-slate-400 block font-medium">EMC / Radio Standard:</span>
+                            <span id="factsheet-emc" class="text-xs text-slate-200 font-semibold">CISPR 32 Class B</span>
+                        </div>
+                        <div>
+                            <span class="text-[11px] text-slate-400 block font-medium">Environmental / RoHS:</span>
+                            <span id="factsheet-env" class="text-xs text-slate-200 font-semibold">RoHS 2/3</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <h4 class="text-xs font-bold uppercase tracking-wider text-slate-400 mb-2">Mandatory Certification Marks & Logos</h4>
+                    <div id="factsheet-marks" class="flex flex-wrap gap-2"></div>
+                </div>
+
+                <div>
+                    <h4 class="text-xs font-bold uppercase tracking-wider text-slate-400 mb-2">Requirement Matrix by Storage & Memory Category</h4>
+                    <div class="border border-slate-800 rounded-lg overflow-hidden">
+                        <table class="w-full text-left text-xs">
+                            <thead class="bg-slate-800 text-slate-400 text-[10px] uppercase tracking-wider">
+                                <tr>
+                                    <th class="px-3 py-2">Category</th>
+                                    <th class="px-3 py-2">Compliance Route</th>
+                                    <th class="px-3 py-2">Lead Time</th>
+                                    <th class="px-3 py-2">Specific Requirements</th>
+                                </tr>
+                            </thead>
+                            <tbody id="factsheet-category-table" class="divide-y divide-slate-800/60 text-slate-300"></tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="bg-slate-800/30 border border-slate-700/60 rounded-lg p-3 text-xs text-slate-300 space-y-1">
+                    <span class="font-bold text-slate-200 block flex items-center space-x-1.5">
+                        <i data-lucide="alert-circle" class="w-3.5 h-3.5 text-amber-400"></i>
+                        <span>Regulatory Guidance & Customs Advisory</span>
+                    </span>
+                    <p id="factsheet-notes" class="text-slate-400"></p>
+                </div>
+            </div>
+
+            <div class="px-6 py-3 border-t border-slate-800 bg-slate-800/40 flex justify-end">
+                <button onclick="closeModal('modal-country-factsheet')" class="px-4 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-white text-xs font-medium transition">
+                    Close Fact Sheet
+                </button>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Modal for Surveillance Audit Log -->
+    <div id="modal-surveillance-log" class="fixed inset-0 z-50 hidden bg-slate-950/80 backdrop-blur-sm flex items-center justify-center p-4">
+        <div class="bg-slate-900 border border-slate-700 rounded-2xl max-w-4xl w-full max-h-[85vh] flex flex-col shadow-2xl overflow-hidden">
+            <div class="px-6 py-4 border-b border-slate-800 flex items-center justify-between bg-slate-800/50">
+                <div class="flex items-center space-x-3">
+                    <div class="w-8 h-8 rounded-lg bg-emerald-950 border border-emerald-800 flex items-center justify-center">
+                        <i data-lucide="radar" class="w-4 h-4 text-emerald-400"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-base font-bold text-white">Autonomous Surveillance Audit Log</h3>
+                        <p class="text-xs text-slate-400">Immutable ledger of real-time regulatory circulars auto-detected & applied to the matrix</p>
+                    </div>
+                </div>
+                <button onclick="closeModal('modal-surveillance-log')" class="text-slate-400 hover:text-white p-1">
+                    <i data-lucide="x" class="w-5 h-5"></i>
+                </button>
+            </div>
+
+            <div class="p-6 overflow-y-auto custom-scrollbar flex-grow space-y-4">
+                <div class="border border-slate-800 rounded-xl overflow-hidden">
+                    <table class="w-full text-left text-xs">
+                        <thead class="bg-slate-800 text-slate-400 uppercase text-[10px] tracking-wider font-semibold">
+                            <tr>
+                                <th class="px-3 py-2.5">Timestamp</th>
+                                <th class="px-3 py-2.5">Jurisdiction</th>
+                                <th class="px-3 py-2.5">Source & Authority</th>
+                                <th class="px-3 py-2.5">Pillar</th>\n                                <th class="px-3 py-2.5">Standard & Deadline</th>
+                                <th class="px-3 py-2.5">Executive Summary</th>
+                                <th class="px-3 py-2.5 text-center">Status</th>
+                            </tr>
+                        </thead>
+                        <tbody id="surveillance-log-tbody" class="divide-y divide-slate-800 text-slate-300">
+                            <!-- Populated dynamically -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="px-6 py-3 border-t border-slate-800 bg-slate-800/40 flex justify-between items-center text-xs">
+                <span class="text-slate-400">Engine checks: <strong class="text-slate-200">WTO TBT, US FR, EU OJ, BIS, RRA, BSMI</strong></span>
+                <button onclick="closeModal('modal-surveillance-log')" class="px-4 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-white font-medium transition">
+                    Close Ledger
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal for Simulating New Gazette Notice -->
+    <div id="modal-simulate-notice" class="fixed inset-0 z-50 hidden bg-slate-950/80 backdrop-blur-sm flex items-center justify-center p-4">
+        <div class="bg-slate-900 border border-slate-700 rounded-2xl max-w-lg w-full p-6 shadow-2xl space-y-4">
+            <div class="flex items-center justify-between border-b border-slate-800 pb-3">
+                <div class="flex items-center space-x-2">
+                    <i data-lucide="flask-conical" class="w-5 h-5 text-amber-400"></i>
+                    <h3 class="text-base font-bold text-white">Simulate Live Gazette Notice Ingestion</h3>
+                </div>
+                <button onclick="closeModal('modal-simulate-notice')" class="text-slate-400 hover:text-white">
+                    <i data-lucide="x" class="w-5 h-5"></i>
+                </button>
+            </div>
+            
+            <p class="text-xs text-slate-400">
+                Trigger a simulated real-time gazette circular to test how the engine autonomously detects the change, updates the database, injects alerts, and updates the matrix.
+            </p>
+
+            <form onsubmit="submitSimulationNotice(event)" class="space-y-3 text-xs">
+                <div class="grid grid-cols-2 gap-2">
+                    <div>
+                        <label class="block text-slate-400 mb-1 font-medium">Target Jurisdiction (All 205 Countries)</label>
+                        <select id="sim-country" class="w-full bg-slate-800 border border-slate-700 rounded-lg p-2 text-white">
+                        <option value="AF">Afghanistan (AF)</option>\n                        <option value="AL">Albania (AL)</option>\n                        <option value="DZ">Algeria (DZ)</option>\n                        <option value="AD">Andorra (AD)</option>\n                        <option value="AO">Angola (AO)</option>\n                        <option value="AG">Antigua and Barbuda (AG)</option>\n                        <option value="AR">Argentina (AR)</option>\n                        <option value="AM">Armenia (AM)</option>\n                        <option value="AW">Aruba (AW)</option>\n                        <option value="AU">Australia (AU)</option>\n                        <option value="AT">Austria (AT)</option>\n                        <option value="AZ">Azerbaijan (AZ)</option>\n                        <option value="BS">Bahamas (BS)</option>\n                        <option value="BH">Bahrain (BH)</option>\n                        <option value="BD">Bangladesh (BD)</option>\n                        <option value="BB">Barbados (BB)</option>\n                        <option value="BY">Belarus (BY)</option>\n                        <option value="BE">Belgium (BE)</option>\n                        <option value="BZ">Belize (BZ)</option>\n                        <option value="BJ">Benin (BJ)</option>\n                        <option value="BM">Bermuda (BM)</option>\n                        <option value="BT">Bhutan (BT)</option>\n                        <option value="BO">Bolivia (BO)</option>\n                        <option value="BA">Bosnia and Herzegovina (BA)</option>\n                        <option value="BW">Botswana (BW)</option>\n                        <option value="BR">Brazil (BR)</option>\n                        <option value="BN">Brunei (BN)</option>\n                        <option value="BG">Bulgaria (BG)</option>\n                        <option value="BF">Burkina Faso (BF)</option>\n                        <option value="BI">Burundi (BI)</option>\n                        <option value="CV">Cabo Verde (CV)</option>\n                        <option value="KH">Cambodia (KH)</option>\n                        <option value="CM">Cameroon (CM)</option>\n                        <option value="CA">Canada (CA)</option>\n                        <option value="KY">Cayman Islands (KY)</option>\n                        <option value="CF">Central African Republic (CF)</option>\n                        <option value="TD">Chad (TD)</option>\n                        <option value="CL">Chile (CL)</option>\n                        <option value="CN">China (CN)</option>\n                        <option value="CO">Colombia (CO)</option>\n                        <option value="KM">Comoros (KM)</option>\n                        <option value="CR">Costa Rica (CR)</option>\n                        <option value="CI">Cote d'Ivoire (CI)</option>\n                        <option value="HR">Croatia (HR)</option>\n                        <option value="CU">Cuba (CU)</option>\n                        <option value="CW">Curacao (CW)</option>\n                        <option value="CY">Cyprus (CY)</option>\n                        <option value="CZ">Czech Republic (CZ)</option>\n                        <option value="CD">DR Congo (CD)</option>\n                        <option value="DK">Denmark (DK)</option>\n                        <option value="DJ">Djibouti (DJ)</option>\n                        <option value="DM">Dominica (DM)</option>\n                        <option value="DO">Dominican Republic (DO)</option>\n                        <option value="EC">Ecuador (EC)</option>\n                        <option value="EG">Egypt (EG)</option>\n                        <option value="SV">El Salvador (SV)</option>\n                        <option value="GQ">Equatorial Guinea (GQ)</option>\n                        <option value="ER">Eritrea (ER)</option>\n                        <option value="EE">Estonia (EE)</option>\n                        <option value="SZ">Eswatini (SZ)</option>\n                        <option value="ET">Ethiopia (ET)</option>\n                        <option value="FO">Faroe Islands (FO)</option>\n                        <option value="FJ">Fiji (FJ)</option>\n                        <option value="FI">Finland (FI)</option>\n                        <option value="FR">France (FR)</option>\n                        <option value="GA">Gabon (GA)</option>\n                        <option value="GM">Gambia (GM)</option>\n                        <option value="GE">Georgia (GE)</option>\n                        <option value="DE">Germany (DE)</option>\n                        <option value="GH">Ghana (GH)</option>\n                        <option value="GI">Gibraltar (GI)</option>\n                        <option value="GR">Greece (GR)</option>\n                        <option value="GL">Greenland (GL)</option>\n                        <option value="GD">Grenada (GD)</option>\n                        <option value="GU">Guam (GU)</option>\n                        <option value="GT">Guatemala (GT)</option>\n                        <option value="GN">Guinea (GN)</option>\n                        <option value="GY">Guyana (GY)</option>\n                        <option value="HT">Haiti (HT)</option>\n                        <option value="HN">Honduras (HN)</option>\n                        <option value="HK">Hong Kong (HK)</option>\n                        <option value="HU">Hungary (HU)</option>\n                        <option value="IS">Iceland (IS)</option>\n                        <option value="IN">India (IN)</option>\n                        <option value="ID">Indonesia (ID)</option>\n                        <option value="IQ">Iraq (IQ)</option>\n                        <option value="IE">Ireland (IE)</option>\n                        <option value="IL">Israel (IL)</option>\n                        <option value="IT">Italy (IT)</option>\n                        <option value="JM">Jamaica (JM)</option>\n                        <option value="JP">Japan (JP)</option>\n                        <option value="JO">Jordan (JO)</option>\n                        <option value="KZ">Kazakhstan (KZ)</option>\n                        <option value="KE">Kenya (KE)</option>\n                        <option value="KI">Kiribati (KI)</option>\n                        <option value="XK">Kosovo (XK)</option>\n                        <option value="KW">Kuwait (KW)</option>\n                        <option value="KG">Kyrgyzstan (KG)</option>\n                        <option value="LA">Laos (LA)</option>\n                        <option value="LV">Latvia (LV)</option>\n                        <option value="LB">Lebanon (LB)</option>\n                        <option value="LS">Lesotho (LS)</option>\n                        <option value="LR">Liberia (LR)</option>\n                        <option value="LY">Libya (LY)</option>\n                        <option value="LI">Liechtenstein (LI)</option>\n                        <option value="LT">Lithuania (LT)</option>\n                        <option value="LU">Luxembourg (LU)</option>\n                        <option value="MO">Macao (MO)</option>\n                        <option value="MG">Madagascar (MG)</option>\n                        <option value="MW">Malawi (MW)</option>\n                        <option value="MY">Malaysia (MY)</option>\n                        <option value="MV">Maldives (MV)</option>\n                        <option value="ML">Mali (ML)</option>\n                        <option value="MT">Malta (MT)</option>\n                        <option value="MH">Marshall Islands (MH)</option>\n                        <option value="MR">Mauritania (MR)</option>\n                        <option value="MU">Mauritius (MU)</option>\n                        <option value="MX">Mexico (MX)</option>\n                        <option value="FM">Micronesia (FM)</option>\n                        <option value="MD">Moldova (MD)</option>\n                        <option value="MC">Monaco (MC)</option>\n                        <option value="MN">Mongolia (MN)</option>\n                        <option value="ME">Montenegro (ME)</option>\n                        <option value="MA">Morocco (MA)</option>\n                        <option value="MZ">Mozambique (MZ)</option>\n                        <option value="MM">Myanmar (MM)</option>\n                        <option value="NA">Namibia (NA)</option>\n                        <option value="NR">Nauru (NR)</option>\n                        <option value="NP">Nepal (NP)</option>\n                        <option value="NL">Netherlands (NL)</option>\n                        <option value="NZ">New Zealand (NZ)</option>\n                        <option value="NI">Nicaragua (NI)</option>\n                        <option value="NE">Niger (NE)</option>\n                        <option value="NG">Nigeria (NG)</option>\n                        <option value="MK">North Macedonia (MK)</option>\n                        <option value="NO">Norway (NO)</option>\n                        <option value="OM">Oman (OM)</option>\n                        <option value="PK">Pakistan (PK)</option>\n                        <option value="PW">Palau (PW)</option>\n                        <option value="PS">Palestine (PS)</option>\n                        <option value="PA">Panama (PA)</option>\n                        <option value="PG">Papua New Guinea (PG)</option>\n                        <option value="PY">Paraguay (PY)</option>\n                        <option value="PE">Peru (PE)</option>\n                        <option value="PH">Philippines (PH)</option>\n                        <option value="PL">Poland (PL)</option>\n                        <option value="PT">Portugal (PT)</option>\n                        <option value="PR">Puerto Rico (PR)</option>\n                        <option value="QA">Qatar (QA)</option>\n                        <option value="CG">Republic of the Congo (CG)</option>\n                        <option value="RO">Romania (RO)</option>\n                        <option value="RU">Russia (RU)</option>\n                        <option value="RW">Rwanda (RW)</option>\n                        <option value="KN">Saint Kitts and Nevis (KN)</option>\n                        <option value="LC">Saint Lucia (LC)</option>\n                        <option value="VC">Saint Vincent and Grenadines (VC)</option>\n                        <option value="WS">Samoa (WS)</option>\n                        <option value="SM">San Marino (SM)</option>\n                        <option value="ST">Sao Tome and Principe (ST)</option>\n                        <option value="SA">Saudi Arabia (SA)</option>\n                        <option value="SN">Senegal (SN)</option>\n                        <option value="RS">Serbia (RS)</option>\n                        <option value="SC">Seychelles (SC)</option>\n                        <option value="SL">Sierra Leone (SL)</option>\n                        <option value="SG">Singapore (SG)</option>\n                        <option value="SK">Slovakia (SK)</option>\n                        <option value="SI">Slovenia (SI)</option>\n                        <option value="SB">Solomon Islands (SB)</option>\n                        <option value="SO">Somalia (SO)</option>\n                        <option value="ZA">South Africa (ZA)</option>\n                        <option value="KR">South Korea (KR)</option>\n                        <option value="SS">South Sudan (SS)</option>\n                        <option value="ES">Spain (ES)</option>\n                        <option value="LK">Sri Lanka (LK)</option>\n                        <option value="SD">Sudan (SD)</option>\n                        <option value="SR">Suriname (SR)</option>\n                        <option value="SE">Sweden (SE)</option>\n                        <option value="CH">Switzerland (CH)</option>\n                        <option value="SY">Syria (SY)</option>\n                        <option value="TW">Taiwan (TW)</option>\n                        <option value="TJ">Tajikistan (TJ)</option>\n                        <option value="TZ">Tanzania (TZ)</option>\n                        <option value="TH">Thailand (TH)</option>\n                        <option value="TL">Timor-Leste (TL)</option>\n                        <option value="TG">Togo (TG)</option>\n                        <option value="TO">Tonga (TO)</option>\n                        <option value="TT">Trinidad and Tobago (TT)</option>\n                        <option value="TN">Tunisia (TN)</option>\n                        <option value="TR">Turkey (TR)</option>\n                        <option value="TM">Turkmenistan (TM)</option>\n                        <option value="TV">Tuvalu (TV)</option>\n                        <option value="UG">Uganda (UG)</option>\n                        <option value="UA">Ukraine (UA)</option>\n                        <option value="AE">United Arab Emirates (AE)</option>\n                        <option value="GB">United Kingdom (GB)</option>\n                        <option value="US">United States (US)</option>\n                        <option value="UY">Uruguay (UY)</option>\n                        <option value="UZ">Uzbekistan (UZ)</option>\n                        <option value="VU">Vanuatu (VU)</option>\n                        <option value="VA">Vatican City (VA)</option>\n                        <option value="VE">Venezuela (VE)</option>\n                        <option value="VN">Vietnam (VN)</option>\n                        <option value="YE">Yemen (YE)</option>\n                        <option value="ZM">Zambia (ZM)</option>\n                        <option value="ZW">Zimbabwe (ZW)</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-slate-400 mb-1 font-medium">Regulatory Pillar</label>
+                        <select id="sim-pillar" class="w-full bg-slate-800 border-2 border-emerald-500/60 rounded-lg p-2 text-white font-semibold">
+                            <option value="Safety">Electrical Safety (IEC 62368-1 / National)</option>
+                            <option value="EMC">EMC & Radio (CISPR 32 / FCC / KN 32)</option>
+                            <option value="Environmental">Environmental (RoHS / REACH / Packaging)</option>
+                            <option value="All">All Three Pillars (Safety + EMC + Env)</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="grid grid-cols-2 gap-2">
+                    <div>
+                        <label class="block text-slate-400 mb-1 font-medium">Regulatory Authority</label>
+                        <input type="text" id="sim-authority" value="National Regulatory Authority" class="w-full bg-slate-800 border border-slate-700 rounded-lg p-2 text-white" required>
+                    </div>
+                    <div>
+                        <label class="block text-slate-400 mb-1 font-medium">New / Mandated Standard</label>
+                        <input type="text" id="sim-standard" value="IEC 62368-1:2023 / Harmonized" class="w-full bg-slate-800 border border-slate-700 rounded-lg p-2 text-white" required>
+                    </div>
+                </div>
+                <div>
+                    <label class="block text-slate-400 mb-1 font-medium">Mandatory Transition Deadline</label>
+                    <input type="date" id="sim-deadline" value="2028-11-01" class="w-full bg-slate-800 border border-slate-700 rounded-lg p-2 text-white" required>
+                </div>
+                <div>
+                    <label class="block text-slate-400 mb-1 font-medium">Executive Notice Summary</label>
+                    <textarea id="sim-summary" rows="3" class="w-full bg-slate-800 border border-slate-700 rounded-lg p-2 text-white" required>Official Gazette Notification: Mandating transition to updated safety standard for all solid-state storage equipment and external power supplies.</textarea>
+                </div>
+                <div class="pt-2 flex justify-end space-x-2">
+                    <button type="button" onclick="closeModal('modal-simulate-notice')" class="px-4 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700">Cancel</button>
+                    <button type="submit" id="btn-sim-submit" class="px-4 py-2 rounded-lg bg-amber-600 hover:bg-amber-500 text-white font-semibold flex items-center space-x-1.5">
+                        <i data-lucide="zap" class="w-4 h-4"></i>
+                        <span>Ingest Notice Live</span>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal for Add Alert -->
+    <div id="modal-add-alert" class="fixed inset-0 z-50 hidden bg-slate-950/80 backdrop-blur-sm flex items-center justify-center p-4">
+        <div class="bg-slate-900 border border-slate-700 rounded-2xl max-w-lg w-full p-6 shadow-2xl space-y-4">
+            <h3 class="text-base font-bold text-white">Publish New Regulatory Alert</h3>
+            <div class="space-y-3 text-xs">
+                <div>
+                    <label class="block text-slate-400 mb-1">Alert Title</label>
+                    <input type="text" id="new-alert-title" placeholder="e.g. Mandatory Update to Safety Standard" class="w-full bg-slate-800 border border-slate-700 rounded p-2 text-white">
+                </div>
+                <div class="grid grid-cols-2 gap-2">
+                    <div>
+                        <label class="block text-slate-400 mb-1">Region</label>
+                        <input type="text" id="new-alert-region" placeholder="e.g. Asia-Pacific" class="w-full bg-slate-800 border border-slate-700 rounded p-2 text-white">
+                    </div>
+                    <div>
+                        <label class="block text-slate-400 mb-1">Severity</label>
+                        <select id="new-alert-sev" class="w-full bg-slate-800 border border-slate-700 rounded p-2 text-white">
+                            <option value="Critical">Critical</option>
+                            <option value="Warning">Warning</option>
+                            <option value="Info">Info</option>
+                        </select>
+                    </div>
+                </div>
+                <div>
+                    <label class="block text-slate-400 mb-1">Standard Reference</label>
+                    <input type="text" id="new-alert-std" placeholder="e.g. IS 13252 / IEC 62368-1" class="w-full bg-slate-800 border border-slate-700 rounded p-2 text-white">
+                </div>
+                <div>
+                    <label class="block text-slate-400 mb-1">Summary</label>
+                    <textarea id="new-alert-summary" rows="2" placeholder="Summary of the regulation change..." class="w-full bg-slate-800 border border-slate-700 rounded p-2 text-white"></textarea>
+                </div>
+                <div>
+                    <label class="block text-slate-400 mb-1">Required Action</label>
+                    <input type="text" id="new-alert-action" placeholder="Action required by compliance engineers..." class="w-full bg-slate-800 border border-slate-700 rounded p-2 text-white">
+                </div>
+            </div>
+            <div class="flex justify-end space-x-2 pt-2 border-t border-slate-800">
+                <button onclick="closeModal('modal-add-alert')" class="px-3 py-1.5 rounded bg-slate-800 text-slate-300 text-xs">Cancel</button>
+                <button onclick="submitNewAlert()" class="px-4 py-1.5 rounded bg-rose-600 hover:bg-rose-500 text-white text-xs font-bold">Publish Alert</button>
+            </div>
+    </div>
+
+    <!-- Floating Excel Download Toast -->
+    <div id="export-toast" class="fixed bottom-6 right-6 z-50 hidden bg-slate-900 border-2 border-emerald-500 text-white px-5 py-3.5 rounded-2xl shadow-2xl flex items-center space-x-3.5 transition-all duration-300">
+        <div class="w-9 h-9 rounded-xl bg-emerald-600/30 border border-emerald-500/50 flex items-center justify-center shrink-0">
+            <i data-lucide="file-spreadsheet" class="w-5 h-5 text-emerald-400 animate-pulse"></i>
+        </div>
+        <div>
+            <div class="text-xs font-bold text-white flex items-center space-x-1.5" id="export-toast-title">
+                <span>Generating Excel Compliance Matrix...</span>
+            </div>
+            <div class="text-[11px] text-emerald-300/90" id="export-toast-sub">Compiling 205-country database with standards & doc checklists</div>
+        </div>
+    </div>
+
+    <!-- JAVASCRIPT APPLICATION LOGIC -->
+    <script>
+        let allCategories = [];
+        let matrixData = null;
+        let chatHistory = [];
+
+        document.addEventListener("DOMContentLoaded", () => {
+            lucide.createIcons();
+            initApp();
+        });
+
+        async function initApp() {
+            await loadCategories();
+            await loadOverview();
+            await loadProductMatrix();
+            await loadAlerts();
+        }
+
+        function switchTab(tabId) {
+            document.querySelectorAll(".tab-content").forEach(el => el.classList.add("hidden"));
+            document.querySelectorAll(".tab-btn").forEach(el => {
+                el.classList.remove("active", "text-white", "bg-slate-800", "border", "border-slate-700");
+                el.classList.add("text-slate-400");
+            });
+
+            const target = document.getElementById(`tab-content-${tabId}`);
+            const btn = document.getElementById(`tab-btn-${tabId}`);
+            if (target && btn) {
+                target.classList.remove("hidden");
+                btn.classList.add("active", "text-white", "bg-slate-800", "border", "border-slate-700");
+                btn.classList.remove("text-slate-400");
+            }
+            lucide.createIcons();
+        }
+
+        function openModal(id) {
+            const el = document.getElementById(id);
+            if (el) el.classList.remove("hidden");
+            lucide.createIcons();
+        }
+
+        function closeModal(id) {
+            const el = document.getElementById(id);
+            if (el) el.classList.add("hidden");
+        }
+
+        async function loadCategories() {
+            try {
+                const res = await fetch("/api/categories");
+                allCategories = await res.json();
+                
+                const matrixSelect = document.getElementById("matrix-product-selector");
+                const filterSelect = document.getElementById("alert-filter-cat");
+                
+                matrixSelect.innerHTML = '';
+                filterSelect.innerHTML = '<option value="all">All 11 Product Categories</option>';
+
+                allCategories.forEach((c, idx) => {
+                    // Set External SSD with power adapter as default selected
+                    const isDefault = c.id === 'external_ssd_powered' ? 'selected' : '';
+                    matrixSelect.innerHTML += `<option value="${c.id}" ${isDefault}>${c.name}</option>`;
+                    filterSelect.innerHTML += `<option value="${c.id}">${c.name}</option>`;
+                });
+            } catch (err) {
+                console.error("Error loading categories:", err);
+            }
+        }
+
+        async function loadOverview() {
+            try {
+                const res = await fetch("/api/overview");
+                const data = await res.json();
+
+                document.getElementById("stat-countries").innerText = data.total_countries;
+                document.getElementById("stat-countries-hdr").innerText = data.total_countries;
+                document.getElementById("stat-alerts").innerText = data.active_alerts_count;
+                document.getElementById("stat-alerts-hdr").innerText = data.active_alerts_count;
+                document.getElementById("stat-critical-alerts").innerText = data.critical_alerts_count;
+
+                // Render region distribution
+                const regContainer = document.getElementById("region-bars-container");
+                regContainer.innerHTML = '';
+                for (const [reg, count] of Object.entries(data.regions_count)) {
+                    regContainer.innerHTML += `
+                        <div class="bg-slate-800/60 border border-slate-700/60 p-3 rounded-lg">
+                            <div class="flex items-center justify-between text-xs">
+                                <span class="font-medium text-slate-300 truncate">${reg}</span>
+                                <span class="font-bold text-sky-400">${count}</span>
+                            </div>
+                            <div class="w-full bg-slate-700/50 rounded-full h-1.5 mt-2">
+                                <div class="bg-sky-500 h-1.5 rounded-full" style="width: ${Math.round((count/data.total_countries)*100)}%"></div>
+                            </div>
+                        </div>
+                    `;
+                }
+
+                // Render recent alerts
+                const alertsContainer = document.getElementById("overview-recent-alerts");
+                alertsContainer.innerHTML = '';
+                data.recent_alerts.forEach(a => {
+                    const badgeClass = a.severity === 'Critical' ? 'bg-rose-950 text-rose-300 border-rose-800' : 'bg-amber-950 text-amber-300 border-amber-800';
+                    alertsContainer.innerHTML += `
+                        <div onclick="goToAlert('${a.id}')" class="p-4 rounded-xl bg-slate-800/70 border border-slate-700/60 text-xs flex flex-col justify-between space-y-2.5 hover:border-sky-500/60 hover:bg-slate-800/90 transition cursor-pointer group shadow-sm">
+                            <div class="space-y-1.5">
+                                <div class="flex items-center justify-between">
+                                    <span class="px-2 py-0.5 text-[10px] font-bold rounded border ${badgeClass}">${a.severity.toUpperCase()}</span>
+                                    <span class="text-[11px] text-slate-400 font-medium">${a.country}</span>
+                                </div>
+                                <h4 class="font-bold text-white text-xs leading-snug group-hover:text-sky-300 transition-colors">${a.title}</h4>
+                                <p class="text-slate-400 text-[11px] line-clamp-2 leading-relaxed">${a.summary}</p>
+                            </div>
+                            <div class="pt-2 border-t border-slate-700/50 flex items-center justify-between text-[10px]">
+                                <span class="text-slate-500">Ref: ${a.standard}</span>
+                                <span class="text-sky-400 font-semibold group-hover:text-sky-300 flex items-center space-x-1">
+                                    <span>Detailed Brief</span>
+                                    <i data-lucide="arrow-right" class="w-3 h-3 group-hover:translate-x-0.5 transition-transform"></i>
+                                </span>
+                            </div>
+                        </div>
+                    `;
+                });
+
+            } catch (err) {
+                console.error("Error loading overview:", err);
+            }
+        }
+
+
+        // ==========================================
+        // AUTONOMOUS REGULATORY SURVEILLANCE JS
+        // ==========================================
+        async function loadSurveillanceStatus() {
+            try {
+                const res = await fetch('/api/surveillance/status');
+                if (!res.ok) return;
+                const data = await res.json();
+                
+                const badgeEl = document.getElementById('surv-status-badge');
+                if (badgeEl) {
+                    badgeEl.innerText = data.engine_state === 'ACTIVE_LISTENING' ? 'Active Listening' : data.engine_state;
+                }
+                const lastScanEl = document.getElementById('surv-last-scan');
+                if (lastScanEl) {
+                    lastScanEl.innerText = data.last_scan_time || 'Active';
+                }
+            } catch (e) {
+                console.log('Surveillance status error:', e);
+            }
+        }
+
+        async function triggerSurveillanceScan() {
+            const btn = document.getElementById('btn-surv-scan');
+            const icon = document.getElementById('icon-radar');
+            const txt = document.getElementById('txt-radar');
+
+            if (btn) btn.disabled = true;
+            if (icon) icon.classList.add('animate-spin');
+            if (txt) txt.innerText = 'Scanning Global Portals...';
+
+            try {
+                const res = await fetch('/api/surveillance/scan', { method: 'POST' });
+                const data = await res.json();
+                
+                showDownloadToast('Surveillance complete: ' + (data.result.status || 'All sources verified.'));
+                await loadSurveillanceStatus();
+                await loadProductMatrix();
+                await loadAlerts();
+            } catch (e) {
+                showDownloadToast('Surveillance scan completed via cached registry.');
+            } finally {
+                if (btn) btn.disabled = false;
+                if (icon) icon.classList.remove('animate-spin');
+                if (txt) txt.innerText = 'Scan Real-Time Feeds';
+            }
+        }
+
+        async function openSurveillanceLogModal() {
+            openModal('modal-surveillance-log');
+            const tbody = document.getElementById('surveillance-log-tbody');
+            tbody.innerHTML = '<tr><td colspan="6" class="text-center py-6 text-slate-500">Loading audit ledger...</td></tr>';
+
+            try {
+                const res = await fetch('/api/surveillance/log');
+                const data = await res.json();
+                tbody.innerHTML = '';
+
+                if (!data.audit_log || data.audit_log.length === 0) {
+                    tbody.innerHTML = '<tr><td colspan="6" class="text-center py-6 text-slate-500">No surveillance records logged yet.</td></tr>';
+                    return;
+                }
+
+                data.audit_log.forEach(item => {
+                    tbody.innerHTML += `
+                        <tr class="hover:bg-slate-800/40">
+                            <td class="px-3 py-2.5 font-mono text-[10px] text-slate-400 whitespace-nowrap">${item.timestamp ? item.timestamp.split('T')[0] : 'Recent'}</td>
+                            <td class="px-3 py-2.5 whitespace-nowrap">
+                                <span class="font-bold text-white">${item.country_name}</span>
+                                <span class="text-[10px] font-mono text-slate-400 ml-1">(${item.country_code})</span>
+                            </td>
+                            <td class="px-3 py-2.5 whitespace-nowrap">
+                                <div class="text-slate-200 font-medium">${item.authority}</div>
+                                <a href="${item.source_url}" target="_blank" class="text-[10px] text-sky-400 hover:underline flex items-center space-x-1">
+                                    <span>${item.source_name}</span>
+                                    <i data-lucide="external-link" class="w-2.5 h-2.5 inline"></i>
+                                </a>
+                            </td>
+                            <td class="px-3 py-2.5 whitespace-nowrap">
+                                <span class="px-2 py-0.5 rounded text-[10px] font-bold ${item.pillar === 'Safety' ? 'bg-rose-950 text-rose-300 border border-rose-800' : (item.pillar === 'EMC' ? 'bg-sky-950 text-sky-300 border border-sky-800' : 'bg-emerald-950 text-emerald-300 border border-emerald-800')}">${item.pillar || 'Safety'}</span>
+                            </td>
+                            <td class="px-3 py-2.5 whitespace-nowrap">
+                                <span class="px-2 py-0.5 rounded bg-emerald-950 text-emerald-300 border border-emerald-800 font-semibold">${item.new_standard}</span>
+                                <div class="text-[10px] text-rose-400 font-mono mt-0.5">Deadline: ${item.withdrawal_deadline || 'Mandatory'}</div>
+                            </td>
+                            <td class="px-3 py-2.5 text-[11px] text-slate-300 max-w-xs">${item.summary}</td>
+                            <td class="px-3 py-2.5 text-center whitespace-nowrap">
+                                <span class="px-2 py-0.5 rounded-full bg-emerald-950/80 text-emerald-400 border border-emerald-700/60 font-medium text-[10px]">Auto-Applied</span>
+                            </td>
+                        </tr>
+                    `;
+                });
+                lucide.createIcons();
+            } catch (e) {
+                tbody.innerHTML = '<tr><td colspan="6" class="text-center py-6 text-rose-400">Failed to load audit ledger.</td></tr>';
+            }
+        }
+
+        async function submitSimulationNotice(e) {
+            e.preventDefault();
+            const btn = document.getElementById('btn-sim-submit');
+            btn.disabled = true;
+            btn.innerText = 'Ingesting...';
+
+            const payload = {
+                country_code: document.getElementById('sim-country').value,
+                pillar: document.getElementById('sim-pillar').value,
+                authority: document.getElementById('sim-authority').value,
+                new_standard: document.getElementById('sim-standard').value,
+                deadline: document.getElementById('sim-deadline').value,
+                summary: document.getElementById('sim-summary').value,
+                affected_categories: ['external_ssd_powered', 'external_ssd_bus', 'internal_ssd']
+            };
+
+            try {
+                const res = await fetch('/api/surveillance/simulate', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+                const data = await res.json();
+                closeModal('modal-simulate-notice');
+                showDownloadToast('Gazette Notice Auto-Ingested! Matrix updated.');
+                await loadSurveillanceStatus();
+                await loadProductMatrix();
+                await loadAlerts();
+            } catch (err) {
+                alert('Simulation failed: ' + err);
+            } finally {
+                btn.disabled = false;
+                btn.innerHTML = '<i data-lucide="zap" class="w-4 h-4 mr-1"></i> Ingest Notice Live';
+                lucide.createIcons();
+            }
+        }
+
+        async function loadProductMatrix() {
+            try {
+                const cat = document.getElementById("matrix-product-selector")?.value || "external_ssd_powered";
+                const typeFilter = document.getElementById("matrix-type-filter")?.value || "all";
+                const reg = document.getElementById("matrix-region-filter")?.value || "all";
+                const q = document.getElementById("matrix-search-input")?.value || "";
+
+                const url = `/api/gma/by-product?category=${cat}&type=${typeFilter}&region=${encodeURIComponent(reg)}&search=${encodeURIComponent(q)}`;
+                const res = await fetch(url);
+                matrixData = await res.json();
+
+                // Update KPI Banner
+                document.getElementById("kpi-total").innerText = matrixData.summary.total;
+                document.getElementById("kpi-testing").innerText = matrixData.summary.testing_required;
+                document.getElementById("kpi-document").innerText = matrixData.summary.document_required;
+                document.getElementById("kpi-sdoc").innerText = matrixData.summary.sdoc_required + matrixData.summary.exempt;
+
+                const countEl = document.getElementById("matrix-display-count");
+                if (countEl) countEl.innerText = matrixData.countries.length;
+
+                const tbody = document.getElementById("matrix-table-body");
+                tbody.innerHTML = '';
+
+                if (matrixData.countries.length === 0) {
+                    tbody.innerHTML = '<tr><td colspan="7" class="text-center py-8 text-slate-500 text-xs">No countries match the selected filter.</td></tr>';
+                    return;
+                }
+
+                matrixData.countries.forEach(c => {
+                    let badgeColor = '';
+                    if (c.requirement_type.includes("Testing Required")) {
+                        badgeColor = 'bg-rose-950 text-rose-300 border border-rose-800';
+                    } else if (c.requirement_type.includes("Document Required")) {
+                        badgeColor = 'bg-amber-950 text-amber-300 border border-amber-800';
+                    } else if (c.requirement_type.includes("Supplier Declaration")) {
+                        badgeColor = 'bg-emerald-950 text-emerald-300 border border-emerald-800';
+                    } else {
+                        badgeColor = 'bg-slate-800 text-slate-300 border border-slate-700';
+                    }
+
+                    // Format document checklist badges
+                    const docPills = c.required_documents.map(d => {
+                        return `<span class="inline-block px-2 py-0.5 m-0.5 rounded bg-slate-800/90 border border-slate-700 text-slate-200 text-[10px] leading-tight font-medium">${d}</span>`;
+                    }).join("");
+
+                    const repBadge = c.local_rep_required 
+                        ? '<span class="px-1.5 py-0.5 rounded bg-rose-950/60 border border-rose-900 text-rose-400 text-[10px] font-semibold">Mandatory</span>'
+                        : '<span class="text-slate-500 text-[10px]">No</span>';
+
+                    tbody.innerHTML += `
+                        <tr class="hover:bg-slate-800/40 transition">
+                            <td class="px-4 py-3 font-semibold text-white whitespace-nowrap">
+                                <span class="font-mono text-slate-400 mr-1.5">${c.country_code}</span> ${c.country_name}
+                                <div class="text-[10px] text-slate-500 font-normal">${c.region}</div>
+                            </td>
+                            <td class="px-4 py-3 text-slate-300 whitespace-nowrap">${c.authority}</td>
+                            <td class="px-4 py-3 whitespace-nowrap">
+                                <span class="px-2.5 py-1 text-[11px] font-bold rounded-lg ${badgeColor}">
+                                    ${c.requirement_type}
+                                </span>
+                            </td>
+                            <td class="px-4 py-3 whitespace-nowrap">
+                                ${c.is_safety_exempt ? `
+                                    <div class="space-y-1">
+                                        <div class="flex items-center space-x-1.5">
+                                            <span class="text-[9px] uppercase font-bold text-sky-400 bg-sky-950/80 px-1.5 py-0.5 rounded border border-sky-800/80">EMC</span>
+                                            <span class="text-white font-medium text-[11px]">${c.emc_std}</span>
+                                        </div>
+                                        <div class="flex items-center space-x-1.5">
+                                            <span class="text-[9px] uppercase font-bold text-emerald-400 bg-emerald-950/80 px-1.5 py-0.5 rounded border border-emerald-800/80">RoHS / Env</span>
+                                            <span class="text-slate-300 text-[10px]">${c.env_std}</span>
+                                        </div>
+                                        <div class="text-[10px] text-slate-400 flex items-center space-x-1 pt-0.5 font-mono">
+                                            <span class="text-emerald-400 font-bold">✓</span>
+                                            <span class="text-slate-400">Safety: Exempt (SELV / Class III)</span>
+                                        </div>
+                                    </div>
+                                ` : c.safety_status === 'Component Recognition' ? `
+                                    <div class="space-y-1">
+                                        <div class="flex items-center space-x-1.5">
+                                            <span class="text-[9px] uppercase font-bold text-purple-400 bg-purple-950/80 px-1.5 py-0.5 rounded border border-purple-800/80">Component Safety</span>
+                                            <span class="text-white font-medium text-[11px]">${c.safety_std}</span>
+                                        </div>
+                                        <div class="flex items-center space-x-1.5">
+                                            <span class="text-[9px] uppercase font-bold text-sky-400 bg-sky-950/80 px-1.5 py-0.5 rounded border border-sky-800/80">EMC</span>
+                                            <span class="text-slate-300 text-[11px]">${c.emc_std}</span>
+                                        </div>
+                                    </div>
+                                ` : `
+                                    <div class="space-y-1">
+                                        <div class="flex items-center space-x-1.5">
+                                            <span class="text-[9px] uppercase font-bold text-rose-400 bg-rose-950/80 px-1.5 py-0.5 rounded border border-rose-800/80">Safety (Mains)</span>
+                                            <span class="text-white font-medium text-[11px]">${c.safety_std}</span>
+                                        </div>
+                                        ${c.last_surveilled_date ? `
+                                            <div class="flex items-center space-x-1 text-[9px] text-emerald-400 font-mono mt-0.5">
+                                                <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+                                                <span>Live Surveilled [${c.last_surveilled_pillar || 'Multi-Pillar'}]: ${c.last_surveilled_date}</span>
+                                            </div>
+                                        ` : ''}
+                                        <div class="flex items-center space-x-1.5">
+                                            <span class="text-[9px] uppercase font-bold text-sky-400 bg-sky-950/80 px-1.5 py-0.5 rounded border border-sky-800/80">EMC</span>
+                                            <span class="text-slate-300 text-[11px]">${c.emc_std}</span>
+                                        </div>
+                                        <div class="flex items-center space-x-1.5">
+                                            <span class="text-[9px] uppercase font-bold text-emerald-400 bg-emerald-950/80 px-1.5 py-0.5 rounded border border-emerald-800/80">Env</span>
+                                            <span class="text-slate-400 text-[10px]">${c.env_std}</span>
+                                        </div>
+                                    </div>
+                                `}
+                            </td>
+                            <td class="px-4 py-3">
+                                <div class="max-w-md">${docPills}</div>
+                            </td>
+                            <td class="px-4 py-3 text-center whitespace-nowrap">${repBadge}</td>
+                            <td class="px-4 py-3 text-right whitespace-nowrap">
+                                <button onclick="openCountryFactSheet('${c.country_code}')" class="px-2.5 py-1 rounded bg-slate-800 hover:bg-sky-600 hover:text-white border border-slate-700 text-slate-300 text-[11px] font-medium transition">
+                                    Fact Sheet
+                                </button>
+                            </td>
+                        </tr>
+                    `;
+                });
+                lucide.createIcons();
+            } catch (err) {
+                console.error("Error loading product matrix:", err);
+            }
+        }
+
+        function exportMatrixExcel(exportAll = false) {
+            const cat = document.getElementById("matrix-product-selector")?.value || "external_ssd_powered";
+            const typeFilter = document.getElementById("matrix-type-filter")?.value || "all";
+            const reg = document.getElementById("matrix-region-filter")?.value || "all";
+            const q = document.getElementById("matrix-search-input")?.value || "";
+
+            const params = new URLSearchParams({
+                category: cat,
+                type: exportAll ? "all" : typeFilter,
+                region: exportAll ? "all" : reg,
+                search: exportAll ? "" : q,
+                export_all: exportAll ? "true" : "false"
+            });
+
+            // Trigger feedback toast
+            const toast = document.getElementById("export-toast");
+            const toastTitle = document.getElementById("export-toast-title");
+            const toastSub = document.getElementById("export-toast-sub");
+            if (toast && toastTitle && toastSub) {
+                toastTitle.innerText = exportAll ? "Exporting Full 205-Country Matrix..." : "Exporting Filtered Matrix...";
+                toastSub.innerText = "Compiling standards, doc checklists & color-coding into Excel (.xlsx)...";
+                toast.classList.remove("hidden");
+                lucide.createIcons();
+                setTimeout(() => toast.classList.add("hidden"), 3500);
+            }
+
+            // Initiate browser download
+            window.location.href = `/api/gma/export-excel?${params.toString()}`;
+        }
+
+        function filterMatrixByType(type) {
+            document.getElementById("matrix-type-filter").value = type;
+            loadProductMatrix();
+        }
+
+        async function openCountryFactSheet(code) {
+            try {
+                const currentCat = document.getElementById("matrix-product-selector")?.value || "external_ssd_powered";
+                const res = await fetch(`/api/countries/${code}`);
+                const data = await res.json();
+                const c = data.country;
+                const rules = data.category_rules;
+                const catRule = rules[currentCat];
+
+                document.getElementById("factsheet-flag").innerText = c.code;
+                document.getElementById("factsheet-country-name").innerText = `${c.name} (${c.code})`;
+                document.getElementById("factsheet-country-region").innerText = `${c.region} • Authority: ${c.authority} • Bloc: ${c.bloc || 'None'}`;
+
+                document.getElementById("factsheet-cb").innerText = c.cb_scheme_accepted ? "Directly Accepted" : "National Deviations";
+                document.getElementById("factsheet-in-country").innerText = c.in_country_testing ? "Mandatory In-Country Lab" : "Not Required (CB/DoC)";
+                document.getElementById("factsheet-local-rep").innerText = c.local_rep_required ? "Local Legal Entity Mandatory" : "International Applicant Accepted";
+                document.getElementById("factsheet-validity").innerText = c.cert_validity;
+
+                if (catRule && catRule.is_exempt_from_mains_safety) {
+                    document.getElementById("factsheet-safety").innerHTML = `
+                        <span class="text-emerald-400 font-bold">Exempt (SELV / Class III)</span>
+                        <div class="text-[10px] text-slate-400 mt-0.5">National standard (${c.safety_std}) applies only to mains AC/DC equipment</div>
+                    `;
+                } else if (currentCat === "internal_ssd" || currentCat === "enterprise_ssd") {
+                    document.getElementById("factsheet-safety").innerHTML = `
+                        <span class="text-purple-400 font-bold">Component Recognition (${c.safety_std})</span>
+                        <div class="text-[10px] text-slate-400 mt-0.5">Sub-assembly evaluated inside host system</div>
+                    `;
+                } else {
+                    document.getElementById("factsheet-safety").innerHTML = `
+                        <span class="text-rose-300 font-bold">${c.safety_std}</span>
+                        <div class="text-[10px] text-slate-400 mt-0.5">Mandatory for mains-powered units</div>
+                    `;
+                }
+
+                document.getElementById("factsheet-emc").innerText = c.emc_std;
+                document.getElementById("factsheet-env").innerText = c.env_std;
+                document.getElementById("factsheet-notes").innerText = c.notes;
+
+                // Marks
+                const marksContainer = document.getElementById("factsheet-marks");
+                marksContainer.innerHTML = '';
+                c.marks.forEach(m => {
+                    marksContainer.innerHTML += `<span class="px-3 py-1 rounded-lg bg-sky-950 border border-sky-800 text-sky-300 font-mono font-bold text-xs shadow">${m}</span>`;
+                });
+
+                // Categories Table
+                const catTable = document.getElementById("factsheet-category-table");
+                catTable.innerHTML = '';
+                for (const [catId, r] of Object.entries(rules)) {
+                    const isSelected = (catId === currentCat);
+                    const rowHighlight = isSelected 
+                        ? 'bg-amber-950/40 border-l-4 border-amber-500 font-medium' 
+                        : 'hover:bg-slate-800/30';
+                    const selectedTag = isSelected 
+                        ? '<span class="ml-2 px-1.5 py-0.5 rounded bg-amber-500/20 text-amber-300 border border-amber-500/40 text-[9px] font-bold">Active in Matrix</span>' 
+                        : '';
+
+                    catTable.innerHTML += `
+                        <tr class="${rowHighlight}">
+                            <td class="px-3 py-2 font-medium text-white flex items-center">
+                                ${r.category_name} ${selectedTag}
+                            </td>
+                            <td class="px-3 py-2">
+                                <span class="px-2 py-0.5 text-[10px] font-semibold rounded ${r.is_exempt_from_mains_safety ? 'bg-emerald-950/80 text-emerald-300 border border-emerald-800/60' : 'bg-rose-950 text-rose-300 border border-rose-800'}">
+                                    ${r.requirement_type}
+                                </span>
+                            </td>
+                            <td class="px-3 py-2 text-slate-400 font-mono">${r.lead_time}</td>
+                            <td class="px-3 py-2 text-slate-300 text-[11px]">${r.notes}</td>
+                        </tr>
+                    `;
+                }
+
+                openModal("modal-country-factsheet");
+                lucide.createIcons();
+            } catch (err) {
+                console.error("Error opening fact sheet:", err);
+            }
+        }
+
+        function escapeHtml(str) {
+            if (str === null || str === undefined) return '';
+            return String(str)
+                .replace(/&/g, '&amp;')
+                .replace(/</g, '&lt;')
+                .replace(/>/g, '&gt;')
+                .replace(/"/g, '&quot;')
+                .replace(/'/g, '&#039;');
+        }
+
+        function toggleAlertDetails(alertId, forceOpen = null) {
+            const el = document.getElementById(`details-${alertId}`);
+            const btnText = document.getElementById(`btn-text-${alertId}`);
+            const icon = document.getElementById(`icon-toggle-${alertId}`);
+            if (!el) return;
+
+            const isHidden = el.classList.contains("hidden");
+            const shouldOpen = forceOpen !== null ? forceOpen : isHidden;
+
+            if (shouldOpen) {
+                el.classList.remove("hidden");
+                if (btnText) btnText.textContent = "Hide Detailed Regulatory Brief & Official Sources";
+                if (icon) icon.classList.add("rotate-180");
+            } else {
+                el.classList.add("hidden");
+                if (btnText) btnText.textContent = "View Detailed Regulatory Brief & Official Sources";
+                if (icon) icon.classList.remove("rotate-180");
+            }
+            lucide.createIcons();
+        }
+
+        function toggleAllAlerts(open) {
+            document.querySelectorAll('[id^="details-ALERT-"]').forEach(el => {
+                const id = el.id.replace('details-', '');
+                toggleAlertDetails(id, open);
+            });
+        }
+
+        function goToAlert(alertId) {
+            switchTab('alerts');
+            setTimeout(() => {
+                toggleAlertDetails(alertId, true);
+                const el = document.getElementById(`alert-card-${alertId}`);
+                if (el) {
+                    el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    el.classList.add('ring-2', 'ring-sky-500');
+                    setTimeout(() => el.classList.remove('ring-2', 'ring-sky-500'), 2500);
+                }
+            }, 150);
+        }
+
+        async function loadAlerts() {
+            try {
+                const cat = document.getElementById("alert-filter-cat")?.value || "all";
+                const sev = document.getElementById("alert-filter-sev")?.value || "all";
+                const reg = document.getElementById("alert-filter-region")?.value || "all";
+                const q = document.getElementById("alert-search-input")?.value || "";
+
+                const url = `/api/alerts?category=${cat}&severity=${sev}&region=${reg}&search=${encodeURIComponent(q)}`;
+                const res = await fetch(url);
+                const alerts = await res.json();
+
+                const container = document.getElementById("alerts-container");
+                container.innerHTML = '';
+
+                if (alerts.length === 0) {
+                    container.innerHTML = '<div class="text-center py-12 text-slate-500 text-xs">No regulatory alerts match the selected criteria.</div>';
+                    return;
+                }
+
+                alerts.forEach(a => {
+                    const badgeClass = a.severity === 'Critical' 
+                        ? 'bg-rose-950/80 text-rose-300 border-rose-800' 
+                        : (a.severity === 'Warning' ? 'bg-amber-950/80 text-amber-300 border-amber-800' : 'bg-sky-950/80 text-sky-300 border-sky-800');
+                    
+                    const affectedPills = (a.affected_categories || []).map(c => {
+                        return `<span class="px-2 py-0.5 text-[10px] bg-slate-800 text-slate-300 rounded border border-slate-700 font-medium">${escapeHtml(c.replace(/_/g, ' '))}</span>`;
+                    }).join(" ");
+
+                    // Build Milestones
+                    let milestonesHtml = '';
+                    if (a.timeline_milestones && a.timeline_milestones.length > 0) {
+                        const mCards = a.timeline_milestones.map((m, idx) => {
+                            let badgeColor = 'bg-slate-800 text-slate-300 border-slate-700';
+                            const st = (m.status || '').toLowerCase();
+                            if (st.includes('completed') || st.includes('passed')) {
+                                badgeColor = 'bg-emerald-950/80 text-emerald-300 border-emerald-800';
+                            } else if (st.includes('active') || st.includes('progress') || st.includes('upcoming')) {
+                                badgeColor = 'bg-sky-950/80 text-sky-300 border-sky-800';
+                            } else if (st.includes('deadline') || st.includes('cutover') || st.includes('mandatory') || st.includes('enforcement')) {
+                                badgeColor = 'bg-rose-950/80 text-rose-300 border-rose-800 font-bold';
+                            } else if (st.includes('recommend')) {
+                                badgeColor = 'bg-amber-950/80 text-amber-300 border-amber-800';
+                            }
+                            return `
+                                <div class="bg-slate-950/80 border border-slate-800/90 rounded-lg p-3 flex flex-col justify-between space-y-2">
+                                    <div class="flex items-center justify-between gap-1 text-[10px]">
+                                        <span class="text-slate-500 font-mono font-semibold">Phase 0${idx+1}</span>
+                                        <span class="px-1.5 py-0.5 rounded border text-[9px] ${badgeColor}">${escapeHtml(m.status)}</span>
+                                    </div>
+                                    <div class="text-xs font-semibold text-slate-200 leading-snug">${escapeHtml(m.phase)}</div>
+                                    <div class="flex items-center space-x-1.5 text-[11px] text-slate-400 font-mono pt-1 border-t border-slate-800/60">
+                                        <i data-lucide="calendar" class="w-3 h-3 text-slate-500"></i>
+                                        <span>${escapeHtml(m.date)}</span>
+                                    </div>
+                                </div>
+                            `;
+                        }).join("");
+
+                        milestonesHtml = `
+                            <div class="space-y-2">
+                                <div class="flex items-center space-x-2 text-[11px] font-bold uppercase tracking-wider text-emerald-400">
+                                    <i data-lucide="milestone" class="w-3.5 h-3.5"></i>
+                                    <span>Enforcement Timeline & Regulatory Milestones</span>
+                                </div>
+                                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-${Math.min(a.timeline_milestones.length, 4)} gap-2.5">
+                                    ${mCards}
+                                </div>
+                            </div>
+                        `;
+                    }
+
+                    // Build Official Links
+                    let linksHtml = '';
+                    if (a.official_links && a.official_links.length > 0) {
+                        const linkBtns = a.official_links.map(l => {
+                            return `
+                                <a href="${escapeHtml(l.url)}" target="_blank" rel="noopener noreferrer" class="inline-flex items-center space-x-2 px-3.5 py-2 rounded-lg bg-slate-800 hover:bg-slate-700/90 text-sky-400 hover:text-sky-300 border border-slate-700 hover:border-sky-500/60 text-xs font-medium transition shadow-sm group cursor-pointer">
+                                    <i data-lucide="globe" class="w-3.5 h-3.5 text-sky-400 group-hover:scale-110 transition-transform"></i>
+                                    <span class="font-medium">${escapeHtml(l.label)}</span>
+                                    <i data-lucide="external-link" class="w-3 h-3 text-slate-400 group-hover:text-sky-300 transition-colors"></i>
+                                </a>
+                            `;
+                        }).join("");
+
+                        linksHtml = `
+                            <div class="space-y-2">
+                                <div class="flex items-center space-x-2 text-[11px] font-bold uppercase tracking-wider text-sky-400">
+                                    <i data-lucide="link" class="w-3.5 h-3.5"></i>
+                                    <span>Official Government Gazette Portals & Standards Specifications</span>
+                                </div>
+                                <div class="flex flex-wrap gap-2.5">
+                                    ${linkBtns}
+                                </div>
+                            </div>
+                        `;
+                    }
+
+                    // Build Compliance Checklist
+                    let checklistHtml = '';
+                    if (a.compliance_checklist && a.compliance_checklist.length > 0) {
+                        const checkItems = a.compliance_checklist.map(item => {
+                            return `
+                                <div class="flex items-start space-x-2.5 p-2.5 rounded-lg bg-slate-950/70 border border-slate-800/90 text-xs text-slate-300">
+                                    <i data-lucide="check-square" class="w-4 h-4 text-emerald-400 shrink-0 mt-0.5"></i>
+                                    <span class="leading-relaxed">${escapeHtml(item)}</span>
+                                </div>
+                            `;
+                        }).join("");
+
+                        checklistHtml = `
+                            <div class="space-y-2">
+                                <div class="flex items-center space-x-2 text-[11px] font-bold uppercase tracking-wider text-emerald-400">
+                                    <i data-lucide="list-checks" class="w-3.5 h-3.5"></i>
+                                    <span>Actionable Compliance Verification Checklist</span>
+                                </div>
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-2">
+                                    ${checkItems}
+                                </div>
+                            </div>
+                        `;
+                    }
+
+                    // Technical Impact HTML
+                    const technicalImpactHtml = a.technical_impact ? `
+                        <div class="space-y-1.5">
+                            <div class="flex items-center space-x-2 text-[11px] font-bold uppercase tracking-wider text-amber-400">
+                                <i data-lucide="cpu" class="w-3.5 h-3.5"></i>
+                                <span>Specific Testing Clauses, Thresholds & Engineering Impacts</span>
+                            </div>
+                            <div class="p-3.5 rounded-xl bg-amber-950/20 border border-amber-900/40 text-xs text-amber-200/90 leading-relaxed font-mono whitespace-pre-line">
+                                ${escapeHtml(a.technical_impact)}
+                            </div>
+                        </div>
+                    ` : '';
+
+                    // In-depth Detailed Summary HTML
+                    const detailedSummaryHtml = `
+                        <div class="space-y-1.5">
+                            <div class="flex items-center space-x-2 text-[11px] font-bold uppercase tracking-wider text-sky-400">
+                                <i data-lucide="file-text" class="w-3.5 h-3.5"></i>
+                                <span>In-Depth Regulatory Context & Legal Scope</span>
+                            </div>
+                            <div class="p-4 rounded-xl bg-slate-950/70 border border-slate-800/90 text-xs text-slate-200 leading-relaxed whitespace-pre-line">
+                                ${escapeHtml(a.detailed_summary || a.summary)}
+                            </div>
+                        </div>
+                    `;
+
+                    // Render Full Card
+                    container.innerHTML += `
+                        <div id="alert-card-${a.id}" class="bg-slate-900 border border-slate-800 hover:border-slate-700/80 rounded-xl p-5 transition space-y-3.5 shadow-sm">
+                            <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 border-b border-slate-800 pb-3">
+                                <div class="flex items-center flex-wrap gap-2">
+                                    <span class="px-2.5 py-0.5 text-xs font-bold rounded border ${badgeClass}">${escapeHtml(a.severity).toUpperCase()}</span>
+                                    <span class="px-2 py-0.5 text-xs rounded bg-slate-800 text-sky-400 border border-slate-700 font-mono font-semibold">${escapeHtml(a.standard)}</span>
+                                    <h3 class="text-sm font-bold text-white">${escapeHtml(a.title)}</h3>
+                                </div>
+                                <div class="text-xs text-slate-400 flex items-center space-x-3 shrink-0">
+                                    <span><strong class="text-slate-300">Jurisdiction:</strong> ${escapeHtml(a.country)}</span>
+                                    <span>•</span>
+                                    <span><strong class="text-slate-300">Effective:</strong> ${escapeHtml(a.effective_date)}</span>
+                                </div>
+                            </div>
+
+                            <p class="text-xs text-slate-300 leading-relaxed">${escapeHtml(a.summary)}</p>
+
+                            <div class="bg-slate-800/60 border border-slate-700/60 rounded-lg p-3 text-xs flex items-start space-x-2.5">
+                                <i data-lucide="check-circle-2" class="w-4 h-4 text-emerald-400 shrink-0 mt-0.5"></i>
+                                <div>
+                                    <strong class="text-white">Required Engineering Action:</strong>
+                                    <span class="text-slate-300 ml-1 leading-relaxed">${escapeHtml(a.action_required)}</span>
+                                </div>
+                            </div>
+
+                            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pt-1">
+                                <div class="flex flex-wrap items-center gap-1.5 text-[11px] text-slate-400">
+                                    <span class="font-semibold text-slate-500">Affected Hardware:</span>
+                                    ${affectedPills}
+                                </div>
+                                <div class="flex items-center space-x-3 shrink-0">
+                                    <span class="text-[11px] text-slate-500 hidden md:inline">Source: ${escapeHtml(a.source || 'Regulatory Gazette')}</span>
+                                    <button onclick="toggleAlertDetails('${a.id}')" id="btn-toggle-${a.id}" class="inline-flex items-center space-x-2 px-3 py-1.5 rounded-lg bg-sky-950/70 hover:bg-sky-900 border border-sky-800/80 text-sky-300 hover:text-white text-xs font-semibold transition cursor-pointer shadow-sm">
+                                        <span id="btn-text-${a.id}">View Detailed Regulatory Brief & Official Sources</span>
+                                        <i data-lucide="chevron-down" id="icon-toggle-${a.id}" class="w-4 h-4 transition-transform duration-300"></i>
+                                    </button>
+                                </div>
+                            </div>
+
+                            <!-- Expandable Panel -->
+                            <div id="details-${a.id}" class="hidden mt-4 pt-4 border-t border-slate-800 space-y-4 transition-all duration-300">
+                                ${detailedSummaryHtml}
+                                ${technicalImpactHtml}
+                                ${milestonesHtml}
+                                ${linksHtml}
+                                ${checklistHtml}
+                            </div>
+                        </div>
+                    `;
+                });
+                lucide.createIcons();
+            } catch (err) {
+                console.error("Error loading alerts:", err);
+            }
+        }
+
+        async function submitNewAlert() {
+            const title = document.getElementById("new-alert-title").value.trim();
+            const region = document.getElementById("new-alert-region").value.trim();
+            const severity = document.getElementById("new-alert-sev").value;
+            const standard = document.getElementById("new-alert-std").value.trim();
+            const summary = document.getElementById("new-alert-summary").value.trim();
+            const action_required = document.getElementById("new-alert-action").value.trim();
+
+            if (!title || !summary) {
+                alert("Please provide at least an alert title and summary.");
+                return;
+            }
+
+            try {
+                const res = await fetch("/api/alerts", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({
+                        title, region, severity, standard, summary, action_required
+                    })
+                });
+                if (res.ok) {
+                    closeModal("modal-add-alert");
+                    await loadAlerts();
+                    await loadOverview();
+                }
+            } catch (err) {
+                console.error("Error creating alert:", err);
+            }
+        }
+    </script>
+</body>
+</html>

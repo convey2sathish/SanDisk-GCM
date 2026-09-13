@@ -1,0 +1,142 @@
+[
+  {
+    "event_id": "SURV-SIM-1789103731",
+    "timestamp": "2026-09-11T05:15:31Z",
+    "country_code": "IN",
+    "country_name": "India",
+    "authority": "MeitY / BIS India",
+    "pillar": "EMC",
+    "source_id": "SRC-IN-GAZETTE",
+    "source_name": "India National Gazette Bulletin (Auto-Ingested)",
+    "source_url": "https://www.meity.gov.in/esdm/standards/gazette-2026-emc-nvme.pdf",
+    "old_standard": "Prior Standard",
+    "new_standard": "IS 15936 / CISPR 32:2026",
+    "effective_date": "2026-09-11",
+    "withdrawal_deadline": "2027-03-31",
+    "affected_categories": [
+      "enterprise_nvme",
+      "external_ssd_powered",
+      "sd_express"
+    ],
+    "event_type": "Live Gazette Mandatory EMC Update",
+    "summary": "Gazette notification mandating CISPR 32 Edition 2.1 radiated emission limits for all high-speed NVMe storage controllers operating above 1 GHz.",
+    "status": "Auto-Applied to Matrix",
+    "confidence_score": 0.99
+  },
+  {
+    "event_id": "SURV-SIM-1789098395",
+    "timestamp": "2026-09-11T03:46:35Z",
+    "country_code": "KR",
+    "country_name": "South Korea",
+    "authority": "National Regulatory Authority",
+    "pillar": "All",
+    "source_id": "SRC-KR-GAZETTE",
+    "source_name": "South Korea National Gazette Bulletin (Auto-Ingested)",
+    "source_url": "https://gazette.gov.kr/circulars/SURV-SIM-1789098395.pdf",
+    "old_standard": "Prior Standard",
+    "new_standard": "IEC 62368-1:2023 / Harmonized",
+    "effective_date": "2026-09-11",
+    "withdrawal_deadline": "2028-11-01",
+    "affected_categories": [
+      "external_ssd_powered",
+      "external_ssd_bus",
+      "internal_ssd"
+    ],
+    "event_type": "Live Gazette Mandatory All Update",
+    "summary": "Official Gazette Notification: Mandating transition to updated safety standard for all solid-state storage equipment and external power supplies.",
+    "status": "Auto-Applied to Matrix",
+    "confidence_score": 0.99
+  },
+  {
+    "event_id": "SURV-SIM-1789096815",
+    "timestamp": "2026-09-11T03:20:15Z",
+    "country_code": "SA",
+    "country_name": "Saudi Arabia",
+    "authority": "Saudi Standards, Metrology and Quality Organization (SASO)",
+    "pillar": "Environmental",
+    "source_id": "SRC-SA-GAZETTE",
+    "source_name": "Saudi Arabia National Gazette Bulletin (Auto-Ingested)",
+    "source_url": "https://gazette.gov.sa/circulars/SURV-SIM-1789096815.pdf",
+    "old_standard": "Prior Standard",
+    "new_standard": "SASO RoHS 2026 / Technical Regulation for Restriction of Hazardous Substances",
+    "effective_date": "2026-09-11",
+    "withdrawal_deadline": "2027-03-31",
+    "affected_categories": [
+      "external_ssd_powered",
+      "external_ssd_bus"
+    ],
+    "event_type": "Live Gazette Mandatory Environmental Update",
+    "summary": "Mandatory enforcement of 10 restricted hazardous substances and SABER certificate upload for storage media.",
+    "status": "Auto-Applied to Matrix",
+    "confidence_score": 0.99
+  },
+  {
+    "event_id": "SURV-SIM-1789095634",
+    "timestamp": "2026-09-11T03:00:34Z",
+    "country_code": "KR",
+    "country_name": "South Korea",
+    "authority": "National Radio Research Agency (RRA)",
+    "source_id": "SRC-KR-GAZETTE",
+    "source_name": "South Korea Official Gazette Bulletin (Auto-Ingested)",
+    "source_url": "https://gazette.gov.kr/circulars/SURV-SIM-1789095634.pdf",
+    "old_standard": "Prior National Standard",
+    "new_standard": "KS C 9832:2026 / KN 32 Amendment 3",
+    "effective_date": "2026-09-11",
+    "withdrawal_deadline": "2027-12-31",
+    "affected_categories": [
+      "external_ssd_powered",
+      "external_ssd_bus"
+    ],
+    "event_type": "Live Gazette Mandatory Update",
+    "summary": "Simulated RRA Gazette Notice: Updated high-frequency radiated emissions limits up to 6GHz for PCIe bus storage devices.",
+    "status": "Auto-Applied to Matrix",
+    "confidence_score": 0.99
+  },
+  {
+    "event_id": "SURV-2026-001",
+    "timestamp": "2026-09-10T10:30:00Z",
+    "country_code": "IN",
+    "country_name": "India",
+    "authority": "Bureau of Indian Standards (BIS) / MeitY",
+    "source_id": "SRC-IN-BIS",
+    "source_name": "India MeitY Gazette Circular No. 2026-11",
+    "source_url": "https://www.crsbis.in/BIS/circulars/2026_62368_transition.pdf",
+    "old_standard": "IS 13252 (Part 1):2010 (IEC 60950-1)",
+    "new_standard": "IS/IEC 62368-1:2023",
+    "effective_date": "2024-06-01",
+    "withdrawal_deadline": "2028-11-01",
+    "affected_categories": [
+      "external_ssd_powered",
+      "external_ssd_bus",
+      "internal_ssd"
+    ],
+    "event_type": "Standard Migration & Sunset Deadline",
+    "summary": "Mandatory transition from legacy IS 13252 (Part 1):2010 [IEC 60950] to IS/IEC 62368-1:2023. Concurrent period active until 01 November 2028.",
+    "status": "Auto-Applied to Matrix",
+    "confidence_score": 0.99
+  },
+  {
+    "event_id": "SURV-2026-002",
+    "timestamp": "2026-09-10T04:20:00Z",
+    "country_code": "KR",
+    "country_name": "South Korea",
+    "authority": "National Radio Research Agency (RRA) / KATS",
+    "source_id": "SRC-KR-RRA",
+    "source_name": "RRA Notification No. 2026-45",
+    "source_url": "https://www.rra.go.kr/en/notice/view.do?notice_seq=812",
+    "old_standard": "KN 32/35 Generic Document",
+    "new_standard": "KC Conformity Registration (KS C 9832/9835)",
+    "effective_date": "2026-01-01",
+    "withdrawal_deadline": "Permanent",
+    "affected_categories": [
+      "external_ssd_bus",
+      "usb_drive",
+      "card_reader",
+      "sd_express"
+    ],
+    "event_type": "Enforcement Clarification",
+    "summary": "Clarification of SELV Class III exemption for bus-powered flash drives and mandatory RRA KC Conformity Registration for high-speed ITE.",
+    "status": "Auto-Applied to Matrix",
+    "confidence_score": 0.98
+  }
+]
