@@ -5,7 +5,7 @@
     "region": "Europe & Eurasia",
     "bloc": "EU / EEA",
     "authority": "BNetzA / DGUV",
-    "safety_std": "IEC 62368-1:2023 (Edition 4.0 Global)",
+    "safety_std": "IEC 62368-1:2023 (Edition 4.0)",
     "emc_std": "CISPR 32:2026 Class B (Harmonized)",
     "env_std": "EU RoHS / REACH / WEEE",
     "cb_scheme_accepted": true,
@@ -19,7 +19,7 @@
     "lead_time_weeks": 2,
     "notes": "Full EU Single Market CE Declaration. WEEE registration required for B2C/B2B.",
     "last_surveilled_date": "2026-09-21",
-    "last_surveilled_pillar": "EMC",
+    "last_surveilled_pillar": "Safety",
     "surveillance_source": "Global Harmonization Bulletin (All 205 Jurisdictions Auto-Ingested)"
   },
   "FR": {
@@ -28,7 +28,7 @@
     "region": "Europe & Eurasia",
     "bloc": "EU / EEA",
     "authority": "ANFR / DGCCRF",
-    "safety_std": "IEC 62368-1:2023 (Edition 4.0 Global)",
+    "safety_std": "IEC 62368-1:2023 (Edition 4.0)",
     "emc_std": "CISPR 32:2026 Class B (Harmonized)",
     "env_std": "EU RoHS / REACH / Triman Logo",
     "cb_scheme_accepted": true,
@@ -43,7 +43,7 @@
     "lead_time_weeks": 2,
     "notes": "Triman sorting signage mandatory on packaging.",
     "last_surveilled_date": "2026-09-21",
-    "last_surveilled_pillar": "EMC",
+    "last_surveilled_pillar": "Safety",
     "surveillance_source": "Global Harmonization Bulletin (All 205 Jurisdictions Auto-Ingested)"
   },
   "IT": {
@@ -52,7 +52,7 @@
     "region": "Europe & Eurasia",
     "bloc": "EU / EEA",
     "authority": "AGCOM / MISE",
-    "safety_std": "IEC 62368-1:2023 (Edition 4.0 Global)",
+    "safety_std": "IEC 62368-1:2023 (Edition 4.0)",
     "emc_std": "CISPR 32:2026 Class B (Harmonized)",
     "env_std": "EU RoHS / Environmental Labeling",
     "cb_scheme_accepted": true,
@@ -66,7 +66,7 @@
     "lead_time_weeks": 2,
     "notes": "Mandatory environmental labeling on all packaging materials.",
     "last_surveilled_date": "2026-09-21",
-    "last_surveilled_pillar": "EMC",
+    "last_surveilled_pillar": "Safety",
     "surveillance_source": "Global Harmonization Bulletin (All 205 Jurisdictions Auto-Ingested)"
   },
   "ES": {
@@ -75,7 +75,7 @@
     "region": "Europe & Eurasia",
     "bloc": "EU / EEA",
     "authority": "CNMC / MINCOTUR",
-    "safety_std": "IEC 62368-1:2023 (Edition 4.0 Global)",
+    "safety_std": "IEC 62368-1:2023 (Edition 4.0)",
     "emc_std": "CISPR 32:2026 Class B (Harmonized)",
     "env_std": "EU RoHS / REACH",
     "cb_scheme_accepted": true,
@@ -89,7 +89,7 @@
     "lead_time_weeks": 2,
     "notes": "Royal Decree on packaging waste declarations applies.",
     "last_surveilled_date": "2026-09-21",
-    "last_surveilled_pillar": "EMC",
+    "last_surveilled_pillar": "Safety",
     "surveillance_source": "Global Harmonization Bulletin (All 205 Jurisdictions Auto-Ingested)"
   },
   "NL": {
@@ -98,7 +98,7 @@
     "region": "Europe & Eurasia",
     "bloc": "EU / EEA",
     "authority": "RDI (Telecom Agency)",
-    "safety_std": "IEC 62368-1:2023 (Edition 4.0 Global)",
+    "safety_std": "IEC 62368-1:2023 (Edition 4.0)",
     "emc_std": "CISPR 32:2026 Class B (Harmonized)",
     "env_std": "EU RoHS / REACH",
     "cb_scheme_accepted": true,
@@ -112,7 +112,7 @@
     "lead_time_weeks": 2,
     "notes": "Major European entry port for customs clearance with CE DoC.",
     "last_surveilled_date": "2026-09-21",
-    "last_surveilled_pillar": "EMC",
+    "last_surveilled_pillar": "Safety",
     "surveillance_source": "Global Harmonization Bulletin (All 205 Jurisdictions Auto-Ingested)"
   },
   "PL": {
@@ -121,7 +121,7 @@
     "region": "Europe & Eurasia",
     "bloc": "EU / EEA",
     "authority": "UKE / UOKiK",
-    "safety_std": "IEC 62368-1:2023 (Edition 4.0 Global)",
+    "safety_std": "IEC 62368-1:2023 (Edition 4.0)",
     "emc_std": "CISPR 32:2026 Class B (Harmonized)",
     "env_std": "EU RoHS / REACH",
     "cb_scheme_accepted": true,
@@ -135,7 +135,7 @@
     "lead_time_weeks": 2,
     "notes": "BDO waste database registration required.",
     "last_surveilled_date": "2026-09-21",
-    "last_surveilled_pillar": "EMC",
+    "last_surveilled_pillar": "Safety",
     "surveillance_source": "Global Harmonization Bulletin (All 205 Jurisdictions Auto-Ingested)"
   },
   "SE": {
@@ -144,7 +144,7 @@
     "region": "Europe & Eurasia",
     "bloc": "EU / EEA",
     "authority": "Elsäkerhetsverket / PTS",
-    "safety_std": "IEC 62368-1:2023 (Edition 4.0 Global)",
+    "safety_std": "IEC 62368-1:2023 (Edition 4.0)",
     "emc_std": "CISPR 32:2026 Class B (Harmonized)",
     "env_std": "EU RoHS / Chemical Tax",
     "cb_scheme_accepted": true,
@@ -158,7 +158,7 @@
     "lead_time_weeks": 2,
     "notes": "Swedish chemical tax on flame retardants in electronics may apply.",
     "last_surveilled_date": "2026-09-21",
-    "last_surveilled_pillar": "EMC",
+    "last_surveilled_pillar": "Safety",
     "surveillance_source": "Global Harmonization Bulletin (All 205 Jurisdictions Auto-Ingested)"
   },
   "BE": {
@@ -167,7 +167,7 @@
     "region": "Europe & Eurasia",
     "bloc": "EU / EEA",
     "authority": "BIPT / FPS Economy",
-    "safety_std": "IEC 62368-1:2023 (Edition 4.0 Global)",
+    "safety_std": "IEC 62368-1:2023 (Edition 4.0)",
     "emc_std": "CISPR 32:2026 Class B (Harmonized)",
     "env_std": "EU RoHS / REACH",
     "cb_scheme_accepted": true,
@@ -181,7 +181,7 @@
     "lead_time_weeks": 2,
     "notes": "Standard EU CE rules apply.",
     "last_surveilled_date": "2026-09-21",
-    "last_surveilled_pillar": "EMC",
+    "last_surveilled_pillar": "Safety",
     "surveillance_source": "Global Harmonization Bulletin (All 205 Jurisdictions Auto-Ingested)"
   },
   "AT": {
@@ -190,7 +190,7 @@
     "region": "Europe & Eurasia",
     "bloc": "EU / EEA",
     "authority": "RTR / BMK",
-    "safety_std": "IEC 62368-1:2023 (Edition 4.0 Global)",
+    "safety_std": "IEC 62368-1:2023 (Edition 4.0)",
     "emc_std": "CISPR 32:2026 Class B (Harmonized)",
     "env_std": "EU RoHS / REACH",
     "cb_scheme_accepted": true,
@@ -204,7 +204,7 @@
     "lead_time_weeks": 2,
     "notes": "Authorized representative required for packaging waste.",
     "last_surveilled_date": "2026-09-21",
-    "last_surveilled_pillar": "EMC",
+    "last_surveilled_pillar": "Safety",
     "surveillance_source": "Global Harmonization Bulletin (All 205 Jurisdictions Auto-Ingested)"
   },
   "IE": {
@@ -213,7 +213,7 @@
     "region": "Europe & Eurasia",
     "bloc": "EU / EEA",
     "authority": "ComReg / HSA",
-    "safety_std": "IEC 62368-1:2023 (Edition 4.0 Global)",
+    "safety_std": "IEC 62368-1:2023 (Edition 4.0)",
     "emc_std": "CISPR 32:2026 Class B (Harmonized)",
     "env_std": "EU RoHS / REACH",
     "cb_scheme_accepted": true,
@@ -227,7 +227,7 @@
     "lead_time_weeks": 2,
     "notes": "English language DoC directly accepted.",
     "last_surveilled_date": "2026-09-21",
-    "last_surveilled_pillar": "EMC",
+    "last_surveilled_pillar": "Safety",
     "surveillance_source": "Global Harmonization Bulletin (All 205 Jurisdictions Auto-Ingested)"
   },
   "DK": {
@@ -236,7 +236,7 @@
     "region": "Europe & Eurasia",
     "bloc": "EU / EEA",
     "authority": "Sikkerhedsstyrelsen",
-    "safety_std": "IEC 62368-1:2023 (Edition 4.0 Global)",
+    "safety_std": "IEC 62368-1:2023 (Edition 4.0)",
     "emc_std": "CISPR 32:2026 Class B (Harmonized)",
     "env_std": "EU RoHS / REACH",
     "cb_scheme_accepted": true,
@@ -250,7 +250,7 @@
     "lead_time_weeks": 2,
     "notes": "Safety Board active market surveillance on power adapters.",
     "last_surveilled_date": "2026-09-21",
-    "last_surveilled_pillar": "EMC",
+    "last_surveilled_pillar": "Safety",
     "surveillance_source": "Global Harmonization Bulletin (All 205 Jurisdictions Auto-Ingested)"
   },
   "FI": {
@@ -259,7 +259,7 @@
     "region": "Europe & Eurasia",
     "bloc": "EU / EEA",
     "authority": "Traficom / Tukes",
-    "safety_std": "IEC 62368-1:2023 (Edition 4.0 Global)",
+    "safety_std": "IEC 62368-1:2023 (Edition 4.0)",
     "emc_std": "CISPR 32:2026 Class B (Harmonized)",
     "env_std": "EU RoHS / REACH",
     "cb_scheme_accepted": true,
@@ -273,7 +273,7 @@
     "lead_time_weeks": 2,
     "notes": "Standard CE rules apply.",
     "last_surveilled_date": "2026-09-21",
-    "last_surveilled_pillar": "EMC",
+    "last_surveilled_pillar": "Safety",
     "surveillance_source": "Global Harmonization Bulletin (All 205 Jurisdictions Auto-Ingested)"
   },
   "PT": {
@@ -282,7 +282,7 @@
     "region": "Europe & Eurasia",
     "bloc": "EU / EEA",
     "authority": "ANACOM / ASAE",
-    "safety_std": "IEC 62368-1:2023 (Edition 4.0 Global)",
+    "safety_std": "IEC 62368-1:2023 (Edition 4.0)",
     "emc_std": "CISPR 32:2026 Class B (Harmonized)",
     "env_std": "EU RoHS / REACH",
     "cb_scheme_accepted": true,
@@ -296,7 +296,7 @@
     "lead_time_weeks": 2,
     "notes": "Portuguese user safety documentation required.",
     "last_surveilled_date": "2026-09-21",
-    "last_surveilled_pillar": "EMC",
+    "last_surveilled_pillar": "Safety",
     "surveillance_source": "Global Harmonization Bulletin (All 205 Jurisdictions Auto-Ingested)"
   },
   "GR": {
@@ -305,7 +305,7 @@
     "region": "Europe & Eurasia",
     "bloc": "EU / EEA",
     "authority": "EETT / General Secretariat",
-    "safety_std": "IEC 62368-1:2023 (Edition 4.0 Global)",
+    "safety_std": "IEC 62368-1:2023 (Edition 4.0)",
     "emc_std": "CISPR 32:2026 Class B (Harmonized)",
     "env_std": "EU RoHS / REACH",
     "cb_scheme_accepted": true,
@@ -319,7 +319,7 @@
     "lead_time_weeks": 2,
     "notes": "Standard CE rules apply.",
     "last_surveilled_date": "2026-09-21",
-    "last_surveilled_pillar": "EMC",
+    "last_surveilled_pillar": "Safety",
     "surveillance_source": "Global Harmonization Bulletin (All 205 Jurisdictions Auto-Ingested)"
   },
   "CZ": {
@@ -328,7 +328,7 @@
     "region": "Europe & Eurasia",
     "bloc": "EU / EEA",
     "authority": "CTU / COI",
-    "safety_std": "IEC 62368-1:2023 (Edition 4.0 Global)",
+    "safety_std": "IEC 62368-1:2023 (Edition 4.0)",
     "emc_std": "CISPR 32:2026 Class B (Harmonized)",
     "env_std": "EU RoHS / REACH",
     "cb_scheme_accepted": true,
@@ -342,7 +342,7 @@
     "lead_time_weeks": 2,
     "notes": "Standard CE rules apply.",
     "last_surveilled_date": "2026-09-21",
-    "last_surveilled_pillar": "EMC",
+    "last_surveilled_pillar": "Safety",
     "surveillance_source": "Global Harmonization Bulletin (All 205 Jurisdictions Auto-Ingested)"
   },
   "RO": {
@@ -351,7 +351,7 @@
     "region": "Europe & Eurasia",
     "bloc": "EU / EEA",
     "authority": "ANCOM / ANPC",
-    "safety_std": "IEC 62368-1:2023 (Edition 4.0 Global)",
+    "safety_std": "IEC 62368-1:2023 (Edition 4.0)",
     "emc_std": "CISPR 32:2026 Class B (Harmonized)",
     "env_std": "EU RoHS / REACH",
     "cb_scheme_accepted": true,
@@ -365,7 +365,7 @@
     "lead_time_weeks": 2,
     "notes": "Standard CE rules apply.",
     "last_surveilled_date": "2026-09-21",
-    "last_surveilled_pillar": "EMC",
+    "last_surveilled_pillar": "Safety",
     "surveillance_source": "Global Harmonization Bulletin (All 205 Jurisdictions Auto-Ingested)"
   },
   "HU": {
@@ -374,7 +374,7 @@
     "region": "Europe & Eurasia",
     "bloc": "EU / EEA",
     "authority": "NMHH",
-    "safety_std": "IEC 62368-1:2023 (Edition 4.0 Global)",
+    "safety_std": "IEC 62368-1:2023 (Edition 4.0)",
     "emc_std": "CISPR 32:2026 Class B (Harmonized)",
     "env_std": "EU RoHS / REACH",
     "cb_scheme_accepted": true,
@@ -388,7 +388,7 @@
     "lead_time_weeks": 2,
     "notes": "Standard CE rules apply.",
     "last_surveilled_date": "2026-09-21",
-    "last_surveilled_pillar": "EMC",
+    "last_surveilled_pillar": "Safety",
     "surveillance_source": "Global Harmonization Bulletin (All 205 Jurisdictions Auto-Ingested)"
   },
   "SK": {
@@ -397,7 +397,7 @@
     "region": "Europe & Eurasia",
     "bloc": "EU / EEA",
     "authority": "RU / SOI",
-    "safety_std": "IEC 62368-1:2023 (Edition 4.0 Global)",
+    "safety_std": "IEC 62368-1:2023 (Edition 4.0)",
     "emc_std": "CISPR 32:2026 Class B (Harmonized)",
     "env_std": "EU RoHS / REACH",
     "cb_scheme_accepted": true,
@@ -411,7 +411,7 @@
     "lead_time_weeks": 2,
     "notes": "Standard CE rules apply.",
     "last_surveilled_date": "2026-09-21",
-    "last_surveilled_pillar": "EMC",
+    "last_surveilled_pillar": "Safety",
     "surveillance_source": "Global Harmonization Bulletin (All 205 Jurisdictions Auto-Ingested)"
   },
   "BG": {
@@ -420,7 +420,7 @@
     "region": "Europe & Eurasia",
     "bloc": "EU / EEA",
     "authority": "CRC / DAMTN",
-    "safety_std": "IEC 62368-1:2023 (Edition 4.0 Global)",
+    "safety_std": "IEC 62368-1:2023 (Edition 4.0)",
     "emc_std": "CISPR 32:2026 Class B (Harmonized)",
     "env_std": "EU RoHS / REACH",
     "cb_scheme_accepted": true,
@@ -434,7 +434,7 @@
     "lead_time_weeks": 2,
     "notes": "Standard CE rules apply.",
     "last_surveilled_date": "2026-09-21",
-    "last_surveilled_pillar": "EMC",
+    "last_surveilled_pillar": "Safety",
     "surveillance_source": "Global Harmonization Bulletin (All 205 Jurisdictions Auto-Ingested)"
   },
   "HR": {
@@ -443,7 +443,7 @@
     "region": "Europe & Eurasia",
     "bloc": "EU / EEA",
     "authority": "HAKOM",
-    "safety_std": "IEC 62368-1:2023 (Edition 4.0 Global)",
+    "safety_std": "IEC 62368-1:2023 (Edition 4.0)",
     "emc_std": "CISPR 32:2026 Class B (Harmonized)",
     "env_std": "EU RoHS / REACH",
     "cb_scheme_accepted": true,
@@ -457,7 +457,7 @@
     "lead_time_weeks": 2,
     "notes": "Standard CE rules apply.",
     "last_surveilled_date": "2026-09-21",
-    "last_surveilled_pillar": "EMC",
+    "last_surveilled_pillar": "Safety",
     "surveillance_source": "Global Harmonization Bulletin (All 205 Jurisdictions Auto-Ingested)"
   },
   "LT": {
@@ -466,7 +466,7 @@
     "region": "Europe & Eurasia",
     "bloc": "EU / EEA",
     "authority": "RRT",
-    "safety_std": "IEC 62368-1:2023 (Edition 4.0 Global)",
+    "safety_std": "IEC 62368-1:2023 (Edition 4.0)",
     "emc_std": "CISPR 32:2026 Class B (Harmonized)",
     "env_std": "EU RoHS / REACH",
     "cb_scheme_accepted": true,
@@ -480,7 +480,7 @@
     "lead_time_weeks": 2,
     "notes": "Standard CE rules apply.",
     "last_surveilled_date": "2026-09-21",
-    "last_surveilled_pillar": "EMC",
+    "last_surveilled_pillar": "Safety",
     "surveillance_source": "Global Harmonization Bulletin (All 205 Jurisdictions Auto-Ingested)"
   },
   "LV": {
@@ -489,7 +489,7 @@
     "region": "Europe & Eurasia",
     "bloc": "EU / EEA",
     "authority": "SPRK / PTAC",
-    "safety_std": "IEC 62368-1:2023 (Edition 4.0 Global)",
+    "safety_std": "IEC 62368-1:2023 (Edition 4.0)",
     "emc_std": "CISPR 32:2026 Class B (Harmonized)",
     "env_std": "EU RoHS / REACH",
     "cb_scheme_accepted": true,
@@ -503,7 +503,7 @@
     "lead_time_weeks": 2,
     "notes": "Standard CE rules apply.",
     "last_surveilled_date": "2026-09-21",
-    "last_surveilled_pillar": "EMC",
+    "last_surveilled_pillar": "Safety",
     "surveillance_source": "Global Harmonization Bulletin (All 205 Jurisdictions Auto-Ingested)"
   },
   "EE": {
@@ -512,7 +512,7 @@
     "region": "Europe & Eurasia",
     "bloc": "EU / EEA",
     "authority": "TTJA",
-    "safety_std": "IEC 62368-1:2023 (Edition 4.0 Global)",
+    "safety_std": "IEC 62368-1:2023 (Edition 4.0)",
     "emc_std": "CISPR 32:2026 Class B (Harmonized)",
     "env_std": "EU RoHS / REACH",
     "cb_scheme_accepted": true,
@@ -526,7 +526,7 @@
     "lead_time_weeks": 2,
     "notes": "Standard CE rules apply.",
     "last_surveilled_date": "2026-09-21",
-    "last_surveilled_pillar": "EMC",
+    "last_surveilled_pillar": "Safety",
     "surveillance_source": "Global Harmonization Bulletin (All 205 Jurisdictions Auto-Ingested)"
   },
   "SI": {
@@ -535,7 +535,7 @@
     "region": "Europe & Eurasia",
     "bloc": "EU / EEA",
     "authority": "AKOS / TIRS",
-    "safety_std": "IEC 62368-1:2023 (Edition 4.0 Global)",
+    "safety_std": "IEC 62368-1:2023 (Edition 4.0)",
     "emc_std": "CISPR 32:2026 Class B (Harmonized)",
     "env_std": "EU RoHS / REACH",
     "cb_scheme_accepted": true,
@@ -549,7 +549,7 @@
     "lead_time_weeks": 2,
     "notes": "Standard CE rules apply.",
     "last_surveilled_date": "2026-09-21",
-    "last_surveilled_pillar": "EMC",
+    "last_surveilled_pillar": "Safety",
     "surveillance_source": "Global Harmonization Bulletin (All 205 Jurisdictions Auto-Ingested)"
   },
   "CY": {
@@ -558,7 +558,7 @@
     "region": "Europe & Eurasia",
     "bloc": "EU / EEA",
     "authority": "DEC / EMS",
-    "safety_std": "IEC 62368-1:2023 (Edition 4.0 Global)",
+    "safety_std": "IEC 62368-1:2023 (Edition 4.0)",
     "emc_std": "CISPR 32:2026 Class B (Harmonized)",
     "env_std": "EU RoHS / REACH",
     "cb_scheme_accepted": true,
@@ -572,7 +572,7 @@
     "lead_time_weeks": 2,
     "notes": "Standard CE rules apply.",
     "last_surveilled_date": "2026-09-21",
-    "last_surveilled_pillar": "EMC",
+    "last_surveilled_pillar": "Safety",
     "surveillance_source": "Global Harmonization Bulletin (All 205 Jurisdictions Auto-Ingested)"
   },
   "LU": {
@@ -581,7 +581,7 @@
     "region": "Europe & Eurasia",
     "bloc": "EU / EEA",
     "authority": "ILNAS",
-    "safety_std": "IEC 62368-1:2023 (Edition 4.0 Global)",
+    "safety_std": "IEC 62368-1:2023 (Edition 4.0)",
     "emc_std": "CISPR 32:2026 Class B (Harmonized)",
     "env_std": "EU RoHS / REACH",
     "cb_scheme_accepted": true,
@@ -595,7 +595,7 @@
     "lead_time_weeks": 2,
     "notes": "Standard CE rules apply.",
     "last_surveilled_date": "2026-09-21",
-    "last_surveilled_pillar": "EMC",
+    "last_surveilled_pillar": "Safety",
     "surveillance_source": "Global Harmonization Bulletin (All 205 Jurisdictions Auto-Ingested)"
   },
   "MT": {
@@ -604,7 +604,7 @@
     "region": "Europe & Eurasia",
     "bloc": "EU / EEA",
     "authority": "MCA / MCCAA",
-    "safety_std": "IEC 62368-1:2023 (Edition 4.0 Global)",
+    "safety_std": "IEC 62368-1:2023 (Edition 4.0)",
     "emc_std": "CISPR 32:2026 Class B (Harmonized)",
     "env_std": "EU RoHS / REACH",
     "cb_scheme_accepted": true,
@@ -618,7 +618,7 @@
     "lead_time_weeks": 2,
     "notes": "Standard CE rules apply.",
     "last_surveilled_date": "2026-09-21",
-    "last_surveilled_pillar": "EMC",
+    "last_surveilled_pillar": "Safety",
     "surveillance_source": "Global Harmonization Bulletin (All 205 Jurisdictions Auto-Ingested)"
   },
   "GB": {
@@ -627,7 +627,7 @@
     "region": "Europe & Eurasia",
     "bloc": "UK",
     "authority": "OPSS / DSIT",
-    "safety_std": "IEC 62368-1:2023 (Edition 4.0 Global)",
+    "safety_std": "IEC 62368-1:2023 (Edition 4.0)",
     "emc_std": "CISPR 32:2026 Class B (Harmonized)",
     "env_std": "UK RoHS / UK PSTI",
     "cb_scheme_accepted": true,
@@ -641,7 +641,7 @@
     "lead_time_weeks": 2,
     "notes": "UKCA mark required. UK PSTI compliance statement mandatory for connectable devices.",
     "last_surveilled_date": "2026-09-21",
-    "last_surveilled_pillar": "EMC",
+    "last_surveilled_pillar": "Safety",
     "surveillance_source": "Global Harmonization Bulletin (All 205 Jurisdictions Auto-Ingested)"
   },
   "CH": {
@@ -650,7 +650,7 @@
     "region": "Europe & Eurasia",
     "bloc": "EFTA",
     "authority": "ESTI / BAKOM",
-    "safety_std": "IEC 62368-1:2023 (Edition 4.0 Global)",
+    "safety_std": "IEC 62368-1:2023 (Edition 4.0)",
     "emc_std": "CISPR 32:2026 Class B (Harmonized)",
     "env_std": "ORRChem (Swiss RoHS)",
     "cb_scheme_accepted": true,
@@ -663,7 +663,7 @@
     "lead_time_weeks": 2,
     "notes": "Accepts CE mark directly under mutual recognition for ITE.",
     "last_surveilled_date": "2026-09-21",
-    "last_surveilled_pillar": "EMC",
+    "last_surveilled_pillar": "Safety",
     "surveillance_source": "Global Harmonization Bulletin (All 205 Jurisdictions Auto-Ingested)"
   },
   "NO": {
@@ -672,7 +672,7 @@
     "region": "Europe & Eurasia",
     "bloc": "EEA",
     "authority": "Nkom / DSB",
-    "safety_std": "IEC 62368-1:2023 (Edition 4.0 Global)",
+    "safety_std": "IEC 62368-1:2023 (Edition 4.0)",
     "emc_std": "CISPR 32:2026 Class B (Harmonized)",
     "env_std": "EU RoHS / REACH",
     "cb_scheme_accepted": true,
@@ -686,7 +686,7 @@
     "lead_time_weeks": 2,
     "notes": "EEA member; full CE mark equivalence.",
     "last_surveilled_date": "2026-09-21",
-    "last_surveilled_pillar": "EMC",
+    "last_surveilled_pillar": "Safety",
     "surveillance_source": "Global Harmonization Bulletin (All 205 Jurisdictions Auto-Ingested)"
   },
   "IS": {
@@ -695,7 +695,7 @@
     "region": "Europe & Eurasia",
     "bloc": "EEA",
     "authority": "Fjarskiptastofa",
-    "safety_std": "IEC 62368-1:2023 (Edition 4.0 Global)",
+    "safety_std": "IEC 62368-1:2023 (Edition 4.0)",
     "emc_std": "CISPR 32:2026 Class B (Harmonized)",
     "env_std": "EU RoHS / REACH",
     "cb_scheme_accepted": true,
@@ -709,7 +709,7 @@
     "lead_time_weeks": 2,
     "notes": "EEA member; full CE mark equivalence.",
     "last_surveilled_date": "2026-09-21",
-    "last_surveilled_pillar": "EMC",
+    "last_surveilled_pillar": "Safety",
     "surveillance_source": "Global Harmonization Bulletin (All 205 Jurisdictions Auto-Ingested)"
   },
   "LI": {
@@ -718,7 +718,7 @@
     "region": "Europe & Eurasia",
     "bloc": "EEA",
     "authority": "Amt für Kommunikation",
-    "safety_std": "IEC 62368-1:2023 (Edition 4.0 Global)",
+    "safety_std": "IEC 62368-1:2023 (Edition 4.0)",
     "emc_std": "CISPR 32:2026 Class B (Harmonized)",
     "env_std": "EU RoHS / REACH",
     "cb_scheme_accepted": true,
@@ -731,7 +731,7 @@
     "lead_time_weeks": 2,
     "notes": "EEA member; full CE mark equivalence.",
     "last_surveilled_date": "2026-09-21",
-    "last_surveilled_pillar": "EMC",
+    "last_surveilled_pillar": "Safety",
     "surveillance_source": "Global Harmonization Bulletin (All 205 Jurisdictions Auto-Ingested)"
   },
   "RU": {
@@ -740,7 +740,7 @@
     "region": "Europe & Eurasia",
     "bloc": "EAEU",
     "authority": "Rosstandart / EAC",
-    "safety_std": "IEC 62368-1:2023 (Edition 4.0 Global)",
+    "safety_std": "IEC 62368-1:2023 (Edition 4.0)",
     "emc_std": "CISPR 32:2026 Class B (Harmonized)",
     "env_std": "TR EAEU 037/2016 (RoHS)",
     "cb_scheme_accepted": true,
@@ -753,7 +753,7 @@
     "lead_time_weeks": 6,
     "notes": "EAC certificate / declaration required. In-country accredited testing or recognized CB.",
     "last_surveilled_date": "2026-09-21",
-    "last_surveilled_pillar": "EMC",
+    "last_surveilled_pillar": "Safety",
     "surveillance_source": "Global Harmonization Bulletin (All 205 Jurisdictions Auto-Ingested)"
   },
   "BY": {
@@ -762,7 +762,7 @@
     "region": "Europe & Eurasia",
     "bloc": "EAEU",
     "authority": "Gosstandart / BELLIS",
-    "safety_std": "IEC 62368-1:2023 (Edition 4.0 Global)",
+    "safety_std": "IEC 62368-1:2023 (Edition 4.0)",
     "emc_std": "CISPR 32:2026 Class B (Harmonized)",
     "env_std": "TR EAEU 037/2016 / Energy Eff",
     "cb_scheme_accepted": true,
@@ -776,7 +776,7 @@
     "lead_time_weeks": 6,
     "notes": "EAEU rules plus national energy efficiency marking TR 2018/024/BY.",
     "last_surveilled_date": "2026-09-21",
-    "last_surveilled_pillar": "EMC",
+    "last_surveilled_pillar": "Safety",
     "surveillance_source": "Global Harmonization Bulletin (All 205 Jurisdictions Auto-Ingested)"
   },
   "KZ": {
@@ -785,7 +785,7 @@
     "region": "Europe & Eurasia",
     "bloc": "EAEU",
     "authority": "KAZMEMST",
-    "safety_std": "IEC 62368-1:2023 (Edition 4.0 Global)",
+    "safety_std": "IEC 62368-1:2023 (Edition 4.0)",
     "emc_std": "CISPR 32:2026 Class B (Harmonized)",
     "env_std": "TR EAEU 037/2016",
     "cb_scheme_accepted": true,
@@ -798,7 +798,7 @@
     "lead_time_weeks": 5,
     "notes": "EAC declaration recognized across all EAEU member states.",
     "last_surveilled_date": "2026-09-21",
-    "last_surveilled_pillar": "EMC",
+    "last_surveilled_pillar": "Safety",
     "surveillance_source": "Global Harmonization Bulletin (All 205 Jurisdictions Auto-Ingested)"
   },
   "AM": {
@@ -807,7 +807,7 @@
     "region": "Europe & Eurasia",
     "bloc": "EAEU",
     "authority": "Armstandard",
-    "safety_std": "IEC 62368-1:2023 (Edition 4.0 Global)",
+    "safety_std": "IEC 62368-1:2023 (Edition 4.0)",
     "emc_std": "CISPR 32:2026 Class B (Harmonized)",
     "env_std": "TR EAEU 037/2016",
     "cb_scheme_accepted": true,
@@ -820,7 +820,7 @@
     "lead_time_weeks": 5,
     "notes": "EAEU member state.",
     "last_surveilled_date": "2026-09-21",
-    "last_surveilled_pillar": "EMC",
+    "last_surveilled_pillar": "Safety",
     "surveillance_source": "Global Harmonization Bulletin (All 205 Jurisdictions Auto-Ingested)"
   },
   "KG": {
@@ -829,7 +829,7 @@
     "region": "Europe & Eurasia",
     "bloc": "EAEU",
     "authority": "Kyrgyzstandard",
-    "safety_std": "IEC 62368-1:2023 (Edition 4.0 Global)",
+    "safety_std": "IEC 62368-1:2023 (Edition 4.0)",
     "emc_std": "CISPR 32:2026 Class B (Harmonized)",
     "env_std": "TR EAEU 037/2016",
     "cb_scheme_accepted": true,
@@ -842,7 +842,7 @@
     "lead_time_weeks": 5,
     "notes": "EAEU member state.",
     "last_surveilled_date": "2026-09-21",
-    "last_surveilled_pillar": "EMC",
+    "last_surveilled_pillar": "Safety",
     "surveillance_source": "Global Harmonization Bulletin (All 205 Jurisdictions Auto-Ingested)"
   },
   "UA": {
@@ -851,7 +851,7 @@
     "region": "Europe & Eurasia",
     "bloc": "Non-EU",
     "authority": "UkrSEPRO / MinRegion",
-    "safety_std": "IEC 62368-1:2023 (Edition 4.0 Global)",
+    "safety_std": "IEC 62368-1:2023 (Edition 4.0)",
     "emc_std": "CISPR 32:2026 Class B (Harmonized)",
     "env_std": "UA TR RoHS (Res 139)",
     "cb_scheme_accepted": true,
@@ -864,7 +864,7 @@
     "lead_time_weeks": 4,
     "notes": "National Technical Regulation conformity mark (trefoil in circle) required.",
     "last_surveilled_date": "2026-09-21",
-    "last_surveilled_pillar": "EMC",
+    "last_surveilled_pillar": "Safety",
     "surveillance_source": "Global Harmonization Bulletin (All 205 Jurisdictions Auto-Ingested)"
   },
   "RS": {
@@ -873,7 +873,7 @@
     "region": "Europe & Eurasia",
     "bloc": "Candidate EU",
     "authority": "RATEL / Kvalitet",
-    "safety_std": "IEC 62368-1:2023 (Edition 4.0 Global)",
+    "safety_std": "IEC 62368-1:2023 (Edition 4.0)",
     "emc_std": "CISPR 32:2026 Class B (Harmonized)",
     "env_std": "Serbian RoHS",
     "cb_scheme_accepted": true,
@@ -886,7 +886,7 @@
     "lead_time_weeks": 3,
     "notes": "Kvalitet AAA mark required for designated electronic equipment.",
     "last_surveilled_date": "2026-09-21",
-    "last_surveilled_pillar": "EMC",
+    "last_surveilled_pillar": "Safety",
     "surveillance_source": "Global Harmonization Bulletin (All 205 Jurisdictions Auto-Ingested)"
   },
   "TR": {
@@ -895,7 +895,7 @@
     "region": "Europe & Eurasia",
     "bloc": "Customs Union",
     "authority": "BTK / Ministry of Trade",
-    "safety_std": "IEC 62368-1:2023 (Edition 4.0 Global)",
+    "safety_std": "IEC 62368-1:2023 (Edition 4.0)",
     "emc_std": "CISPR 32:2026 Class B (Harmonized)",
     "env_std": "Turkey RoHS (EEE)",
     "cb_scheme_accepted": true,
@@ -908,7 +908,7 @@
     "lead_time_weeks": 2,
     "notes": "EU-Turkey Customs Union allows direct CE marking acceptance.",
     "last_surveilled_date": "2026-09-21",
-    "last_surveilled_pillar": "EMC",
+    "last_surveilled_pillar": "Safety",
     "surveillance_source": "Global Harmonization Bulletin (All 205 Jurisdictions Auto-Ingested)"
   },
   "BA": {
@@ -917,7 +917,7 @@
     "region": "Europe & Eurasia",
     "bloc": "Balkans",
     "authority": "RAK / BAS",
-    "safety_std": "IEC 62368-1:2023 (Edition 4.0 Global)",
+    "safety_std": "IEC 62368-1:2023 (Edition 4.0)",
     "emc_std": "CISPR 32:2026 Class B (Harmonized)",
     "env_std": "National RoHS",
     "cb_scheme_accepted": true,
@@ -930,7 +930,7 @@
     "lead_time_weeks": 4,
     "notes": "Declaration with CB test report.",
     "last_surveilled_date": "2026-09-21",
-    "last_surveilled_pillar": "EMC",
+    "last_surveilled_pillar": "Safety",
     "surveillance_source": "Global Harmonization Bulletin (All 205 Jurisdictions Auto-Ingested)"
   },
   "ME": {
@@ -939,7 +939,7 @@
     "region": "Europe & Eurasia",
     "bloc": "Balkans",
     "authority": "EKIP",
-    "safety_std": "IEC 62368-1:2023 (Edition 4.0 Global)",
+    "safety_std": "IEC 62368-1:2023 (Edition 4.0)",
     "emc_std": "CISPR 32:2026 Class B (Harmonized)",
     "env_std": "RoHS",
     "cb_scheme_accepted": true,
@@ -952,7 +952,7 @@
     "lead_time_weeks": 3,
     "notes": "Aligns with EU CE requirements.",
     "last_surveilled_date": "2026-09-21",
-    "last_surveilled_pillar": "EMC",
+    "last_surveilled_pillar": "Safety",
     "surveillance_source": "Global Harmonization Bulletin (All 205 Jurisdictions Auto-Ingested)"
   },
   "MK": {
@@ -961,7 +961,7 @@
     "region": "Europe & Eurasia",
     "bloc": "Balkans",
     "authority": "AEC",
-    "safety_std": "IEC 62368-1:2023 (Edition 4.0 Global)",
+    "safety_std": "IEC 62368-1:2023 (Edition 4.0)",
     "emc_std": "CISPR 32:2026 Class B (Harmonized)",
     "env_std": "RoHS",
     "cb_scheme_accepted": true,
@@ -974,7 +974,7 @@
     "lead_time_weeks": 3,
     "notes": "Aligns with EU CE requirements.",
     "last_surveilled_date": "2026-09-21",
-    "last_surveilled_pillar": "EMC",
+    "last_surveilled_pillar": "Safety",
     "surveillance_source": "Global Harmonization Bulletin (All 205 Jurisdictions Auto-Ingested)"
   },
   "AL": {
@@ -983,7 +983,7 @@
     "region": "Europe & Eurasia",
     "bloc": "Balkans",
     "authority": "AKEP",
-    "safety_std": "IEC 62368-1:2023 (Edition 4.0 Global)",
+    "safety_std": "IEC 62368-1:2023 (Edition 4.0)",
     "emc_std": "CISPR 32:2026 Class B (Harmonized)",
     "env_std": "RoHS",
     "cb_scheme_accepted": true,
@@ -996,7 +996,7 @@
     "lead_time_weeks": 3,
     "notes": "Aligns with EU CE directives.",
     "last_surveilled_date": "2026-09-21",
-    "last_surveilled_pillar": "EMC",
+    "last_surveilled_pillar": "Safety",
     "surveillance_source": "Global Harmonization Bulletin (All 205 Jurisdictions Auto-Ingested)"
   },
   "MD": {
@@ -1005,7 +1005,7 @@
     "region": "Europe & Eurasia",
     "bloc": "Candidate EU",
     "authority": "ANRCETI",
-    "safety_std": "IEC 62368-1:2023 (Edition 4.0 Global)",
+    "safety_std": "IEC 62368-1:2023 (Edition 4.0)",
     "emc_std": "CISPR 32:2026 Class B (Harmonized)",
     "env_std": "RoHS",
     "cb_scheme_accepted": true,
@@ -1018,7 +1018,7 @@
     "lead_time_weeks": 4,
     "notes": "Harmonized with EU CE standards.",
     "last_surveilled_date": "2026-09-21",
-    "last_surveilled_pillar": "EMC",
+    "last_surveilled_pillar": "Safety",
     "surveillance_source": "Global Harmonization Bulletin (All 205 Jurisdictions Auto-Ingested)"
   },
   "GE": {
@@ -1027,7 +1027,7 @@
     "region": "Europe & Eurasia",
     "bloc": "Caucasus",
     "authority": "GNCC",
-    "safety_std": "IEC 62368-1:2023 (Edition 4.0 Global)",
+    "safety_std": "IEC 62368-1:2023 (Edition 4.0)",
     "emc_std": "CISPR 32:2026 Class B (Harmonized)",
     "env_std": "RoHS",
     "cb_scheme_accepted": true,
@@ -1040,7 +1040,7 @@
     "lead_time_weeks": 2,
     "notes": "Recognizes CE / CB test reports directly.",
     "last_surveilled_date": "2026-09-21",
-    "last_surveilled_pillar": "EMC",
+    "last_surveilled_pillar": "Safety",
     "surveillance_source": "Global Harmonization Bulletin (All 205 Jurisdictions Auto-Ingested)"
   },
   "AZ": {
@@ -1049,7 +1049,7 @@
     "region": "Europe & Eurasia",
     "bloc": "Caucasus",
     "authority": "AZSTAND",
-    "safety_std": "IEC 62368-1:2023 (Edition 4.0 Global)",
+    "safety_std": "IEC 62368-1:2023 (Edition 4.0)",
     "emc_std": "CISPR 32:2026 Class B (Harmonized)",
     "env_std": "RoHS",
     "cb_scheme_accepted": true,
@@ -1062,7 +1062,7 @@
     "lead_time_weeks": 5,
     "notes": "National AZS certificate required for mains power devices.",
     "last_surveilled_date": "2026-09-21",
-    "last_surveilled_pillar": "EMC",
+    "last_surveilled_pillar": "Safety",
     "surveillance_source": "Global Harmonization Bulletin (All 205 Jurisdictions Auto-Ingested)"
   },
   "UZ": {
@@ -1071,7 +1071,7 @@
     "region": "Europe & Eurasia",
     "bloc": "Central Asia",
     "authority": "Uzstandard",
-    "safety_std": "IEC 62368-1:2023 (Edition 4.0 Global)",
+    "safety_std": "IEC 62368-1:2023 (Edition 4.0)",
     "emc_std": "CISPR 32:2026 Class B (Harmonized)",
     "env_std": "RoHS",
     "cb_scheme_accepted": true,
@@ -1084,7 +1084,7 @@
     "lead_time_weeks": 6,
     "notes": "In-country testing or bilateral CB report recognition.",
     "last_surveilled_date": "2026-09-21",
-    "last_surveilled_pillar": "EMC",
+    "last_surveilled_pillar": "Safety",
     "surveillance_source": "Global Harmonization Bulletin (All 205 Jurisdictions Auto-Ingested)"
   },
   "TJ": {
@@ -1093,7 +1093,7 @@
     "region": "Europe & Eurasia",
     "bloc": "Central Asia",
     "authority": "Tajikstandard",
-    "safety_std": "IEC 62368-1:2023 (Edition 4.0 Global)",
+    "safety_std": "IEC 62368-1:2023 (Edition 4.0)",
     "emc_std": "CISPR 32:2026 Class B (Harmonized)",
     "env_std": "RoHS",
     "cb_scheme_accepted": true,
@@ -1106,7 +1106,7 @@
     "lead_time_weeks": 6,
     "notes": "GOST-based national certification.",
     "last_surveilled_date": "2026-09-21",
-    "last_surveilled_pillar": "EMC",
+    "last_surveilled_pillar": "Safety",
     "surveillance_source": "Global Harmonization Bulletin (All 205 Jurisdictions Auto-Ingested)"
   },
   "TM": {
@@ -1115,7 +1115,7 @@
     "region": "Europe & Eurasia",
     "bloc": "Central Asia",
     "authority": "Turkmenstandartlary",
-    "safety_std": "IEC 62368-1:2023 (Edition 4.0 Global)",
+    "safety_std": "IEC 62368-1:2023 (Edition 4.0)",
     "emc_std": "CISPR 32:2026 Class B (Harmonized)",
     "env_std": "RoHS",
     "cb_scheme_accepted": true,
@@ -1128,7 +1128,7 @@
     "lead_time_weeks": 6,
     "notes": "National conformity certificate required.",
     "last_surveilled_date": "2026-09-21",
-    "last_surveilled_pillar": "EMC",
+    "last_surveilled_pillar": "Safety",
     "surveillance_source": "Global Harmonization Bulletin (All 205 Jurisdictions Auto-Ingested)"
   },
   "US": {
@@ -1137,7 +1137,7 @@
     "region": "Americas",
     "bloc": "USMCA",
     "authority": "FCC / OSHA NRTL / DoE",
-    "safety_std": "IEC 62368-1:2023 (Edition 4.0 Global)",
+    "safety_std": "IEC 62368-1:2023 (Edition 4.0)",
     "emc_std": "CISPR 32:2026 Class B (Harmonized)",
     "env_std": "TSCA / Prop 65 / DoE Level VI",
     "cb_scheme_accepted": true,
@@ -1151,7 +1151,7 @@
     "lead_time_weeks": 2,
     "notes": "FCC SDoC for un-intentional radiators. NRTL (UL/CSA/ETL) safety mark expected for powered units. DoE Level VI mandatory for external power supply.",
     "last_surveilled_date": "2026-09-21",
-    "last_surveilled_pillar": "EMC",
+    "last_surveilled_pillar": "Safety",
     "surveillance_source": "Global Harmonization Bulletin (All 205 Jurisdictions Auto-Ingested)"
   },
   "CA": {
@@ -1160,7 +1160,7 @@
     "region": "Americas",
     "bloc": "USMCA",
     "authority": "ISED / SCC",
-    "safety_std": "IEC 62368-1:2023 (Edition 4.0 Global)",
+    "safety_std": "IEC 62368-1:2023 (Edition 4.0)",
     "emc_std": "CISPR 32:2026 Class B (Harmonized)",
     "env_std": "CEPA / NRCan Energy Efficiency",
     "cb_scheme_accepted": true,
@@ -1174,7 +1174,7 @@
     "lead_time_weeks": 2,
     "notes": "ICES-003 Class B compliance statement on packaging/label. NRCan energy efficiency for power adapters.",
     "last_surveilled_date": "2026-09-21",
-    "last_surveilled_pillar": "EMC",
+    "last_surveilled_pillar": "Safety",
     "surveillance_source": "Global Harmonization Bulletin (All 205 Jurisdictions Auto-Ingested)"
   },
   "MX": {
@@ -1183,7 +1183,7 @@
     "region": "Americas",
     "bloc": "USMCA",
     "authority": "IFT / DGN / NYCE / ANCE",
-    "safety_std": "IEC 62368-1:2023 (Edition 4.0 Global)",
+    "safety_std": "IEC 62368-1:2023 (Edition 4.0)",
     "emc_std": "CISPR 32:2026 Class B (Harmonized)",
     "env_std": "Mexican RoHS / Energy Law",
     "cb_scheme_accepted": true,
@@ -1197,7 +1197,7 @@
     "lead_time_weeks": 6,
     "notes": "Mandatory in-country safety testing for power adapters. Local Mexican importer holds certificate.",
     "last_surveilled_date": "2026-09-21",
-    "last_surveilled_pillar": "EMC",
+    "last_surveilled_pillar": "Safety",
     "surveillance_source": "Global Harmonization Bulletin (All 205 Jurisdictions Auto-Ingested)"
   },
   "BR": {
@@ -1206,7 +1206,7 @@
     "region": "Americas",
     "bloc": "MERCOSUR",
     "authority": "ANATEL / INMETRO",
-    "safety_std": "IEC 62368-1:2023 (Edition 4.0 Global)",
+    "safety_std": "IEC 62368-1:2023 (Edition 4.0)",
     "emc_std": "CISPR 32:2026 Class B (Harmonized)",
     "env_std": "RoHS (CONAMA) / INMETRO Energy",
     "cb_scheme_accepted": true,
@@ -1220,7 +1220,7 @@
     "lead_time_weeks": 8,
     "notes": "INMETRO safety certification mandatory for AC power adapters. Local factory audit / annual maintenance required.",
     "last_surveilled_date": "2026-09-21",
-    "last_surveilled_pillar": "EMC",
+    "last_surveilled_pillar": "Safety",
     "surveillance_source": "Global Harmonization Bulletin (All 205 Jurisdictions Auto-Ingested)"
   },
   "AR": {
@@ -1229,7 +1229,7 @@
     "region": "Americas",
     "bloc": "MERCOSUR",
     "authority": "ENACOM / Sec. of Commerce",
-    "safety_std": "IEC 62368-1:2023 (Edition 4.0 Global)",
+    "safety_std": "IEC 62368-1:2023 (Edition 4.0)",
     "emc_std": "CISPR 32:2026 Class B (Harmonized)",
     "env_std": "Resolution 834/2019 (RoHS)",
     "cb_scheme_accepted": true,
@@ -1242,7 +1242,7 @@
     "lead_time_weeks": 8,
     "notes": "Mandatory S-Mark safety certification for external power adapters. In-country testing / CB deviation evaluation.",
     "last_surveilled_date": "2026-09-21",
-    "last_surveilled_pillar": "EMC",
+    "last_surveilled_pillar": "Safety",
     "surveillance_source": "Global Harmonization Bulletin (All 205 Jurisdictions Auto-Ingested)"
   },
   "CL": {
@@ -1251,7 +1251,7 @@
     "region": "Americas",
     "bloc": "Andean",
     "authority": "SEC / SUBTEL",
-    "safety_std": "IEC 62368-1:2023 (Edition 4.0 Global)",
+    "safety_std": "IEC 62368-1:2023 (Edition 4.0)",
     "emc_std": "CISPR 32:2026 Class B (Harmonized)",
     "env_std": "SEC Energy Efficiency Protocol",
     "cb_scheme_accepted": true,
@@ -1264,7 +1264,7 @@
     "lead_time_weeks": 6,
     "notes": "SEC QR code label mandatory on certified products and power adapters.",
     "last_surveilled_date": "2026-09-21",
-    "last_surveilled_pillar": "EMC",
+    "last_surveilled_pillar": "Safety",
     "surveillance_source": "Global Harmonization Bulletin (All 205 Jurisdictions Auto-Ingested)"
   },
   "CO": {
@@ -1273,7 +1273,7 @@
     "region": "Americas",
     "bloc": "Andean",
     "authority": "CRC / MinCIT",
-    "safety_std": "IEC 62368-1:2023 (Edition 4.0 Global)",
+    "safety_std": "IEC 62368-1:2023 (Edition 4.0)",
     "emc_std": "CISPR 32:2026 Class B (Harmonized)",
     "env_std": "RoHS Dec 0172",
     "cb_scheme_accepted": true,
@@ -1286,7 +1286,7 @@
     "lead_time_weeks": 4,
     "notes": "RETIE certificate of conformity required for external power adapters. CB report accepted with local review.",
     "last_surveilled_date": "2026-09-21",
-    "last_surveilled_pillar": "EMC",
+    "last_surveilled_pillar": "Safety",
     "surveillance_source": "Global Harmonization Bulletin (All 205 Jurisdictions Auto-Ingested)"
   },
   "PE": {
@@ -1295,7 +1295,7 @@
     "region": "Americas",
     "bloc": "Andean",
     "authority": "MTC / INACAL",
-    "safety_std": "IEC 62368-1:2023 (Edition 4.0 Global)",
+    "safety_std": "IEC 62368-1:2023 (Edition 4.0)",
     "emc_std": "CISPR 32:2026 Class B (Harmonized)",
     "env_std": "RoHS",
     "cb_scheme_accepted": true,
@@ -1308,7 +1308,7 @@
     "lead_time_weeks": 4,
     "notes": "MTC approval required for telecom/RF. Passive ITE storage requires standard customs DoC.",
     "last_surveilled_date": "2026-09-21",
-    "last_surveilled_pillar": "EMC",
+    "last_surveilled_pillar": "Safety",
     "surveillance_source": "Global Harmonization Bulletin (All 205 Jurisdictions Auto-Ingested)"
   },
   "EC": {
@@ -1317,7 +1317,7 @@
     "region": "Americas",
     "bloc": "Andean",
     "authority": "ARCOTEL / INEN",
-    "safety_std": "IEC 62368-1:2023 (Edition 4.0 Global)",
+    "safety_std": "IEC 62368-1:2023 (Edition 4.0)",
     "emc_std": "CISPR 32:2026 Class B (Harmonized)",
     "env_std": "INEN 3134 (RoHS)",
     "cb_scheme_accepted": true,
@@ -1330,7 +1330,7 @@
     "lead_time_weeks": 5,
     "notes": "INEN certificate required for external power adapters based on CB report.",
     "last_surveilled_date": "2026-09-21",
-    "last_surveilled_pillar": "EMC",
+    "last_surveilled_pillar": "Safety",
     "surveillance_source": "Global Harmonization Bulletin (All 205 Jurisdictions Auto-Ingested)"
   },
   "UY": {
@@ -1339,7 +1339,7 @@
     "region": "Americas",
     "bloc": "MERCOSUR",
     "authority": "URSEC / UNIT",
-    "safety_std": "IEC 62368-1:2023 (Edition 4.0 Global)",
+    "safety_std": "IEC 62368-1:2023 (Edition 4.0)",
     "emc_std": "CISPR 32:2026 Class B (Harmonized)",
     "env_std": "RoHS",
     "cb_scheme_accepted": true,
@@ -1352,7 +1352,7 @@
     "lead_time_weeks": 4,
     "notes": "Accepts CB test certificate and FCC/CE reports.",
     "last_surveilled_date": "2026-09-21",
-    "last_surveilled_pillar": "EMC",
+    "last_surveilled_pillar": "Safety",
     "surveillance_source": "Global Harmonization Bulletin (All 205 Jurisdictions Auto-Ingested)"
   },
   "PY": {
@@ -1361,7 +1361,7 @@
     "region": "Americas",
     "bloc": "MERCOSUR",
     "authority": "CONATEL / INTN",
-    "safety_std": "IEC 62368-1:2023 (Edition 4.0 Global)",
+    "safety_std": "IEC 62368-1:2023 (Edition 4.0)",
     "emc_std": "CISPR 32:2026 Class B (Harmonized)",
     "env_std": "RoHS",
     "cb_scheme_accepted": true,
@@ -1374,7 +1374,7 @@
     "lead_time_weeks": 4,
     "notes": "Accepts international CB test reports.",
     "last_surveilled_date": "2026-09-21",
-    "last_surveilled_pillar": "EMC",
+    "last_surveilled_pillar": "Safety",
     "surveillance_source": "Global Harmonization Bulletin (All 205 Jurisdictions Auto-Ingested)"
   },
   "BO": {
@@ -1383,7 +1383,7 @@
     "region": "Americas",
     "bloc": "Andean",
     "authority": "ATT / IBNORCA",
-    "safety_std": "IEC 62368-1:2023 (Edition 4.0 Global)",
+    "safety_std": "IEC 62368-1:2023 (Edition 4.0)",
     "emc_std": "CISPR 32:2026 Class B (Harmonized)",
     "env_std": "RoHS",
     "cb_scheme_accepted": true,
@@ -1396,7 +1396,7 @@
     "lead_time_weeks": 5,
     "notes": "Type approval with FCC/CE test reports.",
     "last_surveilled_date": "2026-09-21",
-    "last_surveilled_pillar": "EMC",
+    "last_surveilled_pillar": "Safety",
     "surveillance_source": "Global Harmonization Bulletin (All 205 Jurisdictions Auto-Ingested)"
   },
   "VE": {
@@ -1405,7 +1405,7 @@
     "region": "Americas",
     "bloc": "Non-aligned",
     "authority": "CONATEL / FONDONORMA",
-    "safety_std": "IEC 62368-1:2023 (Edition 4.0 Global)",
+    "safety_std": "IEC 62368-1:2023 (Edition 4.0)",
     "emc_std": "CISPR 32:2026 Class B (Harmonized)",
     "env_std": "RoHS",
     "cb_scheme_accepted": true,
@@ -1418,7 +1418,7 @@
     "lead_time_weeks": 6,
     "notes": "FCC/CE based review.",
     "last_surveilled_date": "2026-09-21",
-    "last_surveilled_pillar": "EMC",
+    "last_surveilled_pillar": "Safety",
     "surveillance_source": "Global Harmonization Bulletin (All 205 Jurisdictions Auto-Ingested)"
   },
   "GY": {
@@ -1427,7 +1427,7 @@
     "region": "Americas",
     "bloc": "CARICOM",
     "authority": "GNBS",
-    "safety_std": "IEC 62368-1:2023 (Edition 4.0 Global)",
+    "safety_std": "IEC 62368-1:2023 (Edition 4.0)",
     "emc_std": "CISPR 32:2026 Class B (Harmonized)",
     "env_std": "RoHS",
     "cb_scheme_accepted": true,
@@ -1440,7 +1440,7 @@
     "lead_time_weeks": 3,
     "notes": "Accepts FCC / CE certifications directly.",
     "last_surveilled_date": "2026-09-21",
-    "last_surveilled_pillar": "EMC",
+    "last_surveilled_pillar": "Safety",
     "surveillance_source": "Global Harmonization Bulletin (All 205 Jurisdictions Auto-Ingested)"
   },
   "SR": {
@@ -1449,7 +1449,7 @@
     "region": "Americas",
     "bloc": "CARICOM",
     "authority": "TAS / SSB",
-    "safety_std": "IEC 62368-1:2023 (Edition 4.0 Global)",
+    "safety_std": "IEC 62368-1:2023 (Edition 4.0)",
     "emc_std": "CISPR 32:2026 Class B (Harmonized)",
     "env_std": "RoHS",
     "cb_scheme_accepted": true,
@@ -1462,7 +1462,7 @@
     "lead_time_weeks": 3,
     "notes": "Accepts FCC / CE certifications directly.",
     "last_surveilled_date": "2026-09-21",
-    "last_surveilled_pillar": "EMC",
+    "last_surveilled_pillar": "Safety",
     "surveillance_source": "Global Harmonization Bulletin (All 205 Jurisdictions Auto-Ingested)"
   },
   "CR": {
@@ -1471,7 +1471,7 @@
     "region": "Americas",
     "bloc": "SICA",
     "authority": "SUTEL / INTECO",
-    "safety_std": "IEC 62368-1:2023 (Edition 4.0 Global)",
+    "safety_std": "IEC 62368-1:2023 (Edition 4.0)",
     "emc_std": "CISPR 32:2026 Class B (Harmonized)",
     "env_std": "RoHS",
     "cb_scheme_accepted": true,
@@ -1484,7 +1484,7 @@
     "lead_time_weeks": 4,
     "notes": "SUTEL homologation with FCC test reports.",
     "last_surveilled_date": "2026-09-21",
-    "last_surveilled_pillar": "EMC",
+    "last_surveilled_pillar": "Safety",
     "surveillance_source": "Global Harmonization Bulletin (All 205 Jurisdictions Auto-Ingested)"
   },
   "PA": {
@@ -1493,7 +1493,7 @@
     "region": "Americas",
     "bloc": "SICA",
     "authority": "ASEP / DGNTI",
-    "safety_std": "IEC 62368-1:2023 (Edition 4.0 Global)",
+    "safety_std": "IEC 62368-1:2023 (Edition 4.0)",
     "emc_std": "CISPR 32:2026 Class B (Harmonized)",
     "env_std": "RoHS",
     "cb_scheme_accepted": true,
@@ -1506,7 +1506,7 @@
     "lead_time_weeks": 4,
     "notes": "Accepts FCC / CE certification directly.",
     "last_surveilled_date": "2026-09-21",
-    "last_surveilled_pillar": "EMC",
+    "last_surveilled_pillar": "Safety",
     "surveillance_source": "Global Harmonization Bulletin (All 205 Jurisdictions Auto-Ingested)"
   },
   "GT": {
@@ -1515,7 +1515,7 @@
     "region": "Americas",
     "bloc": "SICA",
     "authority": "SIT / COGUANOR",
-    "safety_std": "IEC 62368-1:2023 (Edition 4.0 Global)",
+    "safety_std": "IEC 62368-1:2023 (Edition 4.0)",
     "emc_std": "CISPR 32:2026 Class B (Harmonized)",
     "env_std": "RoHS",
     "cb_scheme_accepted": true,
@@ -1528,7 +1528,7 @@
     "lead_time_weeks": 3,
     "notes": "FCC grant accepted.",
     "last_surveilled_date": "2026-09-21",
-    "last_surveilled_pillar": "EMC",
+    "last_surveilled_pillar": "Safety",
     "surveillance_source": "Global Harmonization Bulletin (All 205 Jurisdictions Auto-Ingested)"
   },
   "SV": {
@@ -1537,7 +1537,7 @@
     "region": "Americas",
     "bloc": "SICA",
     "authority": "SIGET / OSN",
-    "safety_std": "IEC 62368-1:2023 (Edition 4.0 Global)",
+    "safety_std": "IEC 62368-1:2023 (Edition 4.0)",
     "emc_std": "CISPR 32:2026 Class B (Harmonized)",
     "env_std": "RoHS",
     "cb_scheme_accepted": true,
@@ -1550,7 +1550,7 @@
     "lead_time_weeks": 3,
     "notes": "FCC grant accepted.",
     "last_surveilled_date": "2026-09-21",
-    "last_surveilled_pillar": "EMC",
+    "last_surveilled_pillar": "Safety",
     "surveillance_source": "Global Harmonization Bulletin (All 205 Jurisdictions Auto-Ingested)"
   },
   "HN": {
@@ -1559,7 +1559,7 @@
     "region": "Americas",
     "bloc": "SICA",
     "authority": "CONATEL / OHN",
-    "safety_std": "IEC 62368-1:2023 (Edition 4.0 Global)",
+    "safety_std": "IEC 62368-1:2023 (Edition 4.0)",
     "emc_std": "CISPR 32:2026 Class B (Harmonized)",
     "env_std": "RoHS",
     "cb_scheme_accepted": true,
@@ -1572,7 +1572,7 @@
     "lead_time_weeks": 3,
     "notes": "FCC grant accepted.",
     "last_surveilled_date": "2026-09-21",
-    "last_surveilled_pillar": "EMC",
+    "last_surveilled_pillar": "Safety",
     "surveillance_source": "Global Harmonization Bulletin (All 205 Jurisdictions Auto-Ingested)"
   },
   "NI": {
@@ -1581,7 +1581,7 @@
     "region": "Americas",
     "bloc": "SICA",
     "authority": "TELCOR",
-    "safety_std": "IEC 62368-1:2023 (Edition 4.0 Global)",
+    "safety_std": "IEC 62368-1:2023 (Edition 4.0)",
     "emc_std": "CISPR 32:2026 Class B (Harmonized)",
     "env_std": "RoHS",
     "cb_scheme_accepted": true,
@@ -1594,7 +1594,7 @@
     "lead_time_weeks": 4,
     "notes": "FCC grant accepted.",
     "last_surveilled_date": "2026-09-21",
-    "last_surveilled_pillar": "EMC",
+    "last_surveilled_pillar": "Safety",
     "surveillance_source": "Global Harmonization Bulletin (All 205 Jurisdictions Auto-Ingested)"
   },
   "BZ": {
@@ -1603,7 +1603,7 @@
     "region": "Americas",
     "bloc": "CARICOM",
     "authority": "PUC / BBS",
-    "safety_std": "IEC 62368-1:2023 (Edition 4.0 Global)",
+    "safety_std": "IEC 62368-1:2023 (Edition 4.0)",
     "emc_std": "CISPR 32:2026 Class B (Harmonized)",
     "env_std": "RoHS",
     "cb_scheme_accepted": true,
@@ -1616,7 +1616,7 @@
     "lead_time_weeks": 3,
     "notes": "Accepts FCC / CE marks.",
     "last_surveilled_date": "2026-09-21",
-    "last_surveilled_pillar": "EMC",
+    "last_surveilled_pillar": "Safety",
     "surveillance_source": "Global Harmonization Bulletin (All 205 Jurisdictions Auto-Ingested)"
   },
   "DO": {
@@ -1625,7 +1625,7 @@
     "region": "Americas",
     "bloc": "SICA/CARICOM",
     "authority": "INDOTEL / INDOCAL",
-    "safety_std": "IEC 62368-1:2023 (Edition 4.0 Global)",
+    "safety_std": "IEC 62368-1:2023 (Edition 4.0)",
     "emc_std": "CISPR 32:2026 Class B (Harmonized)",
     "env_std": "RoHS",
     "cb_scheme_accepted": true,
@@ -1638,7 +1638,7 @@
     "lead_time_weeks": 4,
     "notes": "FCC test report accepted for homologation.",
     "last_surveilled_date": "2026-09-21",
-    "last_surveilled_pillar": "EMC",
+    "last_surveilled_pillar": "Safety",
     "surveillance_source": "Global Harmonization Bulletin (All 205 Jurisdictions Auto-Ingested)"
   },
   "PR": {
@@ -1647,7 +1647,7 @@
     "region": "Americas",
     "bloc": "US Territory",
     "authority": "FCC / OSHA NRTL",
-    "safety_std": "IEC 62368-1:2023 (Edition 4.0 Global)",
+    "safety_std": "IEC 62368-1:2023 (Edition 4.0)",
     "emc_std": "CISPR 32:2026 Class B (Harmonized)",
     "env_std": "DoE Level VI / Prop 65",
     "cb_scheme_accepted": true,
@@ -1661,7 +1661,7 @@
     "lead_time_weeks": 2,
     "notes": "US Federal jurisdiction; standard FCC and NRTL safety apply.",
     "last_surveilled_date": "2026-09-21",
-    "last_surveilled_pillar": "EMC",
+    "last_surveilled_pillar": "Safety",
     "surveillance_source": "Global Harmonization Bulletin (All 205 Jurisdictions Auto-Ingested)"
   },
   "JM": {
@@ -1670,7 +1670,7 @@
     "region": "Americas",
     "bloc": "CARICOM",
     "authority": "SMA / BSJ",
-    "safety_std": "IEC 62368-1:2023 (Edition 4.0 Global)",
+    "safety_std": "IEC 62368-1:2023 (Edition 4.0)",
     "emc_std": "CISPR 32:2026 Class B (Harmonized)",
     "env_std": "RoHS",
     "cb_scheme_accepted": true,
@@ -1683,7 +1683,7 @@
     "lead_time_weeks": 3,
     "notes": "FCC / CE reports accepted.",
     "last_surveilled_date": "2026-09-21",
-    "last_surveilled_pillar": "EMC",
+    "last_surveilled_pillar": "Safety",
     "surveillance_source": "Global Harmonization Bulletin (All 205 Jurisdictions Auto-Ingested)"
   },
   "TT": {
@@ -1692,7 +1692,7 @@
     "region": "Americas",
     "bloc": "CARICOM",
     "authority": "TATT / TTBS",
-    "safety_std": "IEC 62368-1:2023 (Edition 4.0 Global)",
+    "safety_std": "IEC 62368-1:2023 (Edition 4.0)",
     "emc_std": "CISPR 32:2026 Class B (Harmonized)",
     "env_std": "RoHS",
     "cb_scheme_accepted": true,
@@ -1705,7 +1705,7 @@
     "lead_time_weeks": 3,
     "notes": "FCC / CE reports accepted.",
     "last_surveilled_date": "2026-09-21",
-    "last_surveilled_pillar": "EMC",
+    "last_surveilled_pillar": "Safety",
     "surveillance_source": "Global Harmonization Bulletin (All 205 Jurisdictions Auto-Ingested)"
   },
   "BS": {
@@ -1714,7 +1714,7 @@
     "region": "Americas",
     "bloc": "CARICOM",
     "authority": "URCA / BBS",
-    "safety_std": "IEC 62368-1:2023 (Edition 4.0 Global)",
+    "safety_std": "IEC 62368-1:2023 (Edition 4.0)",
     "emc_std": "CISPR 32:2026 Class B (Harmonized)",
     "env_std": "RoHS",
     "cb_scheme_accepted": true,
@@ -1727,7 +1727,7 @@
     "lead_time_weeks": 3,
     "notes": "Accepts FCC / CE.",
     "last_surveilled_date": "2026-09-21",
-    "last_surveilled_pillar": "EMC",
+    "last_surveilled_pillar": "Safety",
     "surveillance_source": "Global Harmonization Bulletin (All 205 Jurisdictions Auto-Ingested)"
   },
   "BB": {
@@ -1736,7 +1736,7 @@
     "region": "Americas",
     "bloc": "CARICOM",
     "authority": "BNSI",
-    "safety_std": "IEC 62368-1:2023 (Edition 4.0 Global)",
+    "safety_std": "IEC 62368-1:2023 (Edition 4.0)",
     "emc_std": "CISPR 32:2026 Class B (Harmonized)",
     "env_std": "RoHS",
     "cb_scheme_accepted": true,
@@ -1749,7 +1749,7 @@
     "lead_time_weeks": 3,
     "notes": "Accepts FCC / CE.",
     "last_surveilled_date": "2026-09-21",
-    "last_surveilled_pillar": "EMC",
+    "last_surveilled_pillar": "Safety",
     "surveillance_source": "Global Harmonization Bulletin (All 205 Jurisdictions Auto-Ingested)"
   },
   "CU": {
@@ -1758,7 +1758,7 @@
     "region": "Americas",
     "bloc": "Caribbean",
     "authority": "MINCOM / ONN",
-    "safety_std": "IEC 62368-1:2023 (Edition 4.0 Global)",
+    "safety_std": "IEC 62368-1:2023 (Edition 4.0)",
     "emc_std": "CISPR 32:2026 Class B (Harmonized)",
     "env_std": "RoHS",
     "cb_scheme_accepted": true,
@@ -1771,7 +1771,7 @@
     "lead_time_weeks": 6,
     "notes": "National approval required.",
     "last_surveilled_date": "2026-09-21",
-    "last_surveilled_pillar": "EMC",
+    "last_surveilled_pillar": "Safety",
     "surveillance_source": "Global Harmonization Bulletin (All 205 Jurisdictions Auto-Ingested)"
   },
   "HT": {
@@ -1780,7 +1780,7 @@
     "region": "Americas",
     "bloc": "CARICOM",
     "authority": "CONATEL",
-    "safety_std": "IEC 62368-1:2023 (Edition 4.0 Global)",
+    "safety_std": "IEC 62368-1:2023 (Edition 4.0)",
     "emc_std": "CISPR 32:2026 Class B (Harmonized)",
     "env_std": "RoHS",
     "cb_scheme_accepted": true,
@@ -1793,7 +1793,7 @@
     "lead_time_weeks": 4,
     "notes": "Accepts FCC / CE.",
     "last_surveilled_date": "2026-09-21",
-    "last_surveilled_pillar": "EMC",
+    "last_surveilled_pillar": "Safety",
     "surveillance_source": "Global Harmonization Bulletin (All 205 Jurisdictions Auto-Ingested)"
   },
   "BM": {
@@ -1802,7 +1802,7 @@
     "region": "Americas",
     "bloc": "UK Overseas",
     "authority": "RA",
-    "safety_std": "IEC 62368-1:2023 (Edition 4.0 Global)",
+    "safety_std": "IEC 62368-1:2023 (Edition 4.0)",
     "emc_std": "CISPR 32:2026 Class B (Harmonized)",
     "env_std": "RoHS",
     "cb_scheme_accepted": true,
@@ -1816,7 +1816,7 @@
     "lead_time_weeks": 2,
     "notes": "Accepts FCC / CE.",
     "last_surveilled_date": "2026-09-21",
-    "last_surveilled_pillar": "EMC",
+    "last_surveilled_pillar": "Safety",
     "surveillance_source": "Global Harmonization Bulletin (All 205 Jurisdictions Auto-Ingested)"
   },
   "KY": {
@@ -1825,7 +1825,7 @@
     "region": "Americas",
     "bloc": "UK Overseas",
     "authority": "OfReg",
-    "safety_std": "IEC 62368-1:2023 (Edition 4.0 Global)",
+    "safety_std": "IEC 62368-1:2023 (Edition 4.0)",
     "emc_std": "CISPR 32:2026 Class B (Harmonized)",
     "env_std": "RoHS",
     "cb_scheme_accepted": true,
@@ -1839,7 +1839,7 @@
     "lead_time_weeks": 2,
     "notes": "Accepts FCC / CE.",
     "last_surveilled_date": "2026-09-21",
-    "last_surveilled_pillar": "EMC",
+    "last_surveilled_pillar": "Safety",
     "surveillance_source": "Global Harmonization Bulletin (All 205 Jurisdictions Auto-Ingested)"
   },
   "AW": {
@@ -1848,7 +1848,7 @@
     "region": "Americas",
     "bloc": "Kingdom of Netherlands",
     "authority": "DTZ",
-    "safety_std": "IEC 62368-1:2023 (Edition 4.0 Global)",
+    "safety_std": "IEC 62368-1:2023 (Edition 4.0)",
     "emc_std": "CISPR 32:2026 Class B (Harmonized)",
     "env_std": "RoHS",
     "cb_scheme_accepted": true,
@@ -1861,7 +1861,7 @@
     "lead_time_weeks": 2,
     "notes": "Accepts CE mark.",
     "last_surveilled_date": "2026-09-21",
-    "last_surveilled_pillar": "EMC",
+    "last_surveilled_pillar": "Safety",
     "surveillance_source": "Global Harmonization Bulletin (All 205 Jurisdictions Auto-Ingested)"
   },
   "CW": {
@@ -1870,7 +1870,7 @@
     "region": "Americas",
     "bloc": "Kingdom of Netherlands",
     "authority": "BTP",
-    "safety_std": "IEC 62368-1:2023 (Edition 4.0 Global)",
+    "safety_std": "IEC 62368-1:2023 (Edition 4.0)",
     "emc_std": "CISPR 32:2026 Class B (Harmonized)",
     "env_std": "RoHS",
     "cb_scheme_accepted": true,
@@ -1883,7 +1883,7 @@
     "lead_time_weeks": 2,
     "notes": "Accepts CE mark.",
     "last_surveilled_date": "2026-09-21",
-    "last_surveilled_pillar": "EMC",
+    "last_surveilled_pillar": "Safety",
     "surveillance_source": "Global Harmonization Bulletin (All 205 Jurisdictions Auto-Ingested)"
   },
   "CN": {
@@ -1892,7 +1892,7 @@
     "region": "Asia-Pacific",
     "bloc": "East Asia",
     "authority": "SAMR / CNCA / MIIT",
-    "safety_std": "IEC 62368-1:2023 (Edition 4.0 Global)",
+    "safety_std": "IEC 62368-1:2023 (Edition 4.0)",
     "emc_std": "CISPR 32:2026 Class B (Harmonized)",
     "env_std": "China RoHS (SJ/T 11364)",
     "cb_scheme_accepted": true,
@@ -1906,7 +1906,7 @@
     "lead_time_weeks": 8,
     "notes": "Mandatory CCC for external power supplies & designated ITE. In-country testing at CNAS lab required. China RoHS mark and hazardous table mandatory.",
     "last_surveilled_date": "2026-09-21",
-    "last_surveilled_pillar": "EMC",
+    "last_surveilled_pillar": "Safety",
     "surveillance_source": "Global Harmonization Bulletin (All 205 Jurisdictions Auto-Ingested)"
   },
   "JP": {
@@ -1915,7 +1915,7 @@
     "region": "Asia-Pacific",
     "bloc": "East Asia",
     "authority": "METI / VCCI / MIC",
-    "safety_std": "IEC 62368-1:2023 (Edition 4.0 Global)",
+    "safety_std": "IEC 62368-1:2023 (Edition 4.0)",
     "emc_std": "CISPR 32:2026 Class B (Harmonized)",
     "env_std": "J-Moss (JIS C 0950)",
     "cb_scheme_accepted": true,
@@ -1929,7 +1929,7 @@
     "lead_time_weeks": 5,
     "notes": "VCCI Class B voluntary registration for ITE. PSE Diamond mandatory for external AC adapters (METI registered conformity body).",
     "last_surveilled_date": "2026-09-21",
-    "last_surveilled_pillar": "EMC",
+    "last_surveilled_pillar": "Safety",
     "surveillance_source": "Global Harmonization Bulletin (All 205 Jurisdictions Auto-Ingested)"
   },
   "KR": {
@@ -1938,7 +1938,7 @@
     "region": "Asia-Pacific",
     "bloc": "East Asia",
     "authority": "KATS / RRA",
-    "safety_std": "IEC 62368-1:2023 (Edition 4.0 Global)",
+    "safety_std": "IEC 62368-1:2023 (Edition 4.0)",
     "emc_std": "CISPR 32:2026 Class B (Harmonized)",
     "env_std": "IEC 62368-1:2023 / Harmonized",
     "cb_scheme_accepted": true,
@@ -1952,7 +1952,7 @@
     "notes": "KC Mark mandatory for EMC and Safety. Local Korean testing at designated lab required for high-risk power adapters.",
     "last_surveilled_date": "2026-09-21",
     "surveillance_source": "Global Harmonization Bulletin (All 205 Jurisdictions Auto-Ingested)",
-    "last_surveilled_pillar": "EMC"
+    "last_surveilled_pillar": "Safety"
   },
   "TW": {
     "code": "TW",
@@ -1960,7 +1960,7 @@
     "region": "Asia-Pacific",
     "bloc": "East Asia",
     "authority": "BSMI / NCC",
-    "safety_std": "IEC 62368-1:2023 (Edition 4.0 Global)",
+    "safety_std": "IEC 62368-1:2023 (Edition 4.0)",
     "emc_std": "CISPR 32:2026 Class B (Harmonized)",
     "env_std": "CNS 15663 Section 5 (RoHS)",
     "cb_scheme_accepted": true,
@@ -1973,7 +1973,7 @@
     "lead_time_weeks": 6,
     "notes": "BSMI registration of product certification (RPC) mandatory for SSDs and power adapters. Section 5 restricted substance declaration required on packaging.",
     "last_surveilled_date": "2026-09-21",
-    "last_surveilled_pillar": "EMC",
+    "last_surveilled_pillar": "Safety",
     "surveillance_source": "Global Harmonization Bulletin (All 205 Jurisdictions Auto-Ingested)"
   },
   "HK": {
@@ -1982,7 +1982,7 @@
     "region": "Asia-Pacific",
     "bloc": "Greater China",
     "authority": "OFCA / EMSD",
-    "safety_std": "IEC 62368-1:2023 (Edition 4.0 Global)",
+    "safety_std": "IEC 62368-1:2023 (Edition 4.0)",
     "emc_std": "CISPR 32:2026 Class B (Harmonized)",
     "env_std": "RoHS",
     "cb_scheme_accepted": true,
@@ -1996,7 +1996,7 @@
     "lead_time_weeks": 2,
     "notes": "EMSD Electrical Products Safety Regulation recognizes CB Certificate and CE DoC.",
     "last_surveilled_date": "2026-09-21",
-    "last_surveilled_pillar": "EMC",
+    "last_surveilled_pillar": "Safety",
     "surveillance_source": "Global Harmonization Bulletin (All 205 Jurisdictions Auto-Ingested)"
   },
   "MO": {
@@ -2005,7 +2005,7 @@
     "region": "Asia-Pacific",
     "bloc": "Greater China",
     "authority": "CTT / DSPA",
-    "safety_std": "IEC 62368-1:2023 (Edition 4.0 Global)",
+    "safety_std": "IEC 62368-1:2023 (Edition 4.0)",
     "emc_std": "CISPR 32:2026 Class B (Harmonized)",
     "env_std": "RoHS",
     "cb_scheme_accepted": true,
@@ -2018,7 +2018,7 @@
     "lead_time_weeks": 2,
     "notes": "Recognizes CE / CB test reports.",
     "last_surveilled_date": "2026-09-21",
-    "last_surveilled_pillar": "EMC",
+    "last_surveilled_pillar": "Safety",
     "surveillance_source": "Global Harmonization Bulletin (All 205 Jurisdictions Auto-Ingested)"
   },
   "MN": {
@@ -2027,7 +2027,7 @@
     "region": "Asia-Pacific",
     "bloc": "East Asia",
     "authority": "CRC / MASM",
-    "safety_std": "IEC 62368-1:2023 (Edition 4.0 Global)",
+    "safety_std": "IEC 62368-1:2023 (Edition 4.0)",
     "emc_std": "CISPR 32:2026 Class B (Harmonized)",
     "env_std": "RoHS",
     "cb_scheme_accepted": true,
@@ -2040,7 +2040,7 @@
     "lead_time_weeks": 5,
     "notes": "Conformity certificate based on CB test reports.",
     "last_surveilled_date": "2026-09-21",
-    "last_surveilled_pillar": "EMC",
+    "last_surveilled_pillar": "Safety",
     "surveillance_source": "Global Harmonization Bulletin (All 205 Jurisdictions Auto-Ingested)"
   },
   "IN": {
@@ -2049,7 +2049,7 @@
     "region": "Asia-Pacific",
     "bloc": "South Asia",
     "authority": "BIS / MeitY / WPC",
-    "safety_std": "IS 13252 (Part 1):2026 / Gazette Amendment",
+    "safety_std": "IEC 62368-1:2023 (Edition 4.0)",
     "emc_std": "CISPR 32:2026 Class B (Harmonized)",
     "env_std": "E-Waste (Management) Rules RoHS",
     "cb_scheme_accepted": true,
@@ -2063,7 +2063,7 @@
     "notes": "Mandatory BIS CRS registration for External SSDs and AC power adapters. Local testing at BIS accredited laboratory in India. Authorized Indian Representative (AIR) required.",
     "last_surveilled_date": "2026-09-21",
     "last_surveilled_pillar": "Safety",
-    "surveillance_source": "India National Gazette Bulletin (Auto-Ingested)"
+    "surveillance_source": "Global Harmonization Bulletin (All 205 Jurisdictions Auto-Ingested)"
   },
   "PK": {
     "code": "PK",
@@ -2071,7 +2071,7 @@
     "region": "Asia-Pacific",
     "bloc": "South Asia",
     "authority": "PTA / PSQCA",
-    "safety_std": "IEC 62368-1:2023 (Edition 4.0 Global)",
+    "safety_std": "IEC 62368-1:2023 (Edition 4.0)",
     "emc_std": "CISPR 32:2026 Class B (Harmonized)",
     "env_std": "RoHS",
     "cb_scheme_accepted": true,
@@ -2084,7 +2084,7 @@
     "lead_time_weeks": 5,
     "notes": "CB test report accepted by PSQCA.",
     "last_surveilled_date": "2026-09-21",
-    "last_surveilled_pillar": "EMC",
+    "last_surveilled_pillar": "Safety",
     "surveillance_source": "Global Harmonization Bulletin (All 205 Jurisdictions Auto-Ingested)"
   },
   "BD": {
@@ -2093,7 +2093,7 @@
     "region": "Asia-Pacific",
     "bloc": "South Asia",
     "authority": "BSTI / BTRC",
-    "safety_std": "IEC 62368-1:2023 (Edition 4.0 Global)",
+    "safety_std": "IEC 62368-1:2023 (Edition 4.0)",
     "emc_std": "CISPR 32:2026 Class B (Harmonized)",
     "env_std": "Hazardous Waste RoHS",
     "cb_scheme_accepted": true,
@@ -2106,7 +2106,7 @@
     "lead_time_weeks": 6,
     "notes": "BSTI clearance required based on CB test reports.",
     "last_surveilled_date": "2026-09-21",
-    "last_surveilled_pillar": "EMC",
+    "last_surveilled_pillar": "Safety",
     "surveillance_source": "Global Harmonization Bulletin (All 205 Jurisdictions Auto-Ingested)"
   },
   "LK": {
@@ -2115,7 +2115,7 @@
     "region": "Asia-Pacific",
     "bloc": "South Asia",
     "authority": "SLSI / TRCSL",
-    "safety_std": "IEC 62368-1:2023 (Edition 4.0 Global)",
+    "safety_std": "IEC 62368-1:2023 (Edition 4.0)",
     "emc_std": "CISPR 32:2026 Class B (Harmonized)",
     "env_std": "National RoHS",
     "cb_scheme_accepted": true,
@@ -2128,7 +2128,7 @@
     "lead_time_weeks": 5,
     "notes": "Import inspection scheme accepts CB Scheme test certificates.",
     "last_surveilled_date": "2026-09-21",
-    "last_surveilled_pillar": "EMC",
+    "last_surveilled_pillar": "Safety",
     "surveillance_source": "Global Harmonization Bulletin (All 205 Jurisdictions Auto-Ingested)"
   },
   "NP": {
@@ -2137,7 +2137,7 @@
     "region": "Asia-Pacific",
     "bloc": "South Asia",
     "authority": "NBSM / NTA",
-    "safety_std": "IEC 62368-1:2023 (Edition 4.0 Global)",
+    "safety_std": "IEC 62368-1:2023 (Edition 4.0)",
     "emc_std": "CISPR 32:2026 Class B (Harmonized)",
     "env_std": "RoHS",
     "cb_scheme_accepted": true,
@@ -2150,7 +2150,7 @@
     "lead_time_weeks": 4,
     "notes": "Accepts international CB test reports.",
     "last_surveilled_date": "2026-09-21",
-    "last_surveilled_pillar": "EMC",
+    "last_surveilled_pillar": "Safety",
     "surveillance_source": "Global Harmonization Bulletin (All 205 Jurisdictions Auto-Ingested)"
   },
   "BT": {
@@ -2159,7 +2159,7 @@
     "region": "Asia-Pacific",
     "bloc": "South Asia",
     "authority": "BICMA / BSB",
-    "safety_std": "IEC 62368-1:2023 (Edition 4.0 Global)",
+    "safety_std": "IEC 62368-1:2023 (Edition 4.0)",
     "emc_std": "CISPR 32:2026 Class B (Harmonized)",
     "env_std": "RoHS",
     "cb_scheme_accepted": true,
@@ -2172,7 +2172,7 @@
     "lead_time_weeks": 3,
     "notes": "Accepts international test certificates.",
     "last_surveilled_date": "2026-09-21",
-    "last_surveilled_pillar": "EMC",
+    "last_surveilled_pillar": "Safety",
     "surveillance_source": "Global Harmonization Bulletin (All 205 Jurisdictions Auto-Ingested)"
   },
   "MV": {
@@ -2181,7 +2181,7 @@
     "region": "Asia-Pacific",
     "bloc": "South Asia",
     "authority": "CAM",
-    "safety_std": "IEC 62368-1:2023 (Edition 4.0 Global)",
+    "safety_std": "IEC 62368-1:2023 (Edition 4.0)",
     "emc_std": "CISPR 32:2026 Class B (Harmonized)",
     "env_std": "RoHS",
     "cb_scheme_accepted": true,
@@ -2194,7 +2194,7 @@
     "lead_time_weeks": 3,
     "notes": "Accepts CE / FCC test reports.",
     "last_surveilled_date": "2026-09-21",
-    "last_surveilled_pillar": "EMC",
+    "last_surveilled_pillar": "Safety",
     "surveillance_source": "Global Harmonization Bulletin (All 205 Jurisdictions Auto-Ingested)"
   },
   "AF": {
@@ -2203,7 +2203,7 @@
     "region": "Asia-Pacific",
     "bloc": "South Asia",
     "authority": "ATRA / ANSA",
-    "safety_std": "IEC 62368-1:2023 (Edition 4.0 Global)",
+    "safety_std": "IEC 62368-1:2023 (Edition 4.0)",
     "emc_std": "CISPR 32:2026 Class B (Harmonized)",
     "env_std": "RoHS",
     "cb_scheme_accepted": true,
@@ -2216,7 +2216,7 @@
     "lead_time_weeks": 4,
     "notes": "Accepts international test reports.",
     "last_surveilled_date": "2026-09-21",
-    "last_surveilled_pillar": "EMC",
+    "last_surveilled_pillar": "Safety",
     "surveillance_source": "Global Harmonization Bulletin (All 205 Jurisdictions Auto-Ingested)"
   },
   "SG": {
@@ -2225,7 +2225,7 @@
     "region": "Asia-Pacific",
     "bloc": "ASEAN",
     "authority": "Enterprise Singapore / IMDA",
-    "safety_std": "IEC 62368-1:2023 (Edition 4.0 Global)",
+    "safety_std": "IEC 62368-1:2023 (Edition 4.0)",
     "emc_std": "CISPR 32:2026 Class B (Harmonized)",
     "env_std": "SG RoHS (EPMA)",
     "cb_scheme_accepted": true,
@@ -2238,7 +2238,7 @@
     "lead_time_weeks": 4,
     "notes": "Mains-connected external power adapters require mandatory SAFETY Mark registration based on CB Certificate. Importer must register with CPSO.",
     "last_surveilled_date": "2026-09-21",
-    "last_surveilled_pillar": "EMC",
+    "last_surveilled_pillar": "Safety",
     "surveillance_source": "Global Harmonization Bulletin (All 205 Jurisdictions Auto-Ingested)"
   },
   "MY": {
@@ -2247,7 +2247,7 @@
     "region": "Asia-Pacific",
     "bloc": "ASEAN",
     "authority": "SIRIM QAS / MCMC",
-    "safety_std": "IEC 62368-1:2023 (Edition 4.0 Global)",
+    "safety_std": "IEC 62368-1:2023 (Edition 4.0)",
     "emc_std": "CISPR 32:2026 Class B (Harmonized)",
     "env_std": "E-Waste RoHS",
     "cb_scheme_accepted": true,
@@ -2261,7 +2261,7 @@
     "lead_time_weeks": 6,
     "notes": "SIRIM Certificate of Conformity required for external power adapters. Batch testing / consignment inspection or PC-based approval.",
     "last_surveilled_date": "2026-09-21",
-    "last_surveilled_pillar": "EMC",
+    "last_surveilled_pillar": "Safety",
     "surveillance_source": "Global Harmonization Bulletin (All 205 Jurisdictions Auto-Ingested)"
   },
   "ID": {
@@ -2270,7 +2270,7 @@
     "region": "Asia-Pacific",
     "bloc": "ASEAN",
     "authority": "SDPPI / BSN (SNI)",
-    "safety_std": "IEC 62368-1:2023 (Edition 4.0 Global)",
+    "safety_std": "IEC 62368-1:2023 (Edition 4.0)",
     "emc_std": "CISPR 32:2026 Class B (Harmonized)",
     "env_std": "RoHS / TKDN",
     "cb_scheme_accepted": true,
@@ -2284,7 +2284,7 @@
     "lead_time_weeks": 8,
     "notes": "SNI certification required for AC power cords/adapters. Local representative and factory audit may apply.",
     "last_surveilled_date": "2026-09-21",
-    "last_surveilled_pillar": "EMC",
+    "last_surveilled_pillar": "Safety",
     "surveillance_source": "Global Harmonization Bulletin (All 205 Jurisdictions Auto-Ingested)"
   },
   "TH": {
@@ -2293,7 +2293,7 @@
     "region": "Asia-Pacific",
     "bloc": "ASEAN",
     "authority": "TISI / NBTC",
-    "safety_std": "IEC 62368-1:2023 (Edition 4.0 Global)",
+    "safety_std": "IEC 62368-1:2023 (Edition 4.0)",
     "emc_std": "CISPR 32:2026 Class B (Harmonized)",
     "env_std": "Thai RoHS",
     "cb_scheme_accepted": true,
@@ -2306,7 +2306,7 @@
     "lead_time_weeks": 8,
     "notes": "TIS 62368-1 mandatory for power adapters and specific ITE audio/video. In-country testing and factory inspection required.",
     "last_surveilled_date": "2026-09-21",
-    "last_surveilled_pillar": "EMC",
+    "last_surveilled_pillar": "Safety",
     "surveillance_source": "Global Harmonization Bulletin (All 205 Jurisdictions Auto-Ingested)"
   },
   "VN": {
@@ -2315,7 +2315,7 @@
     "region": "Asia-Pacific",
     "bloc": "ASEAN",
     "authority": "MIC / MOST",
-    "safety_std": "IEC 62368-1:2023 (Edition 4.0 Global)",
+    "safety_std": "IEC 62368-1:2023 (Edition 4.0)",
     "emc_std": "CISPR 32:2026 Class B (Harmonized)",
     "env_std": "Circular 30/2011/TT-BCT (RoHS)",
     "cb_scheme_accepted": true,
@@ -2328,7 +2328,7 @@
     "lead_time_weeks": 6,
     "notes": "Local testing at designated Vietnamese lab required for QCVN safety and EMC.",
     "last_surveilled_date": "2026-09-21",
-    "last_surveilled_pillar": "EMC",
+    "last_surveilled_pillar": "Safety",
     "surveillance_source": "Global Harmonization Bulletin (All 205 Jurisdictions Auto-Ingested)"
   },
   "PH": {
@@ -2337,7 +2337,7 @@
     "region": "Asia-Pacific",
     "bloc": "ASEAN",
     "authority": "BPS / NTC",
-    "safety_std": "IEC 62368-1:2023 (Edition 4.0 Global)",
+    "safety_std": "IEC 62368-1:2023 (Edition 4.0)",
     "emc_std": "CISPR 32:2026 Class B (Harmonized)",
     "env_std": "DENR AO 2013-24 (RoHS)",
     "cb_scheme_accepted": true,
@@ -2350,7 +2350,7 @@
     "lead_time_weeks": 5,
     "notes": "Import Commodity Clearance (ICC) or PS license required for external power supplies based on CB test report.",
     "last_surveilled_date": "2026-09-21",
-    "last_surveilled_pillar": "EMC",
+    "last_surveilled_pillar": "Safety",
     "surveillance_source": "Global Harmonization Bulletin (All 205 Jurisdictions Auto-Ingested)"
   },
   "MM": {
@@ -2359,7 +2359,7 @@
     "region": "Asia-Pacific",
     "bloc": "ASEAN",
     "authority": "PTD / DRI",
-    "safety_std": "IEC 62368-1:2023 (Edition 4.0 Global)",
+    "safety_std": "IEC 62368-1:2023 (Edition 4.0)",
     "emc_std": "CISPR 32:2026 Class B (Harmonized)",
     "env_std": "RoHS",
     "cb_scheme_accepted": true,
@@ -2372,7 +2372,7 @@
     "lead_time_weeks": 5,
     "notes": "Type approval based on FCC/CE test reports.",
     "last_surveilled_date": "2026-09-21",
-    "last_surveilled_pillar": "EMC",
+    "last_surveilled_pillar": "Safety",
     "surveillance_source": "Global Harmonization Bulletin (All 205 Jurisdictions Auto-Ingested)"
   },
   "KH": {
@@ -2381,7 +2381,7 @@
     "region": "Asia-Pacific",
     "bloc": "ASEAN",
     "authority": "TRC / ISC",
-    "safety_std": "IEC 62368-1:2023 (Edition 4.0 Global)",
+    "safety_std": "IEC 62368-1:2023 (Edition 4.0)",
     "emc_std": "CISPR 32:2026 Class B (Harmonized)",
     "env_std": "RoHS",
     "cb_scheme_accepted": true,
@@ -2394,7 +2394,7 @@
     "lead_time_weeks": 4,
     "notes": "Accepts international CB test reports.",
     "last_surveilled_date": "2026-09-21",
-    "last_surveilled_pillar": "EMC",
+    "last_surveilled_pillar": "Safety",
     "surveillance_source": "Global Harmonization Bulletin (All 205 Jurisdictions Auto-Ingested)"
   },
   "LA": {
@@ -2403,7 +2403,7 @@
     "region": "Asia-Pacific",
     "bloc": "ASEAN",
     "authority": "MTC",
-    "safety_std": "IEC 62368-1:2023 (Edition 4.0 Global)",
+    "safety_std": "IEC 62368-1:2023 (Edition 4.0)",
     "emc_std": "CISPR 32:2026 Class B (Harmonized)",
     "env_std": "RoHS",
     "cb_scheme_accepted": true,
@@ -2416,7 +2416,7 @@
     "lead_time_weeks": 4,
     "notes": "Accepts international CB test reports.",
     "last_surveilled_date": "2026-09-21",
-    "last_surveilled_pillar": "EMC",
+    "last_surveilled_pillar": "Safety",
     "surveillance_source": "Global Harmonization Bulletin (All 205 Jurisdictions Auto-Ingested)"
   },
   "BN": {
@@ -2425,7 +2425,7 @@
     "region": "Asia-Pacific",
     "bloc": "ASEAN",
     "authority": "AITI",
-    "safety_std": "IEC 62368-1:2023 (Edition 4.0 Global)",
+    "safety_std": "IEC 62368-1:2023 (Edition 4.0)",
     "emc_std": "CISPR 32:2026 Class B (Harmonized)",
     "env_std": "RoHS",
     "cb_scheme_accepted": true,
@@ -2438,7 +2438,7 @@
     "lead_time_weeks": 4,
     "notes": "Type approval based on CE/CB reports.",
     "last_surveilled_date": "2026-09-21",
-    "last_surveilled_pillar": "EMC",
+    "last_surveilled_pillar": "Safety",
     "surveillance_source": "Global Harmonization Bulletin (All 205 Jurisdictions Auto-Ingested)"
   },
   "TL": {
@@ -2447,7 +2447,7 @@
     "region": "Asia-Pacific",
     "bloc": "Southeast Asia",
     "authority": "ANC",
-    "safety_std": "IEC 62368-1:2023 (Edition 4.0 Global)",
+    "safety_std": "IEC 62368-1:2023 (Edition 4.0)",
     "emc_std": "CISPR 32:2026 Class B (Harmonized)",
     "env_std": "RoHS",
     "cb_scheme_accepted": true,
@@ -2460,7 +2460,7 @@
     "lead_time_weeks": 3,
     "notes": "Accepts international test reports.",
     "last_surveilled_date": "2026-09-21",
-    "last_surveilled_pillar": "EMC",
+    "last_surveilled_pillar": "Safety",
     "surveillance_source": "Global Harmonization Bulletin (All 205 Jurisdictions Auto-Ingested)"
   },
   "AU": {
@@ -2469,7 +2469,7 @@
     "region": "Asia-Pacific",
     "bloc": "Oceania",
     "authority": "ACMA / ERAC (EESS)",
-    "safety_std": "IEC 62368-1:2023 (Edition 4.0 Global)",
+    "safety_std": "IEC 62368-1:2023 (Edition 4.0)",
     "emc_std": "CISPR 32:2026 Class B (Harmonized)",
     "env_std": "Waste / Packaging Covenant",
     "cb_scheme_accepted": true,
@@ -2482,7 +2482,7 @@
     "lead_time_weeks": 2,
     "notes": "RCM mark mandatory. External power adapters are Level 3 in-scope electrical equipment requiring Certificate of Conformity and registration on National EESS Database.",
     "last_surveilled_date": "2026-09-21",
-    "last_surveilled_pillar": "EMC",
+    "last_surveilled_pillar": "Safety",
     "surveillance_source": "Global Harmonization Bulletin (All 205 Jurisdictions Auto-Ingested)"
   },
   "NZ": {
@@ -2491,7 +2491,7 @@
     "region": "Asia-Pacific",
     "bloc": "Oceania",
     "authority": "RSM / WorkSafe",
-    "safety_std": "IEC 62368-1:2023 (Edition 4.0 Global)",
+    "safety_std": "IEC 62368-1:2023 (Edition 4.0)",
     "emc_std": "CISPR 32:2026 Class B (Harmonized)",
     "env_std": "RoHS",
     "cb_scheme_accepted": true,
@@ -2504,7 +2504,7 @@
     "lead_time_weeks": 2,
     "notes": "Trans-Tasman Mutual Recognition Agreement harmonizes with Australia RCM.",
     "last_surveilled_date": "2026-09-21",
-    "last_surveilled_pillar": "EMC",
+    "last_surveilled_pillar": "Safety",
     "surveillance_source": "Global Harmonization Bulletin (All 205 Jurisdictions Auto-Ingested)"
   },
   "PG": {
@@ -2513,7 +2513,7 @@
     "region": "Asia-Pacific",
     "bloc": "Oceania",
     "authority": "NICTA / NISIT",
-    "safety_std": "IEC 62368-1:2023 (Edition 4.0 Global)",
+    "safety_std": "IEC 62368-1:2023 (Edition 4.0)",
     "emc_std": "CISPR 32:2026 Class B (Harmonized)",
     "env_std": "RoHS",
     "cb_scheme_accepted": true,
@@ -2526,7 +2526,7 @@
     "lead_time_weeks": 4,
     "notes": "Accepts ACMA/RCM or CE reports.",
     "last_surveilled_date": "2026-09-21",
-    "last_surveilled_pillar": "EMC",
+    "last_surveilled_pillar": "Safety",
     "surveillance_source": "Global Harmonization Bulletin (All 205 Jurisdictions Auto-Ingested)"
   },
   "FJ": {
@@ -2535,7 +2535,7 @@
     "region": "Asia-Pacific",
     "bloc": "Oceania",
     "authority": "TARA / FNDSC",
-    "safety_std": "IEC 62368-1:2023 (Edition 4.0 Global)",
+    "safety_std": "IEC 62368-1:2023 (Edition 4.0)",
     "emc_std": "CISPR 32:2026 Class B (Harmonized)",
     "env_std": "RoHS",
     "cb_scheme_accepted": true,
@@ -2548,7 +2548,7 @@
     "lead_time_weeks": 3,
     "notes": "Accepts international reports.",
     "last_surveilled_date": "2026-09-21",
-    "last_surveilled_pillar": "EMC",
+    "last_surveilled_pillar": "Safety",
     "surveillance_source": "Global Harmonization Bulletin (All 205 Jurisdictions Auto-Ingested)"
   },
   "SA": {
@@ -2557,7 +2557,7 @@
     "region": "Middle East & North Africa",
     "bloc": "GCC",
     "authority": "SASO / CST (CITC)",
-    "safety_std": "IEC 62368-1:2023 (Edition 4.0 Global)",
+    "safety_std": "IEC 62368-1:2023 (Edition 4.0)",
     "emc_std": "CISPR 32:2026 Class B (Harmonized)",
     "env_std": "SASO RoHS 2026 / Technical Regulation for Restriction of Hazardous Substances",
     "cb_scheme_accepted": true,
@@ -2571,7 +2571,7 @@
     "lead_time_weeks": 4,
     "notes": "Mandatory registration on SABER platform. Product Certificate of Conformity (PCoC) and Shipment Certificate (SCoC) required. SASO RoHS declaration mandatory.",
     "last_surveilled_date": "2026-09-21",
-    "last_surveilled_pillar": "EMC",
+    "last_surveilled_pillar": "Safety",
     "surveillance_source": "Global Harmonization Bulletin (All 205 Jurisdictions Auto-Ingested)"
   },
   "AE": {
@@ -2580,7 +2580,7 @@
     "region": "Middle East & North Africa",
     "bloc": "GCC",
     "authority": "MoIAT (ESMA) / TDRA",
-    "safety_std": "IEC 62368-1:2023 (Edition 4.0 Global)",
+    "safety_std": "IEC 62368-1:2023 (Edition 4.0)",
     "emc_std": "CISPR 32:2026 Class B (Harmonized)",
     "env_std": "UAE RoHS (Cabinet Res 10/2017)",
     "cb_scheme_accepted": true,
@@ -2594,7 +2594,7 @@
     "lead_time_weeks": 4,
     "notes": "ECAS (Emirates Conformity Assessment Scheme) mandatory for IT equipment and power adapters. UAE RoHS certificate required.",
     "last_surveilled_date": "2026-09-21",
-    "last_surveilled_pillar": "EMC",
+    "last_surveilled_pillar": "Safety",
     "surveillance_source": "Global Harmonization Bulletin (All 205 Jurisdictions Auto-Ingested)"
   },
   "KW": {
@@ -2603,7 +2603,7 @@
     "region": "Middle East & North Africa",
     "bloc": "GCC",
     "authority": "KOWSMD (PAI) / CITRA",
-    "safety_std": "IEC 62368-1:2023 (Edition 4.0 Global)",
+    "safety_std": "IEC 62368-1:2023 (Edition 4.0)",
     "emc_std": "CISPR 32:2026 Class B (Harmonized)",
     "env_std": "RoHS",
     "cb_scheme_accepted": true,
@@ -2616,7 +2616,7 @@
     "lead_time_weeks": 4,
     "notes": "Kuwait Conformity Assurance Scheme (KUCAS) Technical Evaluation Report (TER) based on CB report.",
     "last_surveilled_date": "2026-09-21",
-    "last_surveilled_pillar": "EMC",
+    "last_surveilled_pillar": "Safety",
     "surveillance_source": "Global Harmonization Bulletin (All 205 Jurisdictions Auto-Ingested)"
   },
   "QA": {
@@ -2625,7 +2625,7 @@
     "region": "Middle East & North Africa",
     "bloc": "GCC",
     "authority": "QS (MoCI) / CRA",
-    "safety_std": "IEC 62368-1:2023 (Edition 4.0 Global)",
+    "safety_std": "IEC 62368-1:2023 (Edition 4.0)",
     "emc_std": "CISPR 32:2026 Class B (Harmonized)",
     "env_std": "RoHS",
     "cb_scheme_accepted": true,
@@ -2638,7 +2638,7 @@
     "lead_time_weeks": 4,
     "notes": "Certificate of Conformity required for customs clearance based on CB Scheme.",
     "last_surveilled_date": "2026-09-21",
-    "last_surveilled_pillar": "EMC",
+    "last_surveilled_pillar": "Safety",
     "surveillance_source": "Global Harmonization Bulletin (All 205 Jurisdictions Auto-Ingested)"
   },
   "BH": {
@@ -2647,7 +2647,7 @@
     "region": "Middle East & North Africa",
     "bloc": "GCC",
     "authority": "BSMD (MoIC) / TRA",
-    "safety_std": "IEC 62368-1:2023 (Edition 4.0 Global)",
+    "safety_std": "IEC 62368-1:2023 (Edition 4.0)",
     "emc_std": "CISPR 32:2026 Class B (Harmonized)",
     "env_std": "RoHS",
     "cb_scheme_accepted": true,
@@ -2661,7 +2661,7 @@
     "lead_time_weeks": 4,
     "notes": "Accepts GCC harmonized standards and international CB reports.",
     "last_surveilled_date": "2026-09-21",
-    "last_surveilled_pillar": "EMC",
+    "last_surveilled_pillar": "Safety",
     "surveillance_source": "Global Harmonization Bulletin (All 205 Jurisdictions Auto-Ingested)"
   },
   "OM": {
@@ -2670,7 +2670,7 @@
     "region": "Middle East & North Africa",
     "bloc": "GCC",
     "authority": "DGSM (MOCIIP) / TRA",
-    "safety_std": "IEC 62368-1:2023 (Edition 4.0 Global)",
+    "safety_std": "IEC 62368-1:2023 (Edition 4.0)",
     "emc_std": "CISPR 32:2026 Class B (Harmonized)",
     "env_std": "RoHS",
     "cb_scheme_accepted": true,
@@ -2684,7 +2684,7 @@
     "lead_time_weeks": 4,
     "notes": "CB Scheme and Gulf conformity mark accepted.",
     "last_surveilled_date": "2026-09-21",
-    "last_surveilled_pillar": "EMC",
+    "last_surveilled_pillar": "Safety",
     "surveillance_source": "Global Harmonization Bulletin (All 205 Jurisdictions Auto-Ingested)"
   },
   "IL": {
@@ -2693,7 +2693,7 @@
     "region": "Middle East & North Africa",
     "bloc": "Levant",
     "authority": "SII (Standards Inst.) / MoC",
-    "safety_std": "IEC 62368-1:2023 (Edition 4.0 Global)",
+    "safety_std": "IEC 62368-1:2023 (Edition 4.0)",
     "emc_std": "CISPR 32:2026 Class B (Harmonized)",
     "env_std": "RoHS",
     "cb_scheme_accepted": true,
@@ -2706,7 +2706,7 @@
     "lead_time_weeks": 6,
     "notes": "Standards Institution of Israel (SII) import permit based on CB report + national deviations test.",
     "last_surveilled_date": "2026-09-21",
-    "last_surveilled_pillar": "EMC",
+    "last_surveilled_pillar": "Safety",
     "surveillance_source": "Global Harmonization Bulletin (All 205 Jurisdictions Auto-Ingested)"
   },
   "EG": {
@@ -2715,7 +2715,7 @@
     "region": "Middle East & North Africa",
     "bloc": "North Africa",
     "authority": "EOS / NTRA / GOEIC",
-    "safety_std": "IEC 62368-1:2023 (Edition 4.0 Global)",
+    "safety_std": "IEC 62368-1:2023 (Edition 4.0)",
     "emc_std": "CISPR 32:2026 Class B (Harmonized)",
     "env_std": "RoHS",
     "cb_scheme_accepted": true,
@@ -2729,7 +2729,7 @@
     "lead_time_weeks": 6,
     "notes": "GOEIC factory inspection and pre-shipment inspection certificate required.",
     "last_surveilled_date": "2026-09-21",
-    "last_surveilled_pillar": "EMC",
+    "last_surveilled_pillar": "Safety",
     "surveillance_source": "Global Harmonization Bulletin (All 205 Jurisdictions Auto-Ingested)"
   },
   "MA": {
@@ -2738,7 +2738,7 @@
     "region": "Middle East & North Africa",
     "bloc": "North Africa",
     "authority": "IMANOR / ANRT / MCINET",
-    "safety_std": "IEC 62368-1:2023 (Edition 4.0 Global)",
+    "safety_std": "IEC 62368-1:2023 (Edition 4.0)",
     "emc_std": "CISPR 32:2026 Class B (Harmonized)",
     "env_std": "Morocco RoHS (Arrêté 2991-19)",
     "cb_scheme_accepted": true,
@@ -2751,7 +2751,7 @@
     "lead_time_weeks": 3,
     "notes": "CMIM conformity marking mandatory on products and packaging. Accepts CE/CB reports for DoC.",
     "last_surveilled_date": "2026-09-21",
-    "last_surveilled_pillar": "EMC",
+    "last_surveilled_pillar": "Safety",
     "surveillance_source": "Global Harmonization Bulletin (All 205 Jurisdictions Auto-Ingested)"
   },
   "JO": {
@@ -2760,7 +2760,7 @@
     "region": "Middle East & North Africa",
     "bloc": "Levant",
     "authority": "JISM / TRC",
-    "safety_std": "IEC 62368-1:2023 (Edition 4.0 Global)",
+    "safety_std": "IEC 62368-1:2023 (Edition 4.0)",
     "emc_std": "CISPR 32:2026 Class B (Harmonized)",
     "env_std": "RoHS",
     "cb_scheme_accepted": true,
@@ -2773,7 +2773,7 @@
     "lead_time_weeks": 4,
     "notes": "Pre-shipment verification of conformity based on CB report.",
     "last_surveilled_date": "2026-09-21",
-    "last_surveilled_pillar": "EMC",
+    "last_surveilled_pillar": "Safety",
     "surveillance_source": "Global Harmonization Bulletin (All 205 Jurisdictions Auto-Ingested)"
   },
   "LB": {
@@ -2782,7 +2782,7 @@
     "region": "Middle East & North Africa",
     "bloc": "Levant",
     "authority": "LIBNOR / MoT",
-    "safety_std": "IEC 62368-1:2023 (Edition 4.0 Global)",
+    "safety_std": "IEC 62368-1:2023 (Edition 4.0)",
     "emc_std": "CISPR 32:2026 Class B (Harmonized)",
     "env_std": "RoHS",
     "cb_scheme_accepted": true,
@@ -2795,7 +2795,7 @@
     "lead_time_weeks": 3,
     "notes": "Accepts CE / CB reports.",
     "last_surveilled_date": "2026-09-21",
-    "last_surveilled_pillar": "EMC",
+    "last_surveilled_pillar": "Safety",
     "surveillance_source": "Global Harmonization Bulletin (All 205 Jurisdictions Auto-Ingested)"
   },
   "IQ": {
@@ -2804,7 +2804,7 @@
     "region": "Middle East & North Africa",
     "bloc": "Levant",
     "authority": "COSQC / CMC",
-    "safety_std": "IEC 62368-1:2023 (Edition 4.0 Global)",
+    "safety_std": "IEC 62368-1:2023 (Edition 4.0)",
     "emc_std": "CISPR 32:2026 Class B (Harmonized)",
     "env_std": "RoHS",
     "cb_scheme_accepted": true,
@@ -2817,7 +2817,7 @@
     "lead_time_weeks": 5,
     "notes": "Pre-export verification of conformity (ICIGI) mandatory.",
     "last_surveilled_date": "2026-09-21",
-    "last_surveilled_pillar": "EMC",
+    "last_surveilled_pillar": "Safety",
     "surveillance_source": "Global Harmonization Bulletin (All 205 Jurisdictions Auto-Ingested)"
   },
   "TN": {
@@ -2826,7 +2826,7 @@
     "region": "Middle East & North Africa",
     "bloc": "North Africa",
     "authority": "INNORPI / CERT",
-    "safety_std": "IEC 62368-1:2023 (Edition 4.0 Global)",
+    "safety_std": "IEC 62368-1:2023 (Edition 4.0)",
     "emc_std": "CISPR 32:2026 Class B (Harmonized)",
     "env_std": "RoHS",
     "cb_scheme_accepted": true,
@@ -2839,7 +2839,7 @@
     "lead_time_weeks": 4,
     "notes": "Type approval with CE/CB test reports.",
     "last_surveilled_date": "2026-09-21",
-    "last_surveilled_pillar": "EMC",
+    "last_surveilled_pillar": "Safety",
     "surveillance_source": "Global Harmonization Bulletin (All 205 Jurisdictions Auto-Ingested)"
   },
   "DZ": {
@@ -2848,7 +2848,7 @@
     "region": "Middle East & North Africa",
     "bloc": "North Africa",
     "authority": "IANOR / ARPCE",
-    "safety_std": "IEC 62368-1:2023 (Edition 4.0 Global)",
+    "safety_std": "IEC 62368-1:2023 (Edition 4.0)",
     "emc_std": "CISPR 32:2026 Class B (Harmonized)",
     "env_std": "RoHS",
     "cb_scheme_accepted": true,
@@ -2861,7 +2861,7 @@
     "lead_time_weeks": 5,
     "notes": "Commercial quality control and conformity certificate.",
     "last_surveilled_date": "2026-09-21",
-    "last_surveilled_pillar": "EMC",
+    "last_surveilled_pillar": "Safety",
     "surveillance_source": "Global Harmonization Bulletin (All 205 Jurisdictions Auto-Ingested)"
   },
   "LY": {
@@ -2870,7 +2870,7 @@
     "region": "Middle East & North Africa",
     "bloc": "North Africa",
     "authority": "LNCSM",
-    "safety_std": "IEC 62368-1:2023 (Edition 4.0 Global)",
+    "safety_std": "IEC 62368-1:2023 (Edition 4.0)",
     "emc_std": "CISPR 32:2026 Class B (Harmonized)",
     "env_std": "RoHS",
     "cb_scheme_accepted": true,
@@ -2883,7 +2883,7 @@
     "lead_time_weeks": 5,
     "notes": "Pre-shipment inspection required.",
     "last_surveilled_date": "2026-09-21",
-    "last_surveilled_pillar": "EMC",
+    "last_surveilled_pillar": "Safety",
     "surveillance_source": "Global Harmonization Bulletin (All 205 Jurisdictions Auto-Ingested)"
   },
   "YE": {
@@ -2892,7 +2892,7 @@
     "region": "Middle East & North Africa",
     "bloc": "Arabian Pen.",
     "authority": "YSMO",
-    "safety_std": "IEC 62368-1:2023 (Edition 4.0 Global)",
+    "safety_std": "IEC 62368-1:2023 (Edition 4.0)",
     "emc_std": "CISPR 32:2026 Class B (Harmonized)",
     "env_std": "RoHS",
     "cb_scheme_accepted": true,
@@ -2905,7 +2905,7 @@
     "lead_time_weeks": 6,
     "notes": "Pre-shipment inspection based on CB report.",
     "last_surveilled_date": "2026-09-21",
-    "last_surveilled_pillar": "EMC",
+    "last_surveilled_pillar": "Safety",
     "surveillance_source": "Global Harmonization Bulletin (All 205 Jurisdictions Auto-Ingested)"
   },
   "PS": {
@@ -2914,7 +2914,7 @@
     "region": "Middle East & North Africa",
     "bloc": "Levant",
     "authority": "PSI",
-    "safety_std": "IEC 62368-1:2023 (Edition 4.0 Global)",
+    "safety_std": "IEC 62368-1:2023 (Edition 4.0)",
     "emc_std": "CISPR 32:2026 Class B (Harmonized)",
     "env_std": "RoHS",
     "cb_scheme_accepted": true,
@@ -2927,7 +2927,7 @@
     "lead_time_weeks": 4,
     "notes": "Accepts international test certificates.",
     "last_surveilled_date": "2026-09-21",
-    "last_surveilled_pillar": "EMC",
+    "last_surveilled_pillar": "Safety",
     "surveillance_source": "Global Harmonization Bulletin (All 205 Jurisdictions Auto-Ingested)"
   },
   "ZA": {
@@ -2936,7 +2936,7 @@
     "region": "Sub-Saharan Africa",
     "bloc": "SADC",
     "authority": "NRCS / SABS / ICASA",
-    "safety_std": "IEC 62368-1:2023 (Edition 4.0 Global)",
+    "safety_std": "IEC 62368-1:2023 (Edition 4.0)",
     "emc_std": "CISPR 32:2026 Class B (Harmonized)",
     "env_std": "RoHS",
     "cb_scheme_accepted": true,
@@ -2950,7 +2950,7 @@
     "lead_time_weeks": 8,
     "notes": "Mandatory NRCS Letter of Authority (LOA) for electrical safety. SABS Letter of Compliance (LoC) for EMC. Lengthy processing times.",
     "last_surveilled_date": "2026-09-21",
-    "last_surveilled_pillar": "EMC",
+    "last_surveilled_pillar": "Safety",
     "surveillance_source": "Global Harmonization Bulletin (All 205 Jurisdictions Auto-Ingested)"
   },
   "NG": {
@@ -2959,7 +2959,7 @@
     "region": "Sub-Saharan Africa",
     "bloc": "ECOWAS",
     "authority": "SON / NCC",
-    "safety_std": "IEC 62368-1:2023 (Edition 4.0 Global)",
+    "safety_std": "IEC 62368-1:2023 (Edition 4.0)",
     "emc_std": "CISPR 32:2026 Class B (Harmonized)",
     "env_std": "RoHS",
     "cb_scheme_accepted": true,
@@ -2972,7 +2972,7 @@
     "lead_time_weeks": 5,
     "notes": "Standards Organisation of Nigeria Conformity Assessment Program (SONCAP) mandatory for all regulated imports.",
     "last_surveilled_date": "2026-09-21",
-    "last_surveilled_pillar": "EMC",
+    "last_surveilled_pillar": "Safety",
     "surveillance_source": "Global Harmonization Bulletin (All 205 Jurisdictions Auto-Ingested)"
   },
   "KE": {
@@ -2981,7 +2981,7 @@
     "region": "Sub-Saharan Africa",
     "bloc": "EAC",
     "authority": "KEBS / CAK",
-    "safety_std": "IEC 62368-1:2023 (Edition 4.0 Global)",
+    "safety_std": "IEC 62368-1:2023 (Edition 4.0)",
     "emc_std": "CISPR 32:2026 Class B (Harmonized)",
     "env_std": "RoHS",
     "cb_scheme_accepted": true,
@@ -2994,7 +2994,7 @@
     "lead_time_weeks": 4,
     "notes": "Pre-Export Verification of Conformity (PVoC) mandatory before shipment via authorized inspection agencies.",
     "last_surveilled_date": "2026-09-21",
-    "last_surveilled_pillar": "EMC",
+    "last_surveilled_pillar": "Safety",
     "surveillance_source": "Global Harmonization Bulletin (All 205 Jurisdictions Auto-Ingested)"
   },
   "GH": {
@@ -3003,7 +3003,7 @@
     "region": "Sub-Saharan Africa",
     "bloc": "ECOWAS",
     "authority": "GSA / NCA",
-    "safety_std": "IEC 62368-1:2023 (Edition 4.0 Global)",
+    "safety_std": "IEC 62368-1:2023 (Edition 4.0)",
     "emc_std": "CISPR 32:2026 Class B (Harmonized)",
     "env_std": "RoHS",
     "cb_scheme_accepted": true,
@@ -3016,7 +3016,7 @@
     "lead_time_weeks": 4,
     "notes": "Ghana Standards Authority EasyPass program requires certificate of conformity based on CB report.",
     "last_surveilled_date": "2026-09-21",
-    "last_surveilled_pillar": "EMC",
+    "last_surveilled_pillar": "Safety",
     "surveillance_source": "Global Harmonization Bulletin (All 205 Jurisdictions Auto-Ingested)"
   },
   "ET": {
@@ -3025,7 +3025,7 @@
     "region": "Sub-Saharan Africa",
     "bloc": "East Africa",
     "authority": "ECA / ECA",
-    "safety_std": "IEC 62368-1:2023 (Edition 4.0 Global)",
+    "safety_std": "IEC 62368-1:2023 (Edition 4.0)",
     "emc_std": "CISPR 32:2026 Class B (Harmonized)",
     "env_std": "RoHS",
     "cb_scheme_accepted": true,
@@ -3038,7 +3038,7 @@
     "lead_time_weeks": 5,
     "notes": "Mandatory pre-shipment inspection verification.",
     "last_surveilled_date": "2026-09-21",
-    "last_surveilled_pillar": "EMC",
+    "last_surveilled_pillar": "Safety",
     "surveillance_source": "Global Harmonization Bulletin (All 205 Jurisdictions Auto-Ingested)"
   },
   "TZ": {
@@ -3047,7 +3047,7 @@
     "region": "Sub-Saharan Africa",
     "bloc": "EAC",
     "authority": "TBS / TCRA",
-    "safety_std": "IEC 62368-1:2023 (Edition 4.0 Global)",
+    "safety_std": "IEC 62368-1:2023 (Edition 4.0)",
     "emc_std": "CISPR 32:2026 Class B (Harmonized)",
     "env_std": "RoHS",
     "cb_scheme_accepted": true,
@@ -3060,7 +3060,7 @@
     "lead_time_weeks": 4,
     "notes": "Pre-shipment verification of conformity through TBS.",
     "last_surveilled_date": "2026-09-21",
-    "last_surveilled_pillar": "EMC",
+    "last_surveilled_pillar": "Safety",
     "surveillance_source": "Global Harmonization Bulletin (All 205 Jurisdictions Auto-Ingested)"
   },
   "UG": {
@@ -3069,7 +3069,7 @@
     "region": "Sub-Saharan Africa",
     "bloc": "EAC",
     "authority": "UNBS / UCC",
-    "safety_std": "IEC 62368-1:2023 (Edition 4.0 Global)",
+    "safety_std": "IEC 62368-1:2023 (Edition 4.0)",
     "emc_std": "CISPR 32:2026 Class B (Harmonized)",
     "env_std": "RoHS",
     "cb_scheme_accepted": true,
@@ -3082,7 +3082,7 @@
     "lead_time_weeks": 4,
     "notes": "Pre-Export Verification of Conformity (PVoC).",
     "last_surveilled_date": "2026-09-21",
-    "last_surveilled_pillar": "EMC",
+    "last_surveilled_pillar": "Safety",
     "surveillance_source": "Global Harmonization Bulletin (All 205 Jurisdictions Auto-Ingested)"
   },
   "RW": {
@@ -3091,7 +3091,7 @@
     "region": "Sub-Saharan Africa",
     "bloc": "EAC",
     "authority": "RSB / RURA",
-    "safety_std": "IEC 62368-1:2023 (Edition 4.0 Global)",
+    "safety_std": "IEC 62368-1:2023 (Edition 4.0)",
     "emc_std": "CISPR 32:2026 Class B (Harmonized)",
     "env_std": "RoHS",
     "cb_scheme_accepted": true,
@@ -3104,7 +3104,7 @@
     "lead_time_weeks": 4,
     "notes": "CB test reports accepted by RSB.",
     "last_surveilled_date": "2026-09-21",
-    "last_surveilled_pillar": "EMC",
+    "last_surveilled_pillar": "Safety",
     "surveillance_source": "Global Harmonization Bulletin (All 205 Jurisdictions Auto-Ingested)"
   },
   "CI": {
@@ -3113,7 +3113,7 @@
     "region": "Sub-Saharan Africa",
     "bloc": "ECOWAS",
     "authority": "CODINORM / ARTCI",
-    "safety_std": "IEC 62368-1:2023 (Edition 4.0 Global)",
+    "safety_std": "IEC 62368-1:2023 (Edition 4.0)",
     "emc_std": "CISPR 32:2026 Class B (Harmonized)",
     "env_std": "RoHS",
     "cb_scheme_accepted": true,
@@ -3126,7 +3126,7 @@
     "lead_time_weeks": 4,
     "notes": "Pre-shipment verification of conformity (VOC).",
     "last_surveilled_date": "2026-09-21",
-    "last_surveilled_pillar": "EMC",
+    "last_surveilled_pillar": "Safety",
     "surveillance_source": "Global Harmonization Bulletin (All 205 Jurisdictions Auto-Ingested)"
   },
   "SN": {
@@ -3135,7 +3135,7 @@
     "region": "Sub-Saharan Africa",
     "bloc": "ECOWAS",
     "authority": "ASN / ARTP",
-    "safety_std": "IEC 62368-1:2023 (Edition 4.0 Global)",
+    "safety_std": "IEC 62368-1:2023 (Edition 4.0)",
     "emc_std": "CISPR 32:2026 Class B (Harmonized)",
     "env_std": "RoHS",
     "cb_scheme_accepted": true,
@@ -3148,7 +3148,7 @@
     "lead_time_weeks": 4,
     "notes": "Pre-shipment conformity verification.",
     "last_surveilled_date": "2026-09-21",
-    "last_surveilled_pillar": "EMC",
+    "last_surveilled_pillar": "Safety",
     "surveillance_source": "Global Harmonization Bulletin (All 205 Jurisdictions Auto-Ingested)"
   },
   "CM": {
@@ -3157,7 +3157,7 @@
     "region": "Sub-Saharan Africa",
     "bloc": "CEMAC",
     "authority": "ANOR / ART",
-    "safety_std": "IEC 62368-1:2023 (Edition 4.0 Global)",
+    "safety_std": "IEC 62368-1:2023 (Edition 4.0)",
     "emc_std": "CISPR 32:2026 Class B (Harmonized)",
     "env_std": "RoHS",
     "cb_scheme_accepted": true,
@@ -3170,7 +3170,7 @@
     "lead_time_weeks": 4,
     "notes": "PECAE mandatory pre-shipment inspection.",
     "last_surveilled_date": "2026-09-21",
-    "last_surveilled_pillar": "EMC",
+    "last_surveilled_pillar": "Safety",
     "surveillance_source": "Global Harmonization Bulletin (All 205 Jurisdictions Auto-Ingested)"
   },
   "AO": {
@@ -3179,7 +3179,7 @@
     "region": "Sub-Saharan Africa",
     "bloc": "SADC",
     "authority": "IANORQ / INACOM",
-    "safety_std": "IEC 62368-1:2023 (Edition 4.0 Global)",
+    "safety_std": "IEC 62368-1:2023 (Edition 4.0)",
     "emc_std": "CISPR 32:2026 Class B (Harmonized)",
     "env_std": "RoHS",
     "cb_scheme_accepted": true,
@@ -3192,7 +3192,7 @@
     "lead_time_weeks": 5,
     "notes": "Accepts international CE/CB reports.",
     "last_surveilled_date": "2026-09-21",
-    "last_surveilled_pillar": "EMC",
+    "last_surveilled_pillar": "Safety",
     "surveillance_source": "Global Harmonization Bulletin (All 205 Jurisdictions Auto-Ingested)"
   },
   "MZ": {
@@ -3201,7 +3201,7 @@
     "region": "Sub-Saharan Africa",
     "bloc": "SADC",
     "authority": "INNOQ / INCM",
-    "safety_std": "IEC 62368-1:2023 (Edition 4.0 Global)",
+    "safety_std": "IEC 62368-1:2023 (Edition 4.0)",
     "emc_std": "CISPR 32:2026 Class B (Harmonized)",
     "env_std": "RoHS",
     "cb_scheme_accepted": true,
@@ -3214,7 +3214,7 @@
     "lead_time_weeks": 4,
     "notes": "Accepts international CB test reports.",
     "last_surveilled_date": "2026-09-21",
-    "last_surveilled_pillar": "EMC",
+    "last_surveilled_pillar": "Safety",
     "surveillance_source": "Global Harmonization Bulletin (All 205 Jurisdictions Auto-Ingested)"
   },
   "ZM": {
@@ -3223,7 +3223,7 @@
     "region": "Sub-Saharan Africa",
     "bloc": "SADC/COMESA",
     "authority": "ZABS / ZICTA",
-    "safety_std": "IEC 62368-1:2023 (Edition 4.0 Global)",
+    "safety_std": "IEC 62368-1:2023 (Edition 4.0)",
     "emc_std": "CISPR 32:2026 Class B (Harmonized)",
     "env_std": "RoHS",
     "cb_scheme_accepted": true,
@@ -3236,7 +3236,7 @@
     "lead_time_weeks": 4,
     "notes": "PVoC program accepts CB test reports.",
     "last_surveilled_date": "2026-09-21",
-    "last_surveilled_pillar": "EMC",
+    "last_surveilled_pillar": "Safety",
     "surveillance_source": "Global Harmonization Bulletin (All 205 Jurisdictions Auto-Ingested)"
   },
   "ZW": {
@@ -3245,7 +3245,7 @@
     "region": "Sub-Saharan Africa",
     "bloc": "SADC",
     "authority": "SAZ / POTRAZ",
-    "safety_std": "IEC 62368-1:2023 (Edition 4.0 Global)",
+    "safety_std": "IEC 62368-1:2023 (Edition 4.0)",
     "emc_std": "CISPR 32:2026 Class B (Harmonized)",
     "env_std": "RoHS",
     "cb_scheme_accepted": true,
@@ -3258,7 +3258,7 @@
     "lead_time_weeks": 4,
     "notes": "Consignment-based conformity assessment (CBCA).",
     "last_surveilled_date": "2026-09-21",
-    "last_surveilled_pillar": "EMC",
+    "last_surveilled_pillar": "Safety",
     "surveillance_source": "Global Harmonization Bulletin (All 205 Jurisdictions Auto-Ingested)"
   },
   "BW": {
@@ -3267,7 +3267,7 @@
     "region": "Sub-Saharan Africa",
     "bloc": "SADC",
     "authority": "BOBS / BOCRA",
-    "safety_std": "IEC 62368-1:2023 (Edition 4.0 Global)",
+    "safety_std": "IEC 62368-1:2023 (Edition 4.0)",
     "emc_std": "CISPR 32:2026 Class B (Harmonized)",
     "env_std": "RoHS",
     "cb_scheme_accepted": true,
@@ -3280,7 +3280,7 @@
     "lead_time_weeks": 4,
     "notes": "Standards Import Inspection Regulation (SIIR).",
     "last_surveilled_date": "2026-09-21",
-    "last_surveilled_pillar": "EMC",
+    "last_surveilled_pillar": "Safety",
     "surveillance_source": "Global Harmonization Bulletin (All 205 Jurisdictions Auto-Ingested)"
   },
   "NA": {
@@ -3289,7 +3289,7 @@
     "region": "Sub-Saharan Africa",
     "bloc": "SADC",
     "authority": "NSI / CRAN",
-    "safety_std": "IEC 62368-1:2023 (Edition 4.0 Global)",
+    "safety_std": "IEC 62368-1:2023 (Edition 4.0)",
     "emc_std": "CISPR 32:2026 Class B (Harmonized)",
     "env_std": "RoHS",
     "cb_scheme_accepted": true,
@@ -3302,7 +3302,7 @@
     "lead_time_weeks": 4,
     "notes": "Accepts SABS / CE test reports.",
     "last_surveilled_date": "2026-09-21",
-    "last_surveilled_pillar": "EMC",
+    "last_surveilled_pillar": "Safety",
     "surveillance_source": "Global Harmonization Bulletin (All 205 Jurisdictions Auto-Ingested)"
   },
   "MU": {
@@ -3311,7 +3311,7 @@
     "region": "Sub-Saharan Africa",
     "bloc": "SADC/COMESA",
     "authority": "MSBS / ICTA",
-    "safety_std": "IEC 62368-1:2023 (Edition 4.0 Global)",
+    "safety_std": "IEC 62368-1:2023 (Edition 4.0)",
     "emc_std": "CISPR 32:2026 Class B (Harmonized)",
     "env_std": "RoHS",
     "cb_scheme_accepted": true,
@@ -3324,7 +3324,7 @@
     "lead_time_weeks": 3,
     "notes": "Direct acceptance of CB test certificates.",
     "last_surveilled_date": "2026-09-21",
-    "last_surveilled_pillar": "EMC",
+    "last_surveilled_pillar": "Safety",
     "surveillance_source": "Global Harmonization Bulletin (All 205 Jurisdictions Auto-Ingested)"
   },
   "MG": {
@@ -3333,7 +3333,7 @@
     "region": "Sub-Saharan Africa",
     "bloc": "SADC/COMESA",
     "authority": "BNM / ARTEC",
-    "safety_std": "IEC 62368-1:2023 (Edition 4.0 Global)",
+    "safety_std": "IEC 62368-1:2023 (Edition 4.0)",
     "emc_std": "CISPR 32:2026 Class B (Harmonized)",
     "env_std": "RoHS",
     "cb_scheme_accepted": true,
@@ -3346,7 +3346,7 @@
     "lead_time_weeks": 4,
     "notes": "Accepts CE / CB reports.",
     "last_surveilled_date": "2026-09-21",
-    "last_surveilled_pillar": "EMC",
+    "last_surveilled_pillar": "Safety",
     "surveillance_source": "Global Harmonization Bulletin (All 205 Jurisdictions Auto-Ingested)"
   },
   "CD": {
@@ -3355,7 +3355,7 @@
     "region": "Sub-Saharan Africa",
     "bloc": "SADC/EAC",
     "authority": "OCC",
-    "safety_std": "IEC 62368-1:2023 (Edition 4.0 Global)",
+    "safety_std": "IEC 62368-1:2023 (Edition 4.0)",
     "emc_std": "CISPR 32:2026 Class B (Harmonized)",
     "env_std": "RoHS",
     "cb_scheme_accepted": true,
@@ -3368,7 +3368,7 @@
     "lead_time_weeks": 5,
     "notes": "Mandatory pre-shipment inspection.",
     "last_surveilled_date": "2026-09-21",
-    "last_surveilled_pillar": "EMC",
+    "last_surveilled_pillar": "Safety",
     "surveillance_source": "Global Harmonization Bulletin (All 205 Jurisdictions Auto-Ingested)"
   },
   "GA": {
@@ -3377,7 +3377,7 @@
     "region": "Sub-Saharan Africa",
     "bloc": "CEMAC",
     "authority": "AGANOR / ARCEP",
-    "safety_std": "IEC 62368-1:2023 (Edition 4.0 Global)",
+    "safety_std": "IEC 62368-1:2023 (Edition 4.0)",
     "emc_std": "CISPR 32:2026 Class B (Harmonized)",
     "env_std": "RoHS",
     "cb_scheme_accepted": true,
@@ -3390,7 +3390,7 @@
     "lead_time_weeks": 4,
     "notes": "Pre-shipment verification of conformity.",
     "last_surveilled_date": "2026-09-21",
-    "last_surveilled_pillar": "EMC",
+    "last_surveilled_pillar": "Safety",
     "surveillance_source": "Global Harmonization Bulletin (All 205 Jurisdictions Auto-Ingested)"
   },
   "ML": {
@@ -3399,7 +3399,7 @@
     "region": "Sub-Saharan Africa",
     "bloc": "ECOWAS",
     "authority": "AMANORM",
-    "safety_std": "IEC 62368-1:2023 (Edition 4.0 Global)",
+    "safety_std": "IEC 62368-1:2023 (Edition 4.0)",
     "emc_std": "CISPR 32:2026 Class B (Harmonized)",
     "env_std": "RoHS",
     "cb_scheme_accepted": true,
@@ -3412,7 +3412,7 @@
     "lead_time_weeks": 4,
     "notes": "Pre-shipment verification of conformity.",
     "last_surveilled_date": "2026-09-21",
-    "last_surveilled_pillar": "EMC",
+    "last_surveilled_pillar": "Safety",
     "surveillance_source": "Global Harmonization Bulletin (All 205 Jurisdictions Auto-Ingested)"
   },
   "BF": {
@@ -3421,7 +3421,7 @@
     "region": "Sub-Saharan Africa",
     "bloc": "ECOWAS",
     "authority": "ABNORM / ARCEP",
-    "safety_std": "IEC 62368-1:2023 (Edition 4.0 Global)",
+    "safety_std": "IEC 62368-1:2023 (Edition 4.0)",
     "emc_std": "CISPR 32:2026 Class B (Harmonized)",
     "env_std": "RoHS",
     "cb_scheme_accepted": true,
@@ -3434,7 +3434,7 @@
     "lead_time_weeks": 4,
     "notes": "Pre-shipment verification.",
     "last_surveilled_date": "2026-09-21",
-    "last_surveilled_pillar": "EMC",
+    "last_surveilled_pillar": "Safety",
     "surveillance_source": "Global Harmonization Bulletin (All 205 Jurisdictions Auto-Ingested)"
   },
   "GN": {
@@ -3443,7 +3443,7 @@
     "region": "Sub-Saharan Africa",
     "bloc": "ECOWAS",
     "authority": "IGNM",
-    "safety_std": "IEC 62368-1:2023 (Edition 4.0 Global)",
+    "safety_std": "IEC 62368-1:2023 (Edition 4.0)",
     "emc_std": "CISPR 32:2026 Class B (Harmonized)",
     "env_std": "RoHS",
     "cb_scheme_accepted": true,
@@ -3456,7 +3456,7 @@
     "lead_time_weeks": 4,
     "notes": "Accepts international reports.",
     "last_surveilled_date": "2026-09-21",
-    "last_surveilled_pillar": "EMC",
+    "last_surveilled_pillar": "Safety",
     "surveillance_source": "Global Harmonization Bulletin (All 205 Jurisdictions Auto-Ingested)"
   },
   "BJ": {
@@ -3465,7 +3465,7 @@
     "region": "Sub-Saharan Africa",
     "bloc": "ECOWAS",
     "authority": "ANM",
-    "safety_std": "IEC 62368-1:2023 (Edition 4.0 Global)",
+    "safety_std": "IEC 62368-1:2023 (Edition 4.0)",
     "emc_std": "CISPR 32:2026 Class B (Harmonized)",
     "env_std": "RoHS",
     "cb_scheme_accepted": true,
@@ -3478,7 +3478,7 @@
     "lead_time_weeks": 4,
     "notes": "Accepts international reports.",
     "last_surveilled_date": "2026-09-21",
-    "last_surveilled_pillar": "EMC",
+    "last_surveilled_pillar": "Safety",
     "surveillance_source": "Global Harmonization Bulletin (All 205 Jurisdictions Auto-Ingested)"
   },
   "TG": {
@@ -3487,7 +3487,7 @@
     "region": "Sub-Saharan Africa",
     "bloc": "ECOWAS",
     "authority": "ATN",
-    "safety_std": "IEC 62368-1:2023 (Edition 4.0 Global)",
+    "safety_std": "IEC 62368-1:2023 (Edition 4.0)",
     "emc_std": "CISPR 32:2026 Class B (Harmonized)",
     "env_std": "RoHS",
     "cb_scheme_accepted": true,
@@ -3500,7 +3500,7 @@
     "lead_time_weeks": 4,
     "notes": "Pre-shipment verification.",
     "last_surveilled_date": "2026-09-21",
-    "last_surveilled_pillar": "EMC",
+    "last_surveilled_pillar": "Safety",
     "surveillance_source": "Global Harmonization Bulletin (All 205 Jurisdictions Auto-Ingested)"
   },
   "NE": {
@@ -3509,7 +3509,7 @@
     "region": "Sub-Saharan Africa",
     "bloc": "ECOWAS",
     "authority": "DNPQM",
-    "safety_std": "IEC 62368-1:2023 (Edition 4.0 Global)",
+    "safety_std": "IEC 62368-1:2023 (Edition 4.0)",
     "emc_std": "CISPR 32:2026 Class B (Harmonized)",
     "env_std": "RoHS",
     "cb_scheme_accepted": true,
@@ -3522,7 +3522,7 @@
     "lead_time_weeks": 4,
     "notes": "Pre-shipment verification.",
     "last_surveilled_date": "2026-09-21",
-    "last_surveilled_pillar": "EMC",
+    "last_surveilled_pillar": "Safety",
     "surveillance_source": "Global Harmonization Bulletin (All 205 Jurisdictions Auto-Ingested)"
   },
   "MW": {
@@ -3531,7 +3531,7 @@
     "region": "Sub-Saharan Africa",
     "bloc": "SADC",
     "authority": "MBS / MACRA",
-    "safety_std": "IEC 62368-1:2023 (Edition 4.0 Global)",
+    "safety_std": "IEC 62368-1:2023 (Edition 4.0)",
     "emc_std": "CISPR 32:2026 Class B (Harmonized)",
     "env_std": "RoHS",
     "cb_scheme_accepted": true,
@@ -3544,7 +3544,7 @@
     "lead_time_weeks": 4,
     "notes": "Import quality monitoring scheme.",
     "last_surveilled_date": "2026-09-21",
-    "last_surveilled_pillar": "EMC",
+    "last_surveilled_pillar": "Safety",
     "surveillance_source": "Global Harmonization Bulletin (All 205 Jurisdictions Auto-Ingested)"
   },
   "SL": {
@@ -3553,7 +3553,7 @@
     "region": "Sub-Saharan Africa",
     "bloc": "ECOWAS",
     "authority": "SLSB",
-    "safety_std": "IEC 62368-1:2023 (Edition 4.0 Global)",
+    "safety_std": "IEC 62368-1:2023 (Edition 4.0)",
     "emc_std": "CISPR 32:2026 Class B (Harmonized)",
     "env_std": "RoHS",
     "cb_scheme_accepted": true,
@@ -3566,7 +3566,7 @@
     "lead_time_weeks": 4,
     "notes": "Accepts international reports.",
     "last_surveilled_date": "2026-09-21",
-    "last_surveilled_pillar": "EMC",
+    "last_surveilled_pillar": "Safety",
     "surveillance_source": "Global Harmonization Bulletin (All 205 Jurisdictions Auto-Ingested)"
   },
   "LR": {
@@ -3575,7 +3575,7 @@
     "region": "Sub-Saharan Africa",
     "bloc": "ECOWAS",
     "authority": "LBS",
-    "safety_std": "IEC 62368-1:2023 (Edition 4.0 Global)",
+    "safety_std": "IEC 62368-1:2023 (Edition 4.0)",
     "emc_std": "CISPR 32:2026 Class B (Harmonized)",
     "env_std": "RoHS",
     "cb_scheme_accepted": true,
@@ -3588,7 +3588,7 @@
     "lead_time_weeks": 4,
     "notes": "Accepts international reports.",
     "last_surveilled_date": "2026-09-21",
-    "last_surveilled_pillar": "EMC",
+    "last_surveilled_pillar": "Safety",
     "surveillance_source": "Global Harmonization Bulletin (All 205 Jurisdictions Auto-Ingested)"
   },
   "AD": {
@@ -3597,7 +3597,7 @@
     "region": "Europe & Eurasia",
     "bloc": "None",
     "authority": "National Standards Body / Customs",
-    "safety_std": "IEC 62368-1:2023 (Edition 4.0 Global)",
+    "safety_std": "IEC 62368-1:2023 (Edition 4.0)",
     "emc_std": "CISPR 32:2026 Class B (Harmonized)",
     "env_std": "RoHS / Basel Convention",
     "cb_scheme_accepted": true,
@@ -3610,7 +3610,7 @@
     "lead_time_weeks": 3,
     "notes": "Accepts international CB test reports and CE Equivalent for customs entry.",
     "last_surveilled_date": "2026-09-21",
-    "last_surveilled_pillar": "EMC",
+    "last_surveilled_pillar": "Safety",
     "surveillance_source": "Global Harmonization Bulletin (All 205 Jurisdictions Auto-Ingested)"
   },
   "MC": {
@@ -3619,7 +3619,7 @@
     "region": "Europe & Eurasia",
     "bloc": "None",
     "authority": "National Standards Body / Customs",
-    "safety_std": "IEC 62368-1:2023 (Edition 4.0 Global)",
+    "safety_std": "IEC 62368-1:2023 (Edition 4.0)",
     "emc_std": "CISPR 32:2026 Class B (Harmonized)",
     "env_std": "RoHS / Basel Convention",
     "cb_scheme_accepted": true,
@@ -3632,7 +3632,7 @@
     "lead_time_weeks": 3,
     "notes": "Accepts international CB test reports and CE Equivalent for customs entry.",
     "last_surveilled_date": "2026-09-21",
-    "last_surveilled_pillar": "EMC",
+    "last_surveilled_pillar": "Safety",
     "surveillance_source": "Global Harmonization Bulletin (All 205 Jurisdictions Auto-Ingested)"
   },
   "SM": {
@@ -3641,7 +3641,7 @@
     "region": "Europe & Eurasia",
     "bloc": "None",
     "authority": "National Standards Body / Customs",
-    "safety_std": "IEC 62368-1:2023 (Edition 4.0 Global)",
+    "safety_std": "IEC 62368-1:2023 (Edition 4.0)",
     "emc_std": "CISPR 32:2026 Class B (Harmonized)",
     "env_std": "RoHS / Basel Convention",
     "cb_scheme_accepted": true,
@@ -3654,7 +3654,7 @@
     "lead_time_weeks": 3,
     "notes": "Accepts international CB test reports and CE Equivalent for customs entry.",
     "last_surveilled_date": "2026-09-21",
-    "last_surveilled_pillar": "EMC",
+    "last_surveilled_pillar": "Safety",
     "surveillance_source": "Global Harmonization Bulletin (All 205 Jurisdictions Auto-Ingested)"
   },
   "VA": {
@@ -3663,7 +3663,7 @@
     "region": "Europe & Eurasia",
     "bloc": "None",
     "authority": "National Standards Body / Customs",
-    "safety_std": "IEC 62368-1:2023 (Edition 4.0 Global)",
+    "safety_std": "IEC 62368-1:2023 (Edition 4.0)",
     "emc_std": "CISPR 32:2026 Class B (Harmonized)",
     "env_std": "RoHS / Basel Convention",
     "cb_scheme_accepted": true,
@@ -3676,7 +3676,7 @@
     "lead_time_weeks": 3,
     "notes": "Accepts international CB test reports and CE Equivalent for customs entry.",
     "last_surveilled_date": "2026-09-21",
-    "last_surveilled_pillar": "EMC",
+    "last_surveilled_pillar": "Safety",
     "surveillance_source": "Global Harmonization Bulletin (All 205 Jurisdictions Auto-Ingested)"
   },
   "XK": {
@@ -3685,7 +3685,7 @@
     "region": "Europe & Eurasia",
     "bloc": "Balkans",
     "authority": "National Standards Body / Customs",
-    "safety_std": "IEC 62368-1:2023 (Edition 4.0 Global)",
+    "safety_std": "IEC 62368-1:2023 (Edition 4.0)",
     "emc_std": "CISPR 32:2026 Class B (Harmonized)",
     "env_std": "RoHS / Basel Convention",
     "cb_scheme_accepted": true,
@@ -3698,7 +3698,7 @@
     "lead_time_weeks": 3,
     "notes": "Accepts international CB test reports and CE Equivalent for customs entry.",
     "last_surveilled_date": "2026-09-21",
-    "last_surveilled_pillar": "EMC",
+    "last_surveilled_pillar": "Safety",
     "surveillance_source": "Global Harmonization Bulletin (All 205 Jurisdictions Auto-Ingested)"
   },
   "AG": {
@@ -3707,7 +3707,7 @@
     "region": "Americas",
     "bloc": "CARICOM",
     "authority": "National Standards Body / Customs",
-    "safety_std": "IEC 62368-1:2023 (Edition 4.0 Global)",
+    "safety_std": "IEC 62368-1:2023 (Edition 4.0)",
     "emc_std": "CISPR 32:2026 Class B (Harmonized)",
     "env_std": "RoHS / Basel Convention",
     "cb_scheme_accepted": true,
@@ -3720,7 +3720,7 @@
     "lead_time_weeks": 3,
     "notes": "Accepts international CB test reports and FCC / CE Acceptance for customs entry.",
     "last_surveilled_date": "2026-09-21",
-    "last_surveilled_pillar": "EMC",
+    "last_surveilled_pillar": "Safety",
     "surveillance_source": "Global Harmonization Bulletin (All 205 Jurisdictions Auto-Ingested)"
   },
   "DM": {
@@ -3729,7 +3729,7 @@
     "region": "Americas",
     "bloc": "CARICOM",
     "authority": "National Standards Body / Customs",
-    "safety_std": "IEC 62368-1:2023 (Edition 4.0 Global)",
+    "safety_std": "IEC 62368-1:2023 (Edition 4.0)",
     "emc_std": "CISPR 32:2026 Class B (Harmonized)",
     "env_std": "RoHS / Basel Convention",
     "cb_scheme_accepted": true,
@@ -3742,7 +3742,7 @@
     "lead_time_weeks": 3,
     "notes": "Accepts international CB test reports and FCC / CE Acceptance for customs entry.",
     "last_surveilled_date": "2026-09-21",
-    "last_surveilled_pillar": "EMC",
+    "last_surveilled_pillar": "Safety",
     "surveillance_source": "Global Harmonization Bulletin (All 205 Jurisdictions Auto-Ingested)"
   },
   "GD": {
@@ -3751,7 +3751,7 @@
     "region": "Americas",
     "bloc": "CARICOM",
     "authority": "National Standards Body / Customs",
-    "safety_std": "IEC 62368-1:2023 (Edition 4.0 Global)",
+    "safety_std": "IEC 62368-1:2023 (Edition 4.0)",
     "emc_std": "CISPR 32:2026 Class B (Harmonized)",
     "env_std": "RoHS / Basel Convention",
     "cb_scheme_accepted": true,
@@ -3764,7 +3764,7 @@
     "lead_time_weeks": 3,
     "notes": "Accepts international CB test reports and FCC / CE Acceptance for customs entry.",
     "last_surveilled_date": "2026-09-21",
-    "last_surveilled_pillar": "EMC",
+    "last_surveilled_pillar": "Safety",
     "surveillance_source": "Global Harmonization Bulletin (All 205 Jurisdictions Auto-Ingested)"
   },
   "KN": {
@@ -3773,7 +3773,7 @@
     "region": "Americas",
     "bloc": "CARICOM",
     "authority": "National Standards Body / Customs",
-    "safety_std": "IEC 62368-1:2023 (Edition 4.0 Global)",
+    "safety_std": "IEC 62368-1:2023 (Edition 4.0)",
     "emc_std": "CISPR 32:2026 Class B (Harmonized)",
     "env_std": "RoHS / Basel Convention",
     "cb_scheme_accepted": true,
@@ -3786,7 +3786,7 @@
     "lead_time_weeks": 3,
     "notes": "Accepts international CB test reports and FCC / CE Acceptance for customs entry.",
     "last_surveilled_date": "2026-09-21",
-    "last_surveilled_pillar": "EMC",
+    "last_surveilled_pillar": "Safety",
     "surveillance_source": "Global Harmonization Bulletin (All 205 Jurisdictions Auto-Ingested)"
   },
   "LC": {
@@ -3795,7 +3795,7 @@
     "region": "Americas",
     "bloc": "CARICOM",
     "authority": "National Standards Body / Customs",
-    "safety_std": "IEC 62368-1:2023 (Edition 4.0 Global)",
+    "safety_std": "IEC 62368-1:2023 (Edition 4.0)",
     "emc_std": "CISPR 32:2026 Class B (Harmonized)",
     "env_std": "RoHS / Basel Convention",
     "cb_scheme_accepted": true,
@@ -3808,7 +3808,7 @@
     "lead_time_weeks": 3,
     "notes": "Accepts international CB test reports and FCC / CE Acceptance for customs entry.",
     "last_surveilled_date": "2026-09-21",
-    "last_surveilled_pillar": "EMC",
+    "last_surveilled_pillar": "Safety",
     "surveillance_source": "Global Harmonization Bulletin (All 205 Jurisdictions Auto-Ingested)"
   },
   "VC": {
@@ -3817,7 +3817,7 @@
     "region": "Americas",
     "bloc": "CARICOM",
     "authority": "National Standards Body / Customs",
-    "safety_std": "IEC 62368-1:2023 (Edition 4.0 Global)",
+    "safety_std": "IEC 62368-1:2023 (Edition 4.0)",
     "emc_std": "CISPR 32:2026 Class B (Harmonized)",
     "env_std": "RoHS / Basel Convention",
     "cb_scheme_accepted": true,
@@ -3830,7 +3830,7 @@
     "lead_time_weeks": 3,
     "notes": "Accepts international CB test reports and FCC / CE Acceptance for customs entry.",
     "last_surveilled_date": "2026-09-21",
-    "last_surveilled_pillar": "EMC",
+    "last_surveilled_pillar": "Safety",
     "surveillance_source": "Global Harmonization Bulletin (All 205 Jurisdictions Auto-Ingested)"
   },
   "SB": {
@@ -3839,7 +3839,7 @@
     "region": "Asia-Pacific",
     "bloc": "Oceania",
     "authority": "National Standards Body / Customs",
-    "safety_std": "IEC 62368-1:2023 (Edition 4.0 Global)",
+    "safety_std": "IEC 62368-1:2023 (Edition 4.0)",
     "emc_std": "CISPR 32:2026 Class B (Harmonized)",
     "env_std": "RoHS / Basel Convention",
     "cb_scheme_accepted": true,
@@ -3852,7 +3852,7 @@
     "lead_time_weeks": 3,
     "notes": "Accepts international CB test reports and ACMA / CE Acceptance for customs entry.",
     "last_surveilled_date": "2026-09-21",
-    "last_surveilled_pillar": "EMC",
+    "last_surveilled_pillar": "Safety",
     "surveillance_source": "Global Harmonization Bulletin (All 205 Jurisdictions Auto-Ingested)"
   },
   "VU": {
@@ -3861,7 +3861,7 @@
     "region": "Asia-Pacific",
     "bloc": "Oceania",
     "authority": "National Standards Body / Customs",
-    "safety_std": "IEC 62368-1:2023 (Edition 4.0 Global)",
+    "safety_std": "IEC 62368-1:2023 (Edition 4.0)",
     "emc_std": "CISPR 32:2026 Class B (Harmonized)",
     "env_std": "RoHS / Basel Convention",
     "cb_scheme_accepted": true,
@@ -3874,7 +3874,7 @@
     "lead_time_weeks": 3,
     "notes": "Accepts international CB test reports and ACMA / CE Acceptance for customs entry.",
     "last_surveilled_date": "2026-09-21",
-    "last_surveilled_pillar": "EMC",
+    "last_surveilled_pillar": "Safety",
     "surveillance_source": "Global Harmonization Bulletin (All 205 Jurisdictions Auto-Ingested)"
   },
   "WS": {
@@ -3883,7 +3883,7 @@
     "region": "Asia-Pacific",
     "bloc": "Oceania",
     "authority": "National Standards Body / Customs",
-    "safety_std": "IEC 62368-1:2023 (Edition 4.0 Global)",
+    "safety_std": "IEC 62368-1:2023 (Edition 4.0)",
     "emc_std": "CISPR 32:2026 Class B (Harmonized)",
     "env_std": "RoHS / Basel Convention",
     "cb_scheme_accepted": true,
@@ -3896,7 +3896,7 @@
     "lead_time_weeks": 3,
     "notes": "Accepts international CB test reports and ACMA / CE Acceptance for customs entry.",
     "last_surveilled_date": "2026-09-21",
-    "last_surveilled_pillar": "EMC",
+    "last_surveilled_pillar": "Safety",
     "surveillance_source": "Global Harmonization Bulletin (All 205 Jurisdictions Auto-Ingested)"
   },
   "TO": {
@@ -3905,7 +3905,7 @@
     "region": "Asia-Pacific",
     "bloc": "Oceania",
     "authority": "National Standards Body / Customs",
-    "safety_std": "IEC 62368-1:2023 (Edition 4.0 Global)",
+    "safety_std": "IEC 62368-1:2023 (Edition 4.0)",
     "emc_std": "CISPR 32:2026 Class B (Harmonized)",
     "env_std": "RoHS / Basel Convention",
     "cb_scheme_accepted": true,
@@ -3918,7 +3918,7 @@
     "lead_time_weeks": 3,
     "notes": "Accepts international CB test reports and ACMA / CE Acceptance for customs entry.",
     "last_surveilled_date": "2026-09-21",
-    "last_surveilled_pillar": "EMC",
+    "last_surveilled_pillar": "Safety",
     "surveillance_source": "Global Harmonization Bulletin (All 205 Jurisdictions Auto-Ingested)"
   },
   "KI": {
@@ -3927,7 +3927,7 @@
     "region": "Asia-Pacific",
     "bloc": "Oceania",
     "authority": "National Standards Body / Customs",
-    "safety_std": "IEC 62368-1:2023 (Edition 4.0 Global)",
+    "safety_std": "IEC 62368-1:2023 (Edition 4.0)",
     "emc_std": "CISPR 32:2026 Class B (Harmonized)",
     "env_std": "RoHS / Basel Convention",
     "cb_scheme_accepted": true,
@@ -3940,7 +3940,7 @@
     "lead_time_weeks": 3,
     "notes": "Accepts international CB test reports and International Acceptance for customs entry.",
     "last_surveilled_date": "2026-09-21",
-    "last_surveilled_pillar": "EMC",
+    "last_surveilled_pillar": "Safety",
     "surveillance_source": "Global Harmonization Bulletin (All 205 Jurisdictions Auto-Ingested)"
   },
   "FM": {
@@ -3949,7 +3949,7 @@
     "region": "Asia-Pacific",
     "bloc": "Oceania",
     "authority": "National Standards Body / Customs",
-    "safety_std": "IEC 62368-1:2023 (Edition 4.0 Global)",
+    "safety_std": "IEC 62368-1:2023 (Edition 4.0)",
     "emc_std": "CISPR 32:2026 Class B (Harmonized)",
     "env_std": "RoHS / Basel Convention",
     "cb_scheme_accepted": true,
@@ -3962,7 +3962,7 @@
     "lead_time_weeks": 3,
     "notes": "Accepts international CB test reports and FCC Acceptance for customs entry.",
     "last_surveilled_date": "2026-09-21",
-    "last_surveilled_pillar": "EMC",
+    "last_surveilled_pillar": "Safety",
     "surveillance_source": "Global Harmonization Bulletin (All 205 Jurisdictions Auto-Ingested)"
   },
   "MH": {
@@ -3971,7 +3971,7 @@
     "region": "Asia-Pacific",
     "bloc": "Oceania",
     "authority": "National Standards Body / Customs",
-    "safety_std": "IEC 62368-1:2023 (Edition 4.0 Global)",
+    "safety_std": "IEC 62368-1:2023 (Edition 4.0)",
     "emc_std": "CISPR 32:2026 Class B (Harmonized)",
     "env_std": "RoHS / Basel Convention",
     "cb_scheme_accepted": true,
@@ -3984,7 +3984,7 @@
     "lead_time_weeks": 3,
     "notes": "Accepts international CB test reports and FCC Acceptance for customs entry.",
     "last_surveilled_date": "2026-09-21",
-    "last_surveilled_pillar": "EMC",
+    "last_surveilled_pillar": "Safety",
     "surveillance_source": "Global Harmonization Bulletin (All 205 Jurisdictions Auto-Ingested)"
   },
   "PW": {
@@ -3993,7 +3993,7 @@
     "region": "Asia-Pacific",
     "bloc": "Oceania",
     "authority": "National Standards Body / Customs",
-    "safety_std": "IEC 62368-1:2023 (Edition 4.0 Global)",
+    "safety_std": "IEC 62368-1:2023 (Edition 4.0)",
     "emc_std": "CISPR 32:2026 Class B (Harmonized)",
     "env_std": "RoHS / Basel Convention",
     "cb_scheme_accepted": true,
@@ -4006,7 +4006,7 @@
     "lead_time_weeks": 3,
     "notes": "Accepts international CB test reports and FCC Acceptance for customs entry.",
     "last_surveilled_date": "2026-09-21",
-    "last_surveilled_pillar": "EMC",
+    "last_surveilled_pillar": "Safety",
     "surveillance_source": "Global Harmonization Bulletin (All 205 Jurisdictions Auto-Ingested)"
   },
   "NR": {
@@ -4015,7 +4015,7 @@
     "region": "Asia-Pacific",
     "bloc": "Oceania",
     "authority": "National Standards Body / Customs",
-    "safety_std": "IEC 62368-1:2023 (Edition 4.0 Global)",
+    "safety_std": "IEC 62368-1:2023 (Edition 4.0)",
     "emc_std": "CISPR 32:2026 Class B (Harmonized)",
     "env_std": "RoHS / Basel Convention",
     "cb_scheme_accepted": true,
@@ -4028,7 +4028,7 @@
     "lead_time_weeks": 3,
     "notes": "Accepts international CB test reports and ACMA Acceptance for customs entry.",
     "last_surveilled_date": "2026-09-21",
-    "last_surveilled_pillar": "EMC",
+    "last_surveilled_pillar": "Safety",
     "surveillance_source": "Global Harmonization Bulletin (All 205 Jurisdictions Auto-Ingested)"
   },
   "TV": {
@@ -4037,7 +4037,7 @@
     "region": "Asia-Pacific",
     "bloc": "Oceania",
     "authority": "National Standards Body / Customs",
-    "safety_std": "IEC 62368-1:2023 (Edition 4.0 Global)",
+    "safety_std": "IEC 62368-1:2023 (Edition 4.0)",
     "emc_std": "CISPR 32:2026 Class B (Harmonized)",
     "env_std": "RoHS / Basel Convention",
     "cb_scheme_accepted": true,
@@ -4050,7 +4050,7 @@
     "lead_time_weeks": 3,
     "notes": "Accepts international CB test reports and International Acceptance for customs entry.",
     "last_surveilled_date": "2026-09-21",
-    "last_surveilled_pillar": "EMC",
+    "last_surveilled_pillar": "Safety",
     "surveillance_source": "Global Harmonization Bulletin (All 205 Jurisdictions Auto-Ingested)"
   },
   "SY": {
@@ -4059,7 +4059,7 @@
     "region": "Middle East & North Africa",
     "bloc": "Levant",
     "authority": "National Standards Body / Customs",
-    "safety_std": "IEC 62368-1:2023 (Edition 4.0 Global)",
+    "safety_std": "IEC 62368-1:2023 (Edition 4.0)",
     "emc_std": "CISPR 32:2026 Class B (Harmonized)",
     "env_std": "RoHS / Basel Convention",
     "cb_scheme_accepted": true,
@@ -4072,7 +4072,7 @@
     "lead_time_weeks": 3,
     "notes": "Accepts international CB test reports and SASMO for customs entry.",
     "last_surveilled_date": "2026-09-21",
-    "last_surveilled_pillar": "EMC",
+    "last_surveilled_pillar": "Safety",
     "surveillance_source": "Global Harmonization Bulletin (All 205 Jurisdictions Auto-Ingested)"
   },
   "SD": {
@@ -4081,7 +4081,7 @@
     "region": "Middle East & North Africa",
     "bloc": "North Africa",
     "authority": "National Standards Body / Customs",
-    "safety_std": "IEC 62368-1:2023 (Edition 4.0 Global)",
+    "safety_std": "IEC 62368-1:2023 (Edition 4.0)",
     "emc_std": "CISPR 32:2026 Class B (Harmonized)",
     "env_std": "RoHS / Basel Convention",
     "cb_scheme_accepted": true,
@@ -4094,7 +4094,7 @@
     "lead_time_weeks": 3,
     "notes": "Accepts international CB test reports and SSMO for customs entry.",
     "last_surveilled_date": "2026-09-21",
-    "last_surveilled_pillar": "EMC",
+    "last_surveilled_pillar": "Safety",
     "surveillance_source": "Global Harmonization Bulletin (All 205 Jurisdictions Auto-Ingested)"
   },
   "TD": {
@@ -4103,7 +4103,7 @@
     "region": "Sub-Saharan Africa",
     "bloc": "CEMAC",
     "authority": "National Standards Body / Customs",
-    "safety_std": "IEC 62368-1:2023 (Edition 4.0 Global)",
+    "safety_std": "IEC 62368-1:2023 (Edition 4.0)",
     "emc_std": "CISPR 32:2026 Class B (Harmonized)",
     "env_std": "RoHS / Basel Convention",
     "cb_scheme_accepted": true,
@@ -4116,7 +4116,7 @@
     "lead_time_weeks": 3,
     "notes": "Accepts international CB test reports and Pre-shipment inspection for customs entry.",
     "last_surveilled_date": "2026-09-21",
-    "last_surveilled_pillar": "EMC",
+    "last_surveilled_pillar": "Safety",
     "surveillance_source": "Global Harmonization Bulletin (All 205 Jurisdictions Auto-Ingested)"
   },
   "SO": {
@@ -4125,7 +4125,7 @@
     "region": "Sub-Saharan Africa",
     "bloc": "East Africa",
     "authority": "National Standards Body / Customs",
-    "safety_std": "IEC 62368-1:2023 (Edition 4.0 Global)",
+    "safety_std": "IEC 62368-1:2023 (Edition 4.0)",
     "emc_std": "CISPR 32:2026 Class B (Harmonized)",
     "env_std": "RoHS / Basel Convention",
     "cb_scheme_accepted": true,
@@ -4138,7 +4138,7 @@
     "lead_time_weeks": 3,
     "notes": "Accepts international CB test reports and International Acceptance for customs entry.",
     "last_surveilled_date": "2026-09-21",
-    "last_surveilled_pillar": "EMC",
+    "last_surveilled_pillar": "Safety",
     "surveillance_source": "Global Harmonization Bulletin (All 205 Jurisdictions Auto-Ingested)"
   },
   "SS": {
@@ -4147,7 +4147,7 @@
     "region": "Sub-Saharan Africa",
     "bloc": "East Africa",
     "authority": "National Standards Body / Customs",
-    "safety_std": "IEC 62368-1:2023 (Edition 4.0 Global)",
+    "safety_std": "IEC 62368-1:2023 (Edition 4.0)",
     "emc_std": "CISPR 32:2026 Class B (Harmonized)",
     "env_std": "RoHS / Basel Convention",
     "cb_scheme_accepted": true,
@@ -4160,7 +4160,7 @@
     "lead_time_weeks": 3,
     "notes": "Accepts international CB test reports and International Acceptance for customs entry.",
     "last_surveilled_date": "2026-09-21",
-    "last_surveilled_pillar": "EMC",
+    "last_surveilled_pillar": "Safety",
     "surveillance_source": "Global Harmonization Bulletin (All 205 Jurisdictions Auto-Ingested)"
   },
   "CF": {
@@ -4169,7 +4169,7 @@
     "region": "Sub-Saharan Africa",
     "bloc": "CEMAC",
     "authority": "National Standards Body / Customs",
-    "safety_std": "IEC 62368-1:2023 (Edition 4.0 Global)",
+    "safety_std": "IEC 62368-1:2023 (Edition 4.0)",
     "emc_std": "CISPR 32:2026 Class B (Harmonized)",
     "env_std": "RoHS / Basel Convention",
     "cb_scheme_accepted": true,
@@ -4182,7 +4182,7 @@
     "lead_time_weeks": 3,
     "notes": "Accepts international CB test reports and Pre-shipment inspection for customs entry.",
     "last_surveilled_date": "2026-09-21",
-    "last_surveilled_pillar": "EMC",
+    "last_surveilled_pillar": "Safety",
     "surveillance_source": "Global Harmonization Bulletin (All 205 Jurisdictions Auto-Ingested)"
   },
   "CG": {
@@ -4191,7 +4191,7 @@
     "region": "Sub-Saharan Africa",
     "bloc": "CEMAC",
     "authority": "National Standards Body / Customs",
-    "safety_std": "IEC 62368-1:2023 (Edition 4.0 Global)",
+    "safety_std": "IEC 62368-1:2023 (Edition 4.0)",
     "emc_std": "CISPR 32:2026 Class B (Harmonized)",
     "env_std": "RoHS / Basel Convention",
     "cb_scheme_accepted": true,
@@ -4204,7 +4204,7 @@
     "lead_time_weeks": 3,
     "notes": "Accepts international CB test reports and Pre-shipment inspection for customs entry.",
     "last_surveilled_date": "2026-09-21",
-    "last_surveilled_pillar": "EMC",
+    "last_surveilled_pillar": "Safety",
     "surveillance_source": "Global Harmonization Bulletin (All 205 Jurisdictions Auto-Ingested)"
   },
   "MR": {
@@ -4213,7 +4213,7 @@
     "region": "Sub-Saharan Africa",
     "bloc": "Arab Maghreb",
     "authority": "National Standards Body / Customs",
-    "safety_std": "IEC 62368-1:2023 (Edition 4.0 Global)",
+    "safety_std": "IEC 62368-1:2023 (Edition 4.0)",
     "emc_std": "CISPR 32:2026 Class B (Harmonized)",
     "env_std": "RoHS / Basel Convention",
     "cb_scheme_accepted": true,
@@ -4226,7 +4226,7 @@
     "lead_time_weeks": 3,
     "notes": "Accepts international CB test reports and Pre-shipment inspection for customs entry.",
     "last_surveilled_date": "2026-09-21",
-    "last_surveilled_pillar": "EMC",
+    "last_surveilled_pillar": "Safety",
     "surveillance_source": "Global Harmonization Bulletin (All 205 Jurisdictions Auto-Ingested)"
   },
   "ER": {
@@ -4235,7 +4235,7 @@
     "region": "Sub-Saharan Africa",
     "bloc": "East Africa",
     "authority": "National Standards Body / Customs",
-    "safety_std": "IEC 62368-1:2023 (Edition 4.0 Global)",
+    "safety_std": "IEC 62368-1:2023 (Edition 4.0)",
     "emc_std": "CISPR 32:2026 Class B (Harmonized)",
     "env_std": "RoHS / Basel Convention",
     "cb_scheme_accepted": true,
@@ -4248,7 +4248,7 @@
     "lead_time_weeks": 3,
     "notes": "Accepts international CB test reports and International Acceptance for customs entry.",
     "last_surveilled_date": "2026-09-21",
-    "last_surveilled_pillar": "EMC",
+    "last_surveilled_pillar": "Safety",
     "surveillance_source": "Global Harmonization Bulletin (All 205 Jurisdictions Auto-Ingested)"
   },
   "DJ": {
@@ -4257,7 +4257,7 @@
     "region": "Sub-Saharan Africa",
     "bloc": "East Africa",
     "authority": "National Standards Body / Customs",
-    "safety_std": "IEC 62368-1:2023 (Edition 4.0 Global)",
+    "safety_std": "IEC 62368-1:2023 (Edition 4.0)",
     "emc_std": "CISPR 32:2026 Class B (Harmonized)",
     "env_std": "RoHS / Basel Convention",
     "cb_scheme_accepted": true,
@@ -4270,7 +4270,7 @@
     "lead_time_weeks": 3,
     "notes": "Accepts international CB test reports and International Acceptance for customs entry.",
     "last_surveilled_date": "2026-09-21",
-    "last_surveilled_pillar": "EMC",
+    "last_surveilled_pillar": "Safety",
     "surveillance_source": "Global Harmonization Bulletin (All 205 Jurisdictions Auto-Ingested)"
   },
   "SZ": {
@@ -4279,7 +4279,7 @@
     "region": "Sub-Saharan Africa",
     "bloc": "SADC",
     "authority": "National Standards Body / Customs",
-    "safety_std": "IEC 62368-1:2023 (Edition 4.0 Global)",
+    "safety_std": "IEC 62368-1:2023 (Edition 4.0)",
     "emc_std": "CISPR 32:2026 Class B (Harmonized)",
     "env_std": "RoHS / Basel Convention",
     "cb_scheme_accepted": true,
@@ -4292,7 +4292,7 @@
     "lead_time_weeks": 3,
     "notes": "Accepts international CB test reports and SABS Acceptance for customs entry.",
     "last_surveilled_date": "2026-09-21",
-    "last_surveilled_pillar": "EMC",
+    "last_surveilled_pillar": "Safety",
     "surveillance_source": "Global Harmonization Bulletin (All 205 Jurisdictions Auto-Ingested)"
   },
   "LS": {
@@ -4301,7 +4301,7 @@
     "region": "Sub-Saharan Africa",
     "bloc": "SADC",
     "authority": "National Standards Body / Customs",
-    "safety_std": "IEC 62368-1:2023 (Edition 4.0 Global)",
+    "safety_std": "IEC 62368-1:2023 (Edition 4.0)",
     "emc_std": "CISPR 32:2026 Class B (Harmonized)",
     "env_std": "RoHS / Basel Convention",
     "cb_scheme_accepted": true,
@@ -4314,7 +4314,7 @@
     "lead_time_weeks": 3,
     "notes": "Accepts international CB test reports and SABS Acceptance for customs entry.",
     "last_surveilled_date": "2026-09-21",
-    "last_surveilled_pillar": "EMC",
+    "last_surveilled_pillar": "Safety",
     "surveillance_source": "Global Harmonization Bulletin (All 205 Jurisdictions Auto-Ingested)"
   },
   "GM": {
@@ -4323,7 +4323,7 @@
     "region": "Sub-Saharan Africa",
     "bloc": "ECOWAS",
     "authority": "National Standards Body / Customs",
-    "safety_std": "IEC 62368-1:2023 (Edition 4.0 Global)",
+    "safety_std": "IEC 62368-1:2023 (Edition 4.0)",
     "emc_std": "CISPR 32:2026 Class B (Harmonized)",
     "env_std": "RoHS / Basel Convention",
     "cb_scheme_accepted": true,
@@ -4336,7 +4336,7 @@
     "lead_time_weeks": 3,
     "notes": "Accepts international CB test reports and Pre-shipment inspection for customs entry.",
     "last_surveilled_date": "2026-09-21",
-    "last_surveilled_pillar": "EMC",
+    "last_surveilled_pillar": "Safety",
     "surveillance_source": "Global Harmonization Bulletin (All 205 Jurisdictions Auto-Ingested)"
   },
   "CV": {
@@ -4345,7 +4345,7 @@
     "region": "Sub-Saharan Africa",
     "bloc": "ECOWAS",
     "authority": "National Standards Body / Customs",
-    "safety_std": "IEC 62368-1:2023 (Edition 4.0 Global)",
+    "safety_std": "IEC 62368-1:2023 (Edition 4.0)",
     "emc_std": "CISPR 32:2026 Class B (Harmonized)",
     "env_std": "RoHS / Basel Convention",
     "cb_scheme_accepted": true,
@@ -4358,7 +4358,7 @@
     "lead_time_weeks": 3,
     "notes": "Accepts international CB test reports and CE Acceptance for customs entry.",
     "last_surveilled_date": "2026-09-21",
-    "last_surveilled_pillar": "EMC",
+    "last_surveilled_pillar": "Safety",
     "surveillance_source": "Global Harmonization Bulletin (All 205 Jurisdictions Auto-Ingested)"
   },
   "SC": {
@@ -4367,7 +4367,7 @@
     "region": "Sub-Saharan Africa",
     "bloc": "SADC",
     "authority": "National Standards Body / Customs",
-    "safety_std": "IEC 62368-1:2023 (Edition 4.0 Global)",
+    "safety_std": "IEC 62368-1:2023 (Edition 4.0)",
     "emc_std": "CISPR 32:2026 Class B (Harmonized)",
     "env_std": "RoHS / Basel Convention",
     "cb_scheme_accepted": true,
@@ -4380,7 +4380,7 @@
     "lead_time_weeks": 3,
     "notes": "Accepts international CB test reports and CE / CB Acceptance for customs entry.",
     "last_surveilled_date": "2026-09-21",
-    "last_surveilled_pillar": "EMC",
+    "last_surveilled_pillar": "Safety",
     "surveillance_source": "Global Harmonization Bulletin (All 205 Jurisdictions Auto-Ingested)"
   },
   "KM": {
@@ -4389,7 +4389,7 @@
     "region": "Sub-Saharan Africa",
     "bloc": "Indian Ocean",
     "authority": "National Standards Body / Customs",
-    "safety_std": "IEC 62368-1:2023 (Edition 4.0 Global)",
+    "safety_std": "IEC 62368-1:2023 (Edition 4.0)",
     "emc_std": "CISPR 32:2026 Class B (Harmonized)",
     "env_std": "RoHS / Basel Convention",
     "cb_scheme_accepted": true,
@@ -4402,7 +4402,7 @@
     "lead_time_weeks": 3,
     "notes": "Accepts international CB test reports and International Acceptance for customs entry.",
     "last_surveilled_date": "2026-09-21",
-    "last_surveilled_pillar": "EMC",
+    "last_surveilled_pillar": "Safety",
     "surveillance_source": "Global Harmonization Bulletin (All 205 Jurisdictions Auto-Ingested)"
   },
   "ST": {
@@ -4411,7 +4411,7 @@
     "region": "Sub-Saharan Africa",
     "bloc": "Central Africa",
     "authority": "National Standards Body / Customs",
-    "safety_std": "IEC 62368-1:2023 (Edition 4.0 Global)",
+    "safety_std": "IEC 62368-1:2023 (Edition 4.0)",
     "emc_std": "CISPR 32:2026 Class B (Harmonized)",
     "env_std": "RoHS / Basel Convention",
     "cb_scheme_accepted": true,
@@ -4424,7 +4424,7 @@
     "lead_time_weeks": 3,
     "notes": "Accepts international CB test reports and International Acceptance for customs entry.",
     "last_surveilled_date": "2026-09-21",
-    "last_surveilled_pillar": "EMC",
+    "last_surveilled_pillar": "Safety",
     "surveillance_source": "Global Harmonization Bulletin (All 205 Jurisdictions Auto-Ingested)"
   },
   "GQ": {
@@ -4433,7 +4433,7 @@
     "region": "Sub-Saharan Africa",
     "bloc": "CEMAC",
     "authority": "National Standards Body / Customs",
-    "safety_std": "IEC 62368-1:2023 (Edition 4.0 Global)",
+    "safety_std": "IEC 62368-1:2023 (Edition 4.0)",
     "emc_std": "CISPR 32:2026 Class B (Harmonized)",
     "env_std": "RoHS / Basel Convention",
     "cb_scheme_accepted": true,
@@ -4446,7 +4446,7 @@
     "lead_time_weeks": 3,
     "notes": "Accepts international CB test reports and Pre-shipment inspection for customs entry.",
     "last_surveilled_date": "2026-09-21",
-    "last_surveilled_pillar": "EMC",
+    "last_surveilled_pillar": "Safety",
     "surveillance_source": "Global Harmonization Bulletin (All 205 Jurisdictions Auto-Ingested)"
   },
   "BI": {
@@ -4455,7 +4455,7 @@
     "region": "Sub-Saharan Africa",
     "bloc": "EAC",
     "authority": "National Standards Body / Customs",
-    "safety_std": "IEC 62368-1:2023 (Edition 4.0 Global)",
+    "safety_std": "IEC 62368-1:2023 (Edition 4.0)",
     "emc_std": "CISPR 32:2026 Class B (Harmonized)",
     "env_std": "RoHS / Basel Convention",
     "cb_scheme_accepted": true,
@@ -4468,7 +4468,7 @@
     "lead_time_weeks": 3,
     "notes": "Accepts international CB test reports and Pre-shipment inspection for customs entry.",
     "last_surveilled_date": "2026-09-21",
-    "last_surveilled_pillar": "EMC",
+    "last_surveilled_pillar": "Safety",
     "surveillance_source": "Global Harmonization Bulletin (All 205 Jurisdictions Auto-Ingested)"
   },
   "GL": {
@@ -4477,7 +4477,7 @@
     "region": "Europe & Eurasia",
     "bloc": "Nordic",
     "authority": "National Standards Body / Customs",
-    "safety_std": "IEC 62368-1:2023 (Edition 4.0 Global)",
+    "safety_std": "IEC 62368-1:2023 (Edition 4.0)",
     "emc_std": "CISPR 32:2026 Class B (Harmonized)",
     "env_std": "RoHS / Basel Convention",
     "cb_scheme_accepted": true,
@@ -4490,7 +4490,7 @@
     "lead_time_weeks": 3,
     "notes": "Accepts international CB test reports and CE / Danish Safety Acceptance for customs entry.",
     "last_surveilled_date": "2026-09-21",
-    "last_surveilled_pillar": "EMC",
+    "last_surveilled_pillar": "Safety",
     "surveillance_source": "Global Harmonization Bulletin (All 205 Jurisdictions Auto-Ingested)"
   },
   "FO": {
@@ -4499,7 +4499,7 @@
     "region": "Europe & Eurasia",
     "bloc": "Nordic",
     "authority": "National Standards Body / Customs",
-    "safety_std": "IEC 62368-1:2023 (Edition 4.0 Global)",
+    "safety_std": "IEC 62368-1:2023 (Edition 4.0)",
     "emc_std": "CISPR 32:2026 Class B (Harmonized)",
     "env_std": "RoHS / Basel Convention",
     "cb_scheme_accepted": true,
@@ -4512,7 +4512,7 @@
     "lead_time_weeks": 3,
     "notes": "Accepts international CB test reports and CE / Danish Safety Acceptance for customs entry.",
     "last_surveilled_date": "2026-09-21",
-    "last_surveilled_pillar": "EMC",
+    "last_surveilled_pillar": "Safety",
     "surveillance_source": "Global Harmonization Bulletin (All 205 Jurisdictions Auto-Ingested)"
   },
   "GI": {
@@ -4521,7 +4521,7 @@
     "region": "Europe & Eurasia",
     "bloc": "UK Overseas",
     "authority": "National Standards Body / Customs",
-    "safety_std": "IEC 62368-1:2023 (Edition 4.0 Global)",
+    "safety_std": "IEC 62368-1:2023 (Edition 4.0)",
     "emc_std": "CISPR 32:2026 Class B (Harmonized)",
     "env_std": "RoHS / Basel Convention",
     "cb_scheme_accepted": true,
@@ -4534,7 +4534,7 @@
     "lead_time_weeks": 3,
     "notes": "Accepts international CB test reports and UKCA / CE Acceptance for customs entry.",
     "last_surveilled_date": "2026-09-21",
-    "last_surveilled_pillar": "EMC",
+    "last_surveilled_pillar": "Safety",
     "surveillance_source": "Global Harmonization Bulletin (All 205 Jurisdictions Auto-Ingested)"
   },
   "GU": {
@@ -4543,7 +4543,7 @@
     "region": "Asia-Pacific",
     "bloc": "US Territory",
     "authority": "National Standards Body / Customs",
-    "safety_std": "IEC 62368-1:2023 (Edition 4.0 Global)",
+    "safety_std": "IEC 62368-1:2023 (Edition 4.0)",
     "emc_std": "CISPR 32:2026 Class B (Harmonized)",
     "env_std": "RoHS / Basel Convention",
     "cb_scheme_accepted": true,
@@ -4556,7 +4556,7 @@
     "lead_time_weeks": 3,
     "notes": "Accepts international CB test reports and FCC / OSHA NRTL Acceptance for customs entry.",
     "last_surveilled_date": "2026-09-21",
-    "last_surveilled_pillar": "EMC",
+    "last_surveilled_pillar": "Safety",
     "surveillance_source": "Global Harmonization Bulletin (All 205 Jurisdictions Auto-Ingested)"
   }
 }

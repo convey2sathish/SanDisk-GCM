@@ -1054,6 +1054,24 @@
         let matrixData = null;
         let chatHistory = [];
 
+        function showDownloadToast(title, sub) {
+            const toast = document.getElementById("export-toast");
+            const toastTitle = document.getElementById("export-toast-title");
+            const toastSub = document.getElementById("export-toast-sub");
+            if (!toast) return;
+            if (toastTitle) toastTitle.innerHTML = `<span class="truncate">${title || 'Operation Completed'}</span>`;
+            if (toastSub) {
+                toastSub.innerText = sub || 'Global database & regulatory matrix synchronized';
+            }
+            toast.classList.remove("hidden");
+            if (window.lucide) lucide.createIcons();
+            clearTimeout(window._toastTimeout);
+            window._toastTimeout = setTimeout(() => {
+                toast.classList.add("hidden");
+            }, 4500);
+        }
+        window.showToast = showDownloadToast;
+
         document.addEventListener("DOMContentLoaded", () => {
             lucide.createIcons();
             initApp();
@@ -1406,15 +1424,18 @@
                 closeModal('modal-simulate-notice');
 
                 const countUpdated = data.affected_countries_count || (selectedCountry === 'ALL' ? 205 : 1);
-                if (countUpdated >= 200 || selectedCountry === 'ALL') {
-                    showDownloadToast(`⚡ Gazette Ingested! ALL 205 Countries updated to ${newStd} simultaneously!`);
-                } else {
-                    showDownloadToast(`⚡ Gazette Ingested! ${selectedCountry} updated to ${newStd}.`);
+                if (typeof showDownloadToast === 'function') {
+                    if (countUpdated >= 200 || selectedCountry === 'ALL') {
+                        showDownloadToast(`⚡ Gazette Ingested! ALL 205 Countries updated to ${newStd} simultaneously!`, 'Global compliance matrix and alerts synchronized');
+                    } else {
+                        showDownloadToast(`⚡ Gazette Ingested! ${selectedCountry} updated to ${newStd}.`, 'Target jurisdiction matrix updated');
+                    }
                 }
 
-                await loadSurveillanceStatus();
-                await loadProductMatrix();
-                await loadAlerts();
+                if (typeof loadSurveillanceStatus === 'function') await loadSurveillanceStatus();
+                if (typeof loadProductMatrix === 'function') await loadProductMatrix();
+                if (typeof loadAlerts === 'function') await loadAlerts();
+                if (typeof loadOverview === 'function') await loadOverview();
             } catch (err) {
                 alert('Simulation failed: ' + err);
             } finally {
