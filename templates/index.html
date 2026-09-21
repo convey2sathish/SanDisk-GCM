@@ -47,6 +47,72 @@
             background: #475569;
         }
     </style>
+    <!-- jsVectorMap Dark Theme CSS -->
+    <link rel="stylesheet" href="/static/css/jsvectormap.min.css">
+    <style>
+        .jvm-container {
+            background-color: #0b101b !important;
+            border-radius: 0.75rem;
+        }
+        .jvm-tooltip {
+            background-color: #0f172a !important;
+            border: 1px solid #334155 !important;
+            color: #f8fafc !important;
+            font-family: inherit !important;
+            font-size: 11px !important;
+            padding: 8px 12px !important;
+            border-radius: 8px !important;
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.5), 0 8px 10px -6px rgba(0, 0, 0, 0.5) !important;
+            z-index: 9999 !important;
+            pointer-events: none !important;
+            max-width: 280px !important;
+            white-space: normal !important;
+            line-height: 1.4 !important;
+        }
+        .jvm-zoom-btn {
+            background-color: #1e293b !important;
+            border: 1px solid #334155 !important;
+            color: #94a3b8 !important;
+            width: 28px !important;
+            height: 28px !important;
+            border-radius: 6px !important;
+            display: flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            font-size: 14px !important;
+            line-height: 1 !important;
+            transition: all 0.15s ease !important;
+        }
+        .jvm-zoom-btn:hover {
+            background-color: #334155 !important;
+            color: #f8fafc !important;
+        }
+        .jvm-zoom-btn.jvm-zoomin {
+            top: 14px !important;
+            left: 14px !important;
+        }
+        .jvm-zoom-btn.jvm-zoomout {
+            top: 48px !important;
+            left: 14px !important;
+        }
+        .jvm-region {
+            transition: fill 0.3s ease, stroke 0.2s ease;
+        }
+        .jvm-region:hover {
+            stroke: #38bdf8 !important;
+            stroke-width: 1.5px !important;
+            filter: drop-shadow(0 0 6px rgba(56, 189, 248, 0.4));
+        }
+        .jvm-marker {
+            cursor: pointer;
+            transition: r 0.2s ease, fill 0.2s ease;
+        }
+        .jvm-marker:hover {
+            stroke: #ffffff !important;
+            stroke-width: 2px !important;
+            filter: drop-shadow(0 0 8px rgba(244, 63, 94, 0.8));
+        }
+    </style>
 </head>
 <body class="bg-slate-950 text-slate-100 font-sans antialiased min-h-screen custom-scrollbar flex flex-col justify-between">
 
@@ -99,6 +165,11 @@
                     <button onclick="switchTab('matrix')" id="tab-btn-matrix" class="tab-btn px-4 py-2 text-sm font-medium rounded-md flex items-center space-x-2 text-slate-400 hover:text-slate-200 hover:bg-slate-800/50">
                         <i data-lucide="layers" class="w-4 h-4 text-amber-400"></i>
                         <span>Product Testing vs. Document Matrix</span>
+                    </button>
+                    <button onclick="switchTab('map')" id="tab-btn-map" class="tab-btn px-4 py-2 text-sm font-medium rounded-md flex items-center space-x-2 text-slate-400 hover:text-slate-200 hover:bg-slate-800/50">
+                        <i data-lucide="globe-2" class="w-4 h-4 text-cyan-400"></i>
+                        <span>Global Access Map</span>
+                        <span class="ml-1 px-1.5 py-0.2 text-[10px] rounded bg-cyan-950/70 border border-cyan-800 text-cyan-300 font-mono">205</span>
                     </button>
                     <button onclick="switchTab('alerts')" id="tab-btn-alerts" class="tab-btn px-4 py-2 text-sm font-medium rounded-md flex items-center space-x-2 text-slate-400 hover:text-slate-200 hover:bg-slate-800/50">
                         <i data-lucide="bell" class="w-4 h-4 text-rose-400"></i>
@@ -409,6 +480,127 @@
                 </div>
             </div>
 
+        </section>
+
+        <!-- ============================================== -->
+        <!-- TAB: INTERACTIVE GLOBAL ACCESS WORLD MAP -->
+        <!-- ============================================== -->
+        <section id="tab-content-map" class="tab-content hidden space-y-4">
+            
+            <!-- Map Top Control Bar -->
+            <div class="bg-slate-900 border border-slate-800 rounded-xl p-4 shadow-lg">
+                <div class="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-4">
+                    <div>
+                        <div class="flex items-center space-x-2">
+                            <span class="w-2.5 h-2.5 rounded-full bg-cyan-400 animate-pulse"></span>
+                            <h2 class="text-lg font-bold text-white tracking-tight flex items-center gap-2">
+                                Interactive Global Market Access Map
+                                <span class="text-xs font-mono font-medium px-2 py-0.5 rounded-full bg-cyan-950 text-cyan-300 border border-cyan-800">205 Jurisdictions</span>
+                            </h2>
+                        </div>
+                        <p class="text-xs text-slate-400 mt-1">Geospatial compliance intelligence, testing barriers, lead-time heatmaps, and environmental mandates across all global markets.</p>
+                    </div>
+
+                    <!-- Controls: Product, Metric, Search, Reset -->
+                    <div class="flex flex-wrap items-center gap-2.5 w-full lg:w-auto">
+                        <!-- Product Selector -->
+                        <div class="flex-1 sm:flex-initial min-w-[200px]">
+                            <label class="block text-[10px] uppercase tracking-wider font-semibold text-slate-400 mb-1">Target Product</label>
+                            <select id="map-product-select" onchange="renderMapHeatmap()" class="w-full bg-slate-800 border border-slate-700 text-slate-200 text-xs rounded-lg px-3 py-1.5 focus:outline-none focus:border-cyan-500">
+                                <!-- Populated dynamically -->
+                            </select>
+                        </div>
+
+                        <!-- Heatmap Metric Selector -->
+                        <div class="flex-1 sm:flex-initial min-w-[190px]">
+                            <label class="block text-[10px] uppercase tracking-wider font-semibold text-slate-400 mb-1">Heatmap Layer</label>
+                            <select id="map-metric-select" onchange="renderMapHeatmap()" class="w-full bg-slate-800 border border-slate-700 text-slate-200 text-xs rounded-lg px-3 py-1.5 focus:outline-none focus:border-cyan-500 font-medium">
+                                <option value="readiness">🎯 Compliance Readiness</option>
+                                <option value="testing_barrier">🔬 In-Country Lab Testing Barrier</option>
+                                <option value="lead_time">⏱️ Certification Lead Time</option>
+                                <option value="environmental">🌿 Environmental, PFAS &amp; Packaging</option>
+                                <option value="alerts">🔔 Active Regulatory Alerts</option>
+                            </select>
+                        </div>
+
+                        <!-- Country Quick Search -->
+                        <div class="flex-1 sm:flex-initial min-w-[170px]">
+                            <label class="block text-[10px] uppercase tracking-wider font-semibold text-slate-400 mb-1">Quick Search</label>
+                            <div class="relative">
+                                <input type="text" id="map-search-input" onkeyup="handleMapSearch(this.value)" placeholder="Search country..." class="w-full bg-slate-800 border border-slate-700 text-slate-200 text-xs rounded-lg pl-7 pr-3 py-1.5 focus:outline-none focus:border-cyan-500">
+                                <i data-lucide="search" class="w-3 h-3 text-slate-400 absolute left-2.5 top-2"></i>
+                            </div>
+                        </div>
+
+                        <!-- Reset Zoom Button -->
+                        <div class="self-end">
+                            <button type="button" onclick="resetMapZoom()" title="Reset Map View" class="px-2.5 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 border border-slate-700 text-xs flex items-center gap-1 transition">
+                                <i data-lucide="rotate-ccw" class="w-3.5 h-3.5"></i>
+                                <span>Reset</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Dynamic KPI Bar -->
+                <div id="map-kpi-bar" class="grid grid-cols-2 sm:grid-cols-4 gap-3 pt-3 mt-3 border-t border-slate-800">
+                    <!-- Populated dynamically -->
+                </div>
+            </div>
+
+            <!-- Map & Country Dossier Grid -->
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-4">
+                
+                <!-- Interactive Vector Map View -->
+                <div id="map-canvas-card" class="lg:col-span-8 bg-slate-900 border border-slate-800 rounded-xl p-3 shadow-lg relative flex flex-col justify-between overflow-hidden" style="min-height: 640px;">
+                    
+                    <!-- Quick Region Focus Bar -->
+                    <div class="absolute top-4 right-4 z-20 flex items-center space-x-1 bg-slate-900/90 backdrop-blur border border-slate-700/80 rounded-lg p-1 text-[11px] shadow">
+                        <span class="text-slate-400 px-1.5 text-[10px] font-semibold uppercase">Focus:</span>
+                        <button type="button" onclick="focusMapRegion('global')" class="px-2 py-0.5 rounded text-slate-300 hover:bg-slate-800 transition">Global</button>
+                        <button type="button" onclick="focusMapRegion('americas')" class="px-2 py-0.5 rounded text-slate-300 hover:bg-slate-800 transition">Americas</button>
+                        <button type="button" onclick="focusMapRegion('europe')" class="px-2 py-0.5 rounded text-slate-300 hover:bg-slate-800 transition">Europe</button>
+                        <button type="button" onclick="focusMapRegion('asia')" class="px-2 py-0.5 rounded text-slate-300 hover:bg-slate-800 transition">Asia-Pac</button>
+                        <button type="button" onclick="focusMapRegion('middle_east')" class="px-2 py-0.5 rounded text-slate-300 hover:bg-slate-800 transition">ME &amp; Africa</button>
+                    </div>
+
+                    <!-- Vector Map Container -->
+                    <div id="world-map-wrapper" class="w-full flex-1 relative rounded-lg overflow-hidden" style="min-height: 540px; background-color: #0b101b;">
+                        <div id="world-map" style="width: 100%; height: 540px;"></div>
+                    </div>
+
+                    <!-- Floating Legend -->
+                    <div id="map-legend" class="mt-2.5 pt-2 border-t border-slate-800/80 flex flex-wrap items-center justify-between gap-2 text-xs">
+                        <!-- Dynamically populated legend -->
+                    </div>
+                </div>
+
+                <!-- Country Compliance Dossier Drawer -->
+                <div id="country-dossier-card" class="lg:col-span-4 bg-slate-900 border border-slate-800 rounded-xl p-4 shadow-lg flex flex-col justify-between" style="min-height: 640px;">
+                    <div id="country-dossier-content" class="space-y-4">
+                        <!-- Default state -->
+                        <div class="text-center py-16 space-y-3">
+                            <div class="w-12 h-12 rounded-full bg-slate-800 border border-slate-700 flex items-center justify-center mx-auto text-sky-400">
+                                <i data-lucide="map-pin" class="w-6 h-6"></i>
+                            </div>
+                            <h3 class="text-sm font-semibold text-slate-200">Select Any Country on the Map</h3>
+                            <p class="text-xs text-slate-400 max-w-xs mx-auto leading-relaxed">
+                                Click any territory or glowing island marker to inspect certification schemes, mandatory marks, lead times, and standards dossiers.
+                            </p>
+                            <div class="pt-4 flex flex-wrap justify-center gap-1.5">
+                                <button onclick="selectCountryOnMap('US')" class="px-2.5 py-1 rounded bg-slate-800 hover:bg-slate-700 text-[11px] text-slate-300 border border-slate-700">🇺🇸 United States</button>
+                                <button onclick="selectCountryOnMap('DE')" class="px-2.5 py-1 rounded bg-slate-800 hover:bg-slate-700 text-[11px] text-slate-300 border border-slate-700">🇩🇪 Germany</button>
+                                <button onclick="selectCountryOnMap('IN')" class="px-2.5 py-1 rounded bg-slate-800 hover:bg-slate-700 text-[11px] text-slate-300 border border-slate-700">🇮🇳 India</button>
+                                <button onclick="selectCountryOnMap('CN')" class="px-2.5 py-1 rounded bg-slate-800 hover:bg-slate-700 text-[11px] text-slate-300 border border-slate-700">🇨🇳 China</button>
+                                <button onclick="selectCountryOnMap('JP')" class="px-2.5 py-1 rounded bg-slate-800 hover:bg-slate-700 text-[11px] text-slate-300 border border-slate-700">🇯🇵 Japan</button>
+                                <button onclick="selectCountryOnMap('KR')" class="px-2.5 py-1 rounded bg-slate-800 hover:bg-slate-700 text-[11px] text-slate-300 border border-slate-700">🇰🇷 South Korea</button>
+                                <button onclick="selectCountryOnMap('SG')" class="px-2.5 py-1 rounded bg-slate-800 hover:bg-slate-700 text-[11px] text-slate-300 border border-slate-700">🇸🇬 Singapore</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
         </section>
 
         <!-- ============================================== -->
@@ -1270,6 +1462,11 @@
                 btn.classList.add("active", "text-white", "bg-slate-800", "border", "border-slate-700");
                 btn.classList.remove("text-slate-400");
             }
+            if (tabId === 'map') {
+                if (typeof initOrResizeMap === 'function') {
+                    initOrResizeMap();
+                }
+            }
             lucide.createIcons();
         }
 
@@ -1624,6 +1821,19 @@
                 if (typeof loadProductMatrix === 'function') await loadProductMatrix();
                 if (typeof loadAlerts === 'function') await loadAlerts();
                 if (typeof loadOverview === 'function') await loadOverview();
+                if (typeof renderMapHeatmap === 'function') {
+                    try {
+                        const cRes = await fetch("/api/countries");
+                        const cList = await cRes.json();
+                        cList.forEach(c => { mapCountriesData[c.code] = c; });
+                        const aRes = await fetch("/api/alerts");
+                        mapAlertsData = await aRes.json();
+                        renderMapHeatmap();
+                        if (selectedCountryCode && typeof openCountryDrawer === 'function') {
+                            openCountryDrawer(selectedCountryCode);
+                        }
+                    } catch (e) {}
+                }
             } catch (err) {
                 alert('Simulation failed: ' + err);
             } finally {
@@ -2199,6 +2409,832 @@
                 console.error("Error creating alert:", err);
             }
         }
+    </script>
+    <!-- jsVectorMap Libraries -->
+    <script src="/static/js/jsvectormap.min.js"></script>
+    <script src="/static/js/world.js"></script>
+    <script>
+// World Map & Global Access Dossier Logic
+let worldMapInstance = null;
+let mapCountriesData = {};
+let mapAlertsData = [];
+let selectedCountryCode = 'US';
+let islandMarkers = [
+    { name: "Singapore (SG)", coords: [1.3521, 103.8198], code: "SG" },
+    { name: "Hong Kong (HK)", coords: [22.3193, 114.1694], code: "HK" },
+    { name: "Bahrain (BH)", coords: [26.0667, 50.5577], code: "BH" },
+    { name: "Malta (MT)", coords: [35.9375, 14.3754], code: "MT" },
+    { name: "Macau (MO)", coords: [22.1987, 113.5439], code: "MO" },
+    { name: "Bermuda (BM)", coords: [32.3078, -64.7505], code: "BM" },
+    { name: "Cayman Islands (KY)", coords: [19.3133, -81.2546], code: "KY" },
+    { name: "Gibraltar (GI)", coords: [36.1408, -5.3536], code: "GI" },
+    { name: "Guam (GU)", coords: [13.4443, 144.7937], code: "GU" },
+    { name: "Faroe Islands (FO)", coords: [61.8926, -6.9118], code: "FO" },
+    { name: "Andorra (AD)", coords: [42.5063, 1.5218], code: "AD" },
+    { name: "Liechtenstein (LI)", coords: [47.1660, 9.5554], code: "LI" },
+    { name: "Monaco (MC)", coords: [43.7384, 7.4246], code: "MC" },
+    { name: "San Marino (SM)", coords: [43.9424, 12.4578], code: "SM" },
+    { name: "Vatican City (VA)", coords: [41.9029, 12.4534], code: "VA" },
+    { name: "Mauritius (MU)", coords: [-20.3484, 57.5522], code: "MU" },
+    { name: "Seychelles (SC)", coords: [-4.6796, 55.4920], code: "SC" },
+    { name: "Maldives (MV)", coords: [3.2028, 73.2207], code: "MV" },
+    { name: "Cabo Verde (CV)", coords: [16.5388, -23.0418], code: "CV" },
+    { name: "Barbados (BB)", coords: [13.1939, -59.5432], code: "BB" },
+    { name: "Antigua & Barbuda (AG)", coords: [17.0608, -61.7964], code: "AG" },
+    { name: "Saint Lucia (LC)", coords: [13.9094, -60.9789], code: "LC" },
+    { name: "Grenada (GD)", coords: [12.1165, -61.6790], code: "GD" },
+    { name: "Aruba (AW)", coords: [12.5211, -69.9683], code: "AW" },
+    { name: "Curaçao (CW)", coords: [12.1696, -68.9900], code: "CW" },
+    { name: "Dominica (DM)", coords: [15.4150, -61.3710], code: "DM" },
+    { name: "Saint Kitts & Nevis (KN)", coords: [17.3578, -62.7830], code: "KN" },
+    { name: "St. Vincent & Grenadines (VC)", coords: [13.2528, -61.1971], code: "VC" },
+    { name: "Micronesia (FM)", coords: [7.4256, 150.5508], code: "FM" },
+    { name: "Marshall Islands (MH)", coords: [7.1315, 171.1845], code: "MH" },
+    { name: "Palau (PW)", coords: [7.5150, 134.5825], code: "PW" },
+    { name: "Samoa (WS)", coords: [-13.7590, -172.1046], code: "WS" },
+    { name: "Tonga (TO)", coords: [-21.1789, -175.1982], code: "TO" },
+    { name: "Tuvalu (TV)", coords: [-7.1095, 177.6493], code: "TV" },
+    { name: "Kiribati (KI)", coords: [1.8709, -157.3631], code: "KI" },
+    { name: "Nauru (NR)", coords: [-0.5228, 166.9315], code: "NR" },
+    { name: "Comoros (KM)", coords: [-11.8790, 43.8726], code: "KM" },
+    { name: "Sao Tome & Principe (ST)", coords: [0.1864, 6.6131], code: "ST" },
+    { name: "Kosovo (XK)", coords: [42.6026, 20.9030], code: "XK" }
+];
+
+async function initOrResizeMap() {
+    if (!worldMapInstance) {
+        await initWorldMap();
+    } else {
+        setTimeout(() => {
+            renderMapHeatmap();
+        }, 100);
+    }
+}
+
+async function initWorldMap() {
+    const container = document.getElementById("world-map");
+    if (!container) return;
+
+    // Load products into map product selector if empty
+    populateMapProductSelector();
+
+    // Fetch countries data if not cached
+    if (Object.keys(mapCountriesData).length === 0) {
+        try {
+            const res = await fetch("/api/countries");
+            const list = await res.json();
+            list.forEach(c => {
+                mapCountriesData[c.code] = c;
+            });
+        } catch (e) {
+            console.error("Could not fetch countries for map:", e);
+        }
+    }
+
+    // Fetch alerts data
+    try {
+        const aRes = await fetch("/api/alerts");
+        mapAlertsData = await aRes.json();
+    } catch (e) {
+        console.error("Could not fetch alerts for map:", e);
+    }
+
+    // Initialize jsVectorMap
+    try {
+        worldMapInstance = new jsVectorMap({
+            selector: '#world-map',
+            map: 'world',
+            backgroundColor: '#0b101b',
+            draggable: true,
+            zoomButtons: true,
+            zoomOnScroll: true,
+            zoomMax: 12,
+            zoomMin: 1,
+            regionStyle: {
+                initial: {
+                    fill: '#1e293b',
+                    stroke: '#334155',
+                    strokeWidth: 0.5,
+                    fillOpacity: 1
+                },
+                hover: {
+                    fill: '#38bdf8',
+                    cursor: 'pointer'
+                }
+            },
+            markers: islandMarkers.map(m => ({
+                name: m.name,
+                coords: m.coords,
+                code: m.code
+            })),
+            markerStyle: {
+                initial: {
+                    r: 4.5,
+                    fill: '#38bdf8',
+                    stroke: '#0369a1',
+                    strokeWidth: 1.5,
+                    fillOpacity: 0.95
+                },
+                hover: {
+                    r: 7,
+                    fill: '#f43f5e',
+                    stroke: '#ffffff',
+                    strokeWidth: 2,
+                    cursor: 'pointer'
+                }
+            },
+            onRegionTooltipShow(event, tooltip, code) {
+                const c = mapCountriesData[code];
+                if (!c) {
+                    tooltip.text(code);
+                    return;
+                }
+                const pInfo = getProductComplianceForCountry(code);
+                const markStr = (c.marks || []).join(", ") || "Standard SDoC";
+                const hasAlert = mapAlertsData.some(a => a.country === c.name || a.country_code === code || (a.region && c.region && a.region.includes(c.region)));
+                
+                let tooltipHtml = `
+                    <div style="font-family: inherit; font-size: 11px; line-height: 1.4;">
+                        <div style="font-weight: 700; color: #38bdf8; font-size: 12px; margin-bottom: 3px; display: flex; align-items: center; justify-content: space-between;">
+                            <span>${escapeHtml(c.name)} (${code})</span>
+                            <span style="font-size: 10px; padding: 1px 5px; border-radius: 4px; background: #1e293b; color: #94a3b8;">${c.region || ''}</span>
+                        </div>
+                        <div style="color: #cbd5e1; margin-bottom: 2px;"><strong style="color: #f1f5f9;">Mark:</strong> ${escapeHtml(markStr)}</div>
+                        <div style="color: #cbd5e1; margin-bottom: 2px;"><strong style="color: #f1f5f9;">Testing:</strong> ${c.in_country_testing ? '<span style="color:#f43f5e; font-weight:600;">Mandatory In-Country Lab</span>' : '<span style="color:#10b981;">CB / SDoC Accepted</span>'}</div>
+                        <div style="color: #cbd5e1; margin-bottom: 2px;"><strong style="color: #f1f5f9;">Lead Time:</strong> ${c.lead_time_weeks || 4} weeks</div>
+                        <div style="color: #cbd5e1; margin-bottom: 3px;"><strong style="color: #f1f5f9;">Status:</strong> <span style="color:${pInfo.color}; font-weight:600;">${pInfo.status}</span></div>
+                        ${hasAlert ? '<div style="color: #fb7185; font-weight: 600; font-size: 10px;">⚠️ Active Regulatory Alert In Effect</div>' : ''}
+                        <div style="font-size: 9px; color: #64748b; margin-top: 4px; border-top: 1px solid #334155; padding-top: 2px;">Click to view full compliance dossier</div>
+                    </div>
+                `;
+                tooltip.text(tooltipHtml, true);
+            },
+            onRegionClick(event, code) {
+                openCountryDrawer(code);
+            },
+            onMarkerTooltipShow(event, tooltip, index) {
+                const m = islandMarkers[index];
+                if (!m) return;
+                const c = mapCountriesData[m.code] || { name: m.name, marks: [] };
+                const pInfo = getProductComplianceForCountry(m.code);
+                tooltip.text(`
+                    <div style="font-family: inherit; font-size: 11px;">
+                        <div style="font-weight: 700; color: #38bdf8;">${escapeHtml(c.name)} (${m.code})</div>
+                        <div>Status: <span style="color:${pInfo.color};">${pInfo.status}</span></div>
+                        <div style="font-size: 9px; color: #94a3b8;">Click to open dossier</div>
+                    </div>
+                `, true);
+            },
+            onMarkerClick(event, index) {
+                const m = islandMarkers[index];
+                if (m && m.code) {
+                    openCountryDrawer(m.code);
+                }
+            }
+        });
+
+        // Initial render of heatmap colors
+        renderMapHeatmap();
+
+        // Pre-select United States in dossier
+        openCountryDrawer('US');
+
+    } catch (err) {
+        console.error("Error creating jsVectorMap instance:", err);
+    }
+}
+
+function populateMapProductSelector() {
+    const sel = document.getElementById("map-product-select");
+    if (!sel || sel.children.length > 0) return;
+
+    if (allCategories && allCategories.length > 0) {
+        sel.innerHTML = allCategories.map(c => {
+            const isDef = c.id === 'external_ssd_bus' ? 'selected' : '';
+            return `<option value="${c.id}" ${isDef}>${c.name}</option>`;
+        }).join("");
+    } else {
+        sel.innerHTML = `
+            <option value="external_ssd_bus" selected>SanDisk Extreme Portable SSD (Bus-Powered)</option>
+            <option value="external_ssd_powered">G-DRIVE Enterprise Desktop (Mains-Powered)</option>
+            <option value="internal_ssd">WD_BLACK SN850X NVMe SSD</option>
+            <option value="sd_card">SanDisk Extreme PRO SDXC UHS-II</option>
+            <option value="micro_sd">SanDisk Extreme MicroSDXC</option>
+            <option value="enterprise_ssd">Ultrastar DC SN655 Enterprise SSD</option>
+        `;
+    }
+}
+
+function getProductComplianceForCountry(code) {
+    const c = mapCountriesData[code];
+    if (!c) return { status: "Certified", color: "#10b981" };
+
+    const prodId = document.getElementById("map-product-select")?.value || "external_ssd_bus";
+    
+    // Check if there is an active Critical Alert for this country and product
+    const criticalAlert = mapAlertsData.find(a => 
+        (a.severity === 'Critical') &&
+        (a.country === c.name || a.country_code === code || a.region === c.region || a.country === 'Global') &&
+        (!a.affected_categories || a.affected_categories.includes(prodId))
+    );
+
+    if (criticalAlert) {
+        return { status: "Action Required (Alert)", color: "#f43f5e", alert: criticalAlert };
+    }
+
+    if (prodId === 'sd_express') {
+        return { status: "Testing In Progress", color: "#f59e0b" };
+    }
+
+    return { status: "Certified", color: "#10b981" };
+}
+
+function renderMapHeatmap() {
+    if (!worldMapInstance) return;
+
+    const metric = document.getElementById("map-metric-select")?.value || "readiness";
+    const prodId = document.getElementById("map-product-select")?.value || "external_ssd_bus";
+
+    const colorMap = {};
+    const markerColors = {};
+    let kpi1 = 0, kpi2 = 0, kpi3 = 0, kpi4 = 0;
+
+    for (const [code, c] of Object.entries(mapCountriesData)) {
+        let color = '#1e293b';
+
+        if (metric === 'readiness') {
+            const pInfo = getProductComplianceForCountry(code);
+            if (pInfo.status.includes('Action Required')) {
+                color = '#f43f5e'; // Rose / Red
+                kpi3++;
+            } else if (pInfo.status.includes('Testing')) {
+                color = '#f59e0b'; // Amber
+                kpi2++;
+            } else {
+                color = '#10b981'; // Emerald
+                kpi1++;
+            }
+            if (c.in_country_testing) kpi4++;
+
+        } else if (metric === 'testing_barrier') {
+            if (c.in_country_testing) {
+                color = '#f43f5e'; // Mandatory Local Lab
+                kpi1++;
+            } else {
+                color = '#10b981'; // CB / SDoC Accepted
+                kpi2++;
+            }
+            if (c.local_rep_required) kpi3++;
+            if (c.cb_scheme_accepted) kpi4++;
+
+        } else if (metric === 'lead_time') {
+            const weeks = c.lead_time_weeks || 4;
+            if (weeks < 4) {
+                color = '#10b981'; // Fast track
+                kpi1++;
+            } else if (weeks <= 8) {
+                color = '#0284c7'; // Moderate
+                kpi2++;
+            } else if (weeks <= 12) {
+                color = '#f59e0b'; // Long lead
+                kpi3++;
+            } else {
+                color = '#a855f7'; // Critical path
+                kpi4++;
+            }
+
+        } else if (metric === 'environmental') {
+            const pfasStr = (c.pfas_std || '').toLowerCase();
+            const packStr = (c.packaging_std || '').toLowerCase();
+            const rohsStr = (c.rohs_std || '').toLowerCase();
+
+            if (pfasStr.includes('tsca') || pfasStr.includes('ban') || pfasStr.includes('annex xv') || pfasStr.includes('cscl class i')) {
+                color = '#059669'; // Strict PFAS / Chem
+                kpi1++;
+            } else if (packStr.includes('triman') || packStr.includes('verpackg') || packStr.includes('plastic') || packStr.includes('116/2020')) {
+                color = '#0891b2'; // Packaging / Plastics
+                kpi2++;
+            } else if (rohsStr.includes('china rohs') || rohsStr.includes('saso') || rohsStr.includes('bsmi')) {
+                color = '#d97706'; // Dedicated RoHS
+                kpi3++;
+            } else {
+                color = '#334155'; // Standard baseline
+                kpi4++;
+            }
+
+        } else if (metric === 'alerts') {
+            const alert = mapAlertsData.find(a => 
+                (a.country === c.name || a.country_code === code || a.region === c.region) &&
+                (!a.affected_categories || a.affected_categories.includes(prodId))
+            );
+            if (alert) {
+                if (alert.severity === 'Critical') {
+                    color = '#f43f5e';
+                    kpi1++;
+                } else if (alert.severity === 'Warning') {
+                    color = '#f59e0b';
+                    kpi2++;
+                } else {
+                    color = '#38bdf8';
+                    kpi3++;
+                }
+            } else {
+                color = '#1e293b';
+                kpi4++;
+            }
+        }
+
+        colorMap[code] = color;
+    }
+
+    // Apply colors to SVG paths
+    for (const [code, color] of Object.entries(colorMap)) {
+        const path = document.querySelector(`.jvm-region[data-code="${code}"]`);
+        if (path) {
+            path.setAttribute('fill', color);
+            path.style.fill = color;
+        }
+    }
+
+    // Apply colors to island markers
+    islandMarkers.forEach((m, idx) => {
+        const mColor = colorMap[m.code] || '#38bdf8';
+        const circle = document.querySelector(`.jvm-marker[data-index="${idx}"]`);
+        if (circle) {
+            circle.setAttribute('fill', mColor);
+            circle.style.fill = mColor;
+        }
+    });
+
+    // Update KPI Bar and Legend
+    updateMapKpiBar(metric, { kpi1, kpi2, kpi3, kpi4 });
+    updateMapLegend(metric);
+}
+
+function updateMapKpiBar(metric, counts) {
+    const bar = document.getElementById("map-kpi-bar");
+    if (!bar) return;
+
+    if (metric === 'readiness') {
+        bar.innerHTML = `
+            <div class="bg-slate-800/80 border border-slate-700/80 rounded-lg p-2.5">
+                <div class="flex items-center justify-between text-xs text-slate-400 mb-1">
+                    <span>Certified &amp; Market Ready</span>
+                    <i data-lucide="check-circle-2" class="w-3.5 h-3.5 text-emerald-400"></i>
+                </div>
+                <div class="text-xl font-bold text-emerald-400 font-mono">${counts.kpi1} <span class="text-xs text-slate-500 font-normal">/ 205</span></div>
+            </div>
+            <div class="bg-slate-800/80 border border-slate-700/80 rounded-lg p-2.5">
+                <div class="flex items-center justify-between text-xs text-slate-400 mb-1">
+                    <span>Testing / Pending</span>
+                    <i data-lucide="clock" class="w-3.5 h-3.5 text-amber-400"></i>
+                </div>
+                <div class="text-xl font-bold text-amber-400 font-mono">${counts.kpi2} <span class="text-xs text-slate-500 font-normal">Markets</span></div>
+            </div>
+            <div class="bg-slate-800/80 border border-slate-700/80 rounded-lg p-2.5">
+                <div class="flex items-center justify-between text-xs text-slate-400 mb-1">
+                    <span>Alert Action Required</span>
+                    <i data-lucide="alert-triangle" class="w-3.5 h-3.5 text-rose-400"></i>
+                </div>
+                <div class="text-xl font-bold text-rose-400 font-mono">${counts.kpi3} <span class="text-xs text-slate-500 font-normal">Markets</span></div>
+            </div>
+            <div class="bg-slate-800/80 border border-slate-700/80 rounded-lg p-2.5">
+                <div class="flex items-center justify-between text-xs text-slate-400 mb-1">
+                    <span>Local Testing Barrier</span>
+                    <i data-lucide="flask-conical" class="w-3.5 h-3.5 text-cyan-400"></i>
+                </div>
+                <div class="text-xl font-bold text-cyan-400 font-mono">${counts.kpi4} <span class="text-xs text-slate-500 font-normal">In-Country Labs</span></div>
+            </div>
+        `;
+    } else if (metric === 'testing_barrier') {
+        bar.innerHTML = `
+            <div class="bg-slate-800/80 border border-slate-700/80 rounded-lg p-2.5">
+                <div class="flex items-center justify-between text-xs text-slate-400 mb-1">
+                    <span>Mandatory Local Lab</span>
+                    <i data-lucide="shield-alert" class="w-3.5 h-3.5 text-rose-400"></i>
+                </div>
+                <div class="text-xl font-bold text-rose-400 font-mono">${counts.kpi1} <span class="text-xs text-slate-500 font-normal">Countries</span></div>
+            </div>
+            <div class="bg-slate-800/80 border border-slate-700/80 rounded-lg p-2.5">
+                <div class="flex items-center justify-between text-xs text-slate-400 mb-1">
+                    <span>CB / DoC Accepted</span>
+                    <i data-lucide="shield-check" class="w-3.5 h-3.5 text-emerald-400"></i>
+                </div>
+                <div class="text-xl font-bold text-emerald-400 font-mono">${counts.kpi2} <span class="text-xs text-slate-500 font-normal">Countries</span></div>
+            </div>
+            <div class="bg-slate-800/80 border border-slate-700/80 rounded-lg p-2.5">
+                <div class="flex items-center justify-between text-xs text-slate-400 mb-1">
+                    <span>Local Rep Mandate</span>
+                    <i data-lucide="user-check" class="w-3.5 h-3.5 text-amber-400"></i>
+                </div>
+                <div class="text-xl font-bold text-amber-400 font-mono">${counts.kpi3} <span class="text-xs text-slate-500 font-normal">Jurisdictions</span></div>
+            </div>
+            <div class="bg-slate-800/80 border border-slate-700/80 rounded-lg p-2.5">
+                <div class="flex items-center justify-between text-xs text-slate-400 mb-1">
+                    <span>CB Scheme Member</span>
+                    <i data-lucide="globe" class="w-3.5 h-3.5 text-sky-400"></i>
+                </div>
+                <div class="text-xl font-bold text-sky-400 font-mono">${counts.kpi4} <span class="text-xs text-slate-500 font-normal">Recognized</span></div>
+            </div>
+        `;
+    } else if (metric === 'lead_time') {
+        bar.innerHTML = `
+            <div class="bg-slate-800/80 border border-slate-700/80 rounded-lg p-2.5">
+                <div class="flex items-center justify-between text-xs text-slate-400 mb-1">
+                    <span>Fast Track (&lt;4 Weeks)</span>
+                    <i data-lucide="zap" class="w-3.5 h-3.5 text-emerald-400"></i>
+                </div>
+                <div class="text-xl font-bold text-emerald-400 font-mono">${counts.kpi1} <span class="text-xs text-slate-500 font-normal">Markets</span></div>
+            </div>
+            <div class="bg-slate-800/80 border border-slate-700/80 rounded-lg p-2.5">
+                <div class="flex items-center justify-between text-xs text-slate-400 mb-1">
+                    <span>Standard (4-8 Weeks)</span>
+                    <i data-lucide="calendar" class="w-3.5 h-3.5 text-sky-400"></i>
+                </div>
+                <div class="text-xl font-bold text-sky-400 font-mono">${counts.kpi2} <span class="text-xs text-slate-500 font-normal">Markets</span></div>
+            </div>
+            <div class="bg-slate-800/80 border border-slate-700/80 rounded-lg p-2.5">
+                <div class="flex items-center justify-between text-xs text-slate-400 mb-1">
+                    <span>Extended (8-12 Weeks)</span>
+                    <i data-lucide="hourglass" class="w-3.5 h-3.5 text-amber-400"></i>
+                </div>
+                <div class="text-xl font-bold text-amber-400 font-mono">${counts.kpi3} <span class="text-xs text-slate-500 font-normal">Markets</span></div>
+            </div>
+            <div class="bg-slate-800/80 border border-slate-700/80 rounded-lg p-2.5">
+                <div class="flex items-center justify-between text-xs text-slate-400 mb-1">
+                    <span>Critical Path (&gt;12 Weeks)</span>
+                    <i data-lucide="alert-octagon" class="w-3.5 h-3.5 text-purple-400"></i>
+                </div>
+                <div class="text-xl font-bold text-purple-400 font-mono">${counts.kpi4} <span class="text-xs text-slate-500 font-normal">Markets</span></div>
+            </div>
+        `;
+    } else if (metric === 'environmental') {
+        bar.innerHTML = `
+            <div class="bg-slate-800/80 border border-slate-700/80 rounded-lg p-2.5">
+                <div class="flex items-center justify-between text-xs text-slate-400 mb-1">
+                    <span>PFAS Mandates &amp; Bans</span>
+                    <i data-lucide="leaf" class="w-3.5 h-3.5 text-emerald-400"></i>
+                </div>
+                <div class="text-xl font-bold text-emerald-400 font-mono">${counts.kpi1} <span class="text-xs text-slate-500 font-normal">Jurisdictions</span></div>
+            </div>
+            <div class="bg-slate-800/80 border border-slate-700/80 rounded-lg p-2.5">
+                <div class="flex items-center justify-between text-xs text-slate-400 mb-1">
+                    <span>Packaging &amp; Plastics Laws</span>
+                    <i data-lucide="package" class="w-3.5 h-3.5 text-cyan-400"></i>
+                </div>
+                <div class="text-xl font-bold text-cyan-400 font-mono">${counts.kpi2} <span class="text-xs text-slate-500 font-normal">Mandates</span></div>
+            </div>
+            <div class="bg-slate-800/80 border border-slate-700/80 rounded-lg p-2.5">
+                <div class="flex items-center justify-between text-xs text-slate-400 mb-1">
+                    <span>Dedicated RoHS Marks</span>
+                    <i data-lucide="test-tube-2" class="w-3.5 h-3.5 text-amber-400"></i>
+                </div>
+                <div class="text-xl font-bold text-amber-400 font-mono">${counts.kpi3} <span class="text-xs text-slate-500 font-normal">Regimes</span></div>
+            </div>
+            <div class="bg-slate-800/80 border border-slate-700/80 rounded-lg p-2.5">
+                <div class="flex items-center justify-between text-xs text-slate-400 mb-1">
+                    <span>Baseline Environmental</span>
+                    <i data-lucide="globe-2" class="w-3.5 h-3.5 text-slate-400"></i>
+                </div>
+                <div class="text-xl font-bold text-slate-400 font-mono">${counts.kpi4} <span class="text-xs text-slate-500 font-normal">Markets</span></div>
+            </div>
+        `;
+    } else if (metric === 'alerts') {
+        bar.innerHTML = `
+            <div class="bg-slate-800/80 border border-slate-700/80 rounded-lg p-2.5">
+                <div class="flex items-center justify-between text-xs text-slate-400 mb-1">
+                    <span>Critical Alert Orders</span>
+                    <i data-lucide="flame" class="w-3.5 h-3.5 text-rose-400"></i>
+                </div>
+                <div class="text-xl font-bold text-rose-400 font-mono">${counts.kpi1} <span class="text-xs text-slate-500 font-normal">Notices</span></div>
+            </div>
+            <div class="bg-slate-800/80 border border-slate-700/80 rounded-lg p-2.5">
+                <div class="flex items-center justify-between text-xs text-slate-400 mb-1">
+                    <span>Warning Notices</span>
+                    <i data-lucide="alert-circle" class="w-3.5 h-3.5 text-amber-400"></i>
+                </div>
+                <div class="text-xl font-bold text-amber-400 font-mono">${counts.kpi2} <span class="text-xs text-slate-500 font-normal">Notices</span></div>
+            </div>
+            <div class="bg-slate-800/80 border border-slate-700/80 rounded-lg p-2.5">
+                <div class="flex items-center justify-between text-xs text-slate-400 mb-1">
+                    <span>Informational Gazettes</span>
+                    <i data-lucide="info" class="w-3.5 h-3.5 text-sky-400"></i>
+                </div>
+                <div class="text-xl font-bold text-sky-400 font-mono">${counts.kpi3} <span class="text-xs text-slate-500 font-normal">Notices</span></div>
+            </div>
+            <div class="bg-slate-800/80 border border-slate-700/80 rounded-lg p-2.5">
+                <div class="flex items-center justify-between text-xs text-slate-400 mb-1">
+                    <span>Standard Stable State</span>
+                    <i data-lucide="check" class="w-3.5 h-3.5 text-emerald-400"></i>
+                </div>
+                <div class="text-xl font-bold text-emerald-400 font-mono">${counts.kpi4} <span class="text-xs text-slate-500 font-normal">Markets</span></div>
+            </div>
+        `;
+    }
+    lucide.createIcons();
+}
+
+function updateMapLegend(metric) {
+    const legend = document.getElementById("map-legend");
+    if (!legend) return;
+
+    if (metric === 'readiness') {
+        legend.innerHTML = `
+            <div class="flex items-center space-x-4">
+                <span class="text-[11px] font-semibold text-slate-400 uppercase tracking-wider">Legend:</span>
+                <span class="inline-flex items-center gap-1.5"><span class="w-3 h-3 rounded-sm bg-emerald-500"></span><span class="text-slate-300">Certified / Compliant</span></span>
+                <span class="inline-flex items-center gap-1.5"><span class="w-3 h-3 rounded-sm bg-amber-500"></span><span class="text-slate-300">Testing In Progress</span></span>
+                <span class="inline-flex items-center gap-1.5"><span class="w-3 h-3 rounded-sm bg-rose-500"></span><span class="text-slate-300">Action Required (Active Alert)</span></span>
+            </div>
+            <div class="text-[11px] text-slate-500">Includes 39 island/microstate marker pins</div>
+        `;
+    } else if (metric === 'testing_barrier') {
+        legend.innerHTML = `
+            <div class="flex items-center space-x-4">
+                <span class="text-[11px] font-semibold text-slate-400 uppercase tracking-wider">Legend:</span>
+                <span class="inline-flex items-center gap-1.5"><span class="w-3 h-3 rounded-sm bg-rose-500"></span><span class="text-slate-300">Mandatory In-Country Lab Testing</span></span>
+                <span class="inline-flex items-center gap-1.5"><span class="w-3 h-3 rounded-sm bg-emerald-500"></span><span class="text-slate-300">CB Scheme / SDoC Accepted</span></span>
+            </div>
+            <div class="text-[11px] text-slate-500">Local Testing requires physical sample dispatch</div>
+        `;
+    } else if (metric === 'lead_time') {
+        legend.innerHTML = `
+            <div class="flex items-center space-x-4">
+                <span class="text-[11px] font-semibold text-slate-400 uppercase tracking-wider">Lead Time:</span>
+                <span class="inline-flex items-center gap-1.5"><span class="w-3 h-3 rounded-sm bg-emerald-500"></span><span class="text-slate-300">&lt; 4 Weeks (Fast)</span></span>
+                <span class="inline-flex items-center gap-1.5"><span class="w-3 h-3 rounded-sm bg-sky-600"></span><span class="text-slate-300">4 - 8 Weeks (Normal)</span></span>
+                <span class="inline-flex items-center gap-1.5"><span class="w-3 h-3 rounded-sm bg-amber-500"></span><span class="text-slate-300">8 - 12 Weeks (Extended)</span></span>
+                <span class="inline-flex items-center gap-1.5"><span class="w-3 h-3 rounded-sm bg-purple-500"></span><span class="text-slate-300">&gt; 12 Weeks (Critical Path)</span></span>
+            </div>
+        `;
+    } else if (metric === 'environmental') {
+        legend.innerHTML = `
+            <div class="flex items-center space-x-4">
+                <span class="text-[11px] font-semibold text-slate-400 uppercase tracking-wider">Pillars:</span>
+                <span class="inline-flex items-center gap-1.5"><span class="w-3 h-3 rounded-sm bg-emerald-600"></span><span class="text-slate-300">PFAS Bans &amp; TSCA Reporting</span></span>
+                <span class="inline-flex items-center gap-1.5"><span class="w-3 h-3 rounded-sm bg-cyan-600"></span><span class="text-slate-300">Packaging (Triman, AGEC, PPWR)</span></span>
+                <span class="inline-flex items-center gap-1.5"><span class="w-3 h-3 rounded-sm bg-amber-600"></span><span class="text-slate-300">Dedicated RoHS Marks (China, SASO, BSMI)</span></span>
+                <span class="inline-flex items-center gap-1.5"><span class="w-3 h-3 rounded-sm bg-slate-600"></span><span class="text-slate-300">International Baseline</span></span>
+            </div>
+        `;
+    } else if (metric === 'alerts') {
+        legend.innerHTML = `
+            <div class="flex items-center space-x-4">
+                <span class="text-[11px] font-semibold text-slate-400 uppercase tracking-wider">Alerts:</span>
+                <span class="inline-flex items-center gap-1.5"><span class="w-3 h-3 rounded-sm bg-rose-500"></span><span class="text-slate-300">Critical Gazette Alert</span></span>
+                <span class="inline-flex items-center gap-1.5"><span class="w-3 h-3 rounded-sm bg-amber-500"></span><span class="text-slate-300">Warning Notice</span></span>
+                <span class="inline-flex items-center gap-1.5"><span class="w-3 h-3 rounded-sm bg-sky-500"></span><span class="text-slate-300">Informational Revision</span></span>
+                <span class="inline-flex items-center gap-1.5"><span class="w-3 h-3 rounded-sm bg-slate-700"></span><span class="text-slate-300">No Active Alerts</span></span>
+            </div>
+        `;
+    }
+}
+
+async function openCountryDrawer(code) {
+    selectedCountryCode = code.toUpperCase();
+    const container = document.getElementById("country-dossier-content");
+    if (!container) return;
+
+    let c = mapCountriesData[selectedCountryCode];
+    if (!c) {
+        try {
+            const res = await fetch(`/api/countries/${selectedCountryCode}`);
+            const data = await res.json();
+            c = data.country;
+            mapCountriesData[selectedCountryCode] = c;
+        } catch (e) {
+            console.error("Could not fetch country detail:", e);
+        }
+    }
+
+    if (!c) {
+        container.innerHTML = `<div class="p-6 text-center text-slate-400">Country information not available for ${selectedCountryCode}</div>`;
+        return;
+    }
+
+    const prodId = document.getElementById("map-product-select")?.value || "external_ssd_bus";
+    const pInfo = getProductComplianceForCountry(selectedCountryCode);
+    const marksArr = c.marks || [];
+
+    // Filter alerts for this country
+    const countryAlerts = mapAlertsData.filter(a => 
+        a.country === c.name || a.country_code === selectedCountryCode || 
+        (a.region && c.region && a.region.includes(c.region))
+    );
+
+    const flagEmoji = getFlagEmoji(selectedCountryCode);
+
+    container.innerHTML = `
+        <!-- Country Header -->
+        <div class="border-b border-slate-800 pb-3">
+            <div class="flex items-start justify-between">
+                <div>
+                    <div class="flex items-center gap-2">
+                        <span class="text-2xl">${flagEmoji}</span>
+                        <h3 class="text-lg font-bold text-white tracking-tight">${escapeHtml(c.name)}</h3>
+                        <span class="px-1.5 py-0.5 rounded bg-slate-800 border border-slate-700 text-[11px] font-mono font-bold text-sky-400">${c.code}</span>
+                    </div>
+                    <p class="text-xs text-slate-400 mt-0.5">${escapeHtml(c.authority || 'Regulatory Authority')} • <span class="text-slate-300">${escapeHtml(c.region || '')}</span></p>
+                </div>
+                <div class="text-right">
+                    <span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-semibold" style="background-color: ${pInfo.color}20; color: ${pInfo.color}; border: 1px solid ${pInfo.color}60;">
+                        ${pInfo.status}
+                    </span>
+                </div>
+            </div>
+
+            <!-- Marks Badges -->
+            <div class="flex flex-wrap gap-1.5 mt-2.5">
+                ${marksArr.map(m => `<span class="px-2 py-0.5 rounded bg-sky-950/60 border border-sky-800/80 text-[10px] text-sky-300 font-mono font-bold">${escapeHtml(m)}</span>`).join("")}
+                ${c.bloc ? `<span class="px-2 py-0.5 rounded bg-slate-800 border border-slate-700 text-[10px] text-slate-300">${escapeHtml(c.bloc)}</span>` : ''}
+            </div>
+        </div>
+
+        <!-- Testing & Access Requirements Grid -->
+        <div class="grid grid-cols-2 gap-2 text-xs">
+            <div class="bg-slate-800/60 border border-slate-700/60 rounded-lg p-2.5">
+                <span class="text-[10px] text-slate-400 uppercase tracking-wider block font-semibold">Testing Scheme</span>
+                <span class="font-medium ${c.in_country_testing ? 'text-rose-400 font-bold' : 'text-emerald-400'}">
+                    ${c.in_country_testing ? '🔴 Mandatory In-Country Lab' : '🟢 CB / SDoC Accepted'}
+                </span>
+            </div>
+            <div class="bg-slate-800/60 border border-slate-700/60 rounded-lg p-2.5">
+                <span class="text-[10px] text-slate-400 uppercase tracking-wider block font-semibold">Lead Time</span>
+                <span class="font-medium text-slate-200">⏱️ ${c.lead_time_weeks || 4} Weeks</span>
+            </div>
+            <div class="bg-slate-800/60 border border-slate-700/60 rounded-lg p-2.5">
+                <span class="text-[10px] text-slate-400 uppercase tracking-wider block font-semibold">CB Recognition</span>
+                <span class="font-medium text-slate-200">${c.cb_scheme_accepted ? '✅ Accepted (w/ deviations)' : '❌ Not Recognized'}</span>
+            </div>
+            <div class="bg-slate-800/60 border border-slate-700/60 rounded-lg p-2.5">
+                <span class="text-[10px] text-slate-400 uppercase tracking-wider block font-semibold">Local Representative</span>
+                <span class="font-medium text-slate-200">${c.local_rep_required ? '⚠️ Mandatory In-Country' : 'Not Required'}</span>
+            </div>
+        </div>
+
+        <!-- 4-Pillar Standards Dossier -->
+        <div class="space-y-2 text-xs">
+            <div class="text-[11px] font-semibold text-slate-300 uppercase tracking-wider flex items-center justify-between">
+                <span>Regulatory Standards Dossier</span>
+                <span class="text-[10px] font-mono text-emerald-400">Live Surveilled</span>
+            </div>
+
+            <!-- Safety -->
+            <div class="bg-slate-800/40 border border-slate-800 rounded-lg p-2.5">
+                <div class="flex items-center justify-between text-slate-400 text-[10px] uppercase font-semibold mb-1">
+                    <span class="flex items-center gap-1 text-amber-400"><i data-lucide="zap" class="w-3 h-3"></i> Electrical Safety</span>
+                    <span class="text-slate-500 font-mono">Edition 3.0 / 4.0</span>
+                </div>
+                <div class="text-slate-200 font-mono text-[11px] font-medium">${escapeHtml(c.safety_std || 'IEC 62368-1')}</div>
+            </div>
+
+            <!-- EMC -->
+            <div class="bg-slate-800/40 border border-slate-800 rounded-lg p-2.5">
+                <div class="flex items-center justify-between text-slate-400 text-[10px] uppercase font-semibold mb-1">
+                    <span class="flex items-center gap-1 text-sky-400"><i data-lucide="radio" class="w-3 h-3"></i> EMC &amp; Radio Emissions</span>
+                    <span class="text-slate-500 font-mono">Class B</span>
+                </div>
+                <div class="text-slate-200 font-mono text-[11px] font-medium">${escapeHtml(c.emc_std || 'CISPR 32 Class B')}</div>
+            </div>
+
+            <!-- Environmental Pillars Accordion Card -->
+            <div class="bg-emerald-950/20 border border-emerald-900/40 rounded-lg p-2.5 space-y-2">
+                <div class="flex items-center justify-between text-[10px] uppercase font-semibold text-emerald-400">
+                    <span class="flex items-center gap-1"><i data-lucide="leaf" class="w-3 h-3"></i> Environmental &amp; Material Pillars</span>
+                </div>
+                <div class="space-y-1.5 text-[11px]">
+                    <div><strong class="text-teal-300 font-normal">🧪 RoHS:</strong> <span class="text-slate-300 font-mono">${escapeHtml(c.rohs_std || 'RoHS Compliant')}</span></div>
+                    <div><strong class="text-emerald-300 font-normal">🌿 PFAS / HazMat:</strong> <span class="text-slate-300 font-mono">${escapeHtml(c.pfas_std || 'POPs / Basel Restrictions')}</span></div>
+                    <div><strong class="text-amber-300 font-normal">📦 Packaging:</strong> <span class="text-slate-300 font-mono">${escapeHtml(c.packaging_std || 'Standard Recyclability')}</span></div>
+                    <div><strong class="text-cyan-300 font-normal">♻️ EPR / WEEE:</strong> <span class="text-slate-300 font-mono">${escapeHtml(c.epr_std || 'Producer Take-Back')}</span></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Active Alerts in this Country -->
+        ${countryAlerts.length > 0 ? `
+            <div class="space-y-1.5 pt-1">
+                <div class="text-[11px] font-semibold text-rose-400 uppercase tracking-wider flex items-center gap-1">
+                    <i data-lucide="alert-triangle" class="w-3.5 h-3.5"></i>
+                    <span>Active Regulatory Alerts (${countryAlerts.length})</span>
+                </div>
+                <div class="space-y-2 max-h-48 overflow-y-auto custom-scrollbar pr-1">
+                    ${countryAlerts.map(a => `
+                        <div class="p-2.5 rounded-lg border ${a.severity === 'Critical' ? 'bg-rose-950/40 border-rose-900/80 text-rose-200' : 'bg-amber-950/40 border-amber-900/80 text-amber-200'} text-xs">
+                            <div class="font-bold flex items-center justify-between">
+                                <span>${escapeHtml(a.id)}</span>
+                                <span class="text-[10px] font-mono uppercase px-1.5 py-0.2 rounded ${a.severity === 'Critical' ? 'bg-rose-900 text-rose-100' : 'bg-amber-900 text-amber-100'}">${a.severity}</span>
+                            </div>
+                            <div class="text-[11px] mt-1 line-clamp-2">${escapeHtml(a.title)}</div>
+                        </div>
+                    `).join("")}
+                </div>
+            </div>
+        ` : ''}
+
+        <!-- Action Buttons -->
+        <div class="pt-3 border-t border-slate-800 flex items-center gap-2">
+            <button type="button" onclick="triggerCountrySimulation('${c.code}')" class="flex-1 px-3 py-2 rounded-lg bg-cyan-600 hover:bg-cyan-500 text-white font-medium text-xs flex items-center justify-center gap-1.5 shadow transition cursor-pointer">
+                <i data-lucide="zap" class="w-3.5 h-3.5"></i>
+                <span>Simulate Notice</span>
+            </button>
+            <button type="button" onclick="filterMatrixToCountry('${c.code}')" class="flex-1 px-3 py-2 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 font-medium text-xs flex items-center justify-center gap-1.5 border border-slate-700 transition cursor-pointer">
+                <i data-lucide="table" class="w-3.5 h-3.5"></i>
+                <span>View in Matrix</span>
+            </button>
+        </div>
+    `;
+
+    lucide.createIcons();
+}
+
+function selectCountryOnMap(code) {
+    openCountryDrawer(code);
+    if (worldMapInstance) {
+        // Try to focus or highlight
+        try {
+            worldMapInstance.setSelectedRegions([code]);
+        } catch (e) {}
+    }
+}
+
+function focusMapRegion(region) {
+    if (!worldMapInstance) return;
+    try {
+        if (region === 'global') {
+            worldMapInstance.reset();
+        } else if (region === 'americas') {
+            worldMapInstance.setFocus({ regions: ['US', 'CA', 'MX', 'BR', 'AR', 'CL'] });
+        } else if (region === 'europe') {
+            worldMapInstance.setFocus({ regions: ['DE', 'FR', 'GB', 'IT', 'ES', 'PL', 'SE'] });
+        } else if (region === 'asia') {
+            worldMapInstance.setFocus({ regions: ['CN', 'IN', 'JP', 'KR', 'AU', 'SG', 'ID'] });
+        } else if (region === 'middle_east') {
+            worldMapInstance.setFocus({ regions: ['SA', 'AE', 'ZA', 'EG', 'IL', 'TR'] });
+        }
+    } catch (e) {
+        console.warn("Map focus error:", e);
+    }
+}
+
+function resetMapZoom() {
+    if (worldMapInstance) {
+        try {
+            worldMapInstance.reset();
+        } catch (e) {}
+    }
+    const sInput = document.getElementById("map-search-input");
+    if (sInput) sInput.value = '';
+}
+
+function handleMapSearch(val) {
+    const q = (val || '').trim().toLowerCase();
+    if (!q) return;
+
+    // Find country by code or name
+    const found = Object.values(mapCountriesData).find(c => 
+        c.code.toLowerCase() === q || 
+        c.name.toLowerCase().includes(q) ||
+        (c.authority && c.authority.toLowerCase().includes(q))
+    );
+
+    if (found) {
+        openCountryDrawer(found.code);
+        try {
+            worldMapInstance.setFocus({ regions: [found.code] });
+        } catch (e) {}
+    }
+}
+
+function triggerCountrySimulation(code) {
+    // Switch to individual country scope in simulation modal
+    openModal('modal-simulate-notice');
+    if (typeof setSimTargetScope === 'function') {
+        setSimTargetScope('country');
+    }
+    const countrySel = document.getElementById("sim-country-select");
+    if (countrySel) countrySel.value = code;
+}
+
+function filterMatrixToCountry(code) {
+    switchTab('matrix');
+    const searchInput = document.getElementById("matrix-search-input");
+    if (searchInput) {
+        const c = mapCountriesData[code];
+        searchInput.value = c ? c.name : code;
+        loadProductMatrix();
+    }
+}
+
+function getFlagEmoji(countryCode) {
+    if (!countryCode || countryCode.length !== 2) return '🌐';
+    const codePoints = countryCode
+        .toUpperCase()
+        .split('')
+        .map(char => 127397 + char.charCodeAt());
+    return String.fromCodePoint(...codePoints);
+}
+
     </script>
 </body>
 </html>
