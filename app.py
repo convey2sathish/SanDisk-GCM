@@ -5,6 +5,8 @@ from flask import Flask, render_template, request, jsonify, send_file
 import compliance_db as db
 import excel_export
 import reg_surveillance
+import doc_audit_engine
+import datetime
 
 surveillance_engine = reg_surveillance.get_surveillance_engine(db)
 
@@ -20,6 +22,7 @@ else:
 products_store = list(db.SAMPLE_PRODUCTS)
 certificates_store = list(db.SAMPLE_CERTIFICATES)
 alerts_store = list(db.REGULATION_ALERTS)
+latest_audit_cache = {}
 
 @app.route("/")
 def index():
@@ -594,6 +597,66 @@ def api_products_impacted():
         })
 
     return jsonify(impacted_map)
+
+# ----------------------------------------------------------------------
+# DOCUMENT AUDIT & REGULATORY IMPACT ENGINE ENDPOINTS
+# ----------------------------------------------------------------------
+@app.route("/api/documents/scan-folder", methods=["POST"])
+def api_scan_folder():
+    global latest_audit_cache
+    data = request.get_json() or {}
+    folder_path = data.get("folder_path", "").strip()
+    if not folder_path:
+        folder_path = r"C:\SanDisk\Compliance_Docs"
+    
+    report = doc_audit_engine.scan_directory(folder_path)
+    latest_audit_cache = report
+    return jsonify(report)
+
+@app.route("/api/documents/browse-dialog")
+def api_browse_dialog():
+    """Opens native Windows folder selection dialog in standalone mode."""
+    try:
+        import tkinter as tk
+        from tkinter import filedialog
+        root = tk.Tk()
+        root.withdraw()
+        root.attributes('-topmost', True)
+        folder_selected = filedialog.askdirectory(title="Select Compliance Documents Directory", initialdir=r"C:\SanDisk")
+        root.destroy()
+        if folder_selected:
+            return jsonify({"success": True, "folder_path": os.path.normpath(folder_selected)})
+        return jsonify({"success": False, "folder_path": ""})
+    except Exception as e:
+        return jsonify({"success": False, "error": str(e), "folder_path": ""})
+
+@app.route("/api/documents/generate-samples", methods=["POST"])
+def api_generate_samples():
+    global latest_audit_cache
+    target_dir = r"C:\SanDisk\Compliance_Docs"
+    doc_audit_engine.generate_sample_compliance_docs(target_dir)
+    report = doc_audit_engine.scan_directory(target_dir)
+    latest_audit_cache = report
+    return jsonify({
+        "success": True,
+        "message": f"Generated 6 sample compliance documents in {target_dir}",
+        "report": report
+    })
+
+@app.route("/api/documents/export-audit")
+def api_export_audit():
+    global latest_audit_cache
+    if not latest_audit_cache or not latest_audit_cache.get("documents"):
+        latest_audit_cache = doc_audit_engine.scan_directory(r"C:\SanDisk\Compliance_Docs")
+    
+    excel_buf = doc_audit_engine.export_audit_to_excel(latest_audit_cache)
+    filename = f"SanDisk_Document_Revision_Directive_{datetime.date.today().strftime('%Y%m%d')}.xlsx"
+    return send_file(
+        excel_buf,
+        as_attachment=True,
+        download_name=filename,
+        mimetype="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+    )
 
 if __name__ == "__main__":
     import webbrowser
