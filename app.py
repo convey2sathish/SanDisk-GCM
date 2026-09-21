@@ -34,6 +34,20 @@ def api_overview():
     critical_alerts = sum(1 for a in alerts_store if a.get("severity") == "Critical")
     expiring_certs = sum(1 for c in certificates_store if c.get("status") in ["Expiring Soon", "Critical", "Expired"])
 
+    # Compute which of our 11 portfolio products are impacted by active alerts
+    impacted_products_set = set()
+    for a in alerts_store:
+        if "impacted_products" not in a or a["impacted_products"] is None:
+            a["impacted_products"] = reg_surveillance.resolve_product_impacts(
+                a.get("affected_categories", []),
+                country_code=a.get("country_code", a.get("country", "Global")),
+                region=a.get("region", "Global"),
+                products=products_store
+            )
+            a["impacted_products_count"] = len(a["impacted_products"])
+        for p in a["impacted_products"]:
+            impacted_products_set.add(p.get("id"))
+
     # Regional distribution count
     regions_count = {}
     for c in db.COUNTRIES_DB.values():
@@ -48,6 +62,7 @@ def api_overview():
         "active_alerts_count": len(alerts_store),
         "critical_alerts_count": critical_alerts,
         "expiring_certificates_count": expiring_certs,
+        "impacted_products_count": len(impacted_products_set),
         "regions_count": regions_count,
         "recent_alerts": alerts_store[:4],
         "expiring_certificates": [c for c in certificates_store if c.get("status") in ["Expiring Soon", "Critical", "Expired"]]
@@ -205,9 +220,27 @@ def api_alerts():
     severity = request.args.get("severity", "").strip().lower()
     region = request.args.get("region", "").strip().lower()
     search = request.args.get("search", "").strip().lower()
+    impacts_portfolio = request.args.get("impacts_portfolio", "").strip().lower() == "true"
+    product_id = request.args.get("product_id", "").strip().upper()
 
     results = []
     for a in alerts_store:
+        # Guarantee impacted_products is resolved for this alert
+        if "impacted_products" not in a or a["impacted_products"] is None:
+            a["impacted_products"] = reg_surveillance.resolve_product_impacts(
+                a.get("affected_categories", []),
+                country_code=a.get("country_code", a.get("country", "Global")),
+                region=a.get("region", "Global"),
+                products=products_store
+            )
+            a["impacted_products_count"] = len(a["impacted_products"])
+
+        if impacts_portfolio and not a.get("impacted_products"):
+            continue
+
+        if product_id and not any(p.get("id") == product_id for p in a.get("impacted_products", [])):
+            continue
+
         if severity and severity != "all" and a.get("severity", "").lower() != severity:
             continue
         if region and region != "all" and region not in a.get("region", "").lower():
@@ -223,7 +256,8 @@ def api_alerts():
                 search in a.get("technical_impact", "").lower() or
                 search in a.get("standard", "").lower() or
                 search in a.get("country", "").lower() or
-                search in a.get("source", "").lower()
+                search in a.get("source", "").lower() or
+                any(search in p.get("name", "").lower() or search in p.get("sku", "").lower() for p in a.get("impacted_products", []))
             )
             if not match:
                 continue
@@ -455,12 +489,12 @@ def api_surveillance_log():
 @app.route("/api/surveillance/simulate", methods=["POST"])
 def api_surveillance_simulate():
     data = request.get_json() or {}
-    cc = data.get("country_code", "IN")
-    authority = data.get("authority", "Bureau of Indian Standards")
-    new_std = data.get("new_standard", "IS/IEC 62368-1:2023 Amendment 2")
+    cc = data.get("country_code", "ALL")
+    authority = data.get("authority", "Global Harmonization Council (WTO TBT)")
+    new_std = data.get("new_standard", "IEC 62368-1:2023 / Harmonized Edition 4")
     deadline = data.get("deadline", "2028-11-01")
-    summary = data.get("summary", "Official Gazette Notification: Mandating updated safety testing requirements.")
-    cats = data.get("affected_categories", ["external_ssd_powered", "external_ssd_bus"])
+    summary = data.get("summary", "Official Gazette Notification: Mandating transition to updated standard.")
+    cats = data.get("affected_categories", ["external_ssd_powered", "external_ssd_bus", "internal_ssd", "usb_drive"])
     source_url = data.get("source_url")
     pillar = data.get("pillar", "Safety")
 
@@ -479,8 +513,78 @@ def api_surveillance_simulate():
     return jsonify({
         "success": True,
         "event": event,
+        "affected_countries_count": event.get("affected_countries_count", 1),
         "status": surveillance_engine.get_status()
     })
+
+@app.route("/api/surveillance/auto-simulate/next", methods=["GET", "POST"])
+def api_surveillance_auto_simulate_next():
+    event = surveillance_engine.auto_simulate_next_event(products=products_store)
+    global alerts_store
+    alerts_store = list(db.REGULATION_ALERTS)
+    return jsonify({
+        "success": True,
+        "event": event,
+        "alert": event.get("alert"),
+        "impacted_products": event.get("impacted_products", []),
+        "impacted_products_count": event.get("impacted_products_count", 0),
+        "status": surveillance_engine.get_status(),
+        "total_alerts_count": len(alerts_store)
+    })
+
+@app.route("/api/products/impacted")
+def api_products_impacted():
+    impacted_map = []
+    EU_COUNTRIES = {"AT", "BE", "BG", "HR", "CY", "CZ", "DK", "EE", "FI", "FR", "DE", "GR", "HU", "IE", "IT", "LV", "LT", "LU", "MT", "NL", "PL", "PT", "RO", "SK", "SI", "ES", "SE", "GB", "CH", "NO"}
+    for p in products_store:
+        p_alerts = []
+        p_cat = p.get("category_id")
+        targets = [m.upper() for m in p.get("target_markets", [])]
+
+        for a in alerts_store:
+            cats = a.get("affected_categories", [])
+            is_univ = any(c in ["all", "all_storage_categories", "all_categories"] for c in cats)
+            if not (is_univ or p_cat in cats):
+                continue
+
+            cc = a.get("country_code", a.get("country", "Global")).upper()
+            reg = a.get("region", "Global").upper()
+
+            market_match = False
+            if cc in ["GLOBAL", "ALL", "INTERNATIONAL"]:
+                market_match = True
+            elif cc in targets:
+                market_match = True
+            elif cc == "EU" and any(m in EU_COUNTRIES for m in targets):
+                market_match = True
+            elif reg in ["EUROPE", "EURASIA"] and any(m in EU_COUNTRIES for m in targets):
+                market_match = True
+            elif reg == "AMERICAS" and any(m in ["US", "CA", "MX", "BR"] for m in targets):
+                market_match = True
+            elif reg in ["ASIA", "APAC"] and any(m in ["JP", "KR", "TW", "CN", "IN", "AU", "SG"] for m in targets):
+                market_match = True
+            elif reg in ["MIDDLE EAST", "MENA"] and any(m in ["SA", "AE", "IL", "EG"] for m in targets):
+                market_match = True
+
+            if market_match:
+                p_alerts.append({
+                    "id": a.get("id"),
+                    "title": a.get("title"),
+                    "severity": a.get("severity", "Warning"),
+                    "standard": a.get("standard"),
+                    "country": a.get("country"),
+                    "effective_date": a.get("effective_date"),
+                    "action_required": a.get("action_required")
+                })
+
+        impacted_map.append({
+            "product": p,
+            "active_alerts": p_alerts,
+            "alerts_count": len(p_alerts),
+            "has_critical": any(al["severity"] == "Critical" for al in p_alerts)
+        })
+
+    return jsonify(impacted_map)
 
 if __name__ == "__main__":
     import webbrowser

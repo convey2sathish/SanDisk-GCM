@@ -139,7 +139,7 @@
                 </button>
                 <button onclick="openModal('modal-simulate-notice')" class="px-2.5 py-1 rounded-lg bg-slate-800/80 hover:bg-slate-700/80 text-amber-300 font-medium flex items-center space-x-1 border border-amber-900/50 text-[11px] transition">
                     <i data-lucide="flask-conical" class="w-3.5 h-3.5"></i>
-                    <span>Simulate Notice</span>
+                    <span>Simulate Notice (All 205 / Single)</span>
                 </button>
             </div>
         </div>
@@ -634,65 +634,360 @@
         </div>
     </div>
 
-    <!-- Modal for Simulating New Gazette Notice -->
-    <div id="modal-simulate-notice" class="fixed inset-0 z-50 hidden bg-slate-950/80 backdrop-blur-sm flex items-center justify-center p-4">
-        <div class="bg-slate-900 border border-slate-700 rounded-2xl max-w-lg w-full p-6 shadow-2xl space-y-4">
+        <!-- Modal for Simulating New Gazette Notice -->
+    <div id="modal-simulate-notice" class="fixed inset-0 z-50 hidden bg-slate-950/85 backdrop-blur-sm flex items-center justify-center p-4">
+        <div class="bg-slate-900 border border-slate-700 rounded-2xl max-w-2xl w-full p-6 shadow-2xl space-y-4 max-h-[92vh] overflow-y-auto">
             <div class="flex items-center justify-between border-b border-slate-800 pb-3">
-                <div class="flex items-center space-x-2">
-                    <i data-lucide="flask-conical" class="w-5 h-5 text-amber-400"></i>
-                    <h3 class="text-base font-bold text-white">Simulate Live Gazette Notice Ingestion</h3>
+                <div class="flex items-center space-x-2.5">
+                    <div class="w-9 h-9 rounded-xl bg-amber-500/20 border border-amber-500/40 flex items-center justify-center shadow-inner">
+                        <i data-lucide="flask-conical" class="w-5 h-5 text-amber-400"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-base font-bold text-white flex items-center space-x-2">
+                            <span>Simulate Live Gazette Notice Ingestion</span>
+                            <span class="px-2 py-0.5 rounded-full bg-emerald-950 text-emerald-300 border border-emerald-700 text-[10px] font-mono">All 205 Countries Enabled</span>
+                        </h3>
+                        <p class="text-[11px] text-slate-400">Autonomous regulatory ingestion across All 205 Global Jurisdictions at once or target an individual country</p>
+                    </div>
                 </div>
-                <button onclick="closeModal('modal-simulate-notice')" class="text-slate-400 hover:text-white">
+                <button onclick="closeModal('modal-simulate-notice')" class="text-slate-400 hover:text-white p-1 rounded-lg hover:bg-slate-800 transition">
                     <i data-lucide="x" class="w-5 h-5"></i>
                 </button>
             </div>
-            
-            <p class="text-xs text-slate-400">
-                Trigger a simulated real-time gazette circular to test how the engine autonomously detects the change, updates the database, injects alerts, and updates the matrix.
-            </p>
+
+            <!-- Scope Switcher: All 205 Countries vs Individual Country -->
+            <div>
+                <label class="block text-slate-300 font-semibold mb-1.5 text-xs">Select Target Scope</label>
+                <div class="grid grid-cols-2 gap-2 bg-slate-950 p-1 rounded-xl border border-slate-800">
+                    <button type="button" id="btn-scope-all" onclick="setSimScope('ALL')" class="py-2 px-3 rounded-lg text-xs font-bold transition flex items-center justify-center space-x-2 bg-emerald-600 text-white shadow">
+                        <i data-lucide="globe-2" class="w-4 h-4"></i>
+                        <span>🌍 All 205 Countries (Global Harmonization)</span>
+                    </button>
+                    <button type="button" id="btn-scope-single" onclick="setSimScope('SINGLE')" class="py-2 px-3 rounded-lg text-xs font-bold transition flex items-center justify-center space-x-2 text-slate-400 hover:text-slate-200">
+                        <i data-lucide="flag" class="w-4 h-4"></i>
+                        <span>🏳️ Individual Country / Territory</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Scope Banner for All 205 Countries -->
+            <div id="sim-scope-banner-all" class="p-3 bg-gradient-to-r from-emerald-950/70 to-teal-950/60 border border-emerald-500/40 rounded-xl flex items-start space-x-2.5">
+                <i data-lucide="sparkles" class="w-4 h-4 text-emerald-400 shrink-0 mt-0.5 animate-pulse"></i>
+                <div class="text-[11px] leading-relaxed text-slate-300">
+                    <span class="font-bold text-emerald-300">Worldwide Harmonization Mode Active:</span>
+                    Applying this gazette notice will update <strong class="text-white">all 205 international market access jurisdictions at once</strong> across the selected pillar, stamp each country record with live surveillance metadata, generate a global harmonization alert, and calculate portfolio-wide product impacts.
+                </div>
+            </div>
+
+            <!-- Quick Global Presets -->
+            <div>
+                <div class="flex items-center justify-between mb-1.5">
+                    <label class="text-slate-400 font-medium text-xs">Quick Global Scenario Presets (1-Click Fill)</label>
+                    <span class="text-[10px] text-slate-500 font-mono">Harmonized Standards</span>
+                </div>
+                <div class="grid grid-cols-2 sm:grid-cols-4 gap-2">
+                    <button type="button" onclick="applySimPreset('safety_62368')" class="p-2 rounded-lg bg-slate-800/80 hover:bg-slate-700/80 border border-slate-700 hover:border-rose-500/50 text-left transition group">
+                        <div class="flex items-center space-x-1 text-rose-400 font-semibold text-[11px] group-hover:text-rose-300">
+                            <i data-lucide="shield" class="w-3 h-3"></i>
+                            <span>Safety (62368-1)</span>
+                        </div>
+                        <div class="text-[10px] text-slate-400 truncate mt-0.5">IEC 62368-1 4th Ed.</div>
+                    </button>
+
+                    <button type="button" onclick="applySimPreset('emc_cispr32')" class="p-2 rounded-lg bg-slate-800/80 hover:bg-slate-700/80 border border-slate-700 hover:border-sky-500/50 text-left transition group">
+                        <div class="flex items-center space-x-1 text-sky-400 font-semibold text-[11px] group-hover:text-sky-300">
+                            <i data-lucide="radio" class="w-3 h-3"></i>
+                            <span>EMC (CISPR 32)</span>
+                        </div>
+                        <div class="text-[10px] text-slate-400 truncate mt-0.5">CISPR 32:2026 Class B</div>
+                    </button>
+
+                    <button type="button" onclick="applySimPreset('env_rohs')" class="p-2 rounded-lg bg-slate-800/80 hover:bg-slate-700/80 border border-slate-700 hover:border-emerald-500/50 text-left transition group">
+                        <div class="flex items-center space-x-1 text-emerald-400 font-semibold text-[11px] group-hover:text-emerald-300">
+                            <i data-lucide="leaf" class="w-3 h-3"></i>
+                            <span>Env (RoHS 4 / PFAS)</span>
+                        </div>
+                        <div class="text-[10px] text-slate-400 truncate mt-0.5">RoHS 4 & PFAS Ban</div>
+                    </button>
+
+                    <button type="button" onclick="applySimPreset('tri_pillar')" class="p-2 rounded-lg bg-slate-800/80 hover:bg-slate-700/80 border border-slate-700 hover:border-purple-500/50 text-left transition group">
+                        <div class="flex items-center space-x-1 text-purple-400 font-semibold text-[11px] group-hover:text-purple-300">
+                            <i data-lucide="refresh-cw" class="w-3 h-3"></i>
+                            <span>All 3 Pillars</span>
+                        </div>
+                        <div class="text-[10px] text-slate-400 truncate mt-0.5">Safety + EMC + Env</div>
+                    </button>
+                </div>
+            </div>
 
             <form onsubmit="submitSimulationNotice(event)" class="space-y-3 text-xs">
-                <div class="grid grid-cols-2 gap-2">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-2.5">
                     <div>
-                        <label class="block text-slate-400 mb-1 font-medium">Target Jurisdiction (All 205 Countries)</label>
-                        <select id="sim-country" class="w-full bg-slate-800 border border-slate-700 rounded-lg p-2 text-white">
-                        <option value="AF">Afghanistan (AF)</option>\n                        <option value="AL">Albania (AL)</option>\n                        <option value="DZ">Algeria (DZ)</option>\n                        <option value="AD">Andorra (AD)</option>\n                        <option value="AO">Angola (AO)</option>\n                        <option value="AG">Antigua and Barbuda (AG)</option>\n                        <option value="AR">Argentina (AR)</option>\n                        <option value="AM">Armenia (AM)</option>\n                        <option value="AW">Aruba (AW)</option>\n                        <option value="AU">Australia (AU)</option>\n                        <option value="AT">Austria (AT)</option>\n                        <option value="AZ">Azerbaijan (AZ)</option>\n                        <option value="BS">Bahamas (BS)</option>\n                        <option value="BH">Bahrain (BH)</option>\n                        <option value="BD">Bangladesh (BD)</option>\n                        <option value="BB">Barbados (BB)</option>\n                        <option value="BY">Belarus (BY)</option>\n                        <option value="BE">Belgium (BE)</option>\n                        <option value="BZ">Belize (BZ)</option>\n                        <option value="BJ">Benin (BJ)</option>\n                        <option value="BM">Bermuda (BM)</option>\n                        <option value="BT">Bhutan (BT)</option>\n                        <option value="BO">Bolivia (BO)</option>\n                        <option value="BA">Bosnia and Herzegovina (BA)</option>\n                        <option value="BW">Botswana (BW)</option>\n                        <option value="BR">Brazil (BR)</option>\n                        <option value="BN">Brunei (BN)</option>\n                        <option value="BG">Bulgaria (BG)</option>\n                        <option value="BF">Burkina Faso (BF)</option>\n                        <option value="BI">Burundi (BI)</option>\n                        <option value="CV">Cabo Verde (CV)</option>\n                        <option value="KH">Cambodia (KH)</option>\n                        <option value="CM">Cameroon (CM)</option>\n                        <option value="CA">Canada (CA)</option>\n                        <option value="KY">Cayman Islands (KY)</option>\n                        <option value="CF">Central African Republic (CF)</option>\n                        <option value="TD">Chad (TD)</option>\n                        <option value="CL">Chile (CL)</option>\n                        <option value="CN">China (CN)</option>\n                        <option value="CO">Colombia (CO)</option>\n                        <option value="KM">Comoros (KM)</option>\n                        <option value="CR">Costa Rica (CR)</option>\n                        <option value="CI">Cote d'Ivoire (CI)</option>\n                        <option value="HR">Croatia (HR)</option>\n                        <option value="CU">Cuba (CU)</option>\n                        <option value="CW">Curacao (CW)</option>\n                        <option value="CY">Cyprus (CY)</option>\n                        <option value="CZ">Czech Republic (CZ)</option>\n                        <option value="CD">DR Congo (CD)</option>\n                        <option value="DK">Denmark (DK)</option>\n                        <option value="DJ">Djibouti (DJ)</option>\n                        <option value="DM">Dominica (DM)</option>\n                        <option value="DO">Dominican Republic (DO)</option>\n                        <option value="EC">Ecuador (EC)</option>\n                        <option value="EG">Egypt (EG)</option>\n                        <option value="SV">El Salvador (SV)</option>\n                        <option value="GQ">Equatorial Guinea (GQ)</option>\n                        <option value="ER">Eritrea (ER)</option>\n                        <option value="EE">Estonia (EE)</option>\n                        <option value="SZ">Eswatini (SZ)</option>\n                        <option value="ET">Ethiopia (ET)</option>\n                        <option value="FO">Faroe Islands (FO)</option>\n                        <option value="FJ">Fiji (FJ)</option>\n                        <option value="FI">Finland (FI)</option>\n                        <option value="FR">France (FR)</option>\n                        <option value="GA">Gabon (GA)</option>\n                        <option value="GM">Gambia (GM)</option>\n                        <option value="GE">Georgia (GE)</option>\n                        <option value="DE">Germany (DE)</option>\n                        <option value="GH">Ghana (GH)</option>\n                        <option value="GI">Gibraltar (GI)</option>\n                        <option value="GR">Greece (GR)</option>\n                        <option value="GL">Greenland (GL)</option>\n                        <option value="GD">Grenada (GD)</option>\n                        <option value="GU">Guam (GU)</option>\n                        <option value="GT">Guatemala (GT)</option>\n                        <option value="GN">Guinea (GN)</option>\n                        <option value="GY">Guyana (GY)</option>\n                        <option value="HT">Haiti (HT)</option>\n                        <option value="HN">Honduras (HN)</option>\n                        <option value="HK">Hong Kong (HK)</option>\n                        <option value="HU">Hungary (HU)</option>\n                        <option value="IS">Iceland (IS)</option>\n                        <option value="IN">India (IN)</option>\n                        <option value="ID">Indonesia (ID)</option>\n                        <option value="IQ">Iraq (IQ)</option>\n                        <option value="IE">Ireland (IE)</option>\n                        <option value="IL">Israel (IL)</option>\n                        <option value="IT">Italy (IT)</option>\n                        <option value="JM">Jamaica (JM)</option>\n                        <option value="JP">Japan (JP)</option>\n                        <option value="JO">Jordan (JO)</option>\n                        <option value="KZ">Kazakhstan (KZ)</option>\n                        <option value="KE">Kenya (KE)</option>\n                        <option value="KI">Kiribati (KI)</option>\n                        <option value="XK">Kosovo (XK)</option>\n                        <option value="KW">Kuwait (KW)</option>\n                        <option value="KG">Kyrgyzstan (KG)</option>\n                        <option value="LA">Laos (LA)</option>\n                        <option value="LV">Latvia (LV)</option>\n                        <option value="LB">Lebanon (LB)</option>\n                        <option value="LS">Lesotho (LS)</option>\n                        <option value="LR">Liberia (LR)</option>\n                        <option value="LY">Libya (LY)</option>\n                        <option value="LI">Liechtenstein (LI)</option>\n                        <option value="LT">Lithuania (LT)</option>\n                        <option value="LU">Luxembourg (LU)</option>\n                        <option value="MO">Macao (MO)</option>\n                        <option value="MG">Madagascar (MG)</option>\n                        <option value="MW">Malawi (MW)</option>\n                        <option value="MY">Malaysia (MY)</option>\n                        <option value="MV">Maldives (MV)</option>\n                        <option value="ML">Mali (ML)</option>\n                        <option value="MT">Malta (MT)</option>\n                        <option value="MH">Marshall Islands (MH)</option>\n                        <option value="MR">Mauritania (MR)</option>\n                        <option value="MU">Mauritius (MU)</option>\n                        <option value="MX">Mexico (MX)</option>\n                        <option value="FM">Micronesia (FM)</option>\n                        <option value="MD">Moldova (MD)</option>\n                        <option value="MC">Monaco (MC)</option>\n                        <option value="MN">Mongolia (MN)</option>\n                        <option value="ME">Montenegro (ME)</option>\n                        <option value="MA">Morocco (MA)</option>\n                        <option value="MZ">Mozambique (MZ)</option>\n                        <option value="MM">Myanmar (MM)</option>\n                        <option value="NA">Namibia (NA)</option>\n                        <option value="NR">Nauru (NR)</option>\n                        <option value="NP">Nepal (NP)</option>\n                        <option value="NL">Netherlands (NL)</option>\n                        <option value="NZ">New Zealand (NZ)</option>\n                        <option value="NI">Nicaragua (NI)</option>\n                        <option value="NE">Niger (NE)</option>\n                        <option value="NG">Nigeria (NG)</option>\n                        <option value="MK">North Macedonia (MK)</option>\n                        <option value="NO">Norway (NO)</option>\n                        <option value="OM">Oman (OM)</option>\n                        <option value="PK">Pakistan (PK)</option>\n                        <option value="PW">Palau (PW)</option>\n                        <option value="PS">Palestine (PS)</option>\n                        <option value="PA">Panama (PA)</option>\n                        <option value="PG">Papua New Guinea (PG)</option>\n                        <option value="PY">Paraguay (PY)</option>\n                        <option value="PE">Peru (PE)</option>\n                        <option value="PH">Philippines (PH)</option>\n                        <option value="PL">Poland (PL)</option>\n                        <option value="PT">Portugal (PT)</option>\n                        <option value="PR">Puerto Rico (PR)</option>\n                        <option value="QA">Qatar (QA)</option>\n                        <option value="CG">Republic of the Congo (CG)</option>\n                        <option value="RO">Romania (RO)</option>\n                        <option value="RU">Russia (RU)</option>\n                        <option value="RW">Rwanda (RW)</option>\n                        <option value="KN">Saint Kitts and Nevis (KN)</option>\n                        <option value="LC">Saint Lucia (LC)</option>\n                        <option value="VC">Saint Vincent and Grenadines (VC)</option>\n                        <option value="WS">Samoa (WS)</option>\n                        <option value="SM">San Marino (SM)</option>\n                        <option value="ST">Sao Tome and Principe (ST)</option>\n                        <option value="SA">Saudi Arabia (SA)</option>\n                        <option value="SN">Senegal (SN)</option>\n                        <option value="RS">Serbia (RS)</option>\n                        <option value="SC">Seychelles (SC)</option>\n                        <option value="SL">Sierra Leone (SL)</option>\n                        <option value="SG">Singapore (SG)</option>\n                        <option value="SK">Slovakia (SK)</option>\n                        <option value="SI">Slovenia (SI)</option>\n                        <option value="SB">Solomon Islands (SB)</option>\n                        <option value="SO">Somalia (SO)</option>\n                        <option value="ZA">South Africa (ZA)</option>\n                        <option value="KR">South Korea (KR)</option>\n                        <option value="SS">South Sudan (SS)</option>\n                        <option value="ES">Spain (ES)</option>\n                        <option value="LK">Sri Lanka (LK)</option>\n                        <option value="SD">Sudan (SD)</option>\n                        <option value="SR">Suriname (SR)</option>\n                        <option value="SE">Sweden (SE)</option>\n                        <option value="CH">Switzerland (CH)</option>\n                        <option value="SY">Syria (SY)</option>\n                        <option value="TW">Taiwan (TW)</option>\n                        <option value="TJ">Tajikistan (TJ)</option>\n                        <option value="TZ">Tanzania (TZ)</option>\n                        <option value="TH">Thailand (TH)</option>\n                        <option value="TL">Timor-Leste (TL)</option>\n                        <option value="TG">Togo (TG)</option>\n                        <option value="TO">Tonga (TO)</option>\n                        <option value="TT">Trinidad and Tobago (TT)</option>\n                        <option value="TN">Tunisia (TN)</option>\n                        <option value="TR">Turkey (TR)</option>\n                        <option value="TM">Turkmenistan (TM)</option>\n                        <option value="TV">Tuvalu (TV)</option>\n                        <option value="UG">Uganda (UG)</option>\n                        <option value="UA">Ukraine (UA)</option>\n                        <option value="AE">United Arab Emirates (AE)</option>\n                        <option value="GB">United Kingdom (GB)</option>\n                        <option value="US">United States (US)</option>\n                        <option value="UY">Uruguay (UY)</option>\n                        <option value="UZ">Uzbekistan (UZ)</option>\n                        <option value="VU">Vanuatu (VU)</option>\n                        <option value="VA">Vatican City (VA)</option>\n                        <option value="VE">Venezuela (VE)</option>\n                        <option value="VN">Vietnam (VN)</option>\n                        <option value="YE">Yemen (YE)</option>\n                        <option value="ZM">Zambia (ZM)</option>\n                        <option value="ZW">Zimbabwe (ZW)</option>
+                        <label class="block text-slate-400 mb-1 font-medium" id="lbl-sim-country">Target Jurisdiction</label>
+                        <select id="sim-country" onchange="onSimCountryChange()" class="w-full bg-slate-800 border border-slate-700 rounded-lg p-2 text-white font-medium focus:border-emerald-500 focus:outline-none">
+                            <option value="ALL" selected>🌍 All 205 Countries & Jurisdictions (Worldwide Harmonization)</option>
+                            <optgroup label="Or Select Specific Country (205 Available)">
+                                <option value="AF">Afghanistan (AF)</option>
+                                <option value="AL">Albania (AL)</option>
+                                <option value="DZ">Algeria (DZ)</option>
+                                <option value="AD">Andorra (AD)</option>
+                                <option value="AO">Angola (AO)</option>
+                                <option value="AG">Antigua and Barbuda (AG)</option>
+                                <option value="AR">Argentina (AR)</option>
+                                <option value="AM">Armenia (AM)</option>
+                                <option value="AW">Aruba (AW)</option>
+                                <option value="AU">Australia (AU)</option>
+                                <option value="AT">Austria (AT)</option>
+                                <option value="AZ">Azerbaijan (AZ)</option>
+                                <option value="BS">Bahamas (BS)</option>
+                                <option value="BH">Bahrain (BH)</option>
+                                <option value="BD">Bangladesh (BD)</option>
+                                <option value="BB">Barbados (BB)</option>
+                                <option value="BY">Belarus (BY)</option>
+                                <option value="BE">Belgium (BE)</option>
+                                <option value="BZ">Belize (BZ)</option>
+                                <option value="BJ">Benin (BJ)</option>
+                                <option value="BM">Bermuda (BM)</option>
+                                <option value="BT">Bhutan (BT)</option>
+                                <option value="BO">Bolivia (BO)</option>
+                                <option value="BA">Bosnia and Herzegovina (BA)</option>
+                                <option value="BW">Botswana (BW)</option>
+                                <option value="BR">Brazil (BR)</option>
+                                <option value="BN">Brunei (BN)</option>
+                                <option value="BG">Bulgaria (BG)</option>
+                                <option value="BF">Burkina Faso (BF)</option>
+                                <option value="BI">Burundi (BI)</option>
+                                <option value="CV">Cabo Verde (CV)</option>
+                                <option value="KH">Cambodia (KH)</option>
+                                <option value="CM">Cameroon (CM)</option>
+                                <option value="CA">Canada (CA)</option>
+                                <option value="KY">Cayman Islands (KY)</option>
+                                <option value="CF">Central African Republic (CF)</option>
+                                <option value="TD">Chad (TD)</option>
+                                <option value="CL">Chile (CL)</option>
+                                <option value="CN">China (CN)</option>
+                                <option value="CO">Colombia (CO)</option>
+                                <option value="KM">Comoros (KM)</option>
+                                <option value="CR">Costa Rica (CR)</option>
+                                <option value="CI">Cote d'Ivoire (CI)</option>
+                                <option value="HR">Croatia (HR)</option>
+                                <option value="CU">Cuba (CU)</option>
+                                <option value="CW">Curacao (CW)</option>
+                                <option value="CY">Cyprus (CY)</option>
+                                <option value="CZ">Czech Republic (CZ)</option>
+                                <option value="CD">DR Congo (CD)</option>
+                                <option value="DK">Denmark (DK)</option>
+                                <option value="DJ">Djibouti (DJ)</option>
+                                <option value="DM">Dominica (DM)</option>
+                                <option value="DO">Dominican Republic (DO)</option>
+                                <option value="EC">Ecuador (EC)</option>
+                                <option value="EG">Egypt (EG)</option>
+                                <option value="SV">El Salvador (SV)</option>
+                                <option value="GQ">Equatorial Guinea (GQ)</option>
+                                <option value="ER">Eritrea (ER)</option>
+                                <option value="EE">Estonia (EE)</option>
+                                <option value="SZ">Eswatini (SZ)</option>
+                                <option value="ET">Ethiopia (ET)</option>
+                                <option value="FO">Faroe Islands (FO)</option>
+                                <option value="FJ">Fiji (FJ)</option>
+                                <option value="FI">Finland (FI)</option>
+                                <option value="FR">France (FR)</option>
+                                <option value="GA">Gabon (GA)</option>
+                                <option value="GM">Gambia (GM)</option>
+                                <option value="GE">Georgia (GE)</option>
+                                <option value="DE">Germany (DE)</option>
+                                <option value="GH">Ghana (GH)</option>
+                                <option value="GI">Gibraltar (GI)</option>
+                                <option value="GR">Greece (GR)</option>
+                                <option value="GL">Greenland (GL)</option>
+                                <option value="GD">Grenada (GD)</option>
+                                <option value="GU">Guam (GU)</option>
+                                <option value="GT">Guatemala (GT)</option>
+                                <option value="GN">Guinea (GN)</option>
+                                <option value="GY">Guyana (GY)</option>
+                                <option value="HT">Haiti (HT)</option>
+                                <option value="HN">Honduras (HN)</option>
+                                <option value="HK">Hong Kong (HK)</option>
+                                <option value="HU">Hungary (HU)</option>
+                                <option value="IS">Iceland (IS)</option>
+                                <option value="IN">India (IN)</option>
+                                <option value="ID">Indonesia (ID)</option>
+                                <option value="IQ">Iraq (IQ)</option>
+                                <option value="IE">Ireland (IE)</option>
+                                <option value="IL">Israel (IL)</option>
+                                <option value="IT">Italy (IT)</option>
+                                <option value="JM">Jamaica (JM)</option>
+                                <option value="JP">Japan (JP)</option>
+                                <option value="JO">Jordan (JO)</option>
+                                <option value="KZ">Kazakhstan (KZ)</option>
+                                <option value="KE">Kenya (KE)</option>
+                                <option value="KI">Kiribati (KI)</option>
+                                <option value="XK">Kosovo (XK)</option>
+                                <option value="KW">Kuwait (KW)</option>
+                                <option value="KG">Kyrgyzstan (KG)</option>
+                                <option value="LA">Laos (LA)</option>
+                                <option value="LV">Latvia (LV)</option>
+                                <option value="LB">Lebanon (LB)</option>
+                                <option value="LS">Lesotho (LS)</option>
+                                <option value="LR">Liberia (LR)</option>
+                                <option value="LY">Libya (LY)</option>
+                                <option value="LI">Liechtenstein (LI)</option>
+                                <option value="LT">Lithuania (LT)</option>
+                                <option value="LU">Luxembourg (LU)</option>
+                                <option value="MO">Macao (MO)</option>
+                                <option value="MG">Madagascar (MG)</option>
+                                <option value="MW">Malawi (MW)</option>
+                                <option value="MY">Malaysia (MY)</option>
+                                <option value="MV">Maldives (MV)</option>
+                                <option value="ML">Mali (ML)</option>
+                                <option value="MT">Malta (MT)</option>
+                                <option value="MH">Marshall Islands (MH)</option>
+                                <option value="MR">Mauritania (MR)</option>
+                                <option value="MU">Mauritius (MU)</option>
+                                <option value="MX">Mexico (MX)</option>
+                                <option value="FM">Micronesia (FM)</option>
+                                <option value="MD">Moldova (MD)</option>
+                                <option value="MC">Monaco (MC)</option>
+                                <option value="MN">Mongolia (MN)</option>
+                                <option value="ME">Montenegro (ME)</option>
+                                <option value="MA">Morocco (MA)</option>
+                                <option value="MZ">Mozambique (MZ)</option>
+                                <option value="MM">Myanmar (MM)</option>
+                                <option value="NA">Namibia (NA)</option>
+                                <option value="NR">Nauru (NR)</option>
+                                <option value="NP">Nepal (NP)</option>
+                                <option value="NL">Netherlands (NL)</option>
+                                <option value="NZ">New Zealand (NZ)</option>
+                                <option value="NI">Nicaragua (NI)</option>
+                                <option value="NE">Niger (NE)</option>
+                                <option value="NG">Nigeria (NG)</option>
+                                <option value="MK">North Macedonia (MK)</option>
+                                <option value="NO">Norway (NO)</option>
+                                <option value="OM">Oman (OM)</option>
+                                <option value="PK">Pakistan (PK)</option>
+                                <option value="PW">Palau (PW)</option>
+                                <option value="PS">Palestine (PS)</option>
+                                <option value="PA">Panama (PA)</option>
+                                <option value="PG">Papua New Guinea (PG)</option>
+                                <option value="PY">Paraguay (PY)</option>
+                                <option value="PE">Peru (PE)</option>
+                                <option value="PH">Philippines (PH)</option>
+                                <option value="PL">Poland (PL)</option>
+                                <option value="PT">Portugal (PT)</option>
+                                <option value="PR">Puerto Rico (PR)</option>
+                                <option value="QA">Qatar (QA)</option>
+                                <option value="CG">Republic of the Congo (CG)</option>
+                                <option value="RO">Romania (RO)</option>
+                                <option value="RU">Russia (RU)</option>
+                                <option value="RW">Rwanda (RW)</option>
+                                <option value="KN">Saint Kitts and Nevis (KN)</option>
+                                <option value="LC">Saint Lucia (LC)</option>
+                                <option value="VC">Saint Vincent and Grenadines (VC)</option>
+                                <option value="WS">Samoa (WS)</option>
+                                <option value="SM">San Marino (SM)</option>
+                                <option value="ST">Sao Tome and Principe (ST)</option>
+                                <option value="SA">Saudi Arabia (SA)</option>
+                                <option value="SN">Senegal (SN)</option>
+                                <option value="RS">Serbia (RS)</option>
+                                <option value="SC">Seychelles (SC)</option>
+                                <option value="SL">Sierra Leone (SL)</option>
+                                <option value="SG">Singapore (SG)</option>
+                                <option value="SK">Slovakia (SK)</option>
+                                <option value="SI">Slovenia (SI)</option>
+                                <option value="SB">Solomon Islands (SB)</option>
+                                <option value="SO">Somalia (SO)</option>
+                                <option value="ZA">South Africa (ZA)</option>
+                                <option value="KR">South Korea (KR)</option>
+                                <option value="SS">South Sudan (SS)</option>
+                                <option value="ES">Spain (ES)</option>
+                                <option value="LK">Sri Lanka (LK)</option>
+                                <option value="SD">Sudan (SD)</option>
+                                <option value="SR">Suriname (SR)</option>
+                                <option value="SE">Sweden (SE)</option>
+                                <option value="CH">Switzerland (CH)</option>
+                                <option value="SY">Syria (SY)</option>
+                                <option value="TW">Taiwan (TW)</option>
+                                <option value="TJ">Tajikistan (TJ)</option>
+                                <option value="TZ">Tanzania (TZ)</option>
+                                <option value="TH">Thailand (TH)</option>
+                                <option value="TL">Timor-Leste (TL)</option>
+                                <option value="TG">Togo (TG)</option>
+                                <option value="TO">Tonga (TO)</option>
+                                <option value="TT">Trinidad and Tobago (TT)</option>
+                                <option value="TN">Tunisia (TN)</option>
+                                <option value="TR">Turkey (TR)</option>
+                                <option value="TM">Turkmenistan (TM)</option>
+                                <option value="TV">Tuvalu (TV)</option>
+                                <option value="UG">Uganda (UG)</option>
+                                <option value="UA">Ukraine (UA)</option>
+                                <option value="AE">United Arab Emirates (AE)</option>
+                                <option value="GB">United Kingdom (GB)</option>
+                                <option value="US">United States (US)</option>
+                                <option value="UY">Uruguay (UY)</option>
+                                <option value="UZ">Uzbekistan (UZ)</option>
+                                <option value="VU">Vanuatu (VU)</option>
+                                <option value="VA">Vatican City (VA)</option>
+                                <option value="VE">Venezuela (VE)</option>
+                                <option value="VN">Vietnam (VN)</option>
+                                <option value="YE">Yemen (YE)</option>
+                                <option value="ZM">Zambia (ZM)</option>
+                                <option value="ZW">Zimbabwe (ZW)</option>
+                            </optgroup>
                         </select>
                     </div>
                     <div>
                         <label class="block text-slate-400 mb-1 font-medium">Regulatory Pillar</label>
-                        <select id="sim-pillar" class="w-full bg-slate-800 border-2 border-emerald-500/60 rounded-lg p-2 text-white font-semibold">
-                            <option value="Safety">Electrical Safety (IEC 62368-1 / National)</option>
-                            <option value="EMC">EMC & Radio (CISPR 32 / FCC / KN 32)</option>
-                            <option value="Environmental">Environmental (RoHS / REACH / Packaging)</option>
-                            <option value="All">All Three Pillars (Safety + EMC + Env)</option>
+                        <select id="sim-pillar" onchange="onSimPillarChange()" class="w-full bg-slate-800 border-2 border-emerald-500/60 rounded-lg p-2 text-white font-semibold focus:border-emerald-400 focus:outline-none">
+                            <option value="Safety" selected>Electrical Safety (IEC 62368-1 / National Safety)</option>
+                            <option value="EMC">EMC & Radio (CISPR 32 / FCC / KN 32 / CE)</option>
+                            <option value="Environmental">Environmental (RoHS / REACH / PFAS / Packaging)</option>
+                            <option value="All">All Three Pillars (Safety + EMC + Environmental)</option>
                         </select>
                     </div>
                 </div>
-                <div class="grid grid-cols-2 gap-2">
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-2.5">
                     <div>
                         <label class="block text-slate-400 mb-1 font-medium">Regulatory Authority</label>
-                        <input type="text" id="sim-authority" value="National Regulatory Authority" class="w-full bg-slate-800 border border-slate-700 rounded-lg p-2 text-white" required>
+                        <input type="text" id="sim-authority" value="Global Harmonization Council (WTO TBT / International Clearinghouse)" class="w-full bg-slate-800 border border-slate-700 rounded-lg p-2 text-white" required>
                     </div>
                     <div>
                         <label class="block text-slate-400 mb-1 font-medium">New / Mandated Standard</label>
-                        <input type="text" id="sim-standard" value="IEC 62368-1:2023 / Harmonized" class="w-full bg-slate-800 border border-slate-700 rounded-lg p-2 text-white" required>
+                        <input type="text" id="sim-standard" value="IEC 62368-1:2023 (Edition 4.0)" class="w-full bg-slate-800 border border-slate-700 rounded-lg p-2 text-white font-semibold text-emerald-400" required>
                     </div>
                 </div>
-                <div>
-                    <label class="block text-slate-400 mb-1 font-medium">Mandatory Transition Deadline</label>
-                    <input type="date" id="sim-deadline" value="2028-11-01" class="w-full bg-slate-800 border border-slate-700 rounded-lg p-2 text-white" required>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-2.5">
+                    <div>
+                        <label class="block text-slate-400 mb-1 font-medium">Mandatory Enforcement Deadline</label>
+                        <input type="date" id="sim-deadline" value="2028-12-31" class="w-full bg-slate-800 border border-slate-700 rounded-lg p-2 text-white" required>
+                    </div>
+                    <div>
+                        <label class="block text-slate-400 mb-1 font-medium">Affected Product Scope</label>
+                        <div class="p-2 bg-slate-800/80 rounded-lg border border-slate-700 text-slate-300 text-[11px] flex items-center space-x-2">
+                            <i data-lucide="layers" class="w-3.5 h-3.5 text-sky-400 shrink-0"></i>
+                            <span class="truncate">All SanDisk Storage Products (External SSD, Bus, Component)</span>
+                        </div>
+                    </div>
                 </div>
+
                 <div>
                     <label class="block text-slate-400 mb-1 font-medium">Executive Notice Summary</label>
-                    <textarea id="sim-summary" rows="3" class="w-full bg-slate-800 border border-slate-700 rounded-lg p-2 text-white" required>Official Gazette Notification: Mandating transition to updated safety standard for all solid-state storage equipment and external power supplies.</textarea>
+                    <textarea id="sim-summary" rows="2" class="w-full bg-slate-800 border border-slate-700 rounded-lg p-2 text-white" required>Worldwide Harmonization Notice: Mandating transition to IEC 62368-1 4th Edition covering updated touch temperature thresholds, external power adapter test limits, and fire enclosure barriers across all market access jurisdictions.</textarea>
                 </div>
-                <div class="pt-2 flex justify-end space-x-2">
-                    <button type="button" onclick="closeModal('modal-simulate-notice')" class="px-4 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700">Cancel</button>
-                    <button type="submit" id="btn-sim-submit" class="px-4 py-2 rounded-lg bg-amber-600 hover:bg-amber-500 text-white font-semibold flex items-center space-x-1.5">
-                        <i data-lucide="zap" class="w-4 h-4"></i>
-                        <span>Ingest Notice Live</span>
-                    </button>
+
+                <div class="pt-2 flex items-center justify-between border-t border-slate-800">
+                    <div class="text-[11px] text-slate-400 flex items-center space-x-1.5">
+                        <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                        <span id="sim-scope-status-text" class="font-medium text-slate-300">Target: All 205 Countries Worldwide</span>
+                    </div>
+                    <div class="flex space-x-2">
+                        <button type="button" onclick="closeModal('modal-simulate-notice')" class="px-4 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 text-xs font-semibold transition">Cancel</button>
+                        <button type="submit" id="btn-sim-submit" class="px-4 py-2 rounded-lg bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white font-bold flex items-center space-x-1.5 shadow-lg shadow-emerald-900/30 text-xs transition">
+                            <i data-lucide="zap" class="w-4 h-4"></i>
+                            <span id="btn-sim-text">Simulate All 205 Countries at Once</span>
+                        </button>
+                    </div>
                 </div>
             </form>
         </div>
@@ -979,20 +1274,126 @@
             }
         }
 
+                let simCurrentScope = 'ALL';
+
+        function setSimScope(scope) {
+            simCurrentScope = scope;
+            const btnAll = document.getElementById('btn-scope-all');
+            const btnSingle = document.getElementById('btn-scope-single');
+            const bannerAll = document.getElementById('sim-scope-banner-all');
+            const countrySelect = document.getElementById('sim-country');
+            const btnSimText = document.getElementById('btn-sim-text');
+            const scopeStatus = document.getElementById('sim-scope-status-text');
+
+            if (scope === 'ALL') {
+                if (btnAll) btnAll.className = 'py-2 px-3 rounded-lg text-xs font-bold transition flex items-center justify-center space-x-2 bg-emerald-600 text-white shadow';
+                if (btnSingle) btnSingle.className = 'py-2 px-3 rounded-lg text-xs font-bold transition flex items-center justify-center space-x-2 text-slate-400 hover:text-slate-200';
+                if (bannerAll) bannerAll.classList.remove('hidden');
+                if (countrySelect) countrySelect.value = 'ALL';
+                if (btnSimText) btnSimText.innerText = 'Simulate All 205 Countries at Once';
+                if (scopeStatus) scopeStatus.innerText = 'Target: All 205 Countries Worldwide';
+            } else {
+                if (btnSingle) btnSingle.className = 'py-2 px-3 rounded-lg text-xs font-bold transition flex items-center justify-center space-x-2 bg-sky-600 text-white shadow';
+                if (btnAll) btnAll.className = 'py-2 px-3 rounded-lg text-xs font-bold transition flex items-center justify-center space-x-2 text-slate-400 hover:text-slate-200';
+                if (bannerAll) bannerAll.classList.add('hidden');
+                if (countrySelect && countrySelect.value === 'ALL') {
+                    countrySelect.value = 'IN';
+                }
+                const selName = countrySelect ? countrySelect.options[countrySelect.selectedIndex].text.split('(')[0].trim() : 'Selected Country';
+                if (btnSimText) btnSimText.innerText = `Simulate for ${selName}`;
+                if (scopeStatus) scopeStatus.innerText = `Target: ${selName}`;
+            }
+        }
+
+        function onSimCountryChange() {
+            const countrySelect = document.getElementById('sim-country');
+            if (!countrySelect) return;
+            if (countrySelect.value === 'ALL') {
+                setSimScope('ALL');
+            } else {
+                if (simCurrentScope === 'ALL') {
+                    setSimScope('SINGLE');
+                } else {
+                    const selName = countrySelect.options[countrySelect.selectedIndex].text.split('(')[0].trim();
+                    const btnSimText = document.getElementById('btn-sim-text');
+                    const scopeStatus = document.getElementById('sim-scope-status-text');
+                    if (btnSimText) btnSimText.innerText = `Simulate for ${selName}`;
+                    if (scopeStatus) scopeStatus.innerText = `Target: ${selName}`;
+                }
+            }
+        }
+
+        function onSimPillarChange() {
+            const pillar = document.getElementById('sim-pillar')?.value;
+            const stdInput = document.getElementById('sim-standard');
+            if (!stdInput) return;
+            if (pillar === 'Safety' && !stdInput.value.includes('CISPR') && !stdInput.value.includes('RoHS')) {
+                // keep safety
+            } else if (pillar === 'EMC') {
+                stdInput.value = 'CISPR 32:2026 / Class B (Harmonized)';
+            } else if (pillar === 'Environmental') {
+                stdInput.value = 'RoHS 4 / Global PFAS Restricted Substances Directive';
+            } else if (pillar === 'All') {
+                stdInput.value = 'IEC 62368-1 / CISPR 32 / RoHS 4 Harmonized';
+            }
+        }
+
+        function applySimPreset(presetKey) {
+            const authorityInput = document.getElementById('sim-authority');
+            const standardInput = document.getElementById('sim-standard');
+            const pillarSelect = document.getElementById('sim-pillar');
+            const deadlineInput = document.getElementById('sim-deadline');
+            const summaryInput = document.getElementById('sim-summary');
+
+            if (presetKey === 'safety_62368') {
+                if (pillarSelect) pillarSelect.value = 'Safety';
+                if (authorityInput) authorityInput.value = 'International Electrotechnical Commission (IEC) & Harmonized National Bodies';
+                if (standardInput) standardInput.value = 'IEC 62368-1:2023 (Edition 4.0)';
+                if (deadlineInput) deadlineInput.value = '2028-12-31';
+                if (summaryInput) summaryInput.value = 'Worldwide Harmonization Notice: Mandatory transition to IEC 62368-1 4th Edition covering updated touch temperature thresholds, external power adapter test limits, and fire enclosure barriers across all market access jurisdictions.';
+            } else if (presetKey === 'emc_cispr32') {
+                if (pillarSelect) pillarSelect.value = 'EMC';
+                if (authorityInput) authorityInput.value = 'CISPR / ITU & Global National Communications Authorities';
+                if (standardInput) standardInput.value = 'CISPR 32:2026 / Class B (Harmonized)';
+                if (deadlineInput) deadlineInput.value = '2027-09-30';
+                if (summaryInput) summaryInput.value = 'Global Gazette Circular: Mandating updated radiated emissions limits and measurement methods above 1GHz for multimedia and solid-state storage equipment.';
+            } else if (presetKey === 'env_rohs') {
+                if (pillarSelect) pillarSelect.value = 'Environmental';
+                if (authorityInput) authorityInput.value = 'Global Environmental Protection Harmonization Council';
+                if (standardInput) standardInput.value = 'RoHS 4 / Global PFAS Restricted Substances Directive';
+                if (deadlineInput) deadlineInput.value = '2027-03-01';
+                if (summaryInput) summaryInput.value = 'Worldwide Environmental Directive: Prohibiting intentional PFAS/PFOS in component packaging and adding revised MCCP/TBBP-A restriction thresholds for electronics.';
+            } else if (presetKey === 'tri_pillar') {
+                if (pillarSelect) pillarSelect.value = 'All';
+                if (authorityInput) authorityInput.value = 'WTO-TBT Global Regulatory Harmonization Framework';
+                if (standardInput) standardInput.value = 'IEC 62368-1 / CISPR 32 / RoHS 4 Harmonized';
+                if (deadlineInput) deadlineInput.value = '2028-06-30';
+                if (summaryInput) summaryInput.value = 'Universal Global Compliance Update: Synchronized multi-pillar mandate updating Safety, EMC, and Environmental standards across all 205 market access jurisdictions.';
+            }
+        }
+
         async function submitSimulationNotice(e) {
             e.preventDefault();
             const btn = document.getElementById('btn-sim-submit');
-            btn.disabled = true;
-            btn.innerText = 'Ingesting...';
+            const origHtml = btn ? btn.innerHTML : '';
+            if (btn) {
+                btn.disabled = true;
+                btn.innerHTML = '<span class="inline-block animate-spin mr-1.5">⏳</span> Ingesting across jurisdictions...';
+            }
+
+            const selectedCountry = document.getElementById('sim-country')?.value || 'ALL';
+            const pillar = document.getElementById('sim-pillar')?.value || 'Safety';
+            const authority = document.getElementById('sim-authority')?.value || 'Regulatory Authority';
+            const newStd = document.getElementById('sim-standard')?.value || 'Harmonized Standard';
 
             const payload = {
-                country_code: document.getElementById('sim-country').value,
-                pillar: document.getElementById('sim-pillar').value,
-                authority: document.getElementById('sim-authority').value,
-                new_standard: document.getElementById('sim-standard').value,
-                deadline: document.getElementById('sim-deadline').value,
-                summary: document.getElementById('sim-summary').value,
-                affected_categories: ['external_ssd_powered', 'external_ssd_bus', 'internal_ssd']
+                country_code: selectedCountry,
+                pillar: pillar,
+                authority: authority,
+                new_standard: newStd,
+                deadline: document.getElementById('sim-deadline')?.value || '2028-11-01',
+                summary: document.getElementById('sim-summary')?.value || 'Gazette Notification',
+                affected_categories: ['external_ssd_powered', 'external_ssd_bus', 'internal_ssd', 'card_reader', 'usb_drive']
             };
 
             try {
@@ -1003,16 +1404,25 @@
                 });
                 const data = await res.json();
                 closeModal('modal-simulate-notice');
-                showDownloadToast('Gazette Notice Auto-Ingested! Matrix updated.');
+
+                const countUpdated = data.affected_countries_count || (selectedCountry === 'ALL' ? 205 : 1);
+                if (countUpdated >= 200 || selectedCountry === 'ALL') {
+                    showDownloadToast(`⚡ Gazette Ingested! ALL 205 Countries updated to ${newStd} simultaneously!`);
+                } else {
+                    showDownloadToast(`⚡ Gazette Ingested! ${selectedCountry} updated to ${newStd}.`);
+                }
+
                 await loadSurveillanceStatus();
                 await loadProductMatrix();
                 await loadAlerts();
             } catch (err) {
                 alert('Simulation failed: ' + err);
             } finally {
-                btn.disabled = false;
-                btn.innerHTML = '<i data-lucide="zap" class="w-4 h-4 mr-1"></i> Ingest Notice Live';
-                lucide.createIcons();
+                if (btn) {
+                    btn.disabled = false;
+                    btn.innerHTML = origHtml;
+                    lucide.createIcons();
+                }
             }
         }
 
@@ -1078,8 +1488,15 @@
                                 </span>
                             </td>
                             <td class="px-4 py-3 whitespace-nowrap">
-                                ${c.is_safety_exempt ? `
-                                    <div class="space-y-1">
+                                <div class="space-y-1">
+                                    ${c.last_surveilled_date ? `
+                                        <div class="flex items-center space-x-1.5 text-[9px] text-emerald-400 font-mono mb-1 bg-emerald-950/70 px-2 py-0.5 rounded border border-emerald-700/60 inline-flex">
+                                            <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+                                            <span class="font-bold">Live Surveilled [${c.last_surveilled_pillar || 'Harmonized'}]:</span>
+                                            <span>${c.last_surveilled_date}</span>
+                                        </div>
+                                    ` : ''}
+                                    ${c.is_safety_exempt ? `
                                         <div class="flex items-center space-x-1.5">
                                             <span class="text-[9px] uppercase font-bold text-sky-400 bg-sky-950/80 px-1.5 py-0.5 rounded border border-sky-800/80">EMC</span>
                                             <span class="text-white font-medium text-[11px]">${c.emc_std}</span>
@@ -1092,9 +1509,7 @@
                                             <span class="text-emerald-400 font-bold">✓</span>
                                             <span class="text-slate-400">Safety: Exempt (SELV / Class III)</span>
                                         </div>
-                                    </div>
-                                ` : c.safety_status === 'Component Recognition' ? `
-                                    <div class="space-y-1">
+                                    ` : c.safety_status === 'Component Recognition' ? `
                                         <div class="flex items-center space-x-1.5">
                                             <span class="text-[9px] uppercase font-bold text-purple-400 bg-purple-950/80 px-1.5 py-0.5 rounded border border-purple-800/80">Component Safety</span>
                                             <span class="text-white font-medium text-[11px]">${c.safety_std}</span>
@@ -1103,19 +1518,15 @@
                                             <span class="text-[9px] uppercase font-bold text-sky-400 bg-sky-950/80 px-1.5 py-0.5 rounded border border-sky-800/80">EMC</span>
                                             <span class="text-slate-300 text-[11px]">${c.emc_std}</span>
                                         </div>
-                                    </div>
-                                ` : `
-                                    <div class="space-y-1">
+                                        <div class="flex items-center space-x-1.5">
+                                            <span class="text-[9px] uppercase font-bold text-emerald-400 bg-emerald-950/80 px-1.5 py-0.5 rounded border border-emerald-800/80">Env</span>
+                                            <span class="text-slate-400 text-[10px]">${c.env_std}</span>
+                                        </div>
+                                    ` : `
                                         <div class="flex items-center space-x-1.5">
                                             <span class="text-[9px] uppercase font-bold text-rose-400 bg-rose-950/80 px-1.5 py-0.5 rounded border border-rose-800/80">Safety (Mains)</span>
                                             <span class="text-white font-medium text-[11px]">${c.safety_std}</span>
                                         </div>
-                                        ${c.last_surveilled_date ? `
-                                            <div class="flex items-center space-x-1 text-[9px] text-emerald-400 font-mono mt-0.5">
-                                                <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
-                                                <span>Live Surveilled [${c.last_surveilled_pillar || 'Multi-Pillar'}]: ${c.last_surveilled_date}</span>
-                                            </div>
-                                        ` : ''}
                                         <div class="flex items-center space-x-1.5">
                                             <span class="text-[9px] uppercase font-bold text-sky-400 bg-sky-950/80 px-1.5 py-0.5 rounded border border-sky-800/80">EMC</span>
                                             <span class="text-slate-300 text-[11px]">${c.emc_std}</span>
@@ -1124,8 +1535,8 @@
                                             <span class="text-[9px] uppercase font-bold text-emerald-400 bg-emerald-950/80 px-1.5 py-0.5 rounded border border-emerald-800/80">Env</span>
                                             <span class="text-slate-400 text-[10px]">${c.env_std}</span>
                                         </div>
-                                    </div>
-                                `}
+                                    `}
+                                </div>
                             </td>
                             <td class="px-4 py-3">
                                 <div class="max-w-md">${docPills}</div>
