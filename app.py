@@ -91,6 +91,9 @@ def api_gma_by_product():
                 continue
             elif type_filter == "sdoc" and ("Supplier Declaration" not in req_type and "Exempt" not in req_type):
                 continue
+            elif type_filter in ["env", "environmental", "pfas"]:
+                # Matches all countries since all have statutory environmental mandates
+                pass
         if region != "all" and region != "" and region not in c["region"].lower():
             continue
         if search:
@@ -102,6 +105,10 @@ def api_gma_by_product():
                 search in c.get("national_safety_std", "").lower() or
                 search in c.get("emc_std", "").lower() or
                 search in c.get("env_std", "").lower() or
+                search in c.get("rohs_std", "").lower() or
+                search in c.get("pfas_std", "").lower() or
+                search in c.get("packaging_std", "").lower() or
+                search in c.get("epr_std", "").lower() or
                 any(search in d.lower() for d in c["required_documents"]) or
                 any(search in m.lower() for m in c["marks"])
             )

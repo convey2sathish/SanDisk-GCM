@@ -501,6 +501,232 @@ REGULATION_ALERTS = [
             "State explicit 'Defined Support Period' for security maintenance on public support documentation",
             "Provide physical or digital access to the Statement of Compliance with every UK retail shipment"
         ]
+    },
+    {
+        "id": "ALERT-ENV-01",
+        "title": "US EPA TSCA Section 8(a)(7) — Mandatory Reporting of PFAS in Electronic Articles & Storage Peripherals",
+        "region": "Americas",
+        "country": "United States",
+        "standard": "TSCA 40 CFR Part 705 (PFAS Reporting Rule)",
+        "severity": "Critical",
+        "effective_date": "2026-05-08",
+        "affected_categories": ["sd_card", "micro_sd", "sd_express", "cf_card", "gaming_card", "usb_drive", "internal_ssd", "external_ssd_bus", "external_ssd_powered", "enterprise_ssd", "card_reader"],
+        "summary": "EPA final rule under TSCA Section 8(a)(7) mandates one-time retrospective reporting of manufactured or imported articles containing per- and polyfluoroalkyl substances (PFAS) since 2011, including electronic storage drives, cables, and packaging.",
+        "action_required": "Execute supply chain chemical inquiry to identify all PFAS-containing components (thermal pads, fluoropolymer wire jackets, lubricants, mold compounds) and prepare EPA CDX reporting submission.",
+        "status": "Mandatory Filing Window",
+        "source": "US Environmental Protection Agency (EPA)",
+        "detailed_summary": "The US Environmental Protection Agency (EPA) published its landmark Final Rule under Section 8(a)(7) of the Toxic Substances Control Act (TSCA), codified at 40 CFR Part 705. The rule establishes unprecedented reporting obligations for any entity that has manufactured or imported for commercial purposes any chemical substance, mixture, or article containing per- and polyfluoroalkyl substances (PFAS) in any year since January 1, 2011. Crucially for the electronics and storage industry, the rule contains NO de minimis threshold exemption and applies fully to 'article importers'. Solid-state drives, USB thumb drives, memory cards, and their peripheral cables frequently incorporate PFAS chemistries in fluoropolymer wire insulations (e.g. PTFE/FEP), thermal interface materials (TIMs), anti-friction coatings on mechanical connectors, and printed circuit board solder masks.",
+        "technical_impact": "Article importers must report chemical identity, specific CAS numbers, trade names, quantities imported per year since 2011, customer exposure scenarios, and disposal pathways using EPA Central Data Exchange (CDX). Due diligence requires issuing IPC-1752A Class D inquiries to all NAND wafer suppliers, PCB assemblers, and enclosure molders.",
+        "timeline_milestones": [
+            {"phase": "EPA TSCA 8(a)(7) Final Rule Promulgation", "date": "2023-10-11", "status": "Completed"},
+            {"phase": "EPA Central Data Exchange (CDX) Portal Opens for Submissions", "date": "2025-11-12", "status": "Active"},
+            {"phase": "Mandatory Electronic Submission Deadline for Article Importers", "date": "2026-05-08", "status": "Enforcement Deadline"}
+        ],
+        "official_links": [
+            {"label": "US EPA TSCA Section 8(a)(7) Official PFAS Reporting Portal", "url": "https://www.epa.gov/assessing-and-managing-chemicals-under-tsca/tsca-section-8a7-reporting-and-recordkeeping-requirements"},
+            {"label": "e-CFR 40 CFR Part 705 Full Legal Text", "url": "https://www.ecfr.gov/current/title-40/chapter-I/subchapter-R/part-705"},
+            {"label": "EPA Central Data Exchange (CDX) Submission System", "url": "https://cdx.epa.gov"}
+        ],
+        "compliance_checklist": [
+            "Issue chemical due diligence questionnaires to all component vendors for PFAS CAS numbers",
+            "Screen Bill of Materials (BOM) for high-frequency cables (PTFE), thermal gap pads, and connector platings",
+            "Calculate annual historical US import volumes in kilograms for all solid-state storage SKUs since 2011",
+            "Submit completed Form U reporting packages via EPA Central Data Exchange (CDX) prior to cutover deadline"
+        ]
+    },
+    {
+        "id": "ALERT-ENV-02",
+        "title": "EU Packaging & Packaging Waste Regulation (PPWR) — Recycled Plastic Content & Heavy Metal Limits",
+        "region": "Europe & Eurasia",
+        "country": "European Union (EU 27)",
+        "standard": "EU PPWR (Repealing Directive 94/62/EC)",
+        "severity": "Critical",
+        "effective_date": "2026-12-31",
+        "affected_categories": ["sd_card", "micro_sd", "sd_express", "cf_card", "gaming_card", "usb_drive", "internal_ssd", "external_ssd_bus", "external_ssd_powered", "card_reader"],
+        "summary": "European Parliament and Council adopted the new Packaging and Packaging Waste Regulation (PPWR). Mandates 100% recyclable packaging by 2030, minimum post-consumer recycled plastic thresholds, and strict ban on PFAS in food/consumer contact packaging.",
+        "action_required": "Redesign retail blister packs and drive cartons to incorporate minimum 35% post-consumer recycled (PCR) plastic content, eliminate unnecessary voids (>50% empty space ban), and audit heavy metal limits (<100 ppm).",
+        "status": "Final Adoption Active",
+        "source": "European Parliament / Council of the European Union",
+        "detailed_summary": "The European Union has finalized the definitive Packaging and Packaging Waste Regulation (PPWR), replacing the legacy Directive 94/62/EC with directly applicable statutory obligations across all 27 EU Member States. Designed to combat escalating packaging waste and fossil plastic dependency, the PPWR establishes binding targets for electronic equipment packaging: (1) All packaging must be designed for recycling (DfR) and achieve recyclability performance grades A, B, or C by 2030; (2) Plastic packaging components must contain mandatory minimum post-consumer recycled (PCR) plastic percentages (35% target); (3) Maximum empty space ratio of 50% for e-commerce and retail multipacks, eliminating oversized display packaging; (4) Total concentration of heavy metals (Lead, Cadmium, Mercury, Hexavalent Chromium) must not exceed 100 mg/kg; (5) Explicit ban on intentional PFAS addition in packaging materials.",
+        "technical_impact": "Requires transition from virgin thermoformed PVC/PET blister trays to verified post-consumer recycled (rPET) or certified cellulose/paper pulp trays. Packaging engineering must recalculate box volume-to-drive ratios to satisfy maximum 50% void ratio limits.",
+        "timeline_milestones": [
+            {"phase": "EU Council & Parliament Formal Political Agreement", "date": "2024-04-24", "status": "Completed"},
+            {"phase": "Official Journal Publication & 18-Month Entry into Force", "date": "2024-12-01", "status": "Active"},
+            {"phase": "Mandatory Packaging Heavy Metal & Empty Space Ratio Enforcement", "date": "2026-12-31", "status": "Enforcement Cutover"},
+            {"phase": "Mandatory Minimum Recycled Plastic Content Enforcement", "date": "2030-01-01", "status": "Future Target"}
+        ],
+        "official_links": [
+            {"label": "European Commission Packaging Waste Policy Portal", "url": "https://environment.ec.europa.eu/topics/waste-and-recycling/packaging-waste_en"},
+            {"label": "EUR-Lex Legislative Observatory on PPWR", "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:52022PC0677"},
+            {"label": "EPR Packaging Producer Compliance Register Guidelines", "url": "https://www.pro-e.org"}
+        ],
+        "compliance_checklist": [
+            "Audit all retail blister packs and clamshell packaging for heavy metals (< 100 ppm total Pb/Cd/Hg/Cr VI)",
+            "Obtain third-party Chain of Custody certification (ISO 14021) for recycled plastic (rPET) content in drive packaging",
+            "Perform void-space volume calculation ensuring package-to-product ratio complies with 50% limit",
+            "Register packaging volumes and pay Extended Producer Responsibility (EPR) eco-fees across all EU sales countries"
+        ]
+    },
+    {
+        "id": "ALERT-ENV-03",
+        "title": "France AGEC Law — Mandatory Triman Logo & Info-tri Material Sorting Signage on Packaging",
+        "region": "Europe & Eurasia",
+        "country": "France",
+        "standard": "Decree No. 2021-835 / French Environmental Code (AGEC Law)",
+        "severity": "Warning",
+        "effective_date": "Enforced",
+        "affected_categories": ["sd_card", "micro_sd", "sd_express", "cf_card", "gaming_card", "usb_drive", "internal_ssd", "external_ssd_bus", "external_ssd_powered", "card_reader"],
+        "summary": "French customs (DGCCRF) actively enforces mandatory Triman logo combined with harmonized Info-tri sorting signage on all consumer packaging, electronics, and accessories placed on the French market. Non-compliant artwork triggers port seizures and fines up to €15,000 per SKU.",
+        "action_required": "Review packaging artwork for all SanDisk products distributed in France to verify valid Triman logo, separation symbols (Bac Jaune sorting instructions), and Eco-Emballages producer ID.",
+        "status": "Active Customs Enforcement",
+        "source": "French Ministry of Ecological Transition / DGCCRF",
+        "detailed_summary": "Under Article L. 541-9-3 of the French Environmental Code and Decree No. 2021-835 issued under the AGEC Law (Anti-Waste for a Circular Economy), any consumer product subject to Extended Producer Responsibility (EPR) distributed in France must display the standardized Triman logo accompanied by the 'Info-tri' waste sorting signage. For storage hardware (flash cards, SSDs, USB drives), this signage must explicitly decompose the packaging elements into their respective sorting streams (e.g. Cardboard box -> Bac Jaune / Yellow Sorting Bin; Plastic blister tray -> Bac Jaune / Tri de tous les emballages). If the surface area of the largest face of the packaging is under 10 cm², sorting information may be provided digitally via website, but products with package faces between 10 cm² and 20 cm² must still carry the Triman emblem physically.",
+        "technical_impact": "Artwork compliance requires obtaining the official vectorized graphical charters from certified French Producer Responsibility Organizations (Citeo for packaging, Ecosystem or Ecologic for electronic hardware WEEE). Absence of the Info-tri banner triggers fines up to €3,000 for an individual and €15,000 for a legal entity per non-compliant SKU.",
+        "timeline_milestones": [
+            {"phase": "Publication of Decree No. 2021-835", "date": "2021-06-29", "status": "Completed"},
+            {"phase": "Transition Deadline for Existing Stock Exhaustion", "date": "2023-03-09", "status": "Completed"},
+            {"phase": "Active Customs (DGCCRF) Market Audits & Fines Enforced", "date": "2026-01-01", "status": "Active Enforcement"}
+        ],
+        "official_links": [
+            {"label": "Citeo Official Info-tri Packaging Guidelines & Graphics Charter", "url": "https://www.citeo.com/info-tri"},
+            {"label": "ADEME French Agency for Ecological Transition", "url": "https://www.ademe.fr/en"},
+            {"label": "Legifrance Decree No. 2021-835 Full Statutory Text", "url": "https://www.legifrance.gouv.fr/jorf/id/JORFTEXT000043714227"}
+        ],
+        "compliance_checklist": [
+            "Verify presence of Triman logo and Info-tri sorting pictogram on outer retail cardboard and plastic blisters",
+            "Confirm corporate Unique Identification Number (Identifiant Unique - IDU) issued by ADEME is displayed on invoices",
+            "Audit packaging size; ensure products with packaging face > 20 cm² carry full physical Info-tri artwork",
+            "Submit annual packaging tonnage declarations to Citeo / Adelphe before statutory deadlines"
+        ]
+    },
+    {
+        "id": "ALERT-ENV-04",
+        "title": "Italy Legislative Decree 116/2020 — Mandatory Alphanumeric Packaging Material Identification Coding",
+        "region": "Europe & Eurasia",
+        "country": "Italy",
+        "standard": "Legislative Decree 116/2020 (Decision 129/97/EC Material Coding)",
+        "severity": "Warning",
+        "effective_date": "Enforced",
+        "affected_categories": ["sd_card", "micro_sd", "sd_express", "cf_card", "gaming_card", "usb_drive", "internal_ssd", "external_ssd_bus", "external_ssd_powered", "card_reader"],
+        "summary": "Italian environmental law strictly mandates alphanumeric material identification coding in accordance with Decision 129/97/EC on all packaging components (e.g. PAP 20, PAP 21, PET 1, LDPE 4) plus consumer collection guidance in Italian.",
+        "action_required": "Ensure all product packaging intended for the Italian market incorporates statutory material codes (e.g. 'Scatola: PAP 21 - Carta', 'Blister: PET 1 - Plastica', 'Raccolta differenziata').",
+        "status": "Active Legal Enforcement",
+        "source": "Italian Ministry of Environment and Energy Security (MASE) / CONAI",
+        "detailed_summary": "Legislative Decree No. 116 of 3 September 2020, implementing European Directives (EU) 2018/851 on waste and (EU) 2018/852 on packaging waste, mandates comprehensive environmental labeling on all packaging released for consumption in Italy. All primary, secondary, and tertiary packaging must carry the alphanumeric material identification code established by Commission Decision 129/97/EC. For consumer packaging (B2C), the labeling must also clearly identify the material family (e.g. Carta, Plastica) and instruct the consumer on the correct waste collection stream ('Raccolta differenziata: Verifica le disposizioni del tuo Comune'). Non-compliant packaging faces severe administrative financial penalties ranging from €5,200 to €40,000 per violation.",
+        "technical_impact": "Each separate separable component of the drive packaging must be labeled individually. For example, if an SSD package consists of a printed cardboard outer box (PAP 21), a transparent thermoformed plastic insert (PET 1), and a polyethylene cable wrap (LDPE 4), each material must be identified with its specific alphanumeric code on the packaging or via an accessible Italian digital QR link.",
+        "timeline_milestones": [
+            {"phase": "Publication of Legislative Decree 116/2020", "date": "2020-09-03", "status": "Completed"},
+            {"phase": "Suspension Period Exhausted & Entry into Force", "date": "2023-01-01", "status": "Completed"},
+            {"phase": "CONAI & Customs Market Surveillance Audits Active", "date": "2026-01-01", "status": "Active Legal Enforcement"}
+        ],
+        "official_links": [
+            {"label": "CONAI Environmental Labeling Portal (e-Label Guidance)", "url": "https://www.etichetta-conai.com/en/"},
+            {"label": "Commission Decision 129/97/EC Material Identification System", "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:31997D0129"},
+            {"label": "Italian Ministry of Environment (MASE) Official Circular", "url": "https://www.mase.gov.it"}
+        ],
+        "compliance_checklist": [
+            "Decompose bill of materials for drive packaging into discrete separable components",
+            "Assign valid alphanumeric codes according to Decision 129/97/EC (e.g. Cardboard box: PAP 21; Tray: PET 1)",
+            "Include Italian consumer disposal phrasing: 'Raccolta differenziata. Verifica le disposizioni del tuo Comune'",
+            "Verify digital QR code alternative complies with CONAI guidelines if physical package area is constrained"
+        ]
+    },
+    {
+        "id": "ALERT-ENV-05",
+        "title": "India E-Waste Management Rules 2022 — Mandatory CPCB EPR Producer Portal Registration & RoHS Audit",
+        "region": "Asia-Pacific",
+        "country": "India",
+        "standard": "E-Waste (Management) Rules 2022 (CPCB Schedule II RoHS)",
+        "severity": "Critical",
+        "effective_date": "2026-07-01",
+        "affected_categories": ["external_ssd_powered", "external_ssd_bus", "internal_ssd", "usb_drive", "enterprise_ssd"],
+        "summary": "Central Pollution Control Board (CPCB) mandates all producers and importers of IT & Telecom storage equipment (Item Code ITEW) to hold valid EPR registration certificates and purchase electronic Extended Producer Responsibility credits to meet statutory recycling targets.",
+        "action_required": "File annual returns on the CPCB EPR portal, purchase required EPR recycling certificates for prior year import volumes, and maintain Schedule II RoHS technical files.",
+        "status": "Mandatory Annual Compliance",
+        "source": "Central Pollution Control Board (CPCB) / Ministry of Environment, Forest and Climate Change (MoEFCC)",
+        "detailed_summary": "The Ministry of Environment, Forest and Climate Change (MoEFCC) notified the E-Waste (Management) Rules 2022, establishing an electronic credit-based Extended Producer Responsibility (EPR) mechanism overseen by the Central Pollution Control Board (CPCB). Under Category ITEW (Information Technology and Telecommunication Equipment), manufacturers and commercial brand owners of storage units, solid-state drives, and server memory modules must register as 'Producers' on the CPCB centralized online portal. Producers are assigned statutory annual e-waste recycling targets (graduating to 70% and 80% of historical sales tonnage). To meet targets, producers must purchase EPR certificates from CPCB-registered recyclers. Import consignments without active CPCB EPR registration numbers will be blocked at Indian ports by Customs ICEGATE. In addition, Chapter V mandates adherence to Schedule II substance limits (equivalent to EU RoHS 10 substances), requiring self-declarations and component laboratory test files.",
+        "technical_impact": "Non-compliance triggers Environmental Compensation charges levied on producers per ton of unfulfilled recycling targets, alongside customs holds. Manufacturers must track historical shipment weights by SKU in metric tons and upload quarterly sales data to the CPCB portal.",
+        "timeline_milestones": [
+            {"phase": "Notification of E-Waste (Management) Rules 2022", "date": "2022-11-02", "status": "Completed"},
+            {"phase": "Online CPCB EPR Portal Launch & Registration Mandate", "date": "2023-04-01", "status": "Completed"},
+            {"phase": "Statutory Target Audit & Mandatory Annual Return Filing Deadline", "date": "2026-07-01", "status": "Enforcement Cutover"}
+        ],
+        "official_links": [
+            {"label": "CPCB Centralized EPR Portal for E-Waste", "url": "https://eprewastecpcb.in"},
+            {"label": "MoEFCC Gazette Notification E-Waste Rules 2022", "url": "https://cpcb.nic.in/e-waste/"},
+            {"label": "CPCB Standard Operating Procedure (SOP) for Producers", "url": "https://cpcb.nic.in/uploads/Projects/E-Waste/SOP_E_Waste_Rules_2022.pdf"}
+        ],
+        "compliance_checklist": [
+            "Maintain valid CPCB EPR Registration Certificate on Centralized Portal",
+            "Calculate annual net sales weight of storage equipment imported into India (ITEW category)",
+            "Purchase authenticated EPR recycling credits from registered recyclers to satisfy 70% target",
+            "Maintain Schedule II RoHS compliance declarations with ISO 17025 test reports for Lead, Cadmium, and Phthalates"
+        ]
+    },
+    {
+        "id": "ALERT-ENV-06",
+        "title": "US State-Level PFAS Bans — Maine LD 1503 & Minnesota Amara's Law Prohibitions in Electronic Packaging",
+        "region": "Americas",
+        "country": "United States (Maine / Minnesota / California)",
+        "standard": "Maine LD 1503 / Minnesota Ch. 60 (Amara's Law) / CA AB 1817",
+        "severity": "Critical",
+        "effective_date": "2026-01-01",
+        "affected_categories": ["sd_card", "micro_sd", "sd_express", "cf_card", "gaming_card", "usb_drive", "internal_ssd", "external_ssd_bus", "external_ssd_powered", "card_reader"],
+        "summary": "State laws in Maine and Minnesota prohibit the commercial sale of any product or packaging containing intentionally added PFAS chemicals. Affects thermal greases, anti-fingerprint coatings, fluoropolymer cables, and packaging moisture barriers.",
+        "action_required": "Conduct vendor screening to certify zero intentionally added PFAS in all consumer packaging materials, retail boxes, and exterior enclosure surface treatments.",
+        "status": "State Enforcement Active",
+        "source": "Maine DEP / Minnesota Pollution Control Agency (MPCA)",
+        "detailed_summary": "State legislative bodies across the United States have bypassed federal timelines by enacting direct commercial sales prohibitions on products containing intentionally added per- and polyfluoroalkyl substances (PFAS). Under Minnesota's Amara's Law (Minn. Stat. § 116.943) and Maine Public Law 2021, c. 477 (as amended by LD 1537), manufacturers are legally barred from offering for sale in those states products containing intentionally added PFAS, with early bans specifically targeting packaging, carpets, and cookware, followed by broad electronic product cutovers by 2030. California AB 1817 and AB 652 establish complementary chemical bans. Crucially for solid-state storage, fluorinated coatings, fluorinated barrier films in drive packaging, low-surface-energy surface treatments on USB shells, and PTFE-infused internal structural plastics must be tested to prove total organic fluorine (TOF) content is below statutory thresholds (typically 50-100 ppm).",
+        "technical_impact": "Requires total organic fluorine (TOF) combustion ion chromatography testing (EN 14582 / ASTM D7359). Manufacturers must furnish signed Non-Use Certifications from packaging converters and substrate molders.",
+        "timeline_milestones": [
+            {"phase": "Enactment of Maine LD 1503 and Minnesota Amara's Law", "date": "2021-2023", "status": "Completed"},
+            {"phase": "Mandatory Prohibition on PFAS in All Product Packaging Across 12+ US States", "date": "2024-01-01", "status": "Active"},
+            {"phase": "Mandatory State Reporting & Electronic Component Scrutiny", "date": "2026-01-01", "status": "Active Enforcement"}
+        ],
+        "official_links": [
+            {"label": "Maine Department of Environmental Protection (DEP) PFAS in Products Portal", "url": "https://www.maine.gov/dep/spills/topics/pfas/PFAS-products/index.html"},
+            {"label": "Minnesota Pollution Control Agency (MPCA) Amara's Law Guidelines", "url": "https://www.pca.state.mn.us/air-water-land-cleanup/pfas-in-products"},
+            {"label": "Toxics in Packaging Clearinghouse (TPCH) Model Legislation", "url": "https://toxicsinpackaging.org"}
+        ],
+        "compliance_checklist": [
+            "Obtain signed certifications from box and blister tray suppliers confirming zero intentionally added PFAS",
+            "Perform Total Organic Fluorine (TOF) laboratory testing on high-risk packaging barrier layers",
+            "Screen thermal interface materials (TIMs) used in external SSD heatsinks for fluorinated polymers",
+            "Maintain state compliance certification records ready for inspection by state Attorneys General"
+        ]
+    },
+    {
+        "id": "ALERT-ENV-07",
+        "title": "EU RoHS Recast (RoHS 4) & REACH Candidate List — Restrictions on TBBP-A and MCCPs in PCBAs",
+        "region": "Europe & Eurasia",
+        "country": "European Union (EU 27)",
+        "standard": "RoHS Recast Review (Directive 2011/65/EU Amendment) / REACH SVHC",
+        "severity": "Warning",
+        "effective_date": "2027-01-01",
+        "affected_categories": ["sd_card", "micro_sd", "sd_express", "cf_card", "gaming_card", "usb_drive", "internal_ssd", "external_ssd_bus", "external_ssd_powered", "enterprise_ssd", "card_reader"],
+        "summary": "European Commission study for RoHS review recommends restricting two key electronics industry chemicals: Tetrabromobisphenol A (TBBP-A flame retardant used in FR-4 PCB laminates) and Medium-Chain Chlorinated Paraffins (MCCPs used in cable jacketing).",
+        "action_required": "Engage printed circuit board (PCB) laminate suppliers and cable assembly houses to qualify halogen-free FR-4 alternatives and non-chlorinated elastomer jackets.",
+        "status": "Regulatory Impact Assessment",
+        "source": "European Commission DG Environment / Oeko-Institut",
+        "detailed_summary": "Under the mandatory periodic review of the EU RoHS Directive (Directive 2011/65/EU), the European Commission and technical consultants (Oeko-Institut / Fraunhofer IZM) have finalized the prioritization assessment for restricting additional hazardous substances in electrical and electronic equipment ('RoHS 4'). Among the prioritized candidate substances, two chemicals are ubiquitous in storage and computing hardware: (1) Tetrabromobisphenol A (TBBP-A, CAS 79-94-7), a brominated flame retardant reacted into epoxy resins for FR-4 printed circuit board laminates; (2) Medium-Chain Chlorinated Paraffins (MCCPs, chloroalkanes C14-C17), used as plasticizers and flame retardant additives in flexible PVC and synthetic rubber cables. Both substances are identified as Substances of Very High Concern (SVHC) under REACH due to persistent, bioaccumulative, and toxic (PBT) properties.",
+        "technical_impact": "If restricted under RoHS with a typical 0.1% (1,000 ppm) maximum concentration threshold, PCB fabricators must transition to phosphorus-based or alternative halogen-free flame retardant prepregs. Cable manufacturers must transition from plasticized PVC to thermoplastic elastomers (TPE) or polyurethane (TPU) without chlorinated paraffin additives.",
+        "timeline_milestones": [
+            {"phase": "Oeko-Institut Pack 15 Chemical Assessment Final Report", "date": "2021-03-01", "status": "Completed"},
+            {"phase": "European Commission RoHS Review Public Consultation", "date": "2024-06-30", "status": "Completed"},
+            {"phase": "Draft Delegated Directive for Substance Inclusion", "date": "2026-06-30", "status": "Upcoming"},
+            {"phase": "Earliest Enforcement Date with Typical 24-Month Transition Window", "date": "2027-01-01", "status": "Anticipated Cutover"}
+        ],
+        "official_links": [
+            {"label": "European Commission RoHS Directive Evaluation & Review", "url": "https://environment.ec.europa.eu/topics/waste-and-recycling/rohs-directive_en"},
+            {"label": "ECHA Candidate List of Substances of Very High Concern (SVHC)", "url": "https://echa.europa.eu/candidate-list-table"},
+            {"label": "Oeko-Institut RoHS Substance Review Study Portal", "url": "https://rohs.oeko.info"}
+        ],
+        "compliance_checklist": [
+            "Conduct chemical audit of FR-4 printed circuit board laminate specifications with fab houses",
+            "Evaluate halogen-free laminate alternatives (e.g. DOPO-based resin chemistries) for SSD PCBAs",
+            "Screen USB-C interface cable jackets for medium-chain chlorinated paraffins (MCCPs)",
+            "Verify all components on active BOM comply with REACH SVHC Candidate List (< 0.1% w/w threshold)"
+        ]
     }
 ]
 
@@ -1617,6 +1843,10 @@ def get_country_product_requirement(country_code, category_id):
         'national_safety_std': nat_safety,
         'emc_std': applicable_emc,
         'env_std': nat_env,
+        'rohs_std': country.get('rohs_std', nat_env),
+        'pfas_std': country.get('pfas_std', 'PFAS Reporting & Screening'),
+        'packaging_std': country.get('packaging_std', 'Packaging Heavy Metals & Recycled Content'),
+        'epr_std': country.get('epr_std', 'WEEE / E-Waste Producer Responsibility'),
         'last_surveilled_date': country.get('last_surveilled_date'),
         'last_surveilled_pillar': country.get('last_surveilled_pillar'),
         'surveillance_source': country.get('surveillance_source')

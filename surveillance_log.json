@@ -1,5 +1,1229 @@
 [
   {
+    "event_id": "SURV-SIM-1790013225",
+    "timestamp": "2026-09-21T17:53:45Z",
+    "country_code": "ALL",
+    "country_name": "All 205 Global Jurisdictions",
+    "authority": "Global Harmonization Council (WTO TBT / International Clearinghouse)",
+    "pillar": "All",
+    "source_id": "SRC-ALL-GAZETTE",
+    "source_name": "Global Harmonization Bulletin (All 205 Jurisdictions Auto-Ingested)",
+    "source_url": "https://epingalert.wto.org/en/GlobalHarmonizationNotice",
+    "old_standard": "Prior Standard",
+    "new_standard": "IEC 62368-1 / CISPR 32 / RoHS 4 Harmonized",
+    "effective_date": "2026-09-21",
+    "withdrawal_deadline": "2028-12-31",
+    "affected_categories": [
+      "external_ssd_powered",
+      "external_ssd_bus",
+      "internal_ssd",
+      "card_reader",
+      "usb_drive"
+    ],
+    "event_type": "Global Mandatory All Harmonization (All 205 Countries)",
+    "summary": "Worldwide Harmonization Notice: Mandating transition to IEC 62368-1 4th Edition covering updated touch temperature thresholds, external power adapter test limits, and fire enclosure barriers across all market access jurisdictions.",
+    "status": "Auto-Applied to Matrix",
+    "confidence_score": 0.99,
+    "impacted_products": [
+      {
+        "id": "PROD-006",
+        "sku": "SDDDC4-256G-G46",
+        "name": "SanDisk Ultra Dual Drive Luxe USB Type-C (256GB)",
+        "category_id": "usb_drive",
+        "category_name": "USB Flash Drive",
+        "hw_revision": "Rev D.0",
+        "controller": "SanDisk USB 3.2 Gen 1 Native Bridge ASIC",
+        "power_source": "5V Bus-powered (<3.0W)",
+        "market_label": "Global Markets",
+        "compliance_status": "Certified"
+      },
+      {
+        "id": "PROD-007",
+        "sku": "WDS200T2X0E",
+        "name": "WD_BLACK SN850X NVMe SSD (2TB)",
+        "category_id": "internal_ssd",
+        "category_name": "Internal SSD (M.2 NVMe / 2.5-inch SATA)",
+        "hw_revision": "Rev B.1",
+        "controller": "Western Digital 20-82-20035-B1 Proprietary NVMe",
+        "power_source": "Host internal 3.3V (7.5W peak)",
+        "market_label": "Global Markets",
+        "compliance_status": "Certified"
+      },
+      {
+        "id": "PROD-008",
+        "sku": "SDSSDE61-2T00-G25",
+        "name": "SanDisk Extreme Portable SSD (2TB - Bus-Powered)",
+        "category_id": "external_ssd_bus",
+        "category_name": "External SSD (Without Power Adaptor - Bus-Powered)",
+        "hw_revision": "Rev C.2",
+        "controller": "WD NVMe Controller + ASMedia ASM2362 USB Bridge",
+        "power_source": "USB-C Bus-powered (5V @ up to 2.5A, 12.5W max)",
+        "market_label": "Global Markets",
+        "compliance_status": "Certified"
+      },
+      {
+        "id": "PROD-009",
+        "sku": "SDPHF1A-018T-NBAAD",
+        "name": "SanDisk Professional G-DRIVE Enterprise Desktop (18TB - Powered)",
+        "category_id": "external_ssd_powered",
+        "category_name": "External SSD (With Power Adaptor - Mains Powered)",
+        "hw_revision": "Rev A.4",
+        "controller": "Enterprise RAID/SATA to USB 3.2 Gen2 Bridge ASIC",
+        "power_source": "External 100-240V AC/DC Power Brick (19V / 3.42A, 65W Level VI DoE)",
+        "market_label": "Global Markets",
+        "compliance_status": "Certified"
+      },
+      {
+        "id": "PROD-011",
+        "sku": "SDDR-489-G47",
+        "name": "SanDisk ImageMate PRO Multi-Card USB-C Reader",
+        "category_id": "card_reader",
+        "category_name": "Memory Card Reader (Multi-Card / USB-C)",
+        "hw_revision": "Rev B.1",
+        "controller": "Genesys Logic GL3224 Multi-LUN Card Reader Controller",
+        "power_source": "5V Bus-powered via USB Type-C (<5.0W)",
+        "market_label": "Global Markets",
+        "compliance_status": "Certified"
+      }
+    ],
+    "impacted_products_count": 5,
+    "affected_countries_count": 205,
+    "alert": {
+      "id": "ALERT-SURV-1790013226",
+      "title": "Global Harmonization Mandate: IEC 62368-1 / CISPR 32 / RoHS 4 Harmonized (All) Mandated Across All 205 Jurisdictions (#3226)",
+      "region": "Global (All 205 Jurisdictions)",
+      "country": "All 205 Global Jurisdictions",
+      "country_code": "ALL",
+      "standard": "IEC 62368-1 / CISPR 32 / RoHS 4 Harmonized",
+      "severity": "Warning",
+      "effective_date": "2028-12-31",
+      "affected_categories": [
+        "external_ssd_powered",
+        "external_ssd_bus",
+        "internal_ssd",
+        "card_reader",
+        "usb_drive"
+      ],
+      "summary": "[Worldwide Harmonization: All via Global Harmonization Bulletin (All 205 Jurisdictions Auto-Ingested)] Worldwide Harmonization Notice: Mandating transition to IEC 62368-1 4th Edition covering updated touch temperature thresholds, external power adapter test limits, and fire enclosure barriers across all market access jurisdictions. (Enforced across all 205 market access jurisdictions simultaneously).",
+      "action_required": "Audit portfolio technical files and certificates for IEC 62368-1 / CISPR 32 / RoHS 4 Harmonized compliance across all 205 destination markets prior to 2028-12-31.",
+      "status": "Auto-Detected & Live",
+      "source": "Global Harmonization Bulletin (All 205 Jurisdictions Auto-Ingested)",
+      "detailed_summary": "Autonomous surveillance scan detected a worldwide regulatory gazette harmonization notice issued by Global Harmonization Council (WTO TBT / International Clearinghouse). The standard IEC 62368-1 / CISPR 32 / RoHS 4 Harmonized governs All compliance across all 205 international market access jurisdictions for applicable storage and memory equipment.\n\nGlobal Gazette Summary: Worldwide Harmonization Notice: Mandating transition to IEC 62368-1 4th Edition covering updated touch temperature thresholds, external power adapter test limits, and fire enclosure barriers across all market access jurisdictions.\n\nManufacturers and compliance teams must verify product bills of materials, safety test files, and national mark conformity declarations across all regional sales destinations.",
+      "technical_impact": "Applicable Pillar: All Harmonized Regulations.\nNew Standard Reference: IEC 62368-1 / CISPR 32 / RoHS 4 Harmonized.\nApplies Worldwide to: external_ssd_powered, external_ssd_bus, internal_ssd, card_reader, usb_drive.\nMandatory Global Enforcement Cutover: 2028-12-31.\nGlobal Scope: All 205 countries and territories updated.",
+      "timeline_milestones": [
+        {
+          "phase": "Global Gazette Published & Ingested",
+          "date": "2026-09-21",
+          "status": "Active"
+        },
+        {
+          "phase": "Mandatory Global Cutover Deadline",
+          "date": "2028-12-31",
+          "status": "Enforcement Deadline"
+        }
+      ],
+      "official_links": [
+        {
+          "label": "WTO TBT Global Early Warning & Harmonization Gateway",
+          "url": "https://epingalert.wto.org/en/GlobalHarmonizationNotice"
+        },
+        {
+          "label": "International Technical Standards Specification (IEC 62368-1 / CISPR 32 / RoHS 4 Harmonized)",
+          "url": "https://www.google.com/search?q=IEC 62368-1 / CISPR 32 / RoHS 4 Harmonized+international+standard"
+        }
+      ],
+      "compliance_checklist": [
+        "Update global Declaration of Conformity and technical file to reference IEC 62368-1 / CISPR 32 / RoHS 4 Harmonized across all 205 markets",
+        "Verify laboratory test reports cover IEC 62368-1 / CISPR 32 / RoHS 4 Harmonized testing clauses and regional deviations",
+        "Perform bill of materials (BOM) compliance audit for all client and enterprise storage drives",
+        "Coordinate with local representatives and accredited certification bodies worldwide before 2028-12-31"
+      ],
+      "impacted_products": [
+        {
+          "id": "PROD-006",
+          "sku": "SDDDC4-256G-G46",
+          "name": "SanDisk Ultra Dual Drive Luxe USB Type-C (256GB)",
+          "category_id": "usb_drive",
+          "category_name": "USB Flash Drive",
+          "hw_revision": "Rev D.0",
+          "controller": "SanDisk USB 3.2 Gen 1 Native Bridge ASIC",
+          "power_source": "5V Bus-powered (<3.0W)",
+          "market_label": "Global Markets",
+          "compliance_status": "Certified"
+        },
+        {
+          "id": "PROD-007",
+          "sku": "WDS200T2X0E",
+          "name": "WD_BLACK SN850X NVMe SSD (2TB)",
+          "category_id": "internal_ssd",
+          "category_name": "Internal SSD (M.2 NVMe / 2.5-inch SATA)",
+          "hw_revision": "Rev B.1",
+          "controller": "Western Digital 20-82-20035-B1 Proprietary NVMe",
+          "power_source": "Host internal 3.3V (7.5W peak)",
+          "market_label": "Global Markets",
+          "compliance_status": "Certified"
+        },
+        {
+          "id": "PROD-008",
+          "sku": "SDSSDE61-2T00-G25",
+          "name": "SanDisk Extreme Portable SSD (2TB - Bus-Powered)",
+          "category_id": "external_ssd_bus",
+          "category_name": "External SSD (Without Power Adaptor - Bus-Powered)",
+          "hw_revision": "Rev C.2",
+          "controller": "WD NVMe Controller + ASMedia ASM2362 USB Bridge",
+          "power_source": "USB-C Bus-powered (5V @ up to 2.5A, 12.5W max)",
+          "market_label": "Global Markets",
+          "compliance_status": "Certified"
+        },
+        {
+          "id": "PROD-009",
+          "sku": "SDPHF1A-018T-NBAAD",
+          "name": "SanDisk Professional G-DRIVE Enterprise Desktop (18TB - Powered)",
+          "category_id": "external_ssd_powered",
+          "category_name": "External SSD (With Power Adaptor - Mains Powered)",
+          "hw_revision": "Rev A.4",
+          "controller": "Enterprise RAID/SATA to USB 3.2 Gen2 Bridge ASIC",
+          "power_source": "External 100-240V AC/DC Power Brick (19V / 3.42A, 65W Level VI DoE)",
+          "market_label": "Global Markets",
+          "compliance_status": "Certified"
+        },
+        {
+          "id": "PROD-011",
+          "sku": "SDDR-489-G47",
+          "name": "SanDisk ImageMate PRO Multi-Card USB-C Reader",
+          "category_id": "card_reader",
+          "category_name": "Memory Card Reader (Multi-Card / USB-C)",
+          "hw_revision": "Rev B.1",
+          "controller": "Genesys Logic GL3224 Multi-LUN Card Reader Controller",
+          "power_source": "5V Bus-powered via USB Type-C (<5.0W)",
+          "market_label": "Global Markets",
+          "compliance_status": "Certified"
+        }
+      ],
+      "impacted_products_count": 5
+    }
+  },
+  {
+    "event_id": "SURV-SIM-1790013217",
+    "timestamp": "2026-09-21T17:53:37Z",
+    "country_code": "ALL",
+    "country_name": "All 205 Global Jurisdictions",
+    "authority": "Global Harmonization Council (WTO TBT / International Clearinghouse)",
+    "pillar": "All",
+    "source_id": "SRC-ALL-GAZETTE",
+    "source_name": "Global Harmonization Bulletin (All 205 Jurisdictions Auto-Ingested)",
+    "source_url": "https://epingalert.wto.org/en/GlobalHarmonizationNotice",
+    "old_standard": "Prior Standard",
+    "new_standard": "IEC 62368-1 / CISPR 32 / RoHS 4 Harmonized",
+    "effective_date": "2026-09-21",
+    "withdrawal_deadline": "2028-12-31",
+    "affected_categories": [
+      "external_ssd_powered",
+      "external_ssd_bus",
+      "internal_ssd",
+      "card_reader",
+      "usb_drive"
+    ],
+    "event_type": "Global Mandatory All Harmonization (All 205 Countries)",
+    "summary": "Worldwide Harmonization Notice: Mandating transition to IEC 62368-1 4th Edition covering updated touch temperature thresholds, external power adapter test limits, and fire enclosure barriers across all market access jurisdictions.",
+    "status": "Auto-Applied to Matrix",
+    "confidence_score": 0.99,
+    "impacted_products": [
+      {
+        "id": "PROD-006",
+        "sku": "SDDDC4-256G-G46",
+        "name": "SanDisk Ultra Dual Drive Luxe USB Type-C (256GB)",
+        "category_id": "usb_drive",
+        "category_name": "USB Flash Drive",
+        "hw_revision": "Rev D.0",
+        "controller": "SanDisk USB 3.2 Gen 1 Native Bridge ASIC",
+        "power_source": "5V Bus-powered (<3.0W)",
+        "market_label": "Global Markets",
+        "compliance_status": "Certified"
+      },
+      {
+        "id": "PROD-007",
+        "sku": "WDS200T2X0E",
+        "name": "WD_BLACK SN850X NVMe SSD (2TB)",
+        "category_id": "internal_ssd",
+        "category_name": "Internal SSD (M.2 NVMe / 2.5-inch SATA)",
+        "hw_revision": "Rev B.1",
+        "controller": "Western Digital 20-82-20035-B1 Proprietary NVMe",
+        "power_source": "Host internal 3.3V (7.5W peak)",
+        "market_label": "Global Markets",
+        "compliance_status": "Certified"
+      },
+      {
+        "id": "PROD-008",
+        "sku": "SDSSDE61-2T00-G25",
+        "name": "SanDisk Extreme Portable SSD (2TB - Bus-Powered)",
+        "category_id": "external_ssd_bus",
+        "category_name": "External SSD (Without Power Adaptor - Bus-Powered)",
+        "hw_revision": "Rev C.2",
+        "controller": "WD NVMe Controller + ASMedia ASM2362 USB Bridge",
+        "power_source": "USB-C Bus-powered (5V @ up to 2.5A, 12.5W max)",
+        "market_label": "Global Markets",
+        "compliance_status": "Certified"
+      },
+      {
+        "id": "PROD-009",
+        "sku": "SDPHF1A-018T-NBAAD",
+        "name": "SanDisk Professional G-DRIVE Enterprise Desktop (18TB - Powered)",
+        "category_id": "external_ssd_powered",
+        "category_name": "External SSD (With Power Adaptor - Mains Powered)",
+        "hw_revision": "Rev A.4",
+        "controller": "Enterprise RAID/SATA to USB 3.2 Gen2 Bridge ASIC",
+        "power_source": "External 100-240V AC/DC Power Brick (19V / 3.42A, 65W Level VI DoE)",
+        "market_label": "Global Markets",
+        "compliance_status": "Certified"
+      },
+      {
+        "id": "PROD-011",
+        "sku": "SDDR-489-G47",
+        "name": "SanDisk ImageMate PRO Multi-Card USB-C Reader",
+        "category_id": "card_reader",
+        "category_name": "Memory Card Reader (Multi-Card / USB-C)",
+        "hw_revision": "Rev B.1",
+        "controller": "Genesys Logic GL3224 Multi-LUN Card Reader Controller",
+        "power_source": "5V Bus-powered via USB Type-C (<5.0W)",
+        "market_label": "Global Markets",
+        "compliance_status": "Certified"
+      }
+    ],
+    "impacted_products_count": 5,
+    "affected_countries_count": 205,
+    "alert": {
+      "id": "ALERT-SURV-1790013217",
+      "title": "Global Harmonization Mandate: IEC 62368-1 / CISPR 32 / RoHS 4 Harmonized (All) Mandated Across All 205 Jurisdictions",
+      "region": "Global (All 205 Jurisdictions)",
+      "country": "All 205 Global Jurisdictions",
+      "country_code": "ALL",
+      "standard": "IEC 62368-1 / CISPR 32 / RoHS 4 Harmonized",
+      "severity": "Warning",
+      "effective_date": "2028-12-31",
+      "affected_categories": [
+        "external_ssd_powered",
+        "external_ssd_bus",
+        "internal_ssd",
+        "card_reader",
+        "usb_drive"
+      ],
+      "summary": "[Worldwide Harmonization: All via Global Harmonization Bulletin (All 205 Jurisdictions Auto-Ingested)] Worldwide Harmonization Notice: Mandating transition to IEC 62368-1 4th Edition covering updated touch temperature thresholds, external power adapter test limits, and fire enclosure barriers across all market access jurisdictions. (Enforced across all 205 market access jurisdictions simultaneously).",
+      "action_required": "Audit portfolio technical files and certificates for IEC 62368-1 / CISPR 32 / RoHS 4 Harmonized compliance across all 205 destination markets prior to 2028-12-31.",
+      "status": "Auto-Detected & Live",
+      "source": "Global Harmonization Bulletin (All 205 Jurisdictions Auto-Ingested)",
+      "detailed_summary": "Autonomous surveillance scan detected a worldwide regulatory gazette harmonization notice issued by Global Harmonization Council (WTO TBT / International Clearinghouse). The standard IEC 62368-1 / CISPR 32 / RoHS 4 Harmonized governs All compliance across all 205 international market access jurisdictions for applicable storage and memory equipment.\n\nGlobal Gazette Summary: Worldwide Harmonization Notice: Mandating transition to IEC 62368-1 4th Edition covering updated touch temperature thresholds, external power adapter test limits, and fire enclosure barriers across all market access jurisdictions.\n\nManufacturers and compliance teams must verify product bills of materials, safety test files, and national mark conformity declarations across all regional sales destinations.",
+      "technical_impact": "Applicable Pillar: All Harmonized Regulations.\nNew Standard Reference: IEC 62368-1 / CISPR 32 / RoHS 4 Harmonized.\nApplies Worldwide to: external_ssd_powered, external_ssd_bus, internal_ssd, card_reader, usb_drive.\nMandatory Global Enforcement Cutover: 2028-12-31.\nGlobal Scope: All 205 countries and territories updated.",
+      "timeline_milestones": [
+        {
+          "phase": "Global Gazette Published & Ingested",
+          "date": "2026-09-21",
+          "status": "Active"
+        },
+        {
+          "phase": "Mandatory Global Cutover Deadline",
+          "date": "2028-12-31",
+          "status": "Enforcement Deadline"
+        }
+      ],
+      "official_links": [
+        {
+          "label": "WTO TBT Global Early Warning & Harmonization Gateway",
+          "url": "https://epingalert.wto.org/en/GlobalHarmonizationNotice"
+        },
+        {
+          "label": "International Technical Standards Specification (IEC 62368-1 / CISPR 32 / RoHS 4 Harmonized)",
+          "url": "https://www.google.com/search?q=IEC 62368-1 / CISPR 32 / RoHS 4 Harmonized+international+standard"
+        }
+      ],
+      "compliance_checklist": [
+        "Update global Declaration of Conformity and technical file to reference IEC 62368-1 / CISPR 32 / RoHS 4 Harmonized across all 205 markets",
+        "Verify laboratory test reports cover IEC 62368-1 / CISPR 32 / RoHS 4 Harmonized testing clauses and regional deviations",
+        "Perform bill of materials (BOM) compliance audit for all client and enterprise storage drives",
+        "Coordinate with local representatives and accredited certification bodies worldwide before 2028-12-31"
+      ],
+      "impacted_products": [
+        {
+          "id": "PROD-006",
+          "sku": "SDDDC4-256G-G46",
+          "name": "SanDisk Ultra Dual Drive Luxe USB Type-C (256GB)",
+          "category_id": "usb_drive",
+          "category_name": "USB Flash Drive",
+          "hw_revision": "Rev D.0",
+          "controller": "SanDisk USB 3.2 Gen 1 Native Bridge ASIC",
+          "power_source": "5V Bus-powered (<3.0W)",
+          "market_label": "Global Markets",
+          "compliance_status": "Certified"
+        },
+        {
+          "id": "PROD-007",
+          "sku": "WDS200T2X0E",
+          "name": "WD_BLACK SN850X NVMe SSD (2TB)",
+          "category_id": "internal_ssd",
+          "category_name": "Internal SSD (M.2 NVMe / 2.5-inch SATA)",
+          "hw_revision": "Rev B.1",
+          "controller": "Western Digital 20-82-20035-B1 Proprietary NVMe",
+          "power_source": "Host internal 3.3V (7.5W peak)",
+          "market_label": "Global Markets",
+          "compliance_status": "Certified"
+        },
+        {
+          "id": "PROD-008",
+          "sku": "SDSSDE61-2T00-G25",
+          "name": "SanDisk Extreme Portable SSD (2TB - Bus-Powered)",
+          "category_id": "external_ssd_bus",
+          "category_name": "External SSD (Without Power Adaptor - Bus-Powered)",
+          "hw_revision": "Rev C.2",
+          "controller": "WD NVMe Controller + ASMedia ASM2362 USB Bridge",
+          "power_source": "USB-C Bus-powered (5V @ up to 2.5A, 12.5W max)",
+          "market_label": "Global Markets",
+          "compliance_status": "Certified"
+        },
+        {
+          "id": "PROD-009",
+          "sku": "SDPHF1A-018T-NBAAD",
+          "name": "SanDisk Professional G-DRIVE Enterprise Desktop (18TB - Powered)",
+          "category_id": "external_ssd_powered",
+          "category_name": "External SSD (With Power Adaptor - Mains Powered)",
+          "hw_revision": "Rev A.4",
+          "controller": "Enterprise RAID/SATA to USB 3.2 Gen2 Bridge ASIC",
+          "power_source": "External 100-240V AC/DC Power Brick (19V / 3.42A, 65W Level VI DoE)",
+          "market_label": "Global Markets",
+          "compliance_status": "Certified"
+        },
+        {
+          "id": "PROD-011",
+          "sku": "SDDR-489-G47",
+          "name": "SanDisk ImageMate PRO Multi-Card USB-C Reader",
+          "category_id": "card_reader",
+          "category_name": "Memory Card Reader (Multi-Card / USB-C)",
+          "hw_revision": "Rev B.1",
+          "controller": "Genesys Logic GL3224 Multi-LUN Card Reader Controller",
+          "power_source": "5V Bus-powered via USB Type-C (<5.0W)",
+          "market_label": "Global Markets",
+          "compliance_status": "Certified"
+        }
+      ],
+      "impacted_products_count": 5
+    }
+  },
+  {
+    "event_id": "SURV-SIM-1790013205",
+    "timestamp": "2026-09-21T17:53:25Z",
+    "country_code": "ALL",
+    "country_name": "All 205 Global Jurisdictions",
+    "authority": "Global Harmonization Council (WTO TBT / International Clearinghouse)",
+    "pillar": "Safety",
+    "source_id": "SRC-ALL-GAZETTE",
+    "source_name": "Global Harmonization Bulletin (All 205 Jurisdictions Auto-Ingested)",
+    "source_url": "https://epingalert.wto.org/en/GlobalHarmonizationNotice",
+    "old_standard": "Prior Standard",
+    "new_standard": "IEC 62368-1:2023 (Edition 4.0)",
+    "effective_date": "2026-09-21",
+    "withdrawal_deadline": "2028-12-31",
+    "affected_categories": [
+      "external_ssd_powered",
+      "external_ssd_bus",
+      "internal_ssd",
+      "card_reader",
+      "usb_drive"
+    ],
+    "event_type": "Global Mandatory Safety Harmonization (All 205 Countries)",
+    "summary": "Worldwide Harmonization Notice: Mandating transition to IEC 62368-1 4th Edition covering updated touch temperature thresholds, external power adapter test limits, and fire enclosure barriers across all market access jurisdictions.",
+    "status": "Auto-Applied to Matrix",
+    "confidence_score": 0.99,
+    "impacted_products": [
+      {
+        "id": "PROD-006",
+        "sku": "SDDDC4-256G-G46",
+        "name": "SanDisk Ultra Dual Drive Luxe USB Type-C (256GB)",
+        "category_id": "usb_drive",
+        "category_name": "USB Flash Drive",
+        "hw_revision": "Rev D.0",
+        "controller": "SanDisk USB 3.2 Gen 1 Native Bridge ASIC",
+        "power_source": "5V Bus-powered (<3.0W)",
+        "market_label": "Global Markets",
+        "compliance_status": "Certified"
+      },
+      {
+        "id": "PROD-007",
+        "sku": "WDS200T2X0E",
+        "name": "WD_BLACK SN850X NVMe SSD (2TB)",
+        "category_id": "internal_ssd",
+        "category_name": "Internal SSD (M.2 NVMe / 2.5-inch SATA)",
+        "hw_revision": "Rev B.1",
+        "controller": "Western Digital 20-82-20035-B1 Proprietary NVMe",
+        "power_source": "Host internal 3.3V (7.5W peak)",
+        "market_label": "Global Markets",
+        "compliance_status": "Certified"
+      },
+      {
+        "id": "PROD-008",
+        "sku": "SDSSDE61-2T00-G25",
+        "name": "SanDisk Extreme Portable SSD (2TB - Bus-Powered)",
+        "category_id": "external_ssd_bus",
+        "category_name": "External SSD (Without Power Adaptor - Bus-Powered)",
+        "hw_revision": "Rev C.2",
+        "controller": "WD NVMe Controller + ASMedia ASM2362 USB Bridge",
+        "power_source": "USB-C Bus-powered (5V @ up to 2.5A, 12.5W max)",
+        "market_label": "Global Markets",
+        "compliance_status": "Certified"
+      },
+      {
+        "id": "PROD-009",
+        "sku": "SDPHF1A-018T-NBAAD",
+        "name": "SanDisk Professional G-DRIVE Enterprise Desktop (18TB - Powered)",
+        "category_id": "external_ssd_powered",
+        "category_name": "External SSD (With Power Adaptor - Mains Powered)",
+        "hw_revision": "Rev A.4",
+        "controller": "Enterprise RAID/SATA to USB 3.2 Gen2 Bridge ASIC",
+        "power_source": "External 100-240V AC/DC Power Brick (19V / 3.42A, 65W Level VI DoE)",
+        "market_label": "Global Markets",
+        "compliance_status": "Certified"
+      },
+      {
+        "id": "PROD-011",
+        "sku": "SDDR-489-G47",
+        "name": "SanDisk ImageMate PRO Multi-Card USB-C Reader",
+        "category_id": "card_reader",
+        "category_name": "Memory Card Reader (Multi-Card / USB-C)",
+        "hw_revision": "Rev B.1",
+        "controller": "Genesys Logic GL3224 Multi-LUN Card Reader Controller",
+        "power_source": "5V Bus-powered via USB Type-C (<5.0W)",
+        "market_label": "Global Markets",
+        "compliance_status": "Certified"
+      }
+    ],
+    "impacted_products_count": 5,
+    "affected_countries_count": 205,
+    "alert": {
+      "id": "ALERT-SURV-1790013205",
+      "title": "Global Harmonization Mandate: IEC 62368-1:2023 (Edition 4.0) (Safety) Mandated Across All 205 Jurisdictions",
+      "region": "Global (All 205 Jurisdictions)",
+      "country": "All 205 Global Jurisdictions",
+      "country_code": "ALL",
+      "standard": "IEC 62368-1:2023 (Edition 4.0)",
+      "severity": "Warning",
+      "effective_date": "2028-12-31",
+      "affected_categories": [
+        "external_ssd_powered",
+        "external_ssd_bus",
+        "internal_ssd",
+        "card_reader",
+        "usb_drive"
+      ],
+      "summary": "[Worldwide Harmonization: Safety via Global Harmonization Bulletin (All 205 Jurisdictions Auto-Ingested)] Worldwide Harmonization Notice: Mandating transition to IEC 62368-1 4th Edition covering updated touch temperature thresholds, external power adapter test limits, and fire enclosure barriers across all market access jurisdictions. (Enforced across all 205 market access jurisdictions simultaneously).",
+      "action_required": "Audit portfolio technical files and certificates for IEC 62368-1:2023 (Edition 4.0) compliance across all 205 destination markets prior to 2028-12-31.",
+      "status": "Auto-Detected & Live",
+      "source": "Global Harmonization Bulletin (All 205 Jurisdictions Auto-Ingested)",
+      "detailed_summary": "Autonomous surveillance scan detected a worldwide regulatory gazette harmonization notice issued by Global Harmonization Council (WTO TBT / International Clearinghouse). The standard IEC 62368-1:2023 (Edition 4.0) governs Safety compliance across all 205 international market access jurisdictions for applicable storage and memory equipment.\n\nGlobal Gazette Summary: Worldwide Harmonization Notice: Mandating transition to IEC 62368-1 4th Edition covering updated touch temperature thresholds, external power adapter test limits, and fire enclosure barriers across all market access jurisdictions.\n\nManufacturers and compliance teams must verify product bills of materials, safety test files, and national mark conformity declarations across all regional sales destinations.",
+      "technical_impact": "Applicable Pillar: Safety Harmonized Regulations.\nNew Standard Reference: IEC 62368-1:2023 (Edition 4.0).\nApplies Worldwide to: external_ssd_powered, external_ssd_bus, internal_ssd, card_reader, usb_drive.\nMandatory Global Enforcement Cutover: 2028-12-31.\nGlobal Scope: All 205 countries and territories updated.",
+      "timeline_milestones": [
+        {
+          "phase": "Global Gazette Published & Ingested",
+          "date": "2026-09-21",
+          "status": "Active"
+        },
+        {
+          "phase": "Mandatory Global Cutover Deadline",
+          "date": "2028-12-31",
+          "status": "Enforcement Deadline"
+        }
+      ],
+      "official_links": [
+        {
+          "label": "WTO TBT Global Early Warning & Harmonization Gateway",
+          "url": "https://epingalert.wto.org/en/GlobalHarmonizationNotice"
+        },
+        {
+          "label": "International Technical Standards Specification (IEC 62368-1:2023 (Edition 4.0))",
+          "url": "https://www.google.com/search?q=IEC 62368-1:2023 (Edition 4.0)+international+standard"
+        }
+      ],
+      "compliance_checklist": [
+        "Update global Declaration of Conformity and technical file to reference IEC 62368-1:2023 (Edition 4.0) across all 205 markets",
+        "Verify laboratory test reports cover IEC 62368-1:2023 (Edition 4.0) testing clauses and regional deviations",
+        "Perform bill of materials (BOM) compliance audit for all client and enterprise storage drives",
+        "Coordinate with local representatives and accredited certification bodies worldwide before 2028-12-31"
+      ],
+      "impacted_products": [
+        {
+          "id": "PROD-006",
+          "sku": "SDDDC4-256G-G46",
+          "name": "SanDisk Ultra Dual Drive Luxe USB Type-C (256GB)",
+          "category_id": "usb_drive",
+          "category_name": "USB Flash Drive",
+          "hw_revision": "Rev D.0",
+          "controller": "SanDisk USB 3.2 Gen 1 Native Bridge ASIC",
+          "power_source": "5V Bus-powered (<3.0W)",
+          "market_label": "Global Markets",
+          "compliance_status": "Certified"
+        },
+        {
+          "id": "PROD-007",
+          "sku": "WDS200T2X0E",
+          "name": "WD_BLACK SN850X NVMe SSD (2TB)",
+          "category_id": "internal_ssd",
+          "category_name": "Internal SSD (M.2 NVMe / 2.5-inch SATA)",
+          "hw_revision": "Rev B.1",
+          "controller": "Western Digital 20-82-20035-B1 Proprietary NVMe",
+          "power_source": "Host internal 3.3V (7.5W peak)",
+          "market_label": "Global Markets",
+          "compliance_status": "Certified"
+        },
+        {
+          "id": "PROD-008",
+          "sku": "SDSSDE61-2T00-G25",
+          "name": "SanDisk Extreme Portable SSD (2TB - Bus-Powered)",
+          "category_id": "external_ssd_bus",
+          "category_name": "External SSD (Without Power Adaptor - Bus-Powered)",
+          "hw_revision": "Rev C.2",
+          "controller": "WD NVMe Controller + ASMedia ASM2362 USB Bridge",
+          "power_source": "USB-C Bus-powered (5V @ up to 2.5A, 12.5W max)",
+          "market_label": "Global Markets",
+          "compliance_status": "Certified"
+        },
+        {
+          "id": "PROD-009",
+          "sku": "SDPHF1A-018T-NBAAD",
+          "name": "SanDisk Professional G-DRIVE Enterprise Desktop (18TB - Powered)",
+          "category_id": "external_ssd_powered",
+          "category_name": "External SSD (With Power Adaptor - Mains Powered)",
+          "hw_revision": "Rev A.4",
+          "controller": "Enterprise RAID/SATA to USB 3.2 Gen2 Bridge ASIC",
+          "power_source": "External 100-240V AC/DC Power Brick (19V / 3.42A, 65W Level VI DoE)",
+          "market_label": "Global Markets",
+          "compliance_status": "Certified"
+        },
+        {
+          "id": "PROD-011",
+          "sku": "SDDR-489-G47",
+          "name": "SanDisk ImageMate PRO Multi-Card USB-C Reader",
+          "category_id": "card_reader",
+          "category_name": "Memory Card Reader (Multi-Card / USB-C)",
+          "hw_revision": "Rev B.1",
+          "controller": "Genesys Logic GL3224 Multi-LUN Card Reader Controller",
+          "power_source": "5V Bus-powered via USB Type-C (<5.0W)",
+          "market_label": "Global Markets",
+          "compliance_status": "Certified"
+        }
+      ],
+      "impacted_products_count": 5
+    }
+  },
+  {
+    "event_id": "SURV-SIM-1790012943",
+    "timestamp": "2026-09-21T17:49:03Z",
+    "country_code": "ALL",
+    "country_name": "All 205 Global Jurisdictions",
+    "authority": "Global Harmonization Council (WTO TBT / International Clearinghouse)",
+    "pillar": "All",
+    "source_id": "SRC-ALL-GAZETTE",
+    "source_name": "Global Harmonization Bulletin (All 205 Jurisdictions Auto-Ingested)",
+    "source_url": "https://epingalert.wto.org/en/GlobalHarmonizationNotice",
+    "old_standard": "Prior Standard",
+    "new_standard": "IEC 62368-1 / CISPR 32 / RoHS 4 Harmonized",
+    "effective_date": "2026-09-21",
+    "withdrawal_deadline": "2028-12-31",
+    "affected_categories": [
+      "external_ssd_powered",
+      "external_ssd_bus",
+      "internal_ssd",
+      "card_reader",
+      "usb_drive"
+    ],
+    "event_type": "Global Mandatory All Harmonization (All 205 Countries)",
+    "summary": "Worldwide Harmonization Notice: Mandating transition to IEC 62368-1 4th Edition covering updated touch temperature thresholds, external power adapter test limits, and fire enclosure barriers across all market access jurisdictions.",
+    "status": "Auto-Applied to Matrix",
+    "confidence_score": 0.99,
+    "impacted_products": [
+      {
+        "id": "PROD-006",
+        "sku": "SDDDC4-256G-G46",
+        "name": "SanDisk Ultra Dual Drive Luxe USB Type-C (256GB)",
+        "category_id": "usb_drive",
+        "category_name": "USB Flash Drive",
+        "hw_revision": "Rev D.0",
+        "controller": "SanDisk USB 3.2 Gen 1 Native Bridge ASIC",
+        "power_source": "5V Bus-powered (<3.0W)",
+        "market_label": "Global Markets",
+        "compliance_status": "Certified"
+      },
+      {
+        "id": "PROD-007",
+        "sku": "WDS200T2X0E",
+        "name": "WD_BLACK SN850X NVMe SSD (2TB)",
+        "category_id": "internal_ssd",
+        "category_name": "Internal SSD (M.2 NVMe / 2.5-inch SATA)",
+        "hw_revision": "Rev B.1",
+        "controller": "Western Digital 20-82-20035-B1 Proprietary NVMe",
+        "power_source": "Host internal 3.3V (7.5W peak)",
+        "market_label": "Global Markets",
+        "compliance_status": "Certified"
+      },
+      {
+        "id": "PROD-008",
+        "sku": "SDSSDE61-2T00-G25",
+        "name": "SanDisk Extreme Portable SSD (2TB - Bus-Powered)",
+        "category_id": "external_ssd_bus",
+        "category_name": "External SSD (Without Power Adaptor - Bus-Powered)",
+        "hw_revision": "Rev C.2",
+        "controller": "WD NVMe Controller + ASMedia ASM2362 USB Bridge",
+        "power_source": "USB-C Bus-powered (5V @ up to 2.5A, 12.5W max)",
+        "market_label": "Global Markets",
+        "compliance_status": "Certified"
+      },
+      {
+        "id": "PROD-009",
+        "sku": "SDPHF1A-018T-NBAAD",
+        "name": "SanDisk Professional G-DRIVE Enterprise Desktop (18TB - Powered)",
+        "category_id": "external_ssd_powered",
+        "category_name": "External SSD (With Power Adaptor - Mains Powered)",
+        "hw_revision": "Rev A.4",
+        "controller": "Enterprise RAID/SATA to USB 3.2 Gen2 Bridge ASIC",
+        "power_source": "External 100-240V AC/DC Power Brick (19V / 3.42A, 65W Level VI DoE)",
+        "market_label": "Global Markets",
+        "compliance_status": "Certified"
+      },
+      {
+        "id": "PROD-011",
+        "sku": "SDDR-489-G47",
+        "name": "SanDisk ImageMate PRO Multi-Card USB-C Reader",
+        "category_id": "card_reader",
+        "category_name": "Memory Card Reader (Multi-Card / USB-C)",
+        "hw_revision": "Rev B.1",
+        "controller": "Genesys Logic GL3224 Multi-LUN Card Reader Controller",
+        "power_source": "5V Bus-powered via USB Type-C (<5.0W)",
+        "market_label": "Global Markets",
+        "compliance_status": "Certified"
+      }
+    ],
+    "impacted_products_count": 5,
+    "affected_countries_count": 205,
+    "alert": {
+      "id": "ALERT-SURV-1790012943",
+      "title": "Global Harmonization Mandate: IEC 62368-1 / CISPR 32 / RoHS 4 Harmonized (All) Mandated Across All 205 Jurisdictions",
+      "region": "Global (All 205 Jurisdictions)",
+      "country": "All 205 Global Jurisdictions",
+      "country_code": "ALL",
+      "standard": "IEC 62368-1 / CISPR 32 / RoHS 4 Harmonized",
+      "severity": "Warning",
+      "effective_date": "2028-12-31",
+      "affected_categories": [
+        "external_ssd_powered",
+        "external_ssd_bus",
+        "internal_ssd",
+        "card_reader",
+        "usb_drive"
+      ],
+      "summary": "[Worldwide Harmonization: All via Global Harmonization Bulletin (All 205 Jurisdictions Auto-Ingested)] Worldwide Harmonization Notice: Mandating transition to IEC 62368-1 4th Edition covering updated touch temperature thresholds, external power adapter test limits, and fire enclosure barriers across all market access jurisdictions. (Enforced across all 205 market access jurisdictions simultaneously).",
+      "action_required": "Audit portfolio technical files and certificates for IEC 62368-1 / CISPR 32 / RoHS 4 Harmonized compliance across all 205 destination markets prior to 2028-12-31.",
+      "status": "Auto-Detected & Live",
+      "source": "Global Harmonization Bulletin (All 205 Jurisdictions Auto-Ingested)",
+      "detailed_summary": "Autonomous surveillance scan detected a worldwide regulatory gazette harmonization notice issued by Global Harmonization Council (WTO TBT / International Clearinghouse). The standard IEC 62368-1 / CISPR 32 / RoHS 4 Harmonized governs All compliance across all 205 international market access jurisdictions for applicable storage and memory equipment.\n\nGlobal Gazette Summary: Worldwide Harmonization Notice: Mandating transition to IEC 62368-1 4th Edition covering updated touch temperature thresholds, external power adapter test limits, and fire enclosure barriers across all market access jurisdictions.\n\nManufacturers and compliance teams must verify product bills of materials, safety test files, and national mark conformity declarations across all regional sales destinations.",
+      "technical_impact": "Applicable Pillar: All Harmonized Regulations.\nNew Standard Reference: IEC 62368-1 / CISPR 32 / RoHS 4 Harmonized.\nApplies Worldwide to: external_ssd_powered, external_ssd_bus, internal_ssd, card_reader, usb_drive.\nMandatory Global Enforcement Cutover: 2028-12-31.\nGlobal Scope: All 205 countries and territories updated.",
+      "timeline_milestones": [
+        {
+          "phase": "Global Gazette Published & Ingested",
+          "date": "2026-09-21",
+          "status": "Active"
+        },
+        {
+          "phase": "Mandatory Global Cutover Deadline",
+          "date": "2028-12-31",
+          "status": "Enforcement Deadline"
+        }
+      ],
+      "official_links": [
+        {
+          "label": "WTO TBT Global Early Warning & Harmonization Gateway",
+          "url": "https://epingalert.wto.org/en/GlobalHarmonizationNotice"
+        },
+        {
+          "label": "International Technical Standards Specification (IEC 62368-1 / CISPR 32 / RoHS 4 Harmonized)",
+          "url": "https://www.google.com/search?q=IEC 62368-1 / CISPR 32 / RoHS 4 Harmonized+international+standard"
+        }
+      ],
+      "compliance_checklist": [
+        "Update global Declaration of Conformity and technical file to reference IEC 62368-1 / CISPR 32 / RoHS 4 Harmonized across all 205 markets",
+        "Verify laboratory test reports cover IEC 62368-1 / CISPR 32 / RoHS 4 Harmonized testing clauses and regional deviations",
+        "Perform bill of materials (BOM) compliance audit for all client and enterprise storage drives",
+        "Coordinate with local representatives and accredited certification bodies worldwide before 2028-12-31"
+      ],
+      "impacted_products": [
+        {
+          "id": "PROD-006",
+          "sku": "SDDDC4-256G-G46",
+          "name": "SanDisk Ultra Dual Drive Luxe USB Type-C (256GB)",
+          "category_id": "usb_drive",
+          "category_name": "USB Flash Drive",
+          "hw_revision": "Rev D.0",
+          "controller": "SanDisk USB 3.2 Gen 1 Native Bridge ASIC",
+          "power_source": "5V Bus-powered (<3.0W)",
+          "market_label": "Global Markets",
+          "compliance_status": "Certified"
+        },
+        {
+          "id": "PROD-007",
+          "sku": "WDS200T2X0E",
+          "name": "WD_BLACK SN850X NVMe SSD (2TB)",
+          "category_id": "internal_ssd",
+          "category_name": "Internal SSD (M.2 NVMe / 2.5-inch SATA)",
+          "hw_revision": "Rev B.1",
+          "controller": "Western Digital 20-82-20035-B1 Proprietary NVMe",
+          "power_source": "Host internal 3.3V (7.5W peak)",
+          "market_label": "Global Markets",
+          "compliance_status": "Certified"
+        },
+        {
+          "id": "PROD-008",
+          "sku": "SDSSDE61-2T00-G25",
+          "name": "SanDisk Extreme Portable SSD (2TB - Bus-Powered)",
+          "category_id": "external_ssd_bus",
+          "category_name": "External SSD (Without Power Adaptor - Bus-Powered)",
+          "hw_revision": "Rev C.2",
+          "controller": "WD NVMe Controller + ASMedia ASM2362 USB Bridge",
+          "power_source": "USB-C Bus-powered (5V @ up to 2.5A, 12.5W max)",
+          "market_label": "Global Markets",
+          "compliance_status": "Certified"
+        },
+        {
+          "id": "PROD-009",
+          "sku": "SDPHF1A-018T-NBAAD",
+          "name": "SanDisk Professional G-DRIVE Enterprise Desktop (18TB - Powered)",
+          "category_id": "external_ssd_powered",
+          "category_name": "External SSD (With Power Adaptor - Mains Powered)",
+          "hw_revision": "Rev A.4",
+          "controller": "Enterprise RAID/SATA to USB 3.2 Gen2 Bridge ASIC",
+          "power_source": "External 100-240V AC/DC Power Brick (19V / 3.42A, 65W Level VI DoE)",
+          "market_label": "Global Markets",
+          "compliance_status": "Certified"
+        },
+        {
+          "id": "PROD-011",
+          "sku": "SDDR-489-G47",
+          "name": "SanDisk ImageMate PRO Multi-Card USB-C Reader",
+          "category_id": "card_reader",
+          "category_name": "Memory Card Reader (Multi-Card / USB-C)",
+          "hw_revision": "Rev B.1",
+          "controller": "Genesys Logic GL3224 Multi-LUN Card Reader Controller",
+          "power_source": "5V Bus-powered via USB Type-C (<5.0W)",
+          "market_label": "Global Markets",
+          "compliance_status": "Certified"
+        }
+      ],
+      "impacted_products_count": 5
+    }
+  },
+  {
+    "event_id": "SURV-SIM-1790012904",
+    "timestamp": "2026-09-21T17:48:24Z",
+    "country_code": "ALL",
+    "country_name": "All 205 Global Jurisdictions",
+    "authority": "Global Harmonization Council (WTO TBT / International Clearinghouse)",
+    "pillar": "Safety",
+    "source_id": "SRC-ALL-GAZETTE",
+    "source_name": "Global Harmonization Bulletin (All 205 Jurisdictions Auto-Ingested)",
+    "source_url": "https://epingalert.wto.org/en/GlobalHarmonizationNotice",
+    "old_standard": "Prior Standard",
+    "new_standard": "IEC 62368-1:2023 (Edition 4.0)",
+    "effective_date": "2026-09-21",
+    "withdrawal_deadline": "2028-12-31",
+    "affected_categories": [
+      "external_ssd_powered",
+      "external_ssd_bus",
+      "internal_ssd",
+      "card_reader",
+      "usb_drive"
+    ],
+    "event_type": "Global Mandatory Safety Harmonization (All 205 Countries)",
+    "summary": "Worldwide Harmonization Notice: Mandating transition to IEC 62368-1 4th Edition covering updated touch temperature thresholds, external power adapter test limits, and fire enclosure barriers across all market access jurisdictions.",
+    "status": "Auto-Applied to Matrix",
+    "confidence_score": 0.99,
+    "impacted_products": [
+      {
+        "id": "PROD-006",
+        "sku": "SDDDC4-256G-G46",
+        "name": "SanDisk Ultra Dual Drive Luxe USB Type-C (256GB)",
+        "category_id": "usb_drive",
+        "category_name": "USB Flash Drive",
+        "hw_revision": "Rev D.0",
+        "controller": "SanDisk USB 3.2 Gen 1 Native Bridge ASIC",
+        "power_source": "5V Bus-powered (<3.0W)",
+        "market_label": "Global Markets",
+        "compliance_status": "Certified"
+      },
+      {
+        "id": "PROD-007",
+        "sku": "WDS200T2X0E",
+        "name": "WD_BLACK SN850X NVMe SSD (2TB)",
+        "category_id": "internal_ssd",
+        "category_name": "Internal SSD (M.2 NVMe / 2.5-inch SATA)",
+        "hw_revision": "Rev B.1",
+        "controller": "Western Digital 20-82-20035-B1 Proprietary NVMe",
+        "power_source": "Host internal 3.3V (7.5W peak)",
+        "market_label": "Global Markets",
+        "compliance_status": "Certified"
+      },
+      {
+        "id": "PROD-008",
+        "sku": "SDSSDE61-2T00-G25",
+        "name": "SanDisk Extreme Portable SSD (2TB - Bus-Powered)",
+        "category_id": "external_ssd_bus",
+        "category_name": "External SSD (Without Power Adaptor - Bus-Powered)",
+        "hw_revision": "Rev C.2",
+        "controller": "WD NVMe Controller + ASMedia ASM2362 USB Bridge",
+        "power_source": "USB-C Bus-powered (5V @ up to 2.5A, 12.5W max)",
+        "market_label": "Global Markets",
+        "compliance_status": "Certified"
+      },
+      {
+        "id": "PROD-009",
+        "sku": "SDPHF1A-018T-NBAAD",
+        "name": "SanDisk Professional G-DRIVE Enterprise Desktop (18TB - Powered)",
+        "category_id": "external_ssd_powered",
+        "category_name": "External SSD (With Power Adaptor - Mains Powered)",
+        "hw_revision": "Rev A.4",
+        "controller": "Enterprise RAID/SATA to USB 3.2 Gen2 Bridge ASIC",
+        "power_source": "External 100-240V AC/DC Power Brick (19V / 3.42A, 65W Level VI DoE)",
+        "market_label": "Global Markets",
+        "compliance_status": "Certified"
+      },
+      {
+        "id": "PROD-011",
+        "sku": "SDDR-489-G47",
+        "name": "SanDisk ImageMate PRO Multi-Card USB-C Reader",
+        "category_id": "card_reader",
+        "category_name": "Memory Card Reader (Multi-Card / USB-C)",
+        "hw_revision": "Rev B.1",
+        "controller": "Genesys Logic GL3224 Multi-LUN Card Reader Controller",
+        "power_source": "5V Bus-powered via USB Type-C (<5.0W)",
+        "market_label": "Global Markets",
+        "compliance_status": "Certified"
+      }
+    ],
+    "impacted_products_count": 5,
+    "affected_countries_count": 205,
+    "alert": {
+      "id": "ALERT-SURV-1790012904",
+      "title": "Global Harmonization Mandate: IEC 62368-1:2023 (Edition 4.0) (Safety) Mandated Across All 205 Jurisdictions (#2904)",
+      "region": "Global (All 205 Jurisdictions)",
+      "country": "All 205 Global Jurisdictions",
+      "country_code": "ALL",
+      "standard": "IEC 62368-1:2023 (Edition 4.0)",
+      "severity": "Warning",
+      "effective_date": "2028-12-31",
+      "affected_categories": [
+        "external_ssd_powered",
+        "external_ssd_bus",
+        "internal_ssd",
+        "card_reader",
+        "usb_drive"
+      ],
+      "summary": "[Worldwide Harmonization: Safety via Global Harmonization Bulletin (All 205 Jurisdictions Auto-Ingested)] Worldwide Harmonization Notice: Mandating transition to IEC 62368-1 4th Edition covering updated touch temperature thresholds, external power adapter test limits, and fire enclosure barriers across all market access jurisdictions. (Enforced across all 205 market access jurisdictions simultaneously).",
+      "action_required": "Audit portfolio technical files and certificates for IEC 62368-1:2023 (Edition 4.0) compliance across all 205 destination markets prior to 2028-12-31.",
+      "status": "Auto-Detected & Live",
+      "source": "Global Harmonization Bulletin (All 205 Jurisdictions Auto-Ingested)",
+      "detailed_summary": "Autonomous surveillance scan detected a worldwide regulatory gazette harmonization notice issued by Global Harmonization Council (WTO TBT / International Clearinghouse). The standard IEC 62368-1:2023 (Edition 4.0) governs Safety compliance across all 205 international market access jurisdictions for applicable storage and memory equipment.\n\nGlobal Gazette Summary: Worldwide Harmonization Notice: Mandating transition to IEC 62368-1 4th Edition covering updated touch temperature thresholds, external power adapter test limits, and fire enclosure barriers across all market access jurisdictions.\n\nManufacturers and compliance teams must verify product bills of materials, safety test files, and national mark conformity declarations across all regional sales destinations.",
+      "technical_impact": "Applicable Pillar: Safety Harmonized Regulations.\nNew Standard Reference: IEC 62368-1:2023 (Edition 4.0).\nApplies Worldwide to: external_ssd_powered, external_ssd_bus, internal_ssd, card_reader, usb_drive.\nMandatory Global Enforcement Cutover: 2028-12-31.\nGlobal Scope: All 205 countries and territories updated.",
+      "timeline_milestones": [
+        {
+          "phase": "Global Gazette Published & Ingested",
+          "date": "2026-09-21",
+          "status": "Active"
+        },
+        {
+          "phase": "Mandatory Global Cutover Deadline",
+          "date": "2028-12-31",
+          "status": "Enforcement Deadline"
+        }
+      ],
+      "official_links": [
+        {
+          "label": "WTO TBT Global Early Warning & Harmonization Gateway",
+          "url": "https://epingalert.wto.org/en/GlobalHarmonizationNotice"
+        },
+        {
+          "label": "International Technical Standards Specification (IEC 62368-1:2023 (Edition 4.0))",
+          "url": "https://www.google.com/search?q=IEC 62368-1:2023 (Edition 4.0)+international+standard"
+        }
+      ],
+      "compliance_checklist": [
+        "Update global Declaration of Conformity and technical file to reference IEC 62368-1:2023 (Edition 4.0) across all 205 markets",
+        "Verify laboratory test reports cover IEC 62368-1:2023 (Edition 4.0) testing clauses and regional deviations",
+        "Perform bill of materials (BOM) compliance audit for all client and enterprise storage drives",
+        "Coordinate with local representatives and accredited certification bodies worldwide before 2028-12-31"
+      ],
+      "impacted_products": [
+        {
+          "id": "PROD-006",
+          "sku": "SDDDC4-256G-G46",
+          "name": "SanDisk Ultra Dual Drive Luxe USB Type-C (256GB)",
+          "category_id": "usb_drive",
+          "category_name": "USB Flash Drive",
+          "hw_revision": "Rev D.0",
+          "controller": "SanDisk USB 3.2 Gen 1 Native Bridge ASIC",
+          "power_source": "5V Bus-powered (<3.0W)",
+          "market_label": "Global Markets",
+          "compliance_status": "Certified"
+        },
+        {
+          "id": "PROD-007",
+          "sku": "WDS200T2X0E",
+          "name": "WD_BLACK SN850X NVMe SSD (2TB)",
+          "category_id": "internal_ssd",
+          "category_name": "Internal SSD (M.2 NVMe / 2.5-inch SATA)",
+          "hw_revision": "Rev B.1",
+          "controller": "Western Digital 20-82-20035-B1 Proprietary NVMe",
+          "power_source": "Host internal 3.3V (7.5W peak)",
+          "market_label": "Global Markets",
+          "compliance_status": "Certified"
+        },
+        {
+          "id": "PROD-008",
+          "sku": "SDSSDE61-2T00-G25",
+          "name": "SanDisk Extreme Portable SSD (2TB - Bus-Powered)",
+          "category_id": "external_ssd_bus",
+          "category_name": "External SSD (Without Power Adaptor - Bus-Powered)",
+          "hw_revision": "Rev C.2",
+          "controller": "WD NVMe Controller + ASMedia ASM2362 USB Bridge",
+          "power_source": "USB-C Bus-powered (5V @ up to 2.5A, 12.5W max)",
+          "market_label": "Global Markets",
+          "compliance_status": "Certified"
+        },
+        {
+          "id": "PROD-009",
+          "sku": "SDPHF1A-018T-NBAAD",
+          "name": "SanDisk Professional G-DRIVE Enterprise Desktop (18TB - Powered)",
+          "category_id": "external_ssd_powered",
+          "category_name": "External SSD (With Power Adaptor - Mains Powered)",
+          "hw_revision": "Rev A.4",
+          "controller": "Enterprise RAID/SATA to USB 3.2 Gen2 Bridge ASIC",
+          "power_source": "External 100-240V AC/DC Power Brick (19V / 3.42A, 65W Level VI DoE)",
+          "market_label": "Global Markets",
+          "compliance_status": "Certified"
+        },
+        {
+          "id": "PROD-011",
+          "sku": "SDDR-489-G47",
+          "name": "SanDisk ImageMate PRO Multi-Card USB-C Reader",
+          "category_id": "card_reader",
+          "category_name": "Memory Card Reader (Multi-Card / USB-C)",
+          "hw_revision": "Rev B.1",
+          "controller": "Genesys Logic GL3224 Multi-LUN Card Reader Controller",
+          "power_source": "5V Bus-powered via USB Type-C (<5.0W)",
+          "market_label": "Global Markets",
+          "compliance_status": "Certified"
+        }
+      ],
+      "impacted_products_count": 5
+    }
+  },
+  {
+    "event_id": "SURV-SIM-1790012899",
+    "timestamp": "2026-09-21T17:48:19Z",
+    "country_code": "ALL",
+    "country_name": "All 205 Global Jurisdictions",
+    "authority": "Global Harmonization Council (WTO TBT / International Clearinghouse)",
+    "pillar": "Safety",
+    "source_id": "SRC-ALL-GAZETTE",
+    "source_name": "Global Harmonization Bulletin (All 205 Jurisdictions Auto-Ingested)",
+    "source_url": "https://epingalert.wto.org/en/GlobalHarmonizationNotice",
+    "old_standard": "Prior Standard",
+    "new_standard": "IEC 62368-1:2023 (Edition 4.0)",
+    "effective_date": "2026-09-21",
+    "withdrawal_deadline": "2028-12-31",
+    "affected_categories": [
+      "external_ssd_powered",
+      "external_ssd_bus",
+      "internal_ssd",
+      "card_reader",
+      "usb_drive"
+    ],
+    "event_type": "Global Mandatory Safety Harmonization (All 205 Countries)",
+    "summary": "Worldwide Harmonization Notice: Mandating transition to IEC 62368-1 4th Edition covering updated touch temperature thresholds, external power adapter test limits, and fire enclosure barriers across all market access jurisdictions.",
+    "status": "Auto-Applied to Matrix",
+    "confidence_score": 0.99,
+    "impacted_products": [
+      {
+        "id": "PROD-006",
+        "sku": "SDDDC4-256G-G46",
+        "name": "SanDisk Ultra Dual Drive Luxe USB Type-C (256GB)",
+        "category_id": "usb_drive",
+        "category_name": "USB Flash Drive",
+        "hw_revision": "Rev D.0",
+        "controller": "SanDisk USB 3.2 Gen 1 Native Bridge ASIC",
+        "power_source": "5V Bus-powered (<3.0W)",
+        "market_label": "Global Markets",
+        "compliance_status": "Certified"
+      },
+      {
+        "id": "PROD-007",
+        "sku": "WDS200T2X0E",
+        "name": "WD_BLACK SN850X NVMe SSD (2TB)",
+        "category_id": "internal_ssd",
+        "category_name": "Internal SSD (M.2 NVMe / 2.5-inch SATA)",
+        "hw_revision": "Rev B.1",
+        "controller": "Western Digital 20-82-20035-B1 Proprietary NVMe",
+        "power_source": "Host internal 3.3V (7.5W peak)",
+        "market_label": "Global Markets",
+        "compliance_status": "Certified"
+      },
+      {
+        "id": "PROD-008",
+        "sku": "SDSSDE61-2T00-G25",
+        "name": "SanDisk Extreme Portable SSD (2TB - Bus-Powered)",
+        "category_id": "external_ssd_bus",
+        "category_name": "External SSD (Without Power Adaptor - Bus-Powered)",
+        "hw_revision": "Rev C.2",
+        "controller": "WD NVMe Controller + ASMedia ASM2362 USB Bridge",
+        "power_source": "USB-C Bus-powered (5V @ up to 2.5A, 12.5W max)",
+        "market_label": "Global Markets",
+        "compliance_status": "Certified"
+      },
+      {
+        "id": "PROD-009",
+        "sku": "SDPHF1A-018T-NBAAD",
+        "name": "SanDisk Professional G-DRIVE Enterprise Desktop (18TB - Powered)",
+        "category_id": "external_ssd_powered",
+        "category_name": "External SSD (With Power Adaptor - Mains Powered)",
+        "hw_revision": "Rev A.4",
+        "controller": "Enterprise RAID/SATA to USB 3.2 Gen2 Bridge ASIC",
+        "power_source": "External 100-240V AC/DC Power Brick (19V / 3.42A, 65W Level VI DoE)",
+        "market_label": "Global Markets",
+        "compliance_status": "Certified"
+      },
+      {
+        "id": "PROD-011",
+        "sku": "SDDR-489-G47",
+        "name": "SanDisk ImageMate PRO Multi-Card USB-C Reader",
+        "category_id": "card_reader",
+        "category_name": "Memory Card Reader (Multi-Card / USB-C)",
+        "hw_revision": "Rev B.1",
+        "controller": "Genesys Logic GL3224 Multi-LUN Card Reader Controller",
+        "power_source": "5V Bus-powered via USB Type-C (<5.0W)",
+        "market_label": "Global Markets",
+        "compliance_status": "Certified"
+      }
+    ],
+    "impacted_products_count": 5,
+    "affected_countries_count": 205,
+    "alert": {
+      "id": "ALERT-SURV-1790012900",
+      "title": "Global Harmonization Mandate: IEC 62368-1:2023 (Edition 4.0) (Safety) Mandated Across All 205 Jurisdictions",
+      "region": "Global (All 205 Jurisdictions)",
+      "country": "All 205 Global Jurisdictions",
+      "country_code": "ALL",
+      "standard": "IEC 62368-1:2023 (Edition 4.0)",
+      "severity": "Warning",
+      "effective_date": "2028-12-31",
+      "affected_categories": [
+        "external_ssd_powered",
+        "external_ssd_bus",
+        "internal_ssd",
+        "card_reader",
+        "usb_drive"
+      ],
+      "summary": "[Worldwide Harmonization: Safety via Global Harmonization Bulletin (All 205 Jurisdictions Auto-Ingested)] Worldwide Harmonization Notice: Mandating transition to IEC 62368-1 4th Edition covering updated touch temperature thresholds, external power adapter test limits, and fire enclosure barriers across all market access jurisdictions. (Enforced across all 205 market access jurisdictions simultaneously).",
+      "action_required": "Audit portfolio technical files and certificates for IEC 62368-1:2023 (Edition 4.0) compliance across all 205 destination markets prior to 2028-12-31.",
+      "status": "Auto-Detected & Live",
+      "source": "Global Harmonization Bulletin (All 205 Jurisdictions Auto-Ingested)",
+      "detailed_summary": "Autonomous surveillance scan detected a worldwide regulatory gazette harmonization notice issued by Global Harmonization Council (WTO TBT / International Clearinghouse). The standard IEC 62368-1:2023 (Edition 4.0) governs Safety compliance across all 205 international market access jurisdictions for applicable storage and memory equipment.\n\nGlobal Gazette Summary: Worldwide Harmonization Notice: Mandating transition to IEC 62368-1 4th Edition covering updated touch temperature thresholds, external power adapter test limits, and fire enclosure barriers across all market access jurisdictions.\n\nManufacturers and compliance teams must verify product bills of materials, safety test files, and national mark conformity declarations across all regional sales destinations.",
+      "technical_impact": "Applicable Pillar: Safety Harmonized Regulations.\nNew Standard Reference: IEC 62368-1:2023 (Edition 4.0).\nApplies Worldwide to: external_ssd_powered, external_ssd_bus, internal_ssd, card_reader, usb_drive.\nMandatory Global Enforcement Cutover: 2028-12-31.\nGlobal Scope: All 205 countries and territories updated.",
+      "timeline_milestones": [
+        {
+          "phase": "Global Gazette Published & Ingested",
+          "date": "2026-09-21",
+          "status": "Active"
+        },
+        {
+          "phase": "Mandatory Global Cutover Deadline",
+          "date": "2028-12-31",
+          "status": "Enforcement Deadline"
+        }
+      ],
+      "official_links": [
+        {
+          "label": "WTO TBT Global Early Warning & Harmonization Gateway",
+          "url": "https://epingalert.wto.org/en/GlobalHarmonizationNotice"
+        },
+        {
+          "label": "International Technical Standards Specification (IEC 62368-1:2023 (Edition 4.0))",
+          "url": "https://www.google.com/search?q=IEC 62368-1:2023 (Edition 4.0)+international+standard"
+        }
+      ],
+      "compliance_checklist": [
+        "Update global Declaration of Conformity and technical file to reference IEC 62368-1:2023 (Edition 4.0) across all 205 markets",
+        "Verify laboratory test reports cover IEC 62368-1:2023 (Edition 4.0) testing clauses and regional deviations",
+        "Perform bill of materials (BOM) compliance audit for all client and enterprise storage drives",
+        "Coordinate with local representatives and accredited certification bodies worldwide before 2028-12-31"
+      ],
+      "impacted_products": [
+        {
+          "id": "PROD-006",
+          "sku": "SDDDC4-256G-G46",
+          "name": "SanDisk Ultra Dual Drive Luxe USB Type-C (256GB)",
+          "category_id": "usb_drive",
+          "category_name": "USB Flash Drive",
+          "hw_revision": "Rev D.0",
+          "controller": "SanDisk USB 3.2 Gen 1 Native Bridge ASIC",
+          "power_source": "5V Bus-powered (<3.0W)",
+          "market_label": "Global Markets",
+          "compliance_status": "Certified"
+        },
+        {
+          "id": "PROD-007",
+          "sku": "WDS200T2X0E",
+          "name": "WD_BLACK SN850X NVMe SSD (2TB)",
+          "category_id": "internal_ssd",
+          "category_name": "Internal SSD (M.2 NVMe / 2.5-inch SATA)",
+          "hw_revision": "Rev B.1",
+          "controller": "Western Digital 20-82-20035-B1 Proprietary NVMe",
+          "power_source": "Host internal 3.3V (7.5W peak)",
+          "market_label": "Global Markets",
+          "compliance_status": "Certified"
+        },
+        {
+          "id": "PROD-008",
+          "sku": "SDSSDE61-2T00-G25",
+          "name": "SanDisk Extreme Portable SSD (2TB - Bus-Powered)",
+          "category_id": "external_ssd_bus",
+          "category_name": "External SSD (Without Power Adaptor - Bus-Powered)",
+          "hw_revision": "Rev C.2",
+          "controller": "WD NVMe Controller + ASMedia ASM2362 USB Bridge",
+          "power_source": "USB-C Bus-powered (5V @ up to 2.5A, 12.5W max)",
+          "market_label": "Global Markets",
+          "compliance_status": "Certified"
+        },
+        {
+          "id": "PROD-009",
+          "sku": "SDPHF1A-018T-NBAAD",
+          "name": "SanDisk Professional G-DRIVE Enterprise Desktop (18TB - Powered)",
+          "category_id": "external_ssd_powered",
+          "category_name": "External SSD (With Power Adaptor - Mains Powered)",
+          "hw_revision": "Rev A.4",
+          "controller": "Enterprise RAID/SATA to USB 3.2 Gen2 Bridge ASIC",
+          "power_source": "External 100-240V AC/DC Power Brick (19V / 3.42A, 65W Level VI DoE)",
+          "market_label": "Global Markets",
+          "compliance_status": "Certified"
+        },
+        {
+          "id": "PROD-011",
+          "sku": "SDDR-489-G47",
+          "name": "SanDisk ImageMate PRO Multi-Card USB-C Reader",
+          "category_id": "card_reader",
+          "category_name": "Memory Card Reader (Multi-Card / USB-C)",
+          "hw_revision": "Rev B.1",
+          "controller": "Genesys Logic GL3224 Multi-LUN Card Reader Controller",
+          "power_source": "5V Bus-powered via USB Type-C (<5.0W)",
+          "market_label": "Global Markets",
+          "compliance_status": "Certified"
+        }
+      ],
+      "impacted_products_count": 5
+    }
+  },
+  {
     "event_id": "SURV-SIM-1790012781",
     "timestamp": "2026-09-21T17:46:21Z",
     "country_code": "ALL",
