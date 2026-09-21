@@ -513,7 +513,9 @@ def api_surveillance_simulate():
     return jsonify({
         "success": True,
         "event": event,
+        "alert": event.get("alert"),
         "affected_countries_count": event.get("affected_countries_count", 1),
+        "total_alerts_count": len(alerts_store),
         "status": surveillance_engine.get_status()
     })
 

@@ -828,37 +828,42 @@ class RegulatorySurveillanceEngine:
                         ]
 
                     existing_titles = {a.get("title") for a in self.db.REGULATION_ALERTS}
-                    if alert_title not in existing_titles:
-                        prod_impacts = resolve_product_impacts(
-                            event.get("affected_categories", ["external_ssd_powered", "external_ssd_bus"]),
-                            country_code="ALL" if is_all_countries else event.get("country_code", "Global"),
-                            region="Global" if is_all_countries else event.get("country_name", "Global"),
-                            products=getattr(self.db, "SAMPLE_PRODUCTS", None)
-                        )
-                        self.db.REGULATION_ALERTS.insert(0, {
-                            "id": f"ALERT-SURV-{int(time.time())}",
-                            "title": alert_title,
-                            "region": region_display,
-                            "country": country_display,
-                            "standard": new_std,
-                            "severity": "Critical" if "deadline" in summary.lower() or "mandatory" in summary.lower() else "Warning",
-                            "effective_date": deadline if deadline and deadline != "Permanent" else event.get("effective_date"),
-                            "affected_categories": event.get("affected_categories", ["external_ssd_powered", "external_ssd_bus"]),
-                            "summary": summary_display,
-                            "action_required": action_display,
-                            "status": "Auto-Detected & Live",
-                            "source": event.get("source_name"),
-                            "detailed_summary": detailed_display,
-                            "technical_impact": tech_impact_display,
-                            "timeline_milestones": [
-                                {"phase": "Global Gazette Published & Ingested", "date": event.get("effective_date", datetime.datetime.utcnow().strftime("%Y-%m-%d")), "status": "Active"},
-                                {"phase": "Mandatory Global Cutover Deadline", "date": deadline if deadline and deadline != "Permanent" else "Immediate", "status": "Enforcement Deadline"}
-                            ],
-                            "official_links": official_links_display,
-                            "compliance_checklist": checklist_display,
-                            "impacted_products": prod_impacts,
-                            "impacted_products_count": len(prod_impacts)
-                        })
+                    if alert_title in existing_titles:
+                        alert_title = f"{alert_title} (#{int(time.time()) % 10000})"
+
+                    prod_impacts = resolve_product_impacts(
+                        event.get("affected_categories", ["external_ssd_powered", "external_ssd_bus"]),
+                        country_code="ALL" if is_all_countries else event.get("country_code", "Global"),
+                        region="Global" if is_all_countries else event.get("country_name", "Global"),
+                        products=getattr(self.db, "SAMPLE_PRODUCTS", None)
+                    )
+                    new_alert_entry = {
+                        "id": f"ALERT-SURV-{int(time.time())}",
+                        "title": alert_title,
+                        "region": region_display,
+                        "country": country_display,
+                        "country_code": "ALL" if is_all_countries else event.get("country_code"),
+                        "standard": new_std,
+                        "severity": "Critical" if "deadline" in summary.lower() or "mandatory" in summary.lower() else "Warning",
+                        "effective_date": deadline if deadline and deadline != "Permanent" else event.get("effective_date"),
+                        "affected_categories": event.get("affected_categories", ["external_ssd_powered", "external_ssd_bus"]),
+                        "summary": summary_display,
+                        "action_required": action_display,
+                        "status": "Auto-Detected & Live",
+                        "source": event.get("source_name"),
+                        "detailed_summary": detailed_display,
+                        "technical_impact": tech_impact_display,
+                        "timeline_milestones": [
+                            {"phase": "Global Gazette Published & Ingested", "date": event.get("effective_date", datetime.datetime.utcnow().strftime("%Y-%m-%d")), "status": "Active"},
+                            {"phase": "Mandatory Global Cutover Deadline", "date": deadline if deadline and deadline != "Permanent" else "Immediate", "status": "Enforcement Deadline"}
+                        ],
+                        "official_links": official_links_display,
+                        "compliance_checklist": checklist_display,
+                        "impacted_products": prod_impacts,
+                        "impacted_products_count": len(prod_impacts)
+                    }
+                    self.db.REGULATION_ALERTS.insert(0, new_alert_entry)
+                    event["alert"] = new_alert_entry
             except Exception as e:
                 print(f"[Surveillance] DB injection error: {e}")
 

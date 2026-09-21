@@ -1035,6 +1035,112 @@
             </div>
     </div>
 
+        <!-- Modal for Simulation Confirmation / Success Feedback -->
+    <div id="modal-sim-success" class="fixed inset-0 z-50 hidden bg-slate-950/85 backdrop-blur-sm flex items-center justify-center p-4">
+        <div class="bg-slate-900 border-2 border-emerald-500/80 rounded-2xl max-w-lg w-full p-6 shadow-2xl space-y-4 animate-in fade-in zoom-in-95 duration-200">
+            <div class="flex items-center space-x-3 border-b border-slate-800 pb-3.5">
+                <div class="w-11 h-11 rounded-2xl bg-emerald-500/20 border border-emerald-500/50 flex items-center justify-center shrink-0 shadow-inner">
+                    <i data-lucide="check-check" class="w-6 h-6 text-emerald-400"></i>
+                </div>
+                <div class="flex-grow">
+                    <div class="flex items-center space-x-2">
+                        <span class="px-2 py-0.5 rounded bg-emerald-950 text-emerald-300 border border-emerald-700 text-[10px] font-mono font-bold uppercase">Simulation Live</span>
+                        <span class="text-[10px] text-slate-400 font-mono" id="sim-success-time">Just now</span>
+                    </div>
+                    <h3 class="text-base font-bold text-white mt-0.5" id="sim-success-title">Gazette Notice Ingested Live</h3>
+                </div>
+                <button onclick="closeModal('modal-sim-success')" class="text-slate-400 hover:text-white p-1 rounded-lg hover:bg-slate-800 transition">
+                    <i data-lucide="x" class="w-5 h-5"></i>
+                </button>
+            </div>
+
+            <div class="p-3.5 rounded-xl bg-slate-950/90 border border-slate-800 space-y-2 text-xs">
+                <div class="flex items-center justify-between text-slate-300">
+                    <span class="text-slate-400 font-medium">Jurisdictions Affected:</span>
+                    <span class="font-bold text-emerald-400" id="sim-success-scope">All 205 Countries (Global Harmonization)</span>
+                </div>
+                <div class="flex items-center justify-between text-slate-300">
+                    <span class="text-slate-400 font-medium">Mandated Standard:</span>
+                    <span class="font-bold text-white font-mono" id="sim-success-std">IEC 62368-1:2023 (Edition 4.0)</span>
+                </div>
+                <div class="flex items-center justify-between text-slate-300">
+                    <span class="text-slate-400 font-medium">Regulatory Pillar:</span>
+                    <span class="font-bold text-sky-400" id="sim-success-pillar">Electrical Safety</span>
+                </div>
+                <div class="flex items-center justify-between text-slate-300">
+                    <span class="text-slate-400 font-medium">Regulation Alerts Feed:</span>
+                    <span class="text-rose-400 font-semibold flex items-center space-x-1.5">
+                        <span class="w-2 h-2 rounded-full bg-rose-400 animate-pulse"></span>
+                        <span id="sim-success-alert-status">New Global Alert Created</span>
+                    </span>
+                </div>
+                <div class="flex items-center justify-between text-slate-300">
+                    <span class="text-slate-400 font-medium">Database & Matrix:</span>
+                    <span class="text-emerald-400 font-semibold flex items-center space-x-1">
+                        <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                        <span>205 Records Live-Verified</span>
+                    </span>
+                </div>
+            </div>
+
+            <p class="text-xs text-slate-300 leading-relaxed bg-slate-800/40 p-3 rounded-xl border border-slate-800" id="sim-success-summary">
+                The simulated regulatory notice has been ingested across all global market access jurisdictions, updating technical requirements, recording surveillance timestamps, and creating an enriched legal intelligence alert.
+            </p>
+
+            <div class="pt-1 flex flex-col sm:flex-row gap-2 justify-end">
+                <button onclick="closeModal('modal-sim-success'); switchTab('matrix')" class="px-3.5 py-2 rounded-lg bg-sky-900/80 hover:bg-sky-700 text-sky-200 border border-sky-600/70 text-xs font-bold flex items-center justify-center space-x-1.5 transition shadow">
+                    <i data-lucide="layers" class="w-4 h-4"></i>
+                    <span>View in Product Matrix</span>
+                </button>
+                <button onclick="closeModal('modal-sim-success'); switchTab('alerts')" class="px-3.5 py-2 rounded-lg bg-rose-900/80 hover:bg-rose-700 text-rose-200 border border-rose-600/70 text-xs font-bold flex items-center justify-center space-x-1.5 transition shadow">
+                    <i data-lucide="bell" class="w-4 h-4"></i>
+                    <span>View Regulation Alerts</span>
+                </button>
+                <button onclick="closeModal('modal-sim-success')" class="px-4 py-2 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs font-semibold transition">
+                    Done
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Top-Center Floating Notification Banner -->
+    <div id="top-notification-banner" class="fixed top-5 left-1/2 -translate-x-1/2 z-[9999] hidden max-w-xl w-[92vw] sm:w-full bg-slate-900/95 border-2 border-emerald-500 text-white p-4 rounded-2xl shadow-2xl backdrop-blur-md transition-all duration-300">
+        <div class="flex items-start justify-between gap-3">
+            <div class="flex items-start space-x-3">
+                <div class="w-10 h-10 rounded-xl bg-emerald-500/20 border border-emerald-500/40 flex items-center justify-center shrink-0 mt-0.5 shadow-inner">
+                    <i data-lucide="bell-ring" class="w-5 h-5 text-emerald-400 animate-bounce"></i>
+                </div>
+                <div class="space-y-1">
+                    <div class="flex items-center space-x-2">
+                        <span class="px-2 py-0.5 rounded-full bg-emerald-950 text-emerald-300 border border-emerald-700 text-[10px] font-bold font-mono uppercase tracking-wider">Live Regulatory Notice</span>
+                        <span class="text-[10px] text-slate-400 font-mono" id="top-notif-time">Just now</span>
+                    </div>
+                    <h4 class="text-sm font-bold text-white leading-snug" id="top-notif-title">Simulated Notice Ingested</h4>
+                    <p class="text-xs text-slate-300 leading-relaxed" id="top-notif-body">All 205 countries updated and live alert created.</p>
+                </div>
+            </div>
+            <button onclick="dismissTopNotification()" class="text-slate-400 hover:text-white p-1 rounded-lg hover:bg-slate-800 transition shrink-0">
+                <i data-lucide="x" class="w-4 h-4"></i>
+            </button>
+        </div>
+        <div class="mt-3 pt-2.5 border-t border-slate-800 flex items-center justify-between text-xs">
+            <span class="text-emerald-400 font-mono text-[11px] flex items-center space-x-1">
+                <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                <span id="top-notif-scope">205 Global Jurisdictions Updated</span>
+            </span>
+            <div class="flex space-x-2">
+                <button onclick="dismissTopNotification(); switchTab('alerts')" class="px-3 py-1 rounded-lg bg-rose-900/60 hover:bg-rose-800 text-rose-200 border border-rose-700/60 text-xs font-semibold flex items-center space-x-1 transition">
+                    <i data-lucide="bell" class="w-3.5 h-3.5"></i>
+                    <span>View in Alerts</span>
+                </button>
+                <button onclick="dismissTopNotification(); switchTab('matrix')" class="px-3 py-1 rounded-lg bg-sky-900/60 hover:bg-sky-800 text-sky-200 border border-sky-700/60 text-xs font-semibold flex items-center space-x-1 transition">
+                    <i data-lucide="layers" class="w-3.5 h-3.5"></i>
+                    <span>View Matrix</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
     <!-- Floating Excel Download Toast -->
     <div id="export-toast" class="fixed bottom-6 right-6 z-50 hidden bg-slate-900 border-2 border-emerald-500 text-white px-5 py-3.5 rounded-2xl shadow-2xl flex items-center space-x-3.5 transition-all duration-300">
         <div class="w-9 h-9 rounded-xl bg-emerald-600/30 border border-emerald-500/50 flex items-center justify-center shrink-0">
@@ -1053,6 +1159,60 @@
         let allCategories = [];
         let matrixData = null;
         let chatHistory = [];
+
+                function showSimulationSuccessModal(data, selectedCountry, newStd, pillar, summary) {
+            const count = data.affected_countries_count || (selectedCountry === 'ALL' ? 205 : 1);
+            const scopeText = (count >= 200 || selectedCountry === 'ALL')
+                ? 'All 205 Countries & Jurisdictions (Worldwide Harmonization)'
+                : `${selectedCountry} National Market Access`;
+
+            const elTitle = document.getElementById('sim-success-title');
+            const elScope = document.getElementById('sim-success-scope');
+            const elStd = document.getElementById('sim-success-std');
+            const elPillar = document.getElementById('sim-success-pillar');
+            const elSummary = document.getElementById('sim-success-summary');
+            const elTime = document.getElementById('sim-success-time');
+            const elAlertStatus = document.getElementById('sim-success-alert-status');
+
+            if (elTitle) elTitle.innerText = `Gazette Notice Ingested Live: ${newStd}`;
+            if (elScope) elScope.innerText = scopeText;
+            if (elStd) elStd.innerText = newStd;
+            if (elPillar) elPillar.innerText = pillar;
+            if (elSummary) elSummary.innerText = summary || 'Regulatory standard updated across jurisdictions.';
+            if (elTime) elTime.innerText = new Date().toLocaleTimeString();
+            if (elAlertStatus) {
+                const aTitle = (data.alert && data.alert.title) ? data.alert.title : 'New Global Alert Injected into Feed';
+                elAlertStatus.innerText = aTitle;
+            }
+
+            openModal('modal-sim-success');
+        }
+
+        function showTopNotification(info) {
+            const banner = document.getElementById("top-notification-banner");
+            if (!banner) return;
+            const tEl = document.getElementById("top-notif-title");
+            const bEl = document.getElementById("top-notif-body");
+            const sEl = document.getElementById("top-notif-scope");
+            const timeEl = document.getElementById("top-notif-time");
+
+            if (tEl) tEl.innerText = info.title || "Regulatory Gazette Notice Ingested";
+            if (bEl) bEl.innerText = info.body || "Database and compliance matrix successfully updated.";
+            if (sEl) sEl.innerText = info.scope || "All 205 Global Jurisdictions";
+            if (timeEl) timeEl.innerText = new Date().toLocaleTimeString();
+
+            banner.classList.remove("hidden");
+            if (window.lucide) lucide.createIcons();
+            clearTimeout(window._topNotifTimeout);
+            window._topNotifTimeout = setTimeout(() => {
+                banner.classList.add("hidden");
+            }, 8000);
+        }
+
+        function dismissTopNotification() {
+            const banner = document.getElementById("top-notification-banner");
+            if (banner) banner.classList.add("hidden");
+        }
 
         function showDownloadToast(title, sub) {
             const toast = document.getElementById("export-toast");
@@ -1142,6 +1302,11 @@
                 document.getElementById("stat-countries").innerText = data.total_countries;
                 document.getElementById("stat-countries-hdr").innerText = data.total_countries;
                 document.getElementById("stat-alerts").innerText = data.active_alerts_count;
+                const navBadgeEl = document.getElementById("badge-alert-count");
+                if (navBadgeEl) {
+                    navBadgeEl.innerText = data.active_alerts_count;
+                    navBadgeEl.classList.remove("hidden");
+                }
                 document.getElementById("stat-alerts-hdr").innerText = data.active_alerts_count;
                 document.getElementById("stat-critical-alerts").innerText = data.critical_alerts_count;
 
@@ -1424,14 +1589,25 @@
                 closeModal('modal-simulate-notice');
 
                 const countUpdated = data.affected_countries_count || (selectedCountry === 'ALL' ? 205 : 1);
+
+                // 1. Trigger Center Success Modal
+                showSimulationSuccessModal(data, selectedCountry, newStd, pillar, payload.summary);
+
+                // 2. Trigger Top-Center Floating Notification Banner
+                showTopNotification({
+                    title: `⚡ Live Gazette Notice Ingested: ${newStd}`,
+                    body: (countUpdated >= 200 || selectedCountry === 'ALL')
+                        ? `Mandatory ${pillar} standard (${newStd}) has been autonomously applied across all 205 countries. A new global alert has been injected into the Regulation Alerts feed.`
+                        : `Gazette update for ${selectedCountry} successfully applied to regulatory database.`,
+                    scope: (countUpdated >= 200 || selectedCountry === 'ALL') ? 'All 205 Countries & Jurisdictions Worldwide' : `Target Market: ${selectedCountry}`
+                });
+
+                // 3. Trigger Bottom Toast
                 if (typeof showDownloadToast === 'function') {
-                    if (countUpdated >= 200 || selectedCountry === 'ALL') {
-                        showDownloadToast(`⚡ Gazette Ingested! ALL 205 Countries updated to ${newStd} simultaneously!`, 'Global compliance matrix and alerts synchronized');
-                    } else {
-                        showDownloadToast(`⚡ Gazette Ingested! ${selectedCountry} updated to ${newStd}.`, 'Target jurisdiction matrix updated');
-                    }
+                    showDownloadToast(`⚡ Gazette Notice Ingested! (${newStd})`, 'Database, Matrix, and Alerts Synchronized');
                 }
 
+                // 4. Reload feeds & update badge counters
                 if (typeof loadSurveillanceStatus === 'function') await loadSurveillanceStatus();
                 if (typeof loadProductMatrix === 'function') await loadProductMatrix();
                 if (typeof loadAlerts === 'function') await loadAlerts();
@@ -1754,6 +1930,17 @@
                 const url = `/api/alerts?category=${cat}&severity=${sev}&region=${reg}&search=${encodeURIComponent(q)}`;
                 const res = await fetch(url);
                 const alerts = await res.json();
+
+                // Update alert counters across UI
+                const badgeEl = document.getElementById("badge-alert-count");
+                if (badgeEl) {
+                    badgeEl.innerText = alerts.length;
+                    badgeEl.classList.remove("hidden");
+                }
+                const statAlertsEl = document.getElementById("stat-alerts");
+                if (statAlertsEl) statAlertsEl.innerText = alerts.length;
+                const statAlertsHdrEl = document.getElementById("stat-alerts-hdr");
+                if (statAlertsHdrEl) statAlertsHdrEl.innerText = alerts.length;
 
                 const container = document.getElementById("alerts-container");
                 container.innerHTML = '';
