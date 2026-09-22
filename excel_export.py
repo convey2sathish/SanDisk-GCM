@@ -333,7 +333,7 @@ def export_product_matrix_excel(category_id="external_ssd_powered", type_filter=
     buf.seek(0)
 
     # Clean file name
-    date_stamp = datetime.datetime.now().strftime("%Y%m%d")
+    date_stamp = datetime.datetime.now().strftime("%Y%m%d_%H%M%S")
     clean_cat_id = category_id.replace(" ", "_").lower()
     filename = f"GCM_Compliance_Matrix_{clean_cat_id}_{date_stamp}.xlsx"
 

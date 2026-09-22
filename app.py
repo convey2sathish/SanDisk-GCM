@@ -80,7 +80,7 @@ def create_app():
         resp.headers.setdefault("X-Content-Type-Options", "nosniff")
         resp.headers.setdefault("X-Frame-Options", "SAMEORIGIN")
         resp.headers.setdefault("Referrer-Policy", "no-referrer")
-        if resp.mimetype == "application/json":
+        if resp.mimetype == "application/json" or "spreadsheetml" in (resp.mimetype or "") or resp.mimetype == "application/zip":
             resp.headers["Cache-Control"] = "no-store"
         return resp
 
