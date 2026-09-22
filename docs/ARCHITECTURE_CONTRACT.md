@@ -33,7 +33,7 @@ pieces integrate without conflicts.
 | `config.py` | core | paths, settings, atomic JSON IO |
 | `store.py` | core | persisted mutable state + hash-chained ledger helpers |
 | `compliance_db.py` | core | seed knowledge (categories, countries, alerts, products, certs) + requirement engine |
-| `reg_surveillance.py` | core | surveillance engine (scan, simulate, ledger) |
+| `reg_surveillance.py` | core | surveillance engine (scan, ledger) |
 | `excel_export.py` | core | compliance-matrix workbook |
 | `routes_core.py` | core | overview, categories, matrix, countries, surveillance, settings, actions, products, certificates |
 | `alert_explainer.py` | alerts | deterministic "explain this alert in simple terms" engine |
@@ -118,8 +118,6 @@ last_surveilled_date?, last_surveilled_pillar?, surveillance_source?
 | GET | `/api/surveillance/status` | engine status |
 | POST | `/api/surveillance/scan` | `{result, status, alerts_count}` |
 | GET | `/api/surveillance/log?limit` | `{audit_log[], status, ledger_ok, ledger_entries}` |
-| POST | `/api/surveillance/simulate` | `{success, event, alert, affected_countries_count, ...}` |
-| POST | `/api/surveillance/auto-simulate/next` | `{success, event, alert, ...}` |
 | GET/POST | `/api/settings` | public settings / `{success, settings}` |
 | GET | `/api/actions` | `{actions[]}` |
 | POST | `/api/actions` | `{success, action}` |
@@ -214,7 +212,7 @@ last_surveilled_date?, last_surveilled_pillar?, surveillance_source?
 | `portfolio` | `tab_portfolio.html` | `portfolio.js` | risk |
 | `docaudit` | `tab_docaudit.html` | `docaudit.js` | docaudit |
 
-Shared modals (core): settings, surveillance log, simulate notice, add alert, actions drawer,
+Shared modals (core): settings, surveillance log, add alert, actions drawer,
 command palette, toast/notification.
 
 Each JS module file registers itself:

@@ -112,14 +112,14 @@
   async function loadSamples() {
     if (state.busy) return;
     const btn = document.querySelector('[data-da=samples]');
-    GCM.ui.setLoading(btn, true, 'Creating samples…'); setBusy(true, 'Auditing samples…');
+    GCM.ui.setLoading(btn, true, 'Creating examples…'); setBusy(true, 'Auditing example documents…');
     try {
       const r = await GCM.api.post('/api/documents/generate-samples', {});
       if (r.target_dir) $('da-folder-path').value = r.target_dir;
       render(r.report);
-      GCM.ui.toast('Sample documents loaded', r.message, 'success');
+      GCM.ui.toast('Example documents loaded', r.message, 'success');
     } catch (e) {
-      GCM.ui.toast('Could not create samples', e.message, 'error');
+      GCM.ui.toast('Could not create example documents', e.message, 'error');
     } finally { GCM.ui.setLoading(btn, false); setBusy(false); }
   }
 
@@ -560,14 +560,14 @@
     ['dragleave', 'dragend'].forEach(ev => dz.addEventListener(ev, () => dz.classList.remove('border-purple-400', 'bg-purple-500/10')));
     dz.addEventListener('drop', handleDrop);
     try { const saved = localStorage.getItem('gcm.docaudit.folder'); if (saved && !$('da-folder-path').value) $('da-folder-path').value = saved; } catch (_) { /* ignore */ }
-    if (!$('da-folder-path').value) $('da-folder-path').value = 'C:\\SanDisk\\Compliance_Docs';
+    
   }
 
   GCM.modules.docaudit = {
     init() {
       wire();
       GCM.palette.register({ label: 'Scan compliance folder…', hint: 'Document Impact Audit', icon: 'file-search-2', keywords: ['document', 'audit', 'scan', 'folder', 'docaudit'], run: () => { GCM.tabs.switchTo('docaudit'); setTimeout(() => { const f = $('da-folder-path'); if (f) { f.focus(); f.select(); } }, 150); } });
-      GCM.palette.register({ label: 'Load sample compliance documents', hint: 'Creates 10 demo files and audits them', icon: 'sparkles', keywords: ['sample', 'demo', 'document', 'audit'], run: () => { GCM.tabs.switchTo('docaudit'); setTimeout(loadSamples, 150); } });
+      GCM.palette.register({ label: 'Load example documents (generic)', hint: 'Creates 10 generic placeholder files and audits them', icon: 'sparkles', keywords: ['sample', 'demo', 'document', 'audit'], run: () => { GCM.tabs.switchTo('docaudit'); setTimeout(loadSamples, 150); } });
       GCM.palette.register({ label: 'Export document revision directive (Excel)', hint: 'Last audit report', icon: 'file-spreadsheet', keywords: ['export', 'excel', 'directive', 'document'], run: exportExcel });
       GCM.bus.on('docaudit:focus', (idx) => { const go = () => focusDoc(Number(idx)); if (state.report) go(); else loadLast().then(go); });
       GCM.bus.on('action:docaudit-scan', scanFolder);

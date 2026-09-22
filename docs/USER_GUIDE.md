@@ -83,10 +83,9 @@ certificates with the buttons at the top.
 ## 8. Regulatory Surveillance
 The bar under the header shows the engine status. **Scan feeds now** queries the monitored gateways
 (WTO TBT, US Federal Register – OSHA NRTL / FCC / EPA, EUR-Lex, EAEU, GSO, …); relevant notices are
-scored, recorded in the **ledger** and turned into alerts with product impact. **Simulate notice** lets
-you rehearse a new regulation for one country or all 205 (clearly labelled *simulated*). The ledger is
-hash-chained; the dialog shows whether its integrity verifies. Settings → *Reset knowledge base* removes
-simulated transitions.
+scored, recorded in the **ledger** and turned into alerts with product impact. The ledger starts empty
+and is hash-chained; the dialog shows whether its integrity verifies. Settings → *Reset knowledge base*
+removes detected transitions from the country records.
 
 ## Settings
 Company name, Anthropic API key and model (optional), auto-scan interval. The data folder path is shown;

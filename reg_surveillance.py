@@ -32,7 +32,7 @@ import xml.etree.ElementTree as ET
 
 import config
 import store as store_module
-from surveillance_data import STORAGE_RELEVANCE_KEYWORDS, GLOBAL_MONITORED_SOURCES, AUTO_SIMULATED_SCENARIOS
+from surveillance_data import STORAGE_RELEVANCE_KEYWORDS, GLOBAL_MONITORED_SOURCES
 
 EU_COUNTRIES = {"AT", "BE", "BG", "HR", "CY", "CZ", "DK", "EE", "FI", "FR", "DE", "GR", "HU", "IE", "IT", "LV", "LT",
                 "LU", "MT", "NL", "PL", "PT", "RO", "SK", "SI", "ES", "SE"}
@@ -202,7 +202,6 @@ class RegulatorySurveillanceEngine:
         self.last_scan_status = "Idle - no scan run in this session yet"
         self.last_scan_result = None
         self.active_sources = GLOBAL_MONITORED_SOURCES
-        self.scenario_index = 0
         self._lock = threading.RLock()
         config.ensure_data_dir()
         self._ensure_log_initialized()
@@ -216,54 +215,12 @@ class RegulatorySurveillanceEngine:
         config.atomic_write_json(self.log_file, entries)
 
     def _ensure_log_initialized(self):
+        """Create an empty ledger on first run. The shipped seed contains no events; every entry is
+        written by live scanning (or by the user through the alerts UI)."""
         with self._lock:
-            if os.path.exists(self.log_file) and self._read_log():
+            if os.path.exists(self.log_file) and isinstance(config.read_json(self.log_file, None), list):
                 return
-            baseline = [
-                {
-                    "event_id": "SURV-BASE-0001", "timestamp": "2026-09-10T10:30:00Z", "country_code": "IN", "country_name": "India",
-                    "authority": "Bureau of Indian Standards (BIS) / MeitY", "pillar": "Safety", "source_id": "SRC-IN-BIS",
-                    "source_name": "India MeitY Gazette Circular No. 2026-11", "source_url": "https://www.crsbis.in/BIS/",
-                    "old_standard": "IS 13252 (Part 1):2010 (IEC 60950-1)", "new_standard": "IS/IEC 62368-1:2023",
-                    "effective_date": "2026-09-10", "withdrawal_deadline": "2028-11-01",
-                    "affected_categories": ["external_ssd_powered", "internal_ssd", "external_ssd_bus"],
-                    "event_type": "Safety Standard Transition", "severity": "Critical",
-                    "summary": "BIS CRS migration from IS 13252 (IEC 60950-1) to IS/IEC 62368-1:2023 with in-country NABL testing; concurrent running until 1 Nov 2028.",
-                    "status": "Recorded", "confidence_score": 0.98,
-                },
-                {
-                    "event_id": "SURV-BASE-0002", "timestamp": "2026-09-05T14:15:00Z", "country_code": "KR", "country_name": "South Korea",
-                    "authority": "National Radio Research Agency (RRA) / KATS", "pillar": "EMC", "source_id": "SRC-KR-RRA",
-                    "source_name": "RRA Notification No. 2026-45", "source_url": "https://www.rra.go.kr/en/",
-                    "old_standard": "KN 32/35 generic document", "new_standard": "KC Conformity Registration (KS C 9832/9835)",
-                    "effective_date": "2026-01-01", "withdrawal_deadline": "Permanent",
-                    "affected_categories": ["external_ssd_bus", "usb_drive", "card_reader", "sd_express"],
-                    "event_type": "EMC Enforcement Clarification", "severity": "Warning",
-                    "summary": "Clarification of the SELV Class III exemption for bus-powered flash drives and mandatory RRA KC Conformity Registration for high-speed ITE under KN 32/35.",
-                    "status": "Recorded", "confidence_score": 0.98,
-                },
-                {
-                    "event_id": "SURV-BASE-0003", "timestamp": "2026-09-08T09:00:00Z", "country_code": "EU", "country_name": "European Union",
-                    "authority": "European Chemicals Agency (ECHA) / European Commission", "pillar": "Environmental", "source_id": "SRC-EU-EURLEX",
-                    "source_name": "Official Journal of the European Union L series", "source_url": "https://eur-lex.europa.eu",
-                    "old_standard": "EU RoHS 2011/65/EU", "new_standard": "EU RoHS 2011/65/EU + PFAS / phthalates restriction",
-                    "effective_date": "2026-07-01", "withdrawal_deadline": "2027-06-30",
-                    "affected_categories": ["all_storage_categories"], "event_type": "Environmental Hazardous Substances Restriction",
-                    "severity": "Critical",
-                    "summary": "Universal restriction on per- and polyfluoroalkyl substances (PFAS) in semiconductor packaging and packaging recyclability labelling.",
-                    "status": "Recorded", "confidence_score": 0.97,
-                },
-            ]
-            chained = []
-            prev = None
-            baseline.sort(key=lambda x: x["timestamp"])
-            for e in baseline:  # oldest first for chaining
-                e["prev_hash"] = prev
-                e["hash"] = store_module.ledger_hash(e, prev)
-                prev = e["hash"]
-                chained.append(e)
-            chained.reverse()  # newest first on disk
-            self._write_log(chained)
+            self._write_log([])
 
     def _append_to_audit_log(self, event):
         with self._lock:
@@ -473,7 +430,7 @@ class RegulatorySurveillanceEngine:
         event["no_deadline"] = not has_deadline
         # A detected notice without an explicit cutover date is informational: it is ledgered and
         # alerted but must not be recorded as a standard transition on the country records.
-        records_transition = has_deadline or bool(event.get("simulated"))
+        records_transition = has_deadline
         if self.db and records_transition:
             with self._lock:
                 for code in codes:
@@ -514,13 +471,11 @@ class RegulatorySurveillanceEngine:
         country_display = "All 205 global jurisdictions" if is_all else event.get("country_name")
         summary = event.get("summary", "")
         dl_txt = deadline if deadline and deadline not in ("Permanent", "See gazette bulletin") else "the enforcement date"
-        detected = not event.get("simulated")
-        if detected:
-            title = f"{event.get('country_name')}: {summary}"[:200]
-        elif is_all:
+        detected = True
+        if is_all:
             title = f"Global harmonisation: {new_std} ({pillar}) mandated across all 205 jurisdictions"[:200]
         else:
-            title = f"{event.get('country_name')} – {event.get('authority')}: {new_std} ({pillar}) gazette update"[:200]
+            title = f"{event.get('country_name')}: {summary}"[:200]
         alert = {
             "id": f"ALERT-SURV-{event['event_id'].split('-')[-1]}",
             "title": title,
@@ -557,60 +512,9 @@ class RegulatorySurveillanceEngine:
         }
         return self.store.add_alert(alert)
 
-    # ------------------------------------------------------------------ simulation (demo / what-if)
-    def auto_simulate_next_event(self, products=None):
-        scenario = AUTO_SIMULATED_SCENARIOS[self.scenario_index % len(AUTO_SIMULATED_SCENARIOS)]
-        self.scenario_index += 1
-        event = {
-            "event_id": _event_id("SURV-AUTO", scenario.get("id_key"), int(time.time())),
-            "timestamp": utc_iso(), "country_code": scenario["country_code"], "country_name": scenario["country_name"],
-            "authority": scenario["authority"], "pillar": scenario["pillar"], "source_id": f"SRC-{scenario['country_code']}-{scenario.get('id_key')}",
-            "source_name": scenario["source_name"], "source_url": scenario["source_url"], "old_standard": "Current national standard",
-            "new_standard": scenario["new_standard"], "effective_date": today_iso(), "withdrawal_deadline": scenario["deadline"],
-            "affected_categories": scenario["affected_categories"], "event_type": f"Simulated {scenario['pillar']} notice",
-            "severity": scenario.get("severity", "Warning"), "summary": scenario["summary"], "action_required": scenario["action_required"],
-            "detailed_summary": scenario.get("detailed_summary"), "technical_impact": scenario.get("technical_impact"),
-            "timeline_milestones": scenario.get("timeline_milestones"), "official_links": scenario.get("official_links"),
-            "compliance_checklist": scenario.get("compliance_checklist"), "status": "Simulated (what-if)", "confidence_score": 0.99,
-            "simulated": True,
-        }
-        if products:
-            event["impacted_products"] = resolve_product_impacts(scenario["affected_categories"], country_code=scenario["country_code"], region=scenario["country_name"], products=products)
-        self._apply_event(event, create_alert=True)
-        self.last_scan_time = utc_iso()
-        self.last_scan_status = f"Simulated {scenario['pillar']} notice for {scenario['country_name']} ({scenario['new_standard']}) - {event['impacted_products_count']} portfolio products impacted."
-        return event
-
-    def simulate_gazette_update(self, country_code, authority, new_standard, deadline, summary, affected_categories, pillar="Safety", source_url=None):
-        cc = (country_code or "ALL").upper().strip()
-        is_all = cc in ("ALL", "GLOBAL", "WORLDWIDE", "ALL_COUNTRIES")
-        if is_all:
-            cc = "ALL"
-            country_name = "All 205 global jurisdictions"
-            source_name = "Global harmonisation bulletin (simulated)"
-            source_url = source_url or "https://epingalert.org/"
-        else:
-            country_name = self.db.COUNTRIES_DB.get(cc, {}).get("name", cc) if self.db else cc
-            source_name = f"{country_name} national gazette (simulated)"
-            source_url = source_url or f"https://epingalert.org/en/Search?country={cc}"
-        event = {
-            "event_id": _event_id("SURV-SIM", cc, new_standard, pillar, int(time.time())),
-            "timestamp": utc_iso(), "country_code": cc, "country_name": country_name, "authority": authority, "pillar": pillar,
-            "source_id": f"SRC-{cc}-GAZETTE", "source_name": source_name, "source_url": source_url, "old_standard": "Current national standard",
-            "new_standard": new_standard, "effective_date": today_iso(), "withdrawal_deadline": deadline, "affected_categories": affected_categories,
-            "event_type": f"{'Global' if is_all else 'National'} {pillar} gazette notice (simulated)", "summary": summary,
-            "severity": "Critical" if any(w in summary.lower() for w in ("mandatory", "deadline", "ban", "prohibit")) else "Warning",
-            "status": "Simulated (what-if)", "confidence_score": 0.99, "simulated": True,
-        }
-        self._apply_event(event, create_alert=True)
-        self.last_scan_time = utc_iso()
-        self.last_scan_status = (f"Simulated {pillar} notice applied to {event['affected_countries_count']} jurisdiction(s) ({new_standard}); "
-                                 f"{event['impacted_products_count']} portfolio products impacted.")
-        return event
-
     # ------------------------------------------------------------------ maintenance
     def reset_to_seed(self):
-        """Discard transitions/simulations: reload the shipped country knowledge base into the working copy."""
+        """Discard recorded transitions: reload the shipped country knowledge base into the working copy."""
         seed = config.read_json(config.bundle_path("countries_data.json"), None)
         if not isinstance(seed, dict) or not seed or not self.db:
             return {"restored": 0}

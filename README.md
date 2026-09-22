@@ -20,7 +20,7 @@ one executable.**
 | **Regulatory Horizon & Risk** | One timeline of deadlines, milestones, certificate expiries, actions and surveillance history; Compliance Risk Index per product, region and pillar with an explainable formula; top risks. |
 | **Product Portfolio** | Products with readiness per market, certificates health (expiry countdown), linked alerts, and an engineering-change (ECO) impact analyser. |
 | **Document Impact Audit** | Point at a folder (or drag one into the browser). The engine reads PDFs, DOCX, XLSX, CSV/TXT, identifies standards & editions, labs, SKUs, markets and expiry dates, and produces a health score, a re-test / re-sign / packaging / portal directive per document, a gap analysis per product × market, a remediation plan with cost roll-up and a four-sheet Excel directive. |
-| **Regulatory Surveillance** | Scans WTO TBT, US Federal Register (OSHA NRTL, FCC, EPA), EUR-Lex, EAEU, GSO and national gazettes for storage-relevant notices; records them as standard *transitions* in a tamper-evident, hash-chained ledger; creates fully enriched alerts with product impact. What-if simulation for any country or all 205. |
+| **Regulatory Surveillance** | Scans WTO TBT, US Federal Register (OSHA NRTL, FCC, EPA), EUR-Lex, EAEU, GSO and national gazettes for storage-relevant notices; records them as standard *transitions* in a tamper-evident, hash-chained ledger; creates fully enriched alerts with product impact. |
 | **Everywhere** | Ctrl+K search across countries, standards, alerts, SKUs and actions; keyboard shortcuts; deep links; first-run guide; all data persisted locally and preserved across upgrades. |
 
 ## Quick start
@@ -58,7 +58,7 @@ app.py                 Flask composition root: registers routes_core / routes_al
 config.py              bundle vs. data directory, settings, atomic JSON IO
 store.py               thread-safe persisted state (user alerts, triage, products, certificates, actions, last audit) + ledger hashing
 compliance_db.py       seed knowledge base: 11 categories, 205 countries, 17 alerts, portfolio, requirement engine
-reg_surveillance.py    surveillance engine (scan / simulate / transitions / hash-chained ledger)
+reg_surveillance.py    surveillance engine (scan / transitions / hash-chained ledger)
 surveillance_data.py   monitored gateways, relevance keywords, demo scenarios
 alert_explainer.py     deterministic plain-English explanation engine
 ai_bridge.py           optional Claude enhancement (anthropic SDK, claude-opus-5, server-side fallbacks)

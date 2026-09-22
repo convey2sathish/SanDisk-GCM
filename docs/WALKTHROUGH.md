@@ -72,7 +72,7 @@ All 10 pre-seeded global alerts have been upgraded with rich, technical complian
 10. **WPC India Wireless Import Licensing**: Equipment Type Approval (ETA) exemptions for short-range accessories, Saral Sanchar portal links.
 
 ### C. Live Autonomous Surveillance Integration (`reg_surveillance.py`)
-* When autonomous surveillance detects a new regulatory circular or when a simulated notice is injected, the engine automatically populates:
+* When autonomous surveillance detects a new regulatory circular, the engine automatically populates:
   - `detailed_summary`: Auto-generated technical brief describing the issuing authority, pillar, and impact.
   - `technical_impact`: Specific standard clause callouts and cutover deadlines.
   - `timeline_milestones`: Ingest date and enforcement deadline phases.

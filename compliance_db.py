@@ -497,7 +497,7 @@ REGULATION_ALERTS = [
         ],
         "compliance_checklist": [
             "Draft and sign legal UK PSTI Statement of Compliance (SoC) for all active external storage SKUs",
-            "Publish public Vulnerability Disclosure Policy (VDP) with security@sandisk.com contact point",
+            "Publish public Vulnerability Disclosure Policy (VDP) with a dedicated security contact point (e.g. a security@ mailbox)",
             "State explicit 'Defined Support Period' for security maintenance on public support documentation",
             "Provide physical or digital access to the Statement of Compliance with every UK retail shipment"
         ]
@@ -577,7 +577,7 @@ REGULATION_ALERTS = [
         "effective_date": "Enforced",
         "affected_categories": ["sd_card", "micro_sd", "sd_express", "cf_card", "gaming_card", "usb_drive", "internal_ssd", "external_ssd_bus", "external_ssd_powered", "card_reader"],
         "summary": "French customs (DGCCRF) actively enforces mandatory Triman logo combined with harmonized Info-tri sorting signage on all consumer packaging, electronics, and accessories placed on the French market. Non-compliant artwork triggers port seizures and fines up to €15,000 per SKU.",
-        "action_required": "Review packaging artwork for all SanDisk products distributed in France to verify valid Triman logo, separation symbols (Bac Jaune sorting instructions), and Eco-Emballages producer ID.",
+        "action_required": "Review packaging artwork for all products distributed in France to verify valid Triman logo, separation symbols (Bac Jaune sorting instructions), and Eco-Emballages producer ID.",
         "status": "Active Customs Enforcement",
         "source": "French Ministry of Ecological Transition / DGCCRF",
         "detailed_summary": "Under Article L. 541-9-3 of the French Environmental Code and Decree No. 2021-835 issued under the AGEC Law (Anti-Waste for a Circular Economy), any consumer product subject to Extended Producer Responsibility (EPR) distributed in France must display the standardized Triman logo accompanied by the 'Info-tri' waste sorting signage. For storage hardware (flash cards, SSDs, USB drives), this signage must explicitly decompose the packaging elements into their respective sorting streams (e.g. Cardboard box -> Bac Jaune / Yellow Sorting Bin; Plastic blister tray -> Bac Jaune / Tri de tous les emballages). If the surface area of the largest face of the packaging is under 10 cm², sorting information may be provided digitally via website, but products with package faces between 10 cm² and 20 cm² must still carry the Triman emblem physically.",
@@ -731,344 +731,292 @@ REGULATION_ALERTS = [
 ]
 
 # ==========================================
-# 4. PRE-SEEDED PRODUCT PORTFOLIO (11 PRODUCTS)
+# 4. EXAMPLE PRODUCT PORTFOLIO (11 GENERIC PLACEHOLDERS - ONE PER CATEGORY)
+#    These are illustrative only ("is_example": True). They do not describe any real product.
+#    Users add their own products in the Portfolio tab.
 # ==========================================
+_EXAMPLE_STATUS = "Example – replace with your product"
 SAMPLE_PRODUCTS = [
     {
         "id": "PROD-001",
-        "sku": "SDSDXEP-512G-GN4IN",
-        "name": "SanDisk Extreme PRO SDXC UHS-II (512GB)",
+        "sku": "EXAMPLE-SD-01",
+        "name": "Example product – SD card (UHS-II)",
         "category_id": "sd_card",
         "category_name": "SD Card (Standard / UHS-I / UHS-II)",
-        "hw_revision": "Rev B.2",
-        "controller": "Western Digital 20-82-01048-A1",
-        "nand": "BiCS6 3D TLC NAND (162-Layer)",
+        "hw_revision": "Rev A",
+        "controller": "Generic controller",
+        "nand": "3D NAND",
         "power_source": "Bus-powered 3.3V / 1.8V (<2.5W)",
-        "target_markets": ["US", "DE", "FR", "GB", "JP", "KR", "TW", "CN", "IN", "AU", "SA", "BR", "CA", "MX"],
-        "compliance_status": "Certified",
-        "active_certs_count": 14,
-        "readiness_pct": 100
+        "target_markets": ["US", "DE", "FR", "GB", "JP", "KR", "TW", "CN", "IN", "AU", "BR", "SA"],
+        "compliance_status": _EXAMPLE_STATUS,
+        "active_certs_count": 0,
+        "readiness_pct": 0,
+        "is_example": True
     },
     {
         "id": "PROD-002",
-        "sku": "SDSQXAV-1T00-GN6MA",
-        "name": "SanDisk Extreme MicroSDXC UHS-I (1TB)",
+        "sku": "EXAMPLE-MSD-01",
+        "name": "Example product – microSD card (UHS-I)",
         "category_id": "micro_sd",
         "category_name": "MicroSD Card",
-        "hw_revision": "Rev C.1",
-        "controller": "Western Digital 20-82-01024-B0",
-        "nand": "BiCS5 3D TLC NAND (112-Layer)",
+        "hw_revision": "Rev A",
+        "controller": "Generic controller",
+        "nand": "3D NAND",
         "power_source": "Bus-powered 3.3V / 1.8V (<1.8W)",
-        "target_markets": ["US", "DE", "FR", "GB", "JP", "KR", "TW", "CN", "IN", "AU", "SA", "BR", "CA", "MX", "ZA", "SG"],
-        "compliance_status": "Certified",
-        "active_certs_count": 16,
-        "readiness_pct": 100
+        "target_markets": ["US", "DE", "FR", "GB", "JP", "KR", "TW", "CN", "IN", "AU", "BR", "ZA", "SG"],
+        "compliance_status": _EXAMPLE_STATUS,
+        "active_certs_count": 0,
+        "readiness_pct": 0,
+        "is_example": True
     },
     {
         "id": "PROD-003",
-        "sku": "SDEX-256G-GN9EX",
-        "name": "SanDisk SD Express Next-Gen PCIe NVMe (256GB)",
+        "sku": "EXAMPLE-SDX-01",
+        "name": "Example product – SD Express card (PCIe / NVMe)",
         "category_id": "sd_express",
         "category_name": "SD Express Card (PCIe / NVMe)",
-        "hw_revision": "Rev A.1",
-        "controller": "SanDisk PCIe Gen4x1 NVMe Low-Power ASIC",
-        "nand": "BiCS8 3D QLC/TLC NAND (218-Layer)",
+        "hw_revision": "Rev A",
+        "controller": "Generic controller",
+        "nand": "3D NAND",
         "power_source": "Bus-powered (3.3V / 1.8V, up to 4.2W)",
         "target_markets": ["US", "DE", "FR", "GB", "JP", "KR", "TW", "CN", "IN", "AU"],
-        "compliance_status": "Testing In Progress",
-        "active_certs_count": 7,
-        "readiness_pct": 70
+        "compliance_status": _EXAMPLE_STATUS,
+        "active_certs_count": 0,
+        "readiness_pct": 0,
+        "is_example": True
     },
     {
         "id": "PROD-004",
-        "sku": "SDCFE-512G-ZN4NN",
-        "name": "SanDisk Professional PRO-CINEMA CFexpress Type B (512GB)",
+        "sku": "EXAMPLE-CFX-01",
+        "name": "Example product – CFexpress card (Type B)",
         "category_id": "cf_card",
         "category_name": "CF / CFexpress Card",
-        "hw_revision": "Rev B.0",
-        "controller": "Western Digital PCIe Gen3x2 NVMe ASIC",
-        "nand": "BiCS5 TLC NAND",
+        "hw_revision": "Rev A",
+        "controller": "Generic controller",
+        "nand": "3D NAND",
         "power_source": "Bus-powered 3.3V (3.3W max)",
         "target_markets": ["US", "DE", "FR", "GB", "JP", "KR", "TW", "CN", "CA", "AU"],
-        "compliance_status": "Certified",
-        "active_certs_count": 10,
-        "readiness_pct": 100
+        "compliance_status": _EXAMPLE_STATUS,
+        "active_certs_count": 0,
+        "readiness_pct": 0,
+        "is_example": True
     },
     {
         "id": "PROD-005",
-        "sku": "WDBMPH0010BNC-WASN",
-        "name": "WD_BLACK C50 Expansion Card for Xbox (1TB)",
+        "sku": "EXAMPLE-GXC-01",
+        "name": "Example product – gaming storage expansion card",
         "category_id": "gaming_card",
         "category_name": "Gaming Storage Expansion Card",
-        "hw_revision": "Rev A.3",
-        "controller": "Custom Western Digital Velocity NVMe ASIC",
-        "nand": "BiCS5 3D TLC NAND",
+        "hw_revision": "Rev A",
+        "controller": "Generic controller",
+        "nand": "3D NAND",
         "power_source": "Host-powered 3.3V (<4.0W)",
         "target_markets": ["US", "CA", "MX", "DE", "FR", "GB", "IT", "ES", "JP", "KR", "AU", "NZ", "BR", "SA", "AE"],
-        "compliance_status": "Certified",
-        "active_certs_count": 15,
-        "readiness_pct": 100
+        "compliance_status": _EXAMPLE_STATUS,
+        "active_certs_count": 0,
+        "readiness_pct": 0,
+        "is_example": True
     },
     {
         "id": "PROD-006",
-        "sku": "SDDDC4-256G-G46",
-        "name": "SanDisk Ultra Dual Drive Luxe USB Type-C (256GB)",
+        "sku": "EXAMPLE-USB-01",
+        "name": "Example product – USB flash drive (USB-C)",
         "category_id": "usb_drive",
         "category_name": "USB Flash Drive",
-        "hw_revision": "Rev D.0",
-        "controller": "SanDisk USB 3.2 Gen 1 Native Bridge ASIC",
-        "nand": "BiCS5 3D TLC NAND",
+        "hw_revision": "Rev A",
+        "controller": "Generic controller",
+        "nand": "3D NAND",
         "power_source": "5V Bus-powered (<3.0W)",
         "target_markets": ["US", "DE", "FR", "GB", "JP", "KR", "TW", "CN", "IN", "AU", "BR", "ZA", "SA", "AE"],
-        "compliance_status": "Certified",
-        "active_certs_count": 14,
-        "readiness_pct": 100
+        "compliance_status": _EXAMPLE_STATUS,
+        "active_certs_count": 0,
+        "readiness_pct": 0,
+        "is_example": True
     },
     {
         "id": "PROD-007",
-        "sku": "WDS200T2X0E",
-        "name": "WD_BLACK SN850X NVMe SSD (2TB)",
+        "sku": "EXAMPLE-SSD-01",
+        "name": "Example product – internal SSD (M.2 NVMe)",
         "category_id": "internal_ssd",
         "category_name": "Internal SSD (M.2 NVMe / 2.5-inch SATA)",
-        "hw_revision": "Rev B.1",
-        "controller": "Western Digital 20-82-20035-B1 Proprietary NVMe",
-        "nand": "BiCS5 112-Layer 3D TLC",
+        "hw_revision": "Rev A",
+        "controller": "Generic controller",
+        "nand": "3D NAND",
         "power_source": "Host internal 3.3V (7.5W peak)",
-        "target_markets": ["US", "CA", "DE", "FR", "GB", "JP", "KR", "TW", "CN", "AU", "MA", "IN"],
-        "compliance_status": "Certified",
-        "active_certs_count": 12,
-        "readiness_pct": 100
+        "target_markets": ["US", "CA", "DE", "FR", "GB", "JP", "KR", "TW", "CN", "AU", "IN"],
+        "compliance_status": _EXAMPLE_STATUS,
+        "active_certs_count": 0,
+        "readiness_pct": 0,
+        "is_example": True
     },
     {
         "id": "PROD-008",
-        "sku": "SDSSDE61-2T00-G25",
-        "name": "SanDisk Extreme Portable SSD (2TB - Bus-Powered)",
+        "sku": "EXAMPLE-PSSD-01",
+        "name": "Example product – portable SSD (bus-powered)",
         "category_id": "external_ssd_bus",
         "category_name": "External SSD (Without Power Adaptor - Bus-Powered)",
-        "hw_revision": "Rev C.2",
-        "controller": "WD NVMe Controller + ASMedia ASM2362 USB Bridge",
-        "nand": "BiCS5 3D TLC NAND",
+        "hw_revision": "Rev A",
+        "controller": "Generic controller",
+        "nand": "3D NAND",
         "power_source": "USB-C Bus-powered (5V @ up to 2.5A, 12.5W max)",
         "target_markets": ["US", "CA", "MX", "DE", "FR", "GB", "IT", "JP", "KR", "TW", "CN", "IN", "AU", "BR", "SA", "AE", "SG"],
-        "compliance_status": "Certified",
-        "active_certs_count": 17,
-        "readiness_pct": 100
+        "compliance_status": _EXAMPLE_STATUS,
+        "active_certs_count": 0,
+        "readiness_pct": 0,
+        "is_example": True
     },
     {
         "id": "PROD-009",
-        "sku": "SDPHF1A-018T-NBAAD",
-        "name": "SanDisk Professional G-DRIVE Enterprise Desktop (18TB - Powered)",
+        "sku": "EXAMPLE-DSSD-01",
+        "name": "Example product – desktop storage drive (mains-powered)",
         "category_id": "external_ssd_powered",
         "category_name": "External SSD (With Power Adaptor - Mains Powered)",
-        "hw_revision": "Rev A.4",
-        "controller": "Enterprise RAID/SATA to USB 3.2 Gen2 Bridge ASIC",
-        "nand": "Enterprise Ultrastar 7200RPM HDD / SSD Hybrid Stack",
-        "power_source": "External 100-240V AC/DC Power Brick (19V / 3.42A, 65W Level VI DoE)",
+        "hw_revision": "Rev A",
+        "controller": "Generic controller",
+        "nand": "3D NAND",
+        "power_source": "External 100-240V AC/DC power adapter (19V, 65W)",
         "target_markets": ["US", "CA", "MX", "DE", "FR", "GB", "JP", "KR", "TW", "CN", "IN", "AU", "BR"],
-        "compliance_status": "Certified",
-        "active_certs_count": 13,
-        "readiness_pct": 100
+        "compliance_status": _EXAMPLE_STATUS,
+        "active_certs_count": 0,
+        "readiness_pct": 0,
+        "is_example": True
     },
     {
         "id": "PROD-010",
-        "sku": "WUS5EA1A1CSP7D3",
-        "name": "Ultrastar DC SN655 NVMe Enterprise SSD (15.36TB)",
+        "sku": "EXAMPLE-ESSD-01",
+        "name": "Example product – enterprise SSD (U.2 NVMe)",
         "category_id": "enterprise_ssd",
         "category_name": "Enterprise SSD (U.2, U.3, E1.S, E3.S)",
-        "hw_revision": "Rev B.0",
-        "controller": "Enterprise Dual-Port PCIe Gen4 NVMe Controller",
-        "nand": "BiCS5 Enterprise TLC with Hardware Power Loss Protection",
-        "power_source": "Server 12V Main + 3.3V Aux (25W maximum server workload)",
+        "hw_revision": "Rev A",
+        "controller": "Generic controller",
+        "nand": "3D NAND",
+        "power_source": "Server 12V Main + 3.3V Aux (25W maximum)",
         "target_markets": ["US", "CA", "DE", "FR", "GB", "JP", "KR", "TW", "CN", "AU"],
-        "compliance_status": "Certified",
-        "active_certs_count": 10,
-        "readiness_pct": 100
+        "compliance_status": _EXAMPLE_STATUS,
+        "active_certs_count": 0,
+        "readiness_pct": 0,
+        "is_example": True
     },
     {
         "id": "PROD-011",
-        "sku": "SDDR-489-G47",
-        "name": "SanDisk ImageMate PRO Multi-Card USB-C Reader",
+        "sku": "EXAMPLE-RDR-01",
+        "name": "Example product – multi-card reader (USB-C)",
         "category_id": "card_reader",
         "category_name": "Memory Card Reader (Multi-Card / USB-C)",
-        "hw_revision": "Rev B.1",
-        "controller": "Genesys Logic GL3224 Multi-LUN Card Reader Controller",
-        "nand": "None (Passive Media Transceiver)",
+        "hw_revision": "Rev A",
+        "controller": "Generic controller",
+        "nand": "None (passive media transceiver)",
         "power_source": "5V Bus-powered via USB Type-C (<5.0W)",
         "target_markets": ["US", "CA", "DE", "FR", "GB", "JP", "KR", "TW", "CN", "AU", "SA"],
-        "compliance_status": "Certified",
-        "active_certs_count": 11,
-        "readiness_pct": 100
+        "compliance_status": _EXAMPLE_STATUS,
+        "active_certs_count": 0,
+        "readiness_pct": 0,
+        "is_example": True
     }
 ]
 
 # ==========================================
-# 5. SAMPLE CERTIFICATE VAULT RECORDS
+# 5. EXAMPLE CERTIFICATE VAULT RECORDS (6 GENERIC PLACEHOLDERS)
+#    Illustrative only ("is_example": True): fictitious certificate numbers and an unnamed
+#    issuing body. Dates are chosen so the expiry logic (valid / expiring / expired) is exercised.
 # ==========================================
+_EXAMPLE_ISSUER = "Accredited certification body (example)"
 SAMPLE_CERTIFICATES = [
     {
         "id": "CERT-001",
-        "cert_no": "DE 2-034821-M1",
+        "cert_no": "EXAMPLE-CB-0001",
         "scheme": "IECEE CB Scheme",
         "standard": "IEC 62368-1:2018 (3rd Edition)",
-        "issuing_body": "TÜV SÜD Product Service GmbH",
+        "issuing_body": _EXAMPLE_ISSUER,
         "product_id": "PROD-009",
-        "product_name": "SanDisk Professional G-DRIVE Enterprise Desktop (18TB)",
-        "country_coverage": "54 CB Scheme Member Countries",
+        "product_name": "Example product – desktop storage drive (mains-powered)",
+        "country_coverage": "CB Scheme member countries",
         "issue_date": "2023-04-12",
         "expiry_date": "2028-04-11",
         "status": "Valid",
         "document_type": "CB Test Certificate & Test Report (TRF)",
-        "notes": "Includes national deviations for USA, Canada, Japan, EU, China, India, Australia."
+        "notes": "Example record – replace with your own CB certificate. Edition 3 report; Edition 4 transition to be planned.",
+        "is_example": True
     },
     {
         "id": "CERT-002",
-        "cert_no": "R-41098234",
+        "cert_no": "EXAMPLE-BIS-0002",
         "scheme": "BIS CRS (Compulsory Registration Scheme)",
-        "standard": "IS/IEC 62368-1:2023 (Migrated from IS 13252)",
-        "issuing_body": "Bureau of Indian Standards (MeitY)",
+        "standard": "IS 13252 (Part 1):2010",
+        "issuing_body": _EXAMPLE_ISSUER,
         "product_id": "PROD-009",
-        "product_name": "SanDisk Professional G-DRIVE Enterprise Desktop (18TB)",
+        "product_name": "Example product – desktop storage drive (mains-powered)",
         "country_coverage": "India",
         "issue_date": "2024-11-20",
         "expiry_date": "2026-11-19",
         "status": "Valid",
         "document_type": "BIS Registration Certificate",
-        "notes": "Migrated to IS/IEC 62368-1:2023 ahead of the Nov 1, 2028 mandatory deadline via AIR."
+        "notes": "Example record – expires within 90 days to demonstrate the expiring-soon logic.",
+        "is_example": True
     },
     {
         "id": "CERT-003",
-        "cert_no": "2023010901238910",
-        "scheme": "CCC (China Compulsory Certification)",
-        "standard": "GB 4943.1-2022 / GB/T 9254.1-2021",
-        "issuing_body": "China Quality Certification Centre (CQC)",
-        "product_id": "PROD-009",
-        "product_name": "SanDisk Professional G-DRIVE Enterprise Desktop (18TB)",
-        "country_coverage": "China",
-        "issue_date": "2023-08-15",
-        "expiry_date": "2028-08-14",
-        "status": "Valid",
-        "document_type": "CCC Certificate",
-        "notes": "Annual factory surveillance audit required."
-    },
-    {
-        "id": "CERT-004",
-        "cert_no": "PSE-JET-29831",
-        "scheme": "Japan PSE Mark (Diamond)",
-        "standard": "J62368-1 (H30) / Ordinance Article 1",
-        "issuing_body": "Japan Electrical Safety & Environment Technology Laboratories (JET)",
-        "product_id": "PROD-009",
-        "product_name": "SanDisk Professional G-DRIVE Enterprise Desktop (18TB)",
-        "country_coverage": "Japan",
-        "issue_date": "2023-06-01",
-        "expiry_date": "2026-10-15",
-        "status": "Critical",
-        "document_type": "PSE Certificate of Conformity",
-        "notes": "Renewal evaluation required before October 2026."
-    },
-    {
-        "id": "CERT-005",
-        "cert_no": "US-FCC-WD-2024-889",
+        "cert_no": "EXAMPLE-FCC-0003",
         "scheme": "FCC Supplier Declaration of Conformity (SDoC)",
         "standard": "FCC 47 CFR Part 15 Subpart B (Class B)",
-        "issuing_body": "Sporton International Inc. (FCC Accredited Lab)",
+        "issuing_body": _EXAMPLE_ISSUER,
         "product_id": "PROD-008",
-        "product_name": "SanDisk Extreme Portable SSD (2TB)",
+        "product_name": "Example product – portable SSD (bus-powered)",
         "country_coverage": "United States",
         "issue_date": "2024-02-10",
         "expiry_date": "2029-02-09",
         "status": "Valid",
         "document_type": "FCC Test Report & SDoC Form",
-        "notes": "Includes Section 2.911(d)(5) covered list attestation."
+        "notes": "Example record – replace with your own FCC test report and SDoC.",
+        "is_example": True
     },
     {
-        "id": "CERT-006",
-        "cert_no": "EU-CE-SD-8821",
+        "id": "CERT-004",
+        "cert_no": "EXAMPLE-CE-0004",
         "scheme": "EU CE Declaration of Conformity (DoC)",
         "standard": "EN 55032:2015+A11 / EN 55035:2017 / RoHS 2011/65/EU",
-        "issuing_body": "Western Digital Technologies Inc. (Self-Declaration)",
+        "issuing_body": "Manufacturer self-declaration (example)",
         "product_id": "PROD-008",
-        "product_name": "SanDisk Extreme Portable SSD (2TB)",
+        "product_name": "Example product – portable SSD (bus-powered)",
         "country_coverage": "European Union (EU 27) + EEA",
         "issue_date": "2024-01-15",
         "expiry_date": "Permanent (Design Life)",
         "status": "Valid",
         "document_type": "EU Declaration of Conformity",
-        "notes": "Technical Documentation File stored under EU Authorized Rep."
+        "notes": "Example record – a DoC without an expiry date.",
+        "is_example": True
     },
     {
-        "id": "CERT-007",
-        "cert_no": "R-R-WDC-SN850X",
-        "scheme": "South Korea KC Conformity Assessment",
-        "standard": "KS C 9832 / KS C 9835 (EMC)",
-        "issuing_body": "National Radio Research Agency (RRA)",
-        "product_id": "PROD-007",
-        "product_name": "WD_BLACK SN850X NVMe SSD (2TB)",
-        "country_coverage": "South Korea",
-        "issue_date": "2022-09-01",
-        "expiry_date": "Permanent",
-        "status": "Valid",
-        "document_type": "KC Registration Certificate",
-        "notes": "Component evaluation inside representative host system."
-    },
-    {
-        "id": "CERT-008",
-        "cert_no": "R33008-RoHS",
+        "id": "CERT-005",
+        "cert_no": "EXAMPLE-BSMI-0005",
         "scheme": "Taiwan BSMI RPC Certification",
         "standard": "CNS 13438 / CNS 15663 Section 5",
-        "issuing_body": "Bureau of Standards, Metrology and Inspection (BSMI)",
+        "issuing_body": _EXAMPLE_ISSUER,
         "product_id": "PROD-007",
-        "product_name": "WD_BLACK SN850X NVMe SSD (2TB)",
+        "product_name": "Example product – internal SSD (M.2 NVMe)",
         "country_coverage": "Taiwan",
         "issue_date": "2023-03-10",
         "expiry_date": "2026-03-09",
         "status": "Expired",
         "document_type": "BSMI Product Certification",
-        "notes": "Renewal application pending BSMI review."
+        "notes": "Example record – already expired to demonstrate the expired-certificate logic.",
+        "is_example": True
     },
     {
-        "id": "CERT-009",
-        "cert_no": "ERAC-RCM-99231",
+        "id": "CERT-006",
+        "cert_no": "EXAMPLE-RCM-0006",
         "scheme": "Australia / New Zealand RCM Registration",
         "standard": "AS/NZS CISPR 32:2015",
-        "issuing_body": "Electrical Regulatory Authorities Council (ERAC)",
+        "issuing_body": _EXAMPLE_ISSUER,
         "product_id": "PROD-001",
-        "product_name": "SanDisk Extreme PRO SDXC UHS-II (512GB)",
+        "product_name": "Example product – SD card (UHS-II)",
         "country_coverage": "Australia & New Zealand",
         "issue_date": "2022-05-18",
         "expiry_date": "2027-05-17",
         "status": "Valid",
         "document_type": "RCM Responsible Supplier Declaration",
-        "notes": "Registered by local Australian Responsible Supplier."
-    },
-    {
-        "id": "CERT-010",
-        "cert_no": "SABER-2024-8812",
-        "scheme": "Saudi Arabia SABER PCoC & SCoC",
-        "standard": "SASO RoHS / SASO IEC 62368-1",
-        "issuing_body": "TÜV Rheinland Middle East (SASO Approved Notified Body)",
-        "product_id": "PROD-006",
-        "product_name": "SanDisk Ultra Dual Drive Luxe USB Type-C (256GB)",
-        "country_coverage": "Saudi Arabia",
-        "issue_date": "2024-03-01",
-        "expiry_date": "2025-02-28",
-        "status": "Expired",
-        "document_type": "SABER Product Certificate of Conformity",
-        "notes": "Annual renewal on SABER platform required for customs shipment release."
-    },
-    {
-        "id": "CERT-011",
-        "cert_no": "NIST-CMVP-4412",
-        "scheme": "FIPS 140-3 Cryptographic Module Validation",
-        "standard": "FIPS 140-3 Level 2 (Security / Cryptography)",
-        "issuing_body": "NIST Cryptographic Module Validation Program (CMVP)",
-        "product_id": "PROD-010",
-        "product_name": "Ultrastar DC SN655 NVMe Enterprise SSD (15.36TB)",
-        "country_coverage": "United States & Canada (Federal & Enterprise)",
-        "issue_date": "2023-10-05",
-        "expiry_date": "2028-10-04",
-        "status": "Valid",
-        "document_type": "NIST Validation Certificate",
-        "notes": "Cryptographic hardware engine validation for Self-Encrypting Drive (SED)."
+        "notes": "Example record – replace with your own RCM registration.",
+        "is_example": True
     }
 ]
 
@@ -1821,7 +1769,183 @@ def get_country_product_requirement(country_code, category_id):
             ]
             notes = f"Exempt from mandatory national technical certifications (passive SELV storage media). Standard commercial customs entry with statutory packaging labeling and environmental compliance."
 
+    # -------------------------------------------------------------
+    # Applicable-requirements ledger: one entry per regulatory pillar,
+    # derived from the branch selected above. Exempt pillars are stated
+    # explicitly so the UI never shows a national standard that does not apply.
+    # -------------------------------------------------------------
+    is_eu_like = is_eu or code in ['IS', 'NO', 'CH', 'LI']
+    is_gb = code == 'GB'
+    docs_text = " ".join(docs).lower()
+
+    def _route():
+        rt = (req_type or "")
+        tl = (testing_loc or "")
+        if "Testing Required" in rt:
+            return "In-country lab"
+        if "Registration" in rt or "RPC" in rt or "SABER" in rt or "ECAS" in rt:
+            return "Registration"
+        if "CB" in rt or "CB Accredited" in tl:
+            return "CB Scheme report"
+        if "Document Required" in rt:
+            return "Technical file"
+        return "SDoC"
+
+    def _emc_route():
+        if code in ('KR', 'TW') and cat_id != 'external_ssd_powered':
+            return "Registration"
+        if code in ('KR', 'TW', 'CN', 'JP') and cat_id == 'external_ssd_powered':
+            return "In-country lab"
+        if code in ('SA', 'AE'):
+            return "Registration"
+        base = _route()
+        return "SDoC" if base in ("CB Scheme report", "Technical file") else base
+
+    env_std_short = country.get('rohs_std', nat_env) or nat_env
+    env_note_parts = [
+        f"RoHS/REACH: {env_std_short}",
+        f"PFAS/chemicals: {country.get('pfas_std', 'PFAS Reporting & Screening')}",
+        f"Packaging: {country.get('packaging_std', 'Packaging Heavy Metals & Recycled Content')}",
+        f"EPR/WEEE: {country.get('epr_std', 'WEEE / E-Waste Producer Responsibility')}",
+    ]
+    env_req = {'pillar': 'Environmental', 'status': 'Required', 'standard': env_std_short,
+               'route': 'Declaration', 'note': "; ".join(env_note_parts)}
+    label_req = {'pillar': 'Labelling', 'status': 'Required',
+                 'standard': ", ".join(marks) if marks else None, 'route': None,
+                 'note': f"{c_name} statutory label: importer identity, model, origin"
+                         + (f"; mandatory marks: {', '.join(marks)}" if marks else "")}
+
+    safety_exempt_reason = None
+    emc_exempt_reason = None
+    reqs = []
+
+    if cat_id == 'external_ssd_powered':
+        energy_std = None
+        if code == 'US':
+            energy_std = "US DoE Level VI (10 CFR 430) / CEC Title 20"
+        elif is_eu_like:
+            energy_std = "EU Ecodesign (ErP) Regulation (EU) 2019/1782"
+        elif code == 'KR':
+            energy_std = "KEMCO MEPS external power supply efficiency"
+        elif code == 'CN':
+            energy_std = "China Energy Label (CEL) power supply efficiency"
+        elif code == 'JP':
+            energy_std = "Energy Conservation Law (Top Runner)"
+        elif "energy" in docs_text or "efficiency" in docs_text:
+            energy_std = "External power supply efficiency (DoE VI / ErP / MEPS)"
+        reqs = [
+            {'pillar': 'Safety', 'status': 'Required', 'standard': applicable_safety, 'route': _route(),
+             'note': f"Mains AC/DC adapter and storage unit safety ({auth})"},
+            {'pillar': 'EMC', 'status': 'Required', 'standard': applicable_emc, 'route': _emc_route(),
+             'note': "Class B emissions / immunity for the storage unit"},
+            env_req,
+            {'pillar': 'Energy', 'status': 'Required' if energy_std else 'Not applicable',
+             'standard': energy_std, 'route': 'Declaration' if energy_std else None,
+             'note': "External power supply efficiency mandate" if energy_std else "No efficiency requirement identified"},
+            label_req,
+        ]
+
+    elif cat_id in ['external_ssd_bus', 'card_reader', 'usb_drive']:
+        safety_exempt_reason = "SELV / Class III – no mains connection"
+        reqs = [
+            {'pillar': 'Safety', 'status': 'Exempt', 'standard': None, 'route': None, 'note': safety_exempt_reason},
+            {'pillar': 'EMC', 'status': 'Required', 'standard': applicable_emc, 'route': _emc_route(),
+             'note': "Class B emissions / immunity for active bus-powered device"
+                     + (" – mandatory national registration" if code in ('KR', 'TW') else "")},
+            env_req,
+            label_req,
+        ]
+
+    elif cat_id == 'sd_express':
+        safety_exempt_reason = "SELV – no mains connection (thermal Clause 9 evaluated at host level)"
+        reqs = [
+            {'pillar': 'Safety', 'status': 'Exempt', 'standard': None, 'route': None, 'note': safety_exempt_reason},
+            {'pillar': 'EMC', 'status': 'Required', 'standard': applicable_emc, 'route': _emc_route(),
+             'note': "Radiated emissions evaluated to 6 GHz (PCIe clock harmonics)"},
+            env_req,
+            label_req,
+        ]
+
+    elif cat_id in ['internal_ssd', 'enterprise_ssd']:
+        cyber_std = None
+        if is_eu_like:
+            cyber_std = "EU Cyber Resilience Act (Regulation (EU) 2024/2847)"
+        elif is_gb:
+            cyber_std = "UK PSTI Act 2022 (Product Security regime)"
+        reqs = [
+            {'pillar': 'Safety', 'status': 'Required', 'standard': applicable_safety, 'route': 'Component recognition',
+             'note': "Recognised component (UL/CB) for host system integration"},
+            {'pillar': 'EMC', 'status': 'Required', 'standard': applicable_emc, 'route': _emc_route(),
+             'note': "Class B / Class A emissions when commercialised standalone"},
+            env_req,
+            {'pillar': 'Cyber', 'status': 'Required' if cyber_std else 'Not applicable',
+             'standard': cyber_std, 'route': 'Self-assessment' if cyber_std else None,
+             'note': "Products with digital elements (SED / firmware)" if cyber_std else "No product cybersecurity mandate in this market"},
+            label_req,
+        ]
+
+    else:
+        safety_exempt_reason = "SELV / Class III passive media – no mains connection"
+        if code == 'KR':
+            emc_exempt_reason = "passive media under RRA Article 3 exemption – no standalone KC EMC registration"
+        elif code == 'JP':
+            emc_exempt_reason = "VCCI registration not required for passive removable media"
+        elif code == 'CN':
+            emc_exempt_reason = "no active circuitry – outside CCC / GB 9254 scope (passive SELV media)"
+        elif code == 'TW':
+            emc_exempt_reason = "BSMI commodity inspection exemption for passive storage media"
+        elif code == 'US':
+            emc_exempt_reason = "FCC 47 CFR 15.103(h) passive sub-assembly"
+        elif is_eu_like:
+            emc_exempt_reason = "inherently benign equipment – outside EMCD 2014/30/EU scope (passive media)"
+        elif is_gb:
+            emc_exempt_reason = "inherently benign equipment – outside EMC Regulations 2016 scope (passive media)"
+        elif code == 'IN':
+            emc_exempt_reason = "passive removable media – no BIS CRS or EMC registration"
+        elif code == 'BR':
+            emc_exempt_reason = "ANATEL homologation exemption – passive storage media"
+        elif code in ('SA', 'AE'):
+            emc_exempt_reason = "passive storage media – SABER/ECAS registration covers RoHS only, no EMC report"
+        else:
+            emc_exempt_reason = "passive SELV storage media – no national EMC certification"
+        reqs = [
+            {'pillar': 'Safety', 'status': 'Exempt', 'standard': None, 'route': None, 'note': safety_exempt_reason},
+            {'pillar': 'EMC', 'status': 'Exempt', 'standard': None, 'route': None, 'note': emc_exempt_reason},
+            env_req,
+            label_req,
+        ]
+
+    if safety_exempt_reason:
+        applicable_safety = f"Exempt – {safety_exempt_reason}"
+    if emc_exempt_reason:
+        applicable_emc = f"Exempt – {emc_exempt_reason}"
+
+    def _short_exempt(r):
+        if r['pillar'] == 'Safety':
+            return "Safety (SELV)"
+        if r['pillar'] == 'EMC':
+            return "EMC registration (passive media)"
+        return r['pillar']
+
+    _env_short = env_std_short if len(env_std_short) <= 28 else "RoHS/REACH"
+    applicable_parts = []
+    for r in reqs:
+        if r['status'] != 'Required':
+            continue
+        if r['pillar'] == 'Environmental':
+            applicable_parts.append(f"Environmental ({_env_short})")
+        elif r['route'] and r['pillar'] not in ('Labelling',):
+            applicable_parts.append(f"{r['pillar']} ({r['route']})")
+        else:
+            applicable_parts.append(r['pillar'])
+    exempt_parts = [_short_exempt(r) for r in reqs if r['status'] == 'Exempt']
+    applicable_summary = "Applicable: " + ", ".join(applicable_parts)
+    if exempt_parts:
+        applicable_summary += " · Exempt: " + ", ".join(exempt_parts)
+
     return {
+        'applicable_requirements': reqs,
+        'applicable_summary': applicable_summary,
         'country_code': country['code'],
         'country_name': country['name'],
         'region': country['region'],

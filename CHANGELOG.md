@@ -8,7 +8,6 @@ was found in 1.0 and how it was fixed.
 ### Fixed
 * Overview panels never rendered (JS crash on a missing element).
 * Document Impact Audit tab was non-functional (handlers never defined).
-* Map “Simulate notice” did not pre-select the country.
 * Executable depended on internet CDNs for styling and icons; now fully offline.
 * Shipped country data had every standard overwritten by a simulation; regenerated from source.
 * Ledger contained simulation artefacts; replaced by a clean, hash-chained seed.
@@ -32,7 +31,11 @@ was found in 1.0 and how it was fixed.
 * Settings (company name, AI model/key, auto-scan interval) stored in the local data folder.
 * Cyber pillar; pending-transition heat layer on the map; new matrix filters.
 
+### Removed
+* Gazette-notice simulator and all seeded/simulated surveillance data (the ledger now starts empty and is filled only by live scanning).
+
 ### Changed
+* Built-in example products, certificates and audit documents are now clearly labelled generic placeholders (`is_example`); no real product models, brands or certificate numbers are shipped.
 * Modular architecture: `config.py`, `store.py`, `routes_*.py`, JS modules under `static/js/app/`, Jinja partials.
 * All mutable data lives in `%LOCALAPPDATA%\GCM_Platform\data` (or `GCM_DATA_DIR`); shipped data is read-only.
 * Server binds to localhost by default (`GCM_HOST`, `GCM_PORT` to override).

@@ -169,7 +169,7 @@ def register(app, ctx):
             if search:
                 hay = " ".join(str(c.get(k, "")) for k in (
                     "country_name", "country_code", "authority", "safety_std", "national_safety_std", "emc_std", "env_std",
-                    "rohs_std", "pfas_std", "packaging_std", "epr_std", "notes", "bloc")).lower()
+                    "rohs_std", "pfas_std", "packaging_std", "epr_std", "notes", "bloc", "applicable_summary")).lower()
                 hay += " " + " ".join(c.get("required_documents", [])).lower() + " " + " ".join(c.get("marks", [])).lower()
                 if search not in hay:
                     continue
@@ -233,6 +233,9 @@ def register(app, ctx):
                 "testing_location": rule.get("testing_location"), "badge": rule.get("badge"),
                 "applicable_marks": country.get("marks", []), "lead_time": f"{rule.get('lead_time', country.get('lead_time_weeks', 2))} weeks",
                 "required_documents": rule.get("required_documents", []), "notes": rule.get("notes"),
+                "applicable_requirements": rule.get("applicable_requirements", []),
+                "applicable_summary": rule.get("applicable_summary", ""),
+                "safety_std": rule.get("safety_std"), "emc_std": rule.get("emc_std"),
             }
         alerts = [a for a in store.alerts() if reg_surveillance.alert_matches_country(a, country)]
         products = [p for p in store.products() if code in [m.upper() for m in p.get("target_markets", [])]]
@@ -345,36 +348,6 @@ def register(app, ctx):
         ok, bad = verify_ledger(surveillance.get_audit_log(limit=100000))
         return jsonify({"audit_log": entries, "status": surveillance.get_status(light=True), "ledger_ok": ok, "ledger_first_bad_index": bad,
                         "ledger_entries": len(surveillance.get_audit_log(limit=100000))})
-
-    @app.post("/api/surveillance/simulate")
-    def core_surv_simulate():
-        data = request.get_json(silent=True) or {}
-        cc = str(data.get("country_code") or "ALL").upper().strip()
-        if cc not in ("ALL", "GLOBAL", "WORLDWIDE", "ALL_COUNTRIES") and cc not in db.COUNTRIES_DB:
-            return jsonify({"error": f"Unknown country code '{cc}'"}), 400
-        cats = data.get("affected_categories") or ["external_ssd_powered", "external_ssd_bus", "internal_ssd", "usb_drive"]
-        cats = [c for c in cats if c in db.PRODUCT_CATEGORIES or c in ("all", "all_storage_categories")] or ["all_storage_categories"]
-        pillar = data.get("pillar", "Safety")
-        if pillar not in ("Safety", "EMC", "Environmental", "Cyber", "All"):
-            pillar = "Safety"
-        event = surveillance.simulate_gazette_update(
-            country_code=cc, authority=str(data.get("authority") or "National Regulatory Authority")[:160],
-            new_standard=str(data.get("new_standard") or "IEC 62368-1:2023 (Edition 4.0)")[:160],
-            deadline=str(data.get("deadline") or "2028-11-01")[:10],
-            summary=str(data.get("summary") or "Official Gazette Notification: mandatory transition to updated standard.")[:2000],
-            affected_categories=cats, pillar=pillar, source_url=(data.get("source_url") or None),
-        )
-        return jsonify({"success": True, "event": event, "alert": event.get("alert"),
-                        "affected_countries_count": event.get("affected_countries_count", 1),
-                        "impacted_products_count": event.get("impacted_products_count", 0),
-                        "total_alerts_count": len(store.alerts()), "status": surveillance.get_status(light=True)})
-
-    @app.route("/api/surveillance/auto-simulate/next", methods=["GET", "POST"])
-    def core_surv_auto_next():
-        event = surveillance.auto_simulate_next_event(products=store.products())
-        return jsonify({"success": True, "event": event, "alert": event.get("alert"),
-                        "impacted_products": event.get("impacted_products", []), "impacted_products_count": event.get("impacted_products_count", 0),
-                        "status": surveillance.get_status(light=True), "total_alerts_count": len(store.alerts())})
 
     @app.post("/api/surveillance/reset-knowledge-base")
     def core_surv_reset():

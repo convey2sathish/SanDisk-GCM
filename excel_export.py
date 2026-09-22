@@ -162,8 +162,22 @@ def export_product_matrix_excel(category_id="external_ssd_powered", type_filter=
         "PFAS / Chemical Regime",
         "Packaging & Plastics Mandate",
         "EPR / WEEE Registry",
-        "Pending Standard Transition"
+        "Pending Standard Transition",
+        "Applicable summary"
     ]
+
+    def _pillar_text(c, pillar, fallback):
+        """Applicable-requirements text for one pillar; Exempt rows render as 'Exempt – reason'."""
+        for r in c.get("applicable_requirements") or []:
+            if r.get("pillar") != pillar:
+                continue
+            if r.get("status") == "Exempt":
+                return f"Exempt – {r.get('note') or 'not applicable to this product'}"
+            if r.get("status") == "Not applicable":
+                return "Not applicable"
+            std = r.get("standard") or fallback
+            return f"{std} ({r['route']})" if r.get("route") else std
+        return fallback
 
     ws.row_dimensions[5].height = 28
     for col_idx, h in enumerate(headers, 1):
@@ -221,19 +235,19 @@ def export_product_matrix_excel(category_id="external_ssd_powered", type_filter=
             req_cell.font = exempt_font
 
         # Col 6: Applicable Safety Standard
-        safety_cell = ws.cell(row=row_idx, column=6, value=c.get("safety_std", "Exempt"))
+        safety_cell = ws.cell(row=row_idx, column=6, value=_pillar_text(c, "Safety", c.get("safety_std", "Exempt")))
         safety_cell.alignment = Alignment(horizontal="left", vertical="center")
         safety_cell.font = Font(name="Calibri", size=9)
         safety_cell.border = cell_border
 
         # Col 7: Applicable EMC Standard
-        emc_cell = ws.cell(row=row_idx, column=7, value=c.get("emc_std", "CISPR 32 Class B"))
+        emc_cell = ws.cell(row=row_idx, column=7, value=_pillar_text(c, "EMC", c.get("emc_std", "CISPR 32 Class B")))
         emc_cell.alignment = Alignment(horizontal="left", vertical="center")
         emc_cell.font = Font(name="Calibri", size=9)
         emc_cell.border = cell_border
 
         # Col 8: Environmental / Chemical
-        env_cell = ws.cell(row=row_idx, column=8, value=c.get("env_std", "RoHS / REACH"))
+        env_cell = ws.cell(row=row_idx, column=8, value=_pillar_text(c, "Environmental", c.get("env_std", "RoHS / REACH")))
         env_cell.alignment = Alignment(horizontal="left", vertical="center")
         env_cell.font = Font(name="Calibri", size=9)
         env_cell.border = cell_border
@@ -294,6 +308,12 @@ def export_product_matrix_excel(category_id="external_ssd_powered", type_filter=
         tr_cell.font = Font(name="Calibri", size=9, bold=bool(transitions), color="4338CA" if transitions else "64748B")
         tr_cell.border = cell_border
 
+        # Col 19: applicable requirements & exemptions summary
+        sum_cell = ws.cell(row=row_idx, column=19, value=c.get("applicable_summary", ""))
+        sum_cell.alignment = Alignment(horizontal="left", vertical="center", wrap_text=True)
+        sum_cell.font = Font(name="Calibri", size=9)
+        sum_cell.border = cell_border
+
         row_idx += 1
 
     # Freeze header panes (Freeze at row 6, col 1)
@@ -301,7 +321,7 @@ def export_product_matrix_excel(category_id="external_ssd_powered", type_filter=
 
     # Auto-filter on data table headers
     if row_idx > 6:
-        ws.auto_filter.ref = f"A5:R{row_idx-1}"
+        ws.auto_filter.ref = f"A5:S{row_idx-1}"
 
     # Optimized Column Widths
     col_widths = {
@@ -322,7 +342,8 @@ def export_product_matrix_excel(category_id="external_ssd_powered", type_filter=
         15: 34,  # PFAS
         16: 36,  # Packaging
         17: 32,  # EPR
-        18: 40   # Transition
+        18: 40,  # Transition
+        19: 52   # Applicable summary
     }
     for col_num, width in col_widths.items():
         col_letter = get_column_letter(col_num)

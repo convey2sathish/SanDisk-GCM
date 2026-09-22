@@ -1008,7 +1008,7 @@ def _confidence(alert, seed_ids, sources):
     rich = bool(alert.get("detailed_summary")) and bool(alert.get("technical_impact")) and bool(alert.get("compliance_checklist"))
     if aid in seed_ids and sources:
         return {"level": "High", "basis": f"Curated seed alert with {len(sources)} official source link(s), detailed legal summary, technical impact and checklist reviewed by the GCM knowledge base."}
-    if aid.startswith("ALERT-SURV") or "surveillance" in status or "simulated" in status or alert.get("surveillance_event_id"):
+    if aid.startswith("ALERT-SURV") or "surveillance" in status or alert.get("surveillance_event_id"):
         return {"level": "Medium", "basis": "Detected by the surveillance engine from a feed or gazette notice; fields were auto-enriched and should be verified against the official text before budgeting."}
     if rich and sources:
         return {"level": "Medium", "basis": "User-published alert with detailed content and source link; not yet cross-checked against the official gazette."}
@@ -1260,7 +1260,7 @@ def build_evidence_corpus(alert, ctx=None):
             add(f"{label}: {cur[key]}.", "curated knowledge", "curated")
     for clause in cur.get("technical_clauses") or []:
         add(str(clause).rstrip(".") + ".", "curated knowledge", "curated")
-    add(cur.get("sandisk_guidance"), "curated knowledge (engineering guidance)", "curated")
+    add(cur.get("engineering_guidance"), "curated knowledge (engineering guidance)", "curated")
     add(cur.get("lab_recommendations"), "curated knowledge (lab recommendation)", "curated")
     codes = _market_codes(alert, db)
     markets = _primary_markets(alert, codes, db)

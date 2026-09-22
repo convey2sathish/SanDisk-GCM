@@ -29,21 +29,38 @@
     return tr.slice(-3).map(t => `<div class="mt-1.5 flex items-start gap-1.5 text-[10px] bg-indigo-950/50 border border-indigo-800/60 rounded-lg px-2 py-1"><i data-lucide="git-branch" class="w-3 h-3 text-indigo-300 shrink-0 mt-0.5"></i><span class="text-indigo-200"><strong>${GCM.ui.esc(t.pillar)} transition:</strong> ${GCM.ui.esc(t.from || 'current')} → <strong>${GCM.ui.esc(t.to)}</strong>${t.deadline ? ` by <span class="mono">${GCM.ui.esc(t.deadline)}</span> (${GCM.ui.relDays(t.deadline)})` : ''}</span></div>`).join('');
   }
 
+  const PILLAR_PILL = {
+    Safety: 'text-rose-300 border-rose-800', EMC: 'text-sky-300 border-sky-800', Environmental: 'text-emerald-300 border-emerald-800',
+    Energy: 'text-amber-300 border-amber-800', Cyber: 'text-violet-300 border-violet-800', Labelling: 'text-indigo-300 border-indigo-800',
+  };
+
+  function requirementsHtml(c) {
+    const reqs = (c.applicable_requirements || []).filter(r => r.status !== 'Not applicable');
+    if (!reqs.length) {
+      return `<div class="flex items-center gap-1.5"><span class="pill ${PILLAR_PILL.Safety}">Safety</span><span class="text-white text-[11px]">${GCM.ui.esc(c.safety_std || '')}</span></div>
+        <div class="flex items-center gap-1.5"><span class="pill ${PILLAR_PILL.EMC}">EMC</span><span class="text-slate-200 text-[11px]">${GCM.ui.esc(c.emc_std || '')}</span></div>`;
+    }
+    return reqs.map(r => {
+      if (r.status === 'Exempt') {
+        return `<div class="flex items-start gap-1.5"><span class="pill text-slate-400 border-slate-700 shrink-0">${GCM.ui.esc(r.pillar)}</span><span class="pill text-emerald-400 border-emerald-900 bg-emerald-950/40 shrink-0">Exempt</span><span class="text-slate-400 text-[10px] italic leading-tight">${GCM.ui.esc(r.note || '')}</span></div>`;
+      }
+      const std = r.standard ? `<span class="text-white text-[11px]">${GCM.ui.esc(r.standard)}</span>` : '';
+      const route = r.route ? `<span class="mono text-[9px] text-slate-400 border border-slate-700 rounded px-1 py-px shrink-0">${GCM.ui.esc(r.route)}</span>` : '';
+      const note = r.pillar === 'Environmental' || !r.note ? '' : `<div class="text-[10px] text-slate-500 leading-tight">${GCM.ui.esc(r.note)}</div>`;
+      return `<div class="flex items-start gap-1.5"><span class="pill ${PILLAR_PILL[r.pillar] || ''} shrink-0">${GCM.ui.esc(r.pillar)}</span><div class="min-w-0"><div class="flex items-center gap-1.5 flex-wrap">${std}${route}</div>${note}</div></div>`;
+    }).join('');
+  }
+
   function rowHtml(c) {
     const docs = (c.required_documents || []).map(d => `<span class="inline-block px-2 py-0.5 m-0.5 rounded bg-slate-800/90 border border-slate-700 text-slate-200 text-[10px] leading-tight">${GCM.ui.esc(d)}</span>`).join('');
-    const safety = c.is_safety_exempt
-      ? `<div class="flex items-center gap-1.5"><span class="pill">Safety</span><span class="text-emerald-400 text-[11px] font-semibold">✓ Exempt (SELV / Class III)</span></div>`
-      : c.safety_status === 'Component Recognition'
-        ? `<div class="flex items-center gap-1.5"><span class="pill text-purple-300 border-purple-800">Component safety</span><span class="text-white text-[11px]">${GCM.ui.esc(c.safety_std)}</span></div>`
-        : `<div class="flex items-center gap-1.5"><span class="pill text-rose-300 border-rose-800">Safety (mains)</span><span class="text-white text-[11px]">${GCM.ui.esc(c.safety_std)}</span></div>`;
     return `<tr>
       <td class="whitespace-nowrap"><div class="flex items-center gap-2"><span class="text-lg">${GCM.ui.flag(c.country_code)}</span><div><div class="font-semibold text-white">${GCM.ui.esc(c.country_name)} <span class="mono text-slate-500 text-[10px]">${GCM.ui.esc(c.country_code)}</span></div><div class="text-[10px] text-slate-500">${GCM.ui.esc(c.region)}${c.bloc && c.bloc !== 'None' ? ` · ${GCM.ui.esc(c.bloc)}` : ''}</div></div></div></td>
       <td class="text-slate-300 max-w-[180px]">${GCM.ui.esc(c.authority)}</td>
       <td class="whitespace-nowrap"><span class="${reqBadge(c.requirement_type)}">${GCM.ui.esc(c.requirement_type)}</span><div class="text-[10px] text-slate-500 mt-1 max-w-[200px] whitespace-normal">${GCM.ui.esc(c.testing_location || '')}</div></td>
       <td class="min-w-[260px]"><div class="space-y-1">
         ${c.last_surveilled_date ? `<div class="inline-flex items-center gap-1.5 text-[9px] text-emerald-300 mono bg-emerald-950/60 border border-emerald-800/60 px-2 py-0.5 rounded"><span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>Surveilled ${GCM.ui.esc(c.last_surveilled_date)} [${GCM.ui.esc(c.last_surveilled_pillar || 'All')}]</div>` : ''}
-        ${safety}
-        <div class="flex items-center gap-1.5"><span class="pill text-sky-300 border-sky-800">EMC / Radio</span><span class="text-slate-200 text-[11px]">${GCM.ui.esc(c.emc_std)}</span></div>
+        ${requirementsHtml(c)}
+        ${c.applicable_summary ? `<div class="text-[10px] text-slate-400 leading-tight pt-1 border-t border-slate-800/80">${GCM.ui.esc(c.applicable_summary)}</div>` : ''}
         <div class="pt-1.5 mt-1 border-t border-slate-800/80 space-y-1">
           <div class="flex items-start gap-1.5"><span class="pill text-emerald-300 border-emerald-800 shrink-0">RoHS</span><span class="text-slate-300 text-[10px] leading-tight">${GCM.ui.esc(c.rohs_std || c.env_std)}</span></div>
           ${c.pfas_std ? `<div class="flex items-start gap-1.5"><span class="pill text-teal-300 border-teal-800 shrink-0">PFAS / Chem</span><span class="text-teal-200/90 text-[10px] leading-tight">${GCM.ui.esc(c.pfas_std)}</span></div>` : ''}
@@ -109,8 +126,8 @@
           </div>
         </div>
         <div><div class="section-title mb-2">Mandatory marks</div><div class="flex flex-wrap gap-2">${(c.marks || []).map(m => `<span class="px-3 py-1 rounded-lg bg-sky-950 border border-sky-800 text-sky-300 mono font-bold text-xs">${GCM.ui.esc(m)}</span>`).join('') || '<span class="text-slate-500 text-xs">None</span>'}</div></div>
-        <div><div class="section-title mb-2">Requirement by product category</div><div class="table-wrap"><table class="table"><thead><tr><th>Category</th><th>Route</th><th>Lead time</th><th>Key documents</th></tr></thead><tbody>
-          ${Object.entries(rules).map(([id, r]) => `<tr class="${id === cat ? 'bg-amber-950/30' : ''}"><td class="font-medium text-white">${GCM.ui.esc(r.category_name)}${id === cat ? ' <span class="pill text-amber-300 border-amber-700">active in matrix</span>' : ''}</td><td><span class="${reqBadge(r.requirement_type || '')}">${GCM.ui.esc(r.requirement_type)}</span></td><td class="mono text-slate-400">${GCM.ui.esc(r.lead_time)}</td><td class="text-[11px] text-slate-300">${(r.required_documents || []).slice(0, 3).map(GCM.ui.esc).join(' · ')}${(r.required_documents || []).length > 3 ? ` · +${r.required_documents.length - 3} more` : ''}</td></tr>`).join('')}
+        <div><div class="section-title mb-2">Requirement by product category</div><div class="table-wrap"><table class="table"><thead><tr><th>Category</th><th>Route</th><th>Applicable requirements &amp; exemptions</th><th>Lead time</th><th>Key documents</th></tr></thead><tbody>
+          ${Object.entries(rules).map(([id, r]) => `<tr class="${id === cat ? 'bg-amber-950/30' : ''}"><td class="font-medium text-white">${GCM.ui.esc(r.category_name)}${id === cat ? ' <span class="pill text-amber-300 border-amber-700">active in matrix</span>' : ''}</td><td><span class="${reqBadge(r.requirement_type || '')}">${GCM.ui.esc(r.requirement_type)}</span></td><td class="text-[11px] text-slate-300 max-w-[260px] whitespace-normal">${GCM.ui.esc(r.applicable_summary || '—')}</td><td class="mono text-slate-400">${GCM.ui.esc(r.lead_time)}</td><td class="text-[11px] text-slate-300">${(r.required_documents || []).slice(0, 3).map(GCM.ui.esc).join(' · ')}${(r.required_documents || []).length > 3 ? ` · +${r.required_documents.length - 3} more` : ''}</td></tr>`).join('')}
         </tbody></table></div></div>
         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div class="card !p-4"><div class="section-title text-rose-400 mb-2">Active alerts for this market (${(d.alerts || []).length})</div>${(d.alerts || []).length ? d.alerts.slice(0, 8).map(a => `<button class="w-full text-left flex items-center justify-between gap-2 py-1.5 border-b border-slate-800 last:border-0 hover:text-sky-300" data-action="deeplink-alert" data-arg="${GCM.ui.esc(a.id)}"><span class="text-[11px] text-slate-200 truncate">${GCM.ui.esc(a.title)}</span>${GCM.ui.badge(a.severity, a.severity)}</button>`).join('') : '<div class="text-[11px] text-slate-500">No active alerts target this market.</div>'}</div>
@@ -118,7 +135,7 @@
         </div>
         ${transitions.length ? `<div class="card !p-4"><div class="section-title text-indigo-300 mb-2">Regulatory transitions recorded by surveillance</div><div class="timeline">${transitions.map(t => `<div class="timeline-item" style="--dot:#818cf8"><div class="text-xs text-white font-semibold">${GCM.ui.esc(t.pillar)}: ${GCM.ui.esc(t.from || 'current')} → ${GCM.ui.esc(t.to)}</div><div class="text-[11px] text-slate-400">Deadline ${GCM.ui.esc(t.deadline || '—')} · ${GCM.ui.esc(t.source || '')} · recorded ${GCM.ui.esc(t.applied_at || '')}</div></div>`).join('')}</div></div>` : ''}
         <div class="bg-slate-800/40 border border-slate-700/60 rounded-lg p-3 text-xs text-slate-300"><div class="font-bold text-slate-200 flex items-center gap-1.5 mb-1"><i data-lucide="alert-circle" class="w-3.5 h-3.5 text-amber-400"></i>Regulatory guidance &amp; customs advisory</div><p class="text-slate-400">${GCM.ui.esc(c.notes || '')}</p></div>
-        <div class="flex justify-end gap-2 no-print"><button class="btn btn-secondary btn-sm" data-action="simulate-for-country" data-arg="${GCM.ui.esc(c.code)}"><i data-lucide="flask-conical" class="w-3.5 h-3.5 text-amber-300"></i>Simulate notice for ${GCM.ui.esc(c.name)}</button><button class="btn btn-secondary btn-sm" data-action="action-for-country" data-arg="${GCM.ui.esc(c.code)}"><i data-lucide="plus-square" class="w-3.5 h-3.5 text-emerald-300"></i>Create action</button></div>`;
+        <div class="flex justify-end gap-2 no-print"><button class="btn btn-secondary btn-sm" data-action="action-for-country" data-arg="${GCM.ui.esc(c.code)}"><i data-lucide="plus-square" class="w-3.5 h-3.5 text-emerald-300"></i>Create action</button></div>`;
       GCM.ui.icons();
     } catch (e) { body.innerHTML = `<div class="text-rose-400 text-xs">${GCM.ui.esc(e.message)}</div>`; }
   }
@@ -133,7 +150,6 @@
       $('matrix-kpi-banner').addEventListener('click', (e) => { const b = e.target.closest('[data-mfilter]'); if (b) { $('matrix-type-filter').value = b.dataset.mfilter; load(); } });
       GCM.bus.on('action:matrix-export-view', () => exportExcel(false)); GCM.bus.on('action:matrix-export-all', () => exportExcel(true)); GCM.bus.on('matrix:export', (all) => exportExcel(!!all));
       GCM.bus.on('action:country-factsheet', ({ arg }) => openFactSheet(arg)); GCM.bus.on('country:factsheet', (code) => openFactSheet(code));
-      GCM.bus.on('action:simulate-for-country', ({ arg }) => { GCM.ui.closeModal('modal-country-factsheet'); GCM.bus.emit('surveillance:simulate-country', arg); });
       GCM.bus.on('action:action-for-country', ({ arg }) => GCM.actions.createFor('country', arg, { title: `Review market access requirements for ${GCM.state.countries[arg]?.name || arg}` }));
       GCM.bus.on('matrix:search', (q) => { $('matrix-search-input').value = q || ''; $('matrix-type-filter').value = 'all'; load(); });
       GCM.bus.on('matrix:category', (id) => { if ([...sel.options].some(o => o.value === id)) { sel.value = id; load(); } });

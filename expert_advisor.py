@@ -3,7 +3,7 @@ expert_advisor.py - AI Regulatory Expert Advisor Engine (v2, fixed)
 
 Searches live internet regulatory gazettes, standards bodies, testing-laboratory bulletins
 and government portals to produce in-depth compliance advisories and interactive engineering
-Q&A for SanDisk flash memory & storage products.
+Q&A for flash memory & storage products.
 
 v2 fixes:
   * timezone-aware timestamps (datetime.utcnow() is deprecated)
@@ -41,27 +41,27 @@ CURATED_EXPERT_KNOWLEDGE = {
             "Article 11: Mandatory reporting of actively exploited vulnerabilities to ENISA and national CSIRTs within 24 hours",
             "Article 14: Conformity assessment procedures (Internal control Module A or Third-Party Module B+C depending on classification)"
         ],
-        "sandisk_guidance": "For SanDisk NVMe (e.g., WD_BLACK SN850X) and USB drives (Extreme Portable SSD), firmware ROM bootloaders must enforce ECDSA-384 / RSA-3072 signature verification. Diagnostic JTAG/UART access and vendor flash commands must be permanently blown via eFuses prior to mass production.",
+        "engineering_guidance": "For NVMe SSDs and USB drives with a firmware-bearing controller, firmware ROM bootloaders must enforce ECDSA-384 / RSA-3072 signature verification. Diagnostic JTAG/UART access and vendor flash commands must be permanently blown via eFuses prior to mass production.",
         "lab_recommendations": "Engage accredited European Cybersecurity Assessment labs (TÜV Rheinland, UL Solutions Europe, SGS Brightsight) for Module A technical file audit.",
         "suggested_questions": [
             "Does CRA require third-party lab testing or self-declaration for NVMe SSDs?",
             "What format of SBOM is required and how should flash controller microcode be declared?",
             "What are the reporting obligations to ENISA for discovered firmware bugs?",
-            "Are legacy SanDisk SSD models grandfathered if sold after January 2027?"
+            "Are legacy SSD models grandfathered if sold after January 2027?"
         ]
     },
     "ALERT-2026-02": {
         "legal_authority": "IEC 62368-1:2023 (Edition 4.0) Audio/video, information and communication technology equipment - Part 1: Safety requirements",
         "enforcing_body": "IECEE CB Scheme, CENELEC (Europe), OSHA NRTL (US/Canada), BIS (India), CCC (China)",
         "testing_standards": "IEC 62368-1:2023, EN IEC 62368-1:2024, UL 62368-1 4th Edition",
-        "hardware_scope": "High-speed bus-powered SSDs, USB-PD external desktop storage (G-DRIVE), SD Express removable cards",
+        "hardware_scope": "High-speed bus-powered SSDs, USB-PD external desktop storage, SD Express removable cards",
         "technical_clauses": [
             "Clause 9 (Thermal burn injury hazard): Refined touch temperature limits for metallic accessible enclosures (TS2 limit: 70°C, TS1 limit: 48°C)",
             "Clause 6 (Electrically-caused fire): DC-DC converter fault condition testing under maximum power transfer from USB-PD source",
             "Annex G (Components): Updated capacitor discharge and optical radiation isolation guidelines",
             "National Deviations: Mandatory testing for US/Canada (CSA/UL requirements) and European group differences"
         ],
-        "sandisk_guidance": "SanDisk Extreme Portable SSD (E61/E81) aluminum heatsink bands must maintain surface temperatures <= 70°C under continuous 100% sequential write loops at 35°C ambient. Firmware thermal throttling algorithms must be verified in thermal chambers.",
+        "engineering_guidance": "Bus-powered portable SSDs with metal enclosures must keep accessible surface temperatures <= 70°C under continuous 100% sequential write loops at 35°C ambient. Firmware thermal throttling algorithms must be verified in thermal chambers.",
         "lab_recommendations": "Coordinate with UL Solutions or TÜV SÜD for CB Test Certificate upgrade. Request IECEE TRF 62368-1_4 test report format with national differences for US, EU, and China.",
         "suggested_questions": [
             "What is the maximum allowed touch temperature for metal SSD cases under 4th Edition?",
@@ -74,13 +74,13 @@ CURATED_EXPERT_KNOWLEDGE = {
         "legal_authority": "MeitY Gazette Order No. 27(1)/2022-IPHW & BIS Scheme-II Notification",
         "enforcing_body": "Bureau of Indian Standards (BIS) and Ministry of Electronics & IT (MeitY)",
         "testing_standards": "IS/IEC 62368-1:2023 (Replacing IS 13252 Part 1:2010)",
-        "hardware_scope": "External SSDs, External Desktop Storage with DC Adapters (G-DRIVE), Internal SSDs, Power Supplies",
+        "hardware_scope": "External SSDs, External Desktop Storage with DC Adapters, Internal SSDs, Power Supplies",
         "technical_clauses": [
             "Mandatory migration deadline: November 1, 2028 (Concurrent running allowed until sunset)",
             "In-country testing requirement: Test reports must be generated exclusively by NABL-accredited BIS-recognized labs in India",
             "R-Number inclusion: Existing R-8400xxxx registrations must be transitioned via Change of Standard application"
         ],
-        "sandisk_guidance": "Ship 2 test samples of SanDisk Professional G-DRIVE and external power supplies to UL India or ERTL (West) Mumbai 6 months prior to cutover. Local Authorized Indian Representative (AIR) must execute online portal endorsement.",
+        "engineering_guidance": "Ship 2 test samples of each mains-powered desktop storage product and its external power supply to a BIS-recognised NABL laboratory in India 6 months prior to cutover. Local Authorized Indian Representative (AIR) must execute online portal endorsement.",
         "lab_recommendations": "Book test slots early at UL India (Bengaluru) or TÜV Rheinland India to avoid the Q3 2028 industry backlog.",
         "suggested_questions": [
             "Can overseas CB Scheme test reports be directly accepted by BIS for IS/IEC 62368-1?",
@@ -99,7 +99,7 @@ CURATED_EXPERT_KNOWLEDGE = {
             "Reporting window: Closes May 8, 2025 (Small entity extension to November 10, 2025)",
             "No de minimis volume exemption: Even trace fluoropolymers (e.g. PTFE in wire jackets, PVDF in conformal coating) require filing"
         ],
-        "sandisk_guidance": "Request Full Material Disclosures (FMD) from all tier-1 PCBA, wire harness, and thermal interface material (TIM) suppliers. Compile structural CAS numbers and import tonnages for EPA CDX portal submission.",
+        "engineering_guidance": "Request Full Material Disclosures (FMD) from all tier-1 PCBA, wire harness, and thermal interface material (TIM) suppliers. Compile structural CAS numbers and import tonnages for EPA CDX portal submission.",
         "lab_recommendations": "Screen high-risk polymers using Total Organic Fluorine (TOF) combustion ion chromatography testing at accredited environmental labs (SGS, Eurofins).",
         "suggested_questions": [
             "Does TSCA 8(a)(7) apply to imported articles like finished SSDs or only bulk chemicals?",
@@ -118,7 +118,7 @@ CURATED_EXPERT_KNOWLEDGE = {
             "Dual-material packaging: Clear visual separation for cardboard retail box vs interior PET blister tray",
             "Fines of up to €15,000 per commercial SKU and product recall for non-compliant retail packaging"
         ],
-        "sandisk_guidance": "SanDisk Extreme SSD and microSD retail packaging artwork die-lines must include the Triman logo + CITEO sorting icon on the reverse or side panel. Units destined for Pan-EU distribution should use the unified EU-compliant packaging layout.",
+        "engineering_guidance": "Retail packaging artwork die-lines for consumer SSDs and memory cards must include the Triman logo + CITEO sorting icon on the reverse or side panel. Units destined for Pan-EU distribution should use the unified EU-compliant packaging layout.",
         "lab_recommendations": "Submit artwork proofs to CITEO portal for automated compliance validation prior to cylinder engraving.",
         "suggested_questions": [
             "Can the Triman logo be displayed digitally via QR code instead of printed on the retail box?",
@@ -337,8 +337,8 @@ class RegulatoryExpertAdvisor:
             f"Harmonized verification procedures applicable to {', '.join(affected_categories) or 'solid-state storage'}.",
             "Requirement to maintain a Technical Documentation File (TDF) for a minimum 10-year retention period.",
         ]
-        sandisk_guidance = base_knowledge.get("sandisk_guidance") or (
-            f"Audit all SanDisk flash drive, SSD, and controller designs against {standard or 'the new requirement'}. "
+        engineering_guidance = base_knowledge.get("engineering_guidance") or (
+            f"Audit all of the company's flash drive, SSD and controller designs against {standard or 'the new requirement'}. "
             f"Ensure packaging markings, DoC declarations, and supplier component disclosures are updated prior to {alert.get('effective_date') or 'the mandatory cutover'}."
         )
         lab_advice = base_knowledge.get("lab_recommendations") or "Engage accredited test laboratories (UL Solutions, TÜV Rheinland, SGS, Intertek) to obtain compliant test reports."
@@ -405,8 +405,8 @@ class RegulatoryExpertAdvisor:
                 "enforcing_agency": enforcing_agency,
                 "internet_intelligence_synthesis": web_analysis,
                 "key_technical_clauses": technical_clauses,
-                "sandisk_hardware_impact": hardware_impacts,
-                "sandisk_engineering_guidance": sandisk_guidance,
+                "hardware_impact": hardware_impacts,
+                "engineering_guidance": engineering_guidance,
                 "laboratory_testing_strategy": lab_advice,
                 "compliance_roadmap": roadmap,
                 "suggested_questions": suggested_q,
@@ -481,13 +481,13 @@ class RegulatoryExpertAdvisor:
             expert_answer = (
                 f"In response to your query regarding '{user_question}' under {standard} ({country}): "
                 f"regulatory authorities and test bodies mandate rigorous technical documentation. "
-                f"For SanDisk solid-state storage products, compliance requires demonstrating that hardware microcontrollers, "
+                f"For your solid-state storage products, compliance requires demonstrating that hardware microcontrollers, "
                 f"electrical safety parameters, and environmental declarations satisfy the harmonized requirements of {standard}. "
                 f"Market surveillance authorities are actively auditing conformity files and demanding accredited test reports covering all functional operating states. "
                 f"This specific point is not covered in detail by the alert text - confirm it with the certification body or the official source linked on the alert."
             )
             key_clauses = [f"General Conformity Procedures for {standard}", f"National Market Surveillance Directive ({country})"]
-            action_advice = f"Consult the Technical Documentation File (TDF) for SanDisk models in category {cats[0]}."
+            action_advice = f"Consult the Technical Documentation File (TDF) for your models in category {cats[0]}."
         return expert_answer, key_clauses, action_advice
 
     def answer_custom_question(self, alert, user_question, explanation=None, history=None, ctx=None):

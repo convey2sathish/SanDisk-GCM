@@ -390,26 +390,10 @@ SUPERSEDED_STANDARDS = {
 
 # --------------------------------------------------------------------------- products, labs, markets
 # Extra aliases for the seed portfolio (in addition to SKU prefixes / names derived from the live product list)
-PRODUCT_ALIASES = {
-    "PROD-001": ["Extreme PRO SDXC", "SDSDXEP"], "PROD-002": ["Extreme MicroSDXC", "Extreme microSD", "SDSQXAV"], "PROD-003": ["SD Express", "SDEX-"],
-    "PROD-004": ["PRO-CINEMA", "CFexpress Type B", "SDCFE"], "PROD-005": ["C50 Expansion Card", "WD_BLACK C50", "C50 Xbox", "WDBMPH"],
-    "PROD-006": ["Ultra Dual Drive Luxe", "SDDDC4"], "PROD-007": ["SN850X", "WDS200T2X0E", "WDS"], "PROD-008": ["Extreme Portable SSD", "SDSSDE61"],
-    "PROD-009": ["G-DRIVE", "SDPHF1A"], "PROD-010": ["Ultrastar DC SN655", "SN655", "WUS5EA"], "PROD-011": ["ImageMate PRO", "SDDR-489", "SDDR489"],
-}
-# v1-compatible static SKU table (used when no live product list is available)
-PRODUCT_SKU_PATTERNS = [
-    (r"SDSSDE61[A-Z0-9\-]*", "SDSSDE61", "SanDisk Extreme Portable SSD (Bus-Powered)"),
-    (r"SDPHF1A[A-Z0-9\-]*", "SDPHF1A", "SanDisk Professional G-DRIVE Enterprise (Mains-Powered)"),
-    (r"WDS[0-9]{3}[A-Z0-9\-]*", "WDS200T2X0E", "WD_BLACK SN850X NVMe SSD"),
-    (r"SDSDXEP[A-Z0-9\-]*", "SDSDXEP", "SanDisk Extreme PRO SDXC UHS-II"),
-    (r"SDSQXAV[A-Z0-9\-]*", "SDSQXAV", "SanDisk Extreme MicroSDXC UHS-I"),
-    (r"SDEX[\-_][A-Z0-9\-]*", "SDEX-256G", "SanDisk SD Express Next-Gen PCIe"),
-    (r"SDCFE[A-Z0-9\-]*", "SDCFE-512G", "SanDisk Professional PRO-CINEMA CFexpress"),
-    (r"WDBMPH[A-Z0-9\-]*", "WDBMPH0010", "WD_BLACK C50 Xbox Expansion Card"),
-    (r"SDDDC4[A-Z0-9\-]*", "SDDDC4", "SanDisk Ultra Dual Drive Luxe USB-C"),
-    (r"WUS5EA[A-Z0-9\-]*", "WUS5EA", "Ultrastar DC SN655 Enterprise SSD"),
-    (r"SDDR[\-_]?489[A-Z0-9\-]*", "SDDR-489", "SanDisk ImageMate PRO Multi-Card Reader"),
-]
+# Optional extra aliases per product id (e.g. marketing names) - empty by default. Product matching is
+# built dynamically from the live product list (sku + name, regex-escaped, case-insensitive); no SKUs are hard-coded.
+PRODUCT_ALIASES: Dict[str, List[str]] = {}
+PRODUCT_SKU_PATTERNS: List[Tuple[str, str, str]] = []  # kept for API compatibility; intentionally empty
 
 LAB_NAMES = [
     ("UL Solutions", [r"UL\s+Solutions", r"UL\s+LLC", r"Underwriters\s+Laboratories", r"\bUL\s+(?:Northbrook|India|Japan|International)"]),
@@ -422,7 +406,7 @@ LAB_NAMES = [
     ("KTC", [r"\bKTC\b", r"Korea\s+Testing\s+Certification"]), ("KTR", [r"\bKTR\b"]), ("JET", [r"\bJET\b", r"Japan\s+Electrical\s+Safety"]),
     ("JQA", [r"\bJQA\b"]), ("CQC", [r"\bCQC\b", r"China\s+Quality\s+Certification"]), ("CTTL", [r"\bCTTL\b"]),
     ("Bureau of Indian Standards", [r"Bureau\s+of\s+Indian\s+Standards"]), ("ETL / Intertek", [r"\bETL\b"]),
-    ("SanDisk Internal Compliance Lab", [r"SanDisk\s+Internal\s+Compliance\s+Lab", r"Western\s+Digital\s+(?:Compliance|EMC)\s+Lab"]),
+    ("In-house compliance laboratory", [r"In-?house\s+(?:Compliance|EMC|Safety)\s+Lab", r"Internal\s+Compliance\s+Lab"]),
 ]
 _COMPILED_LABS = [(name, [re.compile(p, re.IGNORECASE) for p in pats]) for name, pats in LAB_NAMES]
 
@@ -736,10 +720,7 @@ def match_product(text: str, products: Optional[List[Dict[str, Any]]]) -> Option
     if scores:
         best = max(scores, key=scores.get)
         return byid[best]
-    for pat, sku, name in PRODUCT_SKU_PATTERNS:  # static fallback
-        if re.search(pat, text, re.IGNORECASE):
-            return {"id": None, "sku": sku, "name": name, "category_id": None}
-    return None
+    return None  # no static fallback: unknown products are reported as unmatched
 
 
 def detect_lab(text: str) -> Optional[str]:
@@ -2126,7 +2107,7 @@ def export_audit_to_excel(report: Dict[str, Any]) -> io.BytesIO:
 
 
 # =============================================================================
-# 7. SAMPLE DOCUMENTS
+# 7. GENERIC EXAMPLE DOCUMENTS
 # =============================================================================
 def make_multiline_pdf(lines: list) -> bytes:
     """Synthesize a valid single-page, uncompressed PDF with a Helvetica text stream."""
@@ -2153,10 +2134,19 @@ def make_multiline_pdf(lines: list) -> bytes:
     return b"".join(parts)
 
 
-def generate_sample_compliance_docs(target_dir=r"C:\SanDisk\Compliance_Docs") -> List[str]:
-    """Create 10 realistic sample files exercising every impact tier. Returns the list of paths written."""
+def generate_sample_compliance_docs(target_dir=None) -> List[str]:
+    """Create 10 GENERIC example files exercising every impact tier. Returns the list of paths written.
+
+    All names, model numbers, report numbers and laboratories are fictitious placeholders
+    ("Example Manufacturer Ltd.", "EXAMPLE-RPT-0001", "Accredited Test Laboratory (example)") that match
+    the generic example products in compliance_db.SAMPLE_PRODUCTS. They do not describe any real product.
+    """
+    target_dir = target_dir or os.path.join(os.path.expanduser("~"), "GCM_Example_Documents")
     os.makedirs(target_dir, exist_ok=True)
     created = []
+    MFR = "Example Manufacturer Ltd."
+    LAB = "Accredited Test Laboratory (example)"
+    NCB = "Accredited certification body (example)"
 
     def pdf(name, lines):
         p = os.path.join(target_dir, name)
@@ -2165,27 +2155,27 @@ def generate_sample_compliance_docs(target_dir=r"C:\SanDisk\Compliance_Docs") ->
         created.append(p)
 
     # 1. Obsolete CB report (Ed. 2) -> retesting_required
-    pdf("CB_Report_E143284_SanDisk_Extreme_SSD_E61.pdf", [
-        "UL Solutions CB Scheme Test Certificate & Report", "Report Number: E143284-A6012-CB-1", "Applicant: Western Digital Technologies, Inc.",
-        "Product: SanDisk Extreme Portable SSD (Bus-Powered) Model SDSSDE61-2T00-G25", "Harmonized Technical Standard: IEC 62368-1:2014 (Second Edition)",
-        "Issuing Body: UL Solutions Northbrook Laboratory", "Ratings: 5V DC, 2.5A SELV (Class III)", "Issue Date: 2019-08-14", "Status: Test report evaluated under legacy Edition 2.0."])
+    pdf("CB_Report_EXAMPLE-RPT-0001_Portable_SSD.pdf", [
+        f"{LAB} - CB Scheme Test Certificate & Report", "Report Number: EXAMPLE-RPT-0001", f"Applicant: {MFR}",
+        "Product: Example product - portable SSD (bus-powered) Model EXAMPLE-PSSD-01", "Harmonized Technical Standard: IEC 62368-1:2014 (Second Edition)",
+        f"Issuing Body: {LAB}", "Ratings: 5V DC, 2.5A SELV (Class III)", "Issue Date: 2019-08-14", "Status: Test report evaluated under legacy Edition 2.0."])
     # 2. EU DoC citing EN 62368-1:2014 -> doc_amendment
-    pdf("EU_Declaration_of_Conformity_G-DRIVE_Enterprise.pdf", [
-        "EU DECLARATION OF CONFORMITY (DoC Ref: DOC-EU-2022-GDRIVE)", "Manufacturer: Western Digital Technologies, Inc.",
-        "Product Name: SanDisk Professional G-DRIVE Enterprise Desktop (18TB)", "Model / SKU: SDPHF1A-018T-NBAAD",
+    pdf("EU_Declaration_of_Conformity_Desktop_Drive.pdf", [
+        "EU DECLARATION OF CONFORMITY (DoC Ref: EXAMPLE-DOC-0002)", f"Manufacturer: {MFR}",
+        "Product Name: Example product - desktop storage drive (mains-powered)", "Model / SKU: EXAMPLE-DSSD-01",
         "Low Voltage Directive 2014/35/EU: Harmonized Standard EN 62368-1:2014+A11:2017", "EMC Directive 2014/30/EU: Harmonized Standard EN 55032:2015 Class B",
-        "RoHS Directive 2011/65/EU on the restriction of hazardous substances", "Authorized Signatory: Global Regulatory Compliance Director, SanDisk", "Date of Issue: 2022-03-10"])
+        "RoHS Directive 2011/65/EU on the restriction of hazardous substances", f"Authorized Signatory: Regulatory Compliance Director, {MFR}", "Date of Issue: 2022-03-10"])
     # 3. Modern EMC report -> compliant
-    pdf("EMC_Test_Report_WD_BLACK_SN850X_NVMe.pdf", [
-        "TUV SUD America Test Report Ref: EMC-TR-2024-9182", "Client: Western Digital Corporation", "Product: WD_BLACK SN850X NVMe SSD (2TB)", "Model / SKU: WDS200T2X0E",
+    pdf("EMC_Test_Report_EXAMPLE-RPT-0003_Internal_SSD.pdf", [
+        f"{LAB} Test Report Ref: EXAMPLE-RPT-0003", f"Client: {MFR}", "Product: Example product - internal SSD (M.2 NVMe)", "Model / SKU: EXAMPLE-SSD-01",
         "Tested Standards:", "- CISPR 32:2015+A1:2019 Class B (Radio Disturbance Characteristics)", "- FCC Part 15B Class B Unintentional Radiators", "- EN 55032:2015+A11:2020",
-        "Laboratory: TUV SUD San Diego Testing Facility", "Date of Test: 2024-02-18", "Result: PASS - Fully Compliant with Modern Emissions Limits."])
+        f"Laboratory: {LAB}", "Date of Test: 2024-02-18", "Result: PASS - Fully Compliant with Modern Emissions Limits."])
     # 4. Packaging spec missing Triman / Italy coding / PPWR -> packaging_update
-    p4 = os.path.join(target_dir, "Packaging_Artwork_Spec_Extreme_PRO_SDXC.docx")
+    p4 = os.path.join(target_dir, "Packaging_Artwork_Spec_SD_Card.docx")
     if HAS_DOCX:
         d = docx.Document()
-        d.add_heading("SanDisk Retail Packaging Master Specification", 0)
-        for t in ["Product Family: SanDisk Extreme PRO SDXC UHS-II (512GB)", "Master SKU: SDSDXEP-512G-GN4IN", "Markets: European Union (France, Italy, Germany), United Kingdom",
+        d.add_heading("Retail Packaging Master Specification (example)", 0)
+        for t in ["Product Family: Example product - SD card (UHS-II)", "Master SKU: EXAMPLE-SD-01", "Markets: European Union (France, Italy, Germany), United Kingdom",
                   "Packaging Substrate: SBS Bleached Sulfate Paperboard (Inner Blister: Thermoformed PET)", "Regulatory Marking Requirements on Exterior Carton:",
                   "- CE Mark minimum height: 5.0 mm", "- UKCA Mark minimum height: 5.0 mm", "- WEEE Crossed-Out Wheelie Bin Symbol (Directive 2012/19/EU)",
                   "- Standard Mobius Loop generic recycling symbol", "Artwork revision: Rev C, 2023-05-02"]:
@@ -2193,44 +2183,44 @@ def generate_sample_compliance_docs(target_dir=r"C:\SanDisk\Compliance_Docs") ->
         d.save(p4)
         created.append(p4)
     # 5. BIS CRS grant citing IS 13252, granted 2021 (expired by inference) -> portal_filing
-    pdf("BIS_CRS_Registration_Grant_G-DRIVE_India.pdf", [
-        "BUREAU OF INDIAN STANDARDS (Central Marks Department)", "Registration Grant Letter Ref: BIS/CRS/REG-41009823", "Registration No: R-41009823",
-        "Manufacturer: Western Digital Technologies, Inc.", "Standard: IS 13252 (Part 1):2010 Safety of Information Technology Equipment",
-        "Product: External Storage Drive (Mains-Powered)", "Brand: SanDisk Professional Model SDPHF1A-018T-NBAAD", "Date of Grant: 2021-11-20",
+    pdf("BIS_CRS_Registration_Grant_Desktop_Drive_India.pdf", [
+        "BUREAU OF INDIAN STANDARDS (Central Marks Department)", "Registration Grant Letter Ref: EXAMPLE-REG-0005", "Registration No: R-00000005",
+        f"Manufacturer: {MFR}", "Standard: IS 13252 (Part 1):2010 Safety of Information Technology Equipment",
+        "Product: External Storage Drive (Mains-Powered)", "Brand: Example Manufacturer, Model EXAMPLE-DSSD-01", "Date of Grant: 2021-11-20",
         "Renewal Status: Requires renewal under the Compulsory Registration Scheme."])
     # 6. FMD spreadsheet with PFAS not evaluated -> doc_amendment
-    p6 = os.path.join(target_dir, "Full_Material_Disclosure_FMD_C50_Xbox.xlsx")
+    p6 = os.path.join(target_dir, "Full_Material_Disclosure_FMD_Gaming_Card.xlsx")
     if HAS_OPENPYXL:
         wb = openpyxl.Workbook()
         ws = wb.active
         ws.title = "BOM Substance Disclosure"
-        ws.append(["Full Material Disclosure - WD_BLACK C50 Expansion Card for Xbox (1TB) - SKU WDBMPH0010BNC-WASN - Markets: United States, European Union"])
+        ws.append(["Full Material Disclosure - Example product - gaming storage expansion card - SKU EXAMPLE-GXC-01 - Markets: United States, European Union"])
         ws.append(["Component Name", "Part Number", "Supplier", "Material Classification", "RoHS Compliance", "REACH SVHC Status", "TSCA PFAS Disclosure"])
-        for row in [["NAND Flash Wafer", "05436-128G", "Kioxia / SanDisk JV", "Epoxy Molding Compound", "RoHS Compliant", "No SVHC >0.1%", "Not Evaluated"],
-                    ["Velocity ASIC Controller", "20-82-01048-A1", "TSMC", "Semiconductor Silicon", "RoHS Compliant", "No SVHC >0.1%", "Not Evaluated"],
-                    ["FR-4 Printed Circuit Board", "PCB-C50-REV3", "AT&S", "Copper Clad Laminate / Glass Fiber", "RoHS Compliant", "TBBP-A Present in Resin", "Not Evaluated"],
-                    ["Thermal Gap Pad", "TP-3000-05", "Bergquist", "Silicone Polymer", "RoHS Compliant", "No SVHC", "Potential Fluoropolymer Content"],
-                    ["Aluminum Enclosure Heatsink", "ENC-AL-C50", "Foxconn", "Aluminum 6063-T6", "RoHS Compliant", "No SVHC", "PFAS Free"]]:
+        for row in [["NAND Flash Package", "EX-NAND-128G", "NAND supplier (example)", "Epoxy Molding Compound", "RoHS Compliant", "No SVHC >0.1%", "Not Evaluated"],
+                    ["NVMe Controller ASIC", "EX-CTRL-01", "Controller supplier (example)", "Semiconductor Silicon", "RoHS Compliant", "No SVHC >0.1%", "Not Evaluated"],
+                    ["FR-4 Printed Circuit Board", "EX-PCB-REV3", "PCB supplier (example)", "Copper Clad Laminate / Glass Fiber", "RoHS Compliant", "TBBP-A Present in Resin", "Not Evaluated"],
+                    ["Thermal Gap Pad", "EX-TIM-05", "Thermal materials supplier (example)", "Silicone Polymer", "RoHS Compliant", "No SVHC", "Potential Fluoropolymer Content"],
+                    ["Aluminum Enclosure Heatsink", "EX-ENC-AL", "Enclosure supplier (example)", "Aluminum 6063-T6", "RoHS Compliant", "No SVHC", "PFAS Free"]]:
             ws.append(row)
         wb.save(p6)
         created.append(p6)
     # 7. Compliant CB certificate citing Edition 4 -> compliant
-    pdf("CB_Certificate_IEC62368-1_Ed4_Extreme_SSD_E61_2025.pdf", [
-        "IECEE CB SCHEME - CB TEST CERTIFICATE", "Certificate No: US-45812-UL", "Report Number: E143284-A7420-CB-2", "NCB: UL Solutions (UL LLC), Northbrook, Illinois, United States",
-        "Applicant: Western Digital Technologies, Inc.", "Product: SanDisk Extreme Portable SSD (2TB - Bus-Powered), Model SDSSDE61-2T00-G25",
+    pdf("CB_Certificate_IEC62368-1_Ed4_Portable_SSD_2025.pdf", [
+        "IECEE CB SCHEME - CB TEST CERTIFICATE", "Certificate No: EXAMPLE-CB-0007", "Report Number: EXAMPLE-RPT-0007", f"NCB: {NCB}",
+        f"Applicant: {MFR}", "Product: Example product - portable SSD (bus-powered), Model EXAMPLE-PSSD-01",
         "Standard: IEC 62368-1:2023 (Edition 4.0) Audio/video, information and communication technology equipment - Safety requirements",
         "National differences: US, CA, EU group, JP, KR, CN, IN, AU", "Ratings: 5 V DC, 2.5 A (USB Type-C bus powered)", "Date of Issue: 2025-03-06", "Valid until: 2028-03-05"])
     # 8. Expired KC certificate -> portal_filing (renewal)
-    pdf("KC_Safety_Certificate_G-DRIVE_Adapter_Korea.pdf", [
-        "KC SAFETY CERTIFICATE (Korea Certification)", "Certificate No: HU07162-22001A", "Issued under the Electrical Appliances and Consumer Products Safety Control Act",
-        "Certification Body: KTL (Korea Testing Laboratory), designated by KATS", "Applicant: Western Digital Technologies, Inc.",
-        "Product: AC/DC Power Adapter for SanDisk Professional G-DRIVE Enterprise Desktop, Model SDPHF1A-018T-NBAAD (adapter model WA-65B19R)",
-        "Standard: KC 62368-1 (K 62368-1:2019)", "EMC Registration: R-R-WDT-SDPHF1A (KN 32 / KN 35)", "Date of Issue: 2022-06-30", "Valid until: 2025-06-29",
+    pdf("KC_Safety_Certificate_Desktop_Drive_Adapter_Korea.pdf", [
+        "KC SAFETY CERTIFICATE (Korea Certification)", "Certificate No: EXAMPLE-KC-0008", "Issued under the Electrical Appliances and Consumer Products Safety Control Act",
+        f"Certification Body: {NCB}, designated by KATS", f"Applicant: {MFR}",
+        "Product: AC/DC Power Adapter for Example product - desktop storage drive (mains-powered), Model EXAMPLE-DSSD-01 (adapter model EXAMPLE-PSU-65)",
+        "Standard: KC 62368-1 (K 62368-1:2019)", "EMC Registration: R-R-EXM-DSSD01 (KN 32 / KN 35)", "Date of Issue: 2022-06-30", "Valid until: 2025-06-29",
         "Country: Republic of Korea"])
     # 9. FCC SDoC without responsible-party statement -> doc_amendment
-    pdf("FCC_SDoC_ImageMate_PRO_Card_Reader.pdf", [
-        "FCC SUPPLIER'S DECLARATION OF CONFORMITY (SDoC)", "47 CFR Part 15 Subpart B - Unintentional Radiators", "Product: SanDisk ImageMate PRO Multi-Card USB-C Reader",
-        "Model: SDDR-489-G47", "Test Report No: BACL-FCC-2024-11207 (ANSI C63.4-2014, Class B)", "Test Laboratory: BACL (Bay Area Compliance Laboratories), Sunnyvale, CA, United States",
+    pdf("FCC_SDoC_Card_Reader.pdf", [
+        "FCC SUPPLIER'S DECLARATION OF CONFORMITY (SDoC)", "47 CFR Part 15 Subpart B - Unintentional Radiators", "Product: Example product - multi-card reader (USB-C)",
+        "Model: EXAMPLE-RDR-01", "Test Report No: EXAMPLE-RPT-0009 (ANSI C63.4-2014, Class B)", f"Test Laboratory: {LAB}",
         "This device complies with Part 15 of the FCC Rules. Operation is subject to the following two conditions: (1) this device may not cause harmful interference,",
         "and (2) this device must accept any interference received, including interference that may cause undesired operation.", "Date: 2024-09-12"])
     # 10. Corrupt PDF -> unreadable

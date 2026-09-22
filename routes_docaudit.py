@@ -24,7 +24,7 @@ import doc_audit_engine as engine
 
 log = logging.getLogger("gcm.docaudit")
 XLSX = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
-DEFAULT_SAMPLE_DIR = r"C:\SanDisk\Compliance_Docs"
+DEFAULT_SAMPLE_DIR = os.path.join(os.path.expanduser("~"), "GCM_Example_Documents")
 _scan_lock = threading.Lock()
 _SAFE_SEGMENT = re.compile(r"[^A-Za-z0-9._ \-()\[\]&+,]+")
 
@@ -33,7 +33,7 @@ def _validate_folder(raw):
     """Return (abs_path, error). Rejects empty / relative / UNC-less weirdness with a clear message."""
     p = str(raw or "").strip().strip('"').strip("'")
     if not p:
-        return None, "Enter a folder path (for example C:\\SanDisk\\Compliance_Docs)."
+        return None, "Enter a folder path (for example C:\\Compliance_Docs)."
     if any(ch in p for ch in "\x00\n\r\t"):
         return None, "The folder path contains control characters."
     if p.startswith("\\\\?\\"):
@@ -167,12 +167,12 @@ def register(app, ctx):
         except PermissionError:
             return jsonify({"error": f"Cannot write to {target}. Choose a folder you have write access to (target_dir)."}), 400
         except OSError as e:
-            return jsonify({"error": f"Could not create sample documents in {target}: {e.strerror or e}"}), 400
+            return jsonify({"error": f"Could not create example documents in {target}: {e.strerror or e}"}), 400
         alerts, products = _live()
         with _scan_lock:
             report = engine.scan_directory(target, recursive=False, alerts=alerts, products=products)
         _persist(report)
-        return jsonify({"success": True, "message": f"Created {len(files)} sample compliance documents in {target} and audited them.",
+        return jsonify({"success": True, "message": f"Created {len(files)} generic example documents in {target} and audited them.",
                         "target_dir": target, "files": [os.path.basename(f) for f in files], "report": report})
 
     # ------------------------------------------------------------------ native folder picker
