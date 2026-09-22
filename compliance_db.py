@@ -1849,7 +1849,15 @@ def get_country_product_requirement(country_code, category_id):
         'epr_std': country.get('epr_std', 'WEEE / E-Waste Producer Responsibility'),
         'last_surveilled_date': country.get('last_surveilled_date'),
         'last_surveilled_pillar': country.get('last_surveilled_pillar'),
-        'surveillance_source': country.get('surveillance_source')
+        'surveillance_source': country.get('surveillance_source'),
+        'safety_std_next': country.get('safety_std_next'),
+        'emc_std_next': country.get('emc_std_next'),
+        'env_std_next': country.get('env_std_next'),
+        'transitions': country.get('transitions', []),
+        'cb_scheme_accepted': country.get('cb_scheme_accepted', False),
+        'in_country_testing': country.get('in_country_testing', False),
+        'cert_validity': country.get('cert_validity'),
+        'lead_time_weeks': country.get('lead_time_weeks', 2)
     }
 
 def get_product_market_breakdown(category_id):

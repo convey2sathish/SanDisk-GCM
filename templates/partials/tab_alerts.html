@@ -1,0 +1,46 @@
+<!-- Regulation Alerts tab (owner: alerts module) -->
+<div class="card !p-0 overflow-hidden" id="alerts-header">
+    <div class="p-5 pb-4 flex flex-col lg:flex-row lg:items-start lg:justify-between gap-4 border-b border-slate-800/80 bg-gradient-to-br from-slate-900 via-slate-900 to-rose-950/30">
+        <div class="flex items-start gap-3 min-w-0">
+            <div class="w-11 h-11 rounded-xl bg-gradient-to-br from-rose-600 to-red-700 flex items-center justify-center shadow-lg shadow-rose-900/40 shrink-0">
+                <i data-lucide="bell-ring" class="w-5 h-5 text-white"></i>
+            </div>
+            <div class="min-w-0">
+                <h2 class="text-base font-bold text-white tracking-tight">Regulation Alerts <span class="text-slate-500 font-normal">·</span> <span class="text-rose-400">Command Centre</span></h2>
+                <p class="text-xs text-slate-400 leading-relaxed mt-0.5 max-w-2xl">Every safety, EMC, environmental and cybersecurity change that touches storage products - triaged, dated, mapped to your portfolio and explained in plain English. Press <strong class="text-indigo-300">Explain in plain English</strong> on any alert.</p>
+                <div class="flex flex-wrap items-center gap-2 mt-2.5" id="alerts-triage-summary" aria-label="Triage summary"></div>
+            </div>
+        </div>
+        <div class="flex flex-wrap items-center gap-2 shrink-0">
+            <button type="button" data-action="alerts-expand-all" class="btn btn-ghost btn-sm" title="Expand every card"><i data-lucide="chevrons-down-up" class="w-3.5 h-3.5"></i><span id="alerts-expand-label">Expand all</span></button>
+            <button type="button" data-action="alerts-refresh" class="btn btn-secondary btn-sm" title="Reload alerts"><i data-lucide="refresh-cw" class="w-3.5 h-3.5"></i>Refresh</button>
+            <button type="button" data-action="open-modal" data-arg="modal-add-alert" class="btn btn-primary btn-sm"><i data-lucide="megaphone" class="w-3.5 h-3.5"></i>Publish alert</button>
+        </div>
+    </div>
+    <div class="px-5 py-3 flex flex-wrap items-center gap-2 bg-slate-950/40" id="alerts-pillar-chips" role="group" aria-label="Pillar quick filter">
+        <span class="section-title mr-1">Pillar</span>
+        <button type="button" data-pillar="all" class="pill-filter active"><i data-lucide="layers" class="w-3 h-3"></i>All</button>
+        <button type="button" data-pillar="Safety" class="pill-filter"><i data-lucide="shield" class="w-3 h-3 text-rose-400"></i>Safety</button>
+        <button type="button" data-pillar="EMC" class="pill-filter"><i data-lucide="radio" class="w-3 h-3 text-sky-400"></i>EMC</button>
+        <button type="button" data-pillar="Environmental" class="pill-filter"><i data-lucide="leaf" class="w-3 h-3 text-emerald-400"></i>Environmental</button>
+        <button type="button" data-pillar="Cyber" class="pill-filter"><i data-lucide="lock" class="w-3 h-3 text-indigo-400"></i>Cyber</button>
+        <span class="ml-auto text-[11px] text-slate-500" id="alerts-count-label">Loading…</span>
+    </div>
+</div>
+
+<div class="card !p-3" id="alerts-filters">
+    <div class="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-7 gap-2 items-end">
+        <div class="xl:col-span-2"><label class="label">Search</label><div class="relative"><i data-lucide="search" class="w-3.5 h-3.5 text-slate-500 absolute left-2.5 top-1/2 -translate-y-1/2"></i><input id="alerts-f-search" class="input !pl-8" placeholder="Title, standard, country, SKU…" autocomplete="off"></div></div>
+        <div><label class="label">Product category</label><select id="alerts-f-category" class="select"><option value="all">All categories</option></select></div>
+        <div><label class="label">Severity</label><select id="alerts-f-severity" class="select"><option value="all">All</option><option>Critical</option><option>Warning</option><option>Info</option></select></div>
+        <div><label class="label">Region</label><select id="alerts-f-region" class="select"><option value="all">All regions</option></select></div>
+        <div><label class="label">Triage status</label><select id="alerts-f-status" class="select"><option value="all">All</option><option>New</option><option>Acknowledged</option><option>In Progress</option><option>Closed</option></select></div>
+        <div><label class="label">Sort</label><select id="alerts-f-sort" class="select"><option value="newest">Newest first</option><option value="deadline">Nearest deadline</option><option value="severity">Severity</option></select></div>
+    </div>
+    <div class="flex flex-wrap items-center justify-between gap-2 mt-2.5 pt-2.5 border-t border-slate-800/80">
+        <label class="flex items-center gap-2 text-xs text-slate-300 cursor-pointer"><input type="checkbox" id="alerts-f-portfolio" class="checkbox"> Only alerts impacting my portfolio</label>
+        <button type="button" data-action="alerts-reset-filters" class="btn btn-ghost btn-sm"><i data-lucide="x" class="w-3.5 h-3.5"></i>Reset filters</button>
+    </div>
+</div>
+
+<div id="alerts-list" class="space-y-3" aria-live="polite"></div>

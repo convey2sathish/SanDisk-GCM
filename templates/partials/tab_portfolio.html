@@ -1,0 +1,175 @@
+<!-- ============================================================ PRODUCT PORTFOLIO (owner: risk module) -->
+<div id="portfolio-root" class="space-y-6">
+
+    <!-- Header: KPIs + actions -->
+    <div class="flex flex-col lg:flex-row lg:items-end justify-between gap-4">
+        <div>
+            <h2 class="text-lg font-bold text-white flex items-center gap-2"><i data-lucide="hard-drive" class="w-5 h-5 text-emerald-400"></i>Product Portfolio</h2>
+            <p class="text-[11px] text-slate-400 mt-0.5">Every SKU with its market readiness, live risk score, certificates and engineering-change impact analysis.</p>
+        </div>
+        <div class="flex items-center gap-2 flex-wrap">
+            <button type="button" class="btn btn-secondary" data-pf="open-add-cert"><i data-lucide="file-badge" class="w-4 h-4 text-amber-400"></i>Add certificate</button>
+            <button type="button" class="btn btn-primary" data-pf="open-add-product"><i data-lucide="plus" class="w-4 h-4"></i>Add product</button>
+        </div>
+    </div>
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-3" id="pf-kpis">
+        <div class="kpi"><div class="kpi-label">Products</div><div class="kpi-value">…</div></div>
+        <div class="kpi"><div class="kpi-label">Certificates</div><div class="kpi-value">…</div></div>
+        <div class="kpi"><div class="kpi-label">Expiring ≤ 90 days</div><div class="kpi-value">…</div></div>
+        <div class="kpi"><div class="kpi-label">Average readiness</div><div class="kpi-value">…</div></div>
+    </div>
+
+    <!-- Toolbar -->
+    <div class="card !py-3 flex flex-col md:flex-row md:items-center gap-3">
+        <div class="relative flex-1 min-w-[200px]"><i data-lucide="search" class="w-4 h-4 text-slate-500 absolute left-3 top-1/2 -translate-y-1/2"></i><input id="pf-search" class="input !pl-9" placeholder="Search name, SKU, controller…" aria-label="Search products"></div>
+        <select id="pf-category" class="select md:!w-64" aria-label="Filter by category"><option value="">All categories</option></select>
+        <select id="pf-sort" class="select md:!w-48" aria-label="Sort products">
+            <option value="risk">Sort: highest risk first</option>
+            <option value="readiness">Sort: lowest readiness first</option>
+            <option value="deadline">Sort: nearest deadline first</option>
+            <option value="name">Sort: name A–Z</option>
+        </select>
+        <span id="pf-count" class="pill whitespace-nowrap"></span>
+    </div>
+
+    <!-- Product cards -->
+    <div id="pf-grid" class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
+        <div class="skeleton h-56 rounded-2xl"></div><div class="skeleton h-56 rounded-2xl"></div><div class="skeleton h-56 rounded-2xl"></div>
+    </div>
+
+    <!-- Certificates -->
+    <div class="card" id="pf-cert-card">
+        <div class="card-header flex-wrap">
+            <div>
+                <div class="card-title"><i data-lucide="file-badge" class="w-4 h-4 text-amber-400"></i>Certificates &amp; registrations</div>
+                <p class="text-[11px] text-slate-500 mt-0.5">Status is recomputed from the expiry date every time you open this tab; the declared status is shown for comparison.</p>
+            </div>
+            <div class="flex items-center gap-2 flex-wrap" id="pf-cert-filters">
+                <button type="button" class="pill !py-1 !px-2.5 ring-2 ring-white/60" data-pf="cert-filter" data-arg="">All <strong class="mono ml-1" data-count="all">0</strong></button>
+                <button type="button" class="badge badge-critical !normal-case !tracking-normal !text-[11px] !py-1 !px-2.5" data-pf="cert-filter" data-arg="Expired">Expired <strong class="mono ml-1" data-count="Expired">0</strong></button>
+                <button type="button" class="badge badge-critical !normal-case !tracking-normal !text-[11px] !py-1 !px-2.5" data-pf="cert-filter" data-arg="Critical">≤ 30 d <strong class="mono ml-1" data-count="Critical">0</strong></button>
+                <button type="button" class="badge badge-warning !normal-case !tracking-normal !text-[11px] !py-1 !px-2.5" data-pf="cert-filter" data-arg="Expiring Soon">≤ 90 d <strong class="mono ml-1" data-count="Expiring Soon">0</strong></button>
+                <button type="button" class="badge badge-success !normal-case !tracking-normal !text-[11px] !py-1 !px-2.5" data-pf="cert-filter" data-arg="Valid">Valid <strong class="mono ml-1" data-count="Valid">0</strong></button>
+            </div>
+        </div>
+        <div class="table-wrap max-h-[520px]">
+            <table class="table">
+                <thead><tr><th>Status</th><th>Certificate</th><th>Scheme &amp; standard</th><th>Product</th><th>Coverage</th><th>Issued</th><th>Expires</th><th class="text-right">Actions</th></tr></thead>
+                <tbody id="pf-cert-tbody"></tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<!-- ============================================================ Product detail drawer -->
+<div id="modal-product-detail" class="modal hidden" aria-hidden="true" role="dialog" aria-label="Product details">
+    <div class="modal-panel max-w-6xl">
+        <div class="modal-head">
+            <div class="flex items-center gap-3 min-w-0">
+                <div id="pd-icon-wrap" class="w-11 h-11 rounded-xl bg-emerald-500/15 border border-emerald-500/40 flex items-center justify-center shrink-0"><i data-lucide="hard-drive" class="w-5 h-5 text-emerald-400"></i></div>
+                <div class="min-w-0">
+                    <h3 id="pd-name" class="text-sm font-bold text-white truncate">Product</h3>
+                    <p id="pd-sub" class="text-[11px] text-slate-400 truncate"></p>
+                </div>
+            </div>
+            <div class="flex items-center gap-2 shrink-0">
+                <div id="pd-risk" class="text-right"></div>
+                <button type="button" class="btn btn-secondary btn-sm" data-pf="pd-action"><i data-lucide="plus-square" class="w-3.5 h-3.5"></i>Action</button>
+                <button type="button" class="btn btn-secondary btn-sm" data-pf="pd-alerts"><i data-lucide="bell" class="w-3.5 h-3.5"></i>Alerts</button>
+                <button type="button" data-action="close-modal" data-arg="modal-product-detail" class="btn btn-ghost btn-sm"><i data-lucide="x" class="w-4 h-4"></i></button>
+            </div>
+        </div>
+        <div class="px-6 pt-3 border-b border-slate-800 flex gap-1 overflow-x-auto scrollbar" role="tablist" id="pd-tabs">
+            <button type="button" class="tab-btn active" data-pf="pd-tab" data-arg="readiness" role="tab"><i data-lucide="globe-2" class="w-3.5 h-3.5 text-cyan-400"></i>Market readiness <span class="pill" data-pd-count="readiness"></span></button>
+            <button type="button" class="tab-btn" data-pf="pd-tab" data-arg="alerts" role="tab"><i data-lucide="bell" class="w-3.5 h-3.5 text-rose-400"></i>Linked alerts <span class="pill" data-pd-count="alerts"></span></button>
+            <button type="button" class="tab-btn" data-pf="pd-tab" data-arg="certs" role="tab"><i data-lucide="file-badge" class="w-3.5 h-3.5 text-amber-400"></i>Certificates <span class="pill" data-pd-count="certs"></span></button>
+            <button type="button" class="tab-btn" data-pf="pd-tab" data-arg="horizon" role="tab"><i data-lucide="radar" class="w-3.5 h-3.5 text-indigo-400"></i>Upcoming dates <span class="pill" data-pd-count="horizon"></span></button>
+            <button type="button" class="tab-btn" data-pf="pd-tab" data-arg="eco" role="tab"><i data-lucide="git-branch" class="w-3.5 h-3.5 text-purple-400"></i>ECO impact analyser</button>
+        </div>
+        <div class="modal-body text-xs" id="pd-body">
+            <div data-pd-panel="readiness"></div>
+            <div data-pd-panel="alerts" class="hidden"></div>
+            <div data-pd-panel="certs" class="hidden"></div>
+            <div data-pd-panel="horizon" class="hidden"></div>
+            <div data-pd-panel="eco" class="hidden">
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-4">
+                    <div class="lg:col-span-1 space-y-3">
+                        <div class="card !p-4 border-purple-800/60 space-y-3">
+                            <div class="section-title text-purple-300"><i data-lucide="git-branch" class="w-3.5 h-3.5"></i>Engineering change (ECO)</div>
+                            <p class="text-[11px] text-slate-400 leading-relaxed">Describe the change; the analyser tells you, market by market, whether it triggers re-testing, a certificate amendment, a documentation update or nothing at all.</p>
+                            <div><label class="label">Component changed</label>
+                                <select id="eco-component" class="select">
+                                    <option value="power_adapter">External power adapter / PSU</option>
+                                    <option value="controller_asic">Controller ASIC</option>
+                                    <option value="nand_flash">NAND flash die / package</option>
+                                    <option value="enclosure_material">Enclosure material / resin</option>
+                                    <option value="firmware_crypto">Firmware – cryptographic module</option>
+                                    <option value="pcb_layout">PCB layout / trace routing</option>
+                                    <option value="passive_components">Passive components (second source)</option>
+                                </select></div>
+                            <div><label class="label">Change description</label><input id="eco-description" class="input" placeholder="e.g. Replace 18 W adapter with 30 W USB-PD model from new supplier"></div>
+                            <div>
+                                <div class="flex items-center justify-between"><label class="label !mb-0">Markets to evaluate</label><span class="flex gap-1"><button type="button" class="btn btn-ghost btn-sm !px-1.5" data-pf="eco-all">all</button><button type="button" class="btn btn-ghost btn-sm !px-1.5" data-pf="eco-none">none</button></span></div>
+                                <div id="eco-markets" class="flex flex-wrap gap-1 mt-1.5"></div>
+                            </div>
+                            <button type="button" class="btn btn-indigo w-full" data-pf="eco-run"><i data-lucide="sparkles" class="w-4 h-4"></i>Analyse impact</button>
+                        </div>
+                    </div>
+                    <div class="lg:col-span-2" id="eco-results">
+                        <div class="empty-state"><i data-lucide="git-branch" class="w-8 h-8 text-slate-600 mx-auto mb-2"></i><div>Pick the component that changes and run the analysis to see the regulatory impact per market.</div></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal-foot justify-between text-[11px] text-slate-500"><span id="pd-foot"></span><button type="button" data-action="close-modal" data-arg="modal-product-detail" class="btn btn-secondary btn-sm">Close</button></div>
+    </div>
+</div>
+
+<!-- ============================================================ Add product -->
+<div id="modal-add-product" class="modal hidden" aria-hidden="true" role="dialog" aria-label="Add product">
+    <div class="modal-panel max-w-2xl">
+        <div class="modal-head"><div><h3 class="text-sm font-bold text-white">Add a product</h3><p class="text-[11px] text-slate-400">The readiness and risk score are computed immediately from its category and target markets.</p></div><button type="button" data-action="close-modal" data-arg="modal-add-product" class="btn btn-ghost btn-sm"><i data-lucide="x" class="w-4 h-4"></i></button></div>
+        <form id="pf-add-product-form" class="modal-body space-y-3 text-xs" novalidate>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+                <div class="md:col-span-2"><label class="label">Product name *</label><input name="name" class="input" placeholder="e.g. SanDisk Desk Drive 8TB" required autofocus></div>
+                <div><label class="label">SKU</label><input name="sku" class="input mono" placeholder="SDSSDT-8T00-GB25"></div>
+                <div><label class="label">Category *</label><select name="category_id" class="select" required></select></div>
+                <div><label class="label">Hardware revision</label><input name="hw_revision" class="input" placeholder="Rev A.0" value="Rev A.0"></div>
+                <div><label class="label">Controller</label><input name="controller" class="input" placeholder="Controller ASIC"></div>
+                <div class="md:col-span-2"><label class="label">NAND</label><input name="nand" class="input" placeholder="BiCS8 3D TLC NAND"></div>
+            </div>
+            <div>
+                <div class="flex items-center justify-between"><label class="label !mb-0">Target markets (ISO codes) *</label><span class="text-[10px] text-slate-500">click to toggle common markets</span></div>
+                <div id="pf-market-presets" class="flex flex-wrap gap-1 mt-1.5 mb-2"></div>
+                <input name="target_markets" class="input mono" placeholder="US, DE, FR, GB, JP, KR, TW, CN, IN, AU" value="US, DE, FR, GB, JP, KR, TW, CN, IN, AU">
+            </div>
+            <div id="pf-add-product-error" class="hidden text-rose-300 text-[11px]"></div>
+            <div class="flex justify-end gap-2 pt-2 border-t border-slate-800"><button type="button" data-action="close-modal" data-arg="modal-add-product" class="btn btn-secondary">Cancel</button><button type="submit" class="btn btn-primary"><i data-lucide="plus" class="w-4 h-4"></i>Create product</button></div>
+        </form>
+    </div>
+</div>
+
+<!-- ============================================================ Add certificate -->
+<div id="modal-add-cert" class="modal hidden" aria-hidden="true" role="dialog" aria-label="Add certificate">
+    <div class="modal-panel max-w-2xl">
+        <div class="modal-head"><div><h3 class="text-sm font-bold text-white">Add a certificate or registration</h3><p class="text-[11px] text-slate-400">Expiry drives the certificate health, the horizon and the product's risk score.</p></div><button type="button" data-action="close-modal" data-arg="modal-add-cert" class="btn btn-ghost btn-sm"><i data-lucide="x" class="w-4 h-4"></i></button></div>
+        <form id="pf-add-cert-form" class="modal-body space-y-3 text-xs" novalidate>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+                <div><label class="label">Certificate number *</label><input name="cert_no" class="input mono" placeholder="e.g. R-41098234" required autofocus></div>
+                <div><label class="label">Product *</label><select name="product_id" class="select" required></select></div>
+                <div><label class="label">Scheme</label><input name="scheme" class="input" list="pf-scheme-list" placeholder="IECEE CB Scheme"></div>
+                <div><label class="label">Standard</label><input name="standard" class="input" placeholder="IEC 62368-1:2023"></div>
+                <div><label class="label">Issuing body</label><input name="issuing_body" class="input" placeholder="TÜV SÜD / UL / BIS…"></div>
+                <div><label class="label">Country coverage</label><input name="country_coverage" class="input" list="pf-coverage-list" placeholder="India · European Union · Global · CB Scheme"></div>
+                <div><label class="label">Issue date</label><input name="issue_date" type="date" class="input"></div>
+                <div><label class="label">Expiry date</label><input name="expiry_date" type="date" class="input"><p class="text-[10px] text-slate-500 mt-1">Leave empty for permanent (design-life) certificates.</p></div>
+                <div><label class="label">Document type</label><input name="document_type" class="input" placeholder="Test Certificate / Registration letter / DoC"></div>
+                <div><label class="label">Notes</label><input name="notes" class="input" placeholder="Factory audit due annually…"></div>
+            </div>
+            <datalist id="pf-scheme-list"><option value="IECEE CB Scheme"><option value="BIS CRS (Compulsory Registration Scheme)"><option value="CCC (China Compulsory Certification)"><option value="Japan PSE Mark (Diamond)"><option value="KC Certification (Korea)"><option value="BSMI RPC (Taiwan)"><option value="FCC SDoC"><option value="CE Declaration of Conformity"><option value="UKCA Declaration"><option value="SASO SABER PCoC"><option value="RCM Supplier Declaration"><option value="UL Recognized Component"><option value="NOM Certificate (Mexico)"><option value="INMETRO (Brazil)"><option value="EAC Certificate (EAEU)"></datalist>
+            <datalist id="pf-coverage-list"><option value="Global"><option value="54 CB Scheme Member Countries"><option value="European Union (EU 27) + EEA"><option value="United States"><option value="United States & Canada"><option value="India"><option value="China"><option value="Japan"><option value="South Korea"><option value="Taiwan"><option value="Saudi Arabia"><option value="GCC"><option value="Australia & New Zealand"><option value="Brazil"><option value="Mexico"><option value="United Kingdom"></datalist>
+            <div id="pf-add-cert-error" class="hidden text-rose-300 text-[11px]"></div>
+            <div class="flex justify-end gap-2 pt-2 border-t border-slate-800"><button type="button" data-action="close-modal" data-arg="modal-add-cert" class="btn btn-secondary">Cancel</button><button type="submit" class="btn btn-primary"><i data-lucide="file-plus-2" class="w-4 h-4"></i>Save certificate</button></div>
+        </form>
+    </div>
+</div>

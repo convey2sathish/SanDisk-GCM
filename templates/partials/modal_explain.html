@@ -1,0 +1,66 @@
+<!-- Explain-in-plain-English modal + expert Q&A console (owner: alerts module) -->
+<style>
+    /* Print: only the explanation panel */
+    @media print {
+        body.printing-explain > *:not(#modal-explain) { display: none !important; }
+        #modal-explain { position: static !important; padding: 0 !important; background: #fff !important; backdrop-filter: none !important; display: block !important; }
+        #modal-explain .modal-panel { max-height: none !important; border: 0 !important; box-shadow: none !important; background: #fff !important; color: #000 !important; }
+        #modal-explain .modal-body { overflow: visible !important; color: #000 !important; }
+        #modal-explain .no-print, #modal-explain .modal-foot, #explain-qa { display: none !important; }
+        #modal-explain .card, #modal-explain [class*="bg-slate"] { background: #fff !important; color: #000 !important; border-color: #bbb !important; }
+        #modal-explain [class*="text-slate"], #modal-explain [class*="text-white"] { color: #111 !important; }
+    }
+    .pill-filter { display: inline-flex; align-items: center; gap: .35rem; padding: .3rem .7rem; border-radius: 999px; font-size: 11px; font-weight: 600; color: #94a3b8; background: #0f172a; border: 1px solid #334155; transition: all .15s ease; }
+    .pill-filter:hover { color: #fff; border-color: #475569; }
+    .pill-filter.active { color: #fff; background: #1e293b; border-color: #e11d48; box-shadow: 0 0 0 3px rgba(225,29,72,.15); }
+    .aud-btn { padding: .35rem .8rem; border-radius: .5rem; font-size: 11px; font-weight: 700; color: #94a3b8; border: 1px solid transparent; transition: all .15s ease; }
+    .aud-btn:hover { color: #fff; }
+    .aud-btn.active { color: #fff; background: linear-gradient(135deg, #4f46e5, #7c3aed); box-shadow: 0 4px 14px -6px rgba(99,102,241,.7); }
+    .alert-card.focused { border-color: #38bdf8 !important; box-shadow: 0 0 0 4px rgba(56,189,248,.18), 0 10px 30px -12px rgba(56,189,248,.35); }
+    .explain-section { background: rgba(2,6,23,.55); border: 1px solid #1e293b; border-radius: .875rem; padding: 1rem 1.15rem; }
+    .explain-section > .section-title { margin-bottom: .6rem; }
+    .qa-msg { max-width: 92%; border-radius: 1rem; padding: .65rem .9rem; font-size: 12px; line-height: 1.55; }
+    .qa-user { margin-left: auto; background: linear-gradient(135deg, #4f46e5, #7c3aed); color: #fff; border-bottom-right-radius: .25rem; }
+    .qa-bot { margin-right: auto; background: #0f172a; border: 1px solid #334155; color: #e2e8f0; border-bottom-left-radius: .25rem; }
+    .typing-dot { width: 6px; height: 6px; border-radius: 999px; background: #a5b4fc; display: inline-block; animation: typing 1.2s infinite ease-in-out; }
+    .typing-dot:nth-child(2) { animation-delay: .2s; } .typing-dot:nth-child(3) { animation-delay: .4s; }
+    @keyframes typing { 0%, 80%, 100% { transform: translateY(0); opacity: .4; } 40% { transform: translateY(-4px); opacity: 1; } }
+    .step-num { width: 1.75rem; height: 1.75rem; border-radius: .6rem; display: grid; place-items: center; font-size: 11px; font-weight: 800; background: linear-gradient(135deg, #4f46e5, #7c3aed); color: #fff; flex-shrink: 0; }
+</style>
+
+<div id="modal-explain" class="modal hidden" aria-hidden="true" role="dialog" aria-label="Explain alert in plain English">
+    <div class="modal-panel max-w-5xl">
+        <div class="modal-head !items-start">
+            <div class="flex items-start gap-3 min-w-0">
+                <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-indigo-600 to-purple-700 flex items-center justify-center shadow-lg shadow-indigo-900/50 shrink-0"><i data-lucide="sparkles" class="w-5 h-5 text-white"></i></div>
+                <div class="min-w-0">
+                    <div class="flex items-center gap-2 flex-wrap mb-1">
+                        <span id="explain-severity" class="badge badge-neutral">—</span>
+                        <span id="explain-pillar" class="pill">—</span>
+                        <span id="explain-engine" class="pill gap-1.5" title="Which engine produced this explanation"><span class="w-1.5 h-1.5 rounded-full bg-slate-500"></span><span>Rules engine</span></span>
+                    </div>
+                    <h3 id="explain-title" class="text-sm font-bold text-white leading-snug">Explain in plain English</h3>
+                    <p id="explain-subtitle" class="text-[11px] text-slate-400 mt-0.5"></p>
+                </div>
+            </div>
+            <div class="flex flex-col items-end gap-2 shrink-0 no-print">
+                <div class="flex items-center gap-1">
+                    <button type="button" id="explain-refresh" class="btn btn-ghost btn-sm" title="Regenerate (re-run rules engine / Claude)"><i data-lucide="refresh-cw" class="w-3.5 h-3.5"></i><span class="hidden sm:inline">Regenerate</span></button>
+                    <button type="button" id="explain-copy" class="btn btn-ghost btn-sm" title="Copy a plain-text brief"><i data-lucide="copy" class="w-3.5 h-3.5"></i><span class="hidden sm:inline">Copy brief</span></button>
+                    <button type="button" id="explain-print" class="btn btn-ghost btn-sm" title="Print / save as PDF"><i data-lucide="printer" class="w-3.5 h-3.5"></i><span class="hidden sm:inline">Print</span></button>
+                    <button type="button" data-action="close-modal" data-arg="modal-explain" class="btn btn-ghost btn-sm" aria-label="Close"><i data-lucide="x" class="w-4 h-4"></i></button>
+                </div>
+                <div class="flex items-center gap-1 rounded-xl bg-slate-950/70 border border-slate-800 p-1" id="explain-audience" role="tablist" aria-label="Audience">
+                    <button type="button" class="aud-btn active" data-aud="simple" title="Short sentences, acronyms expanded, one analogy"><i data-lucide="smile" class="w-3 h-3 inline -mt-0.5 mr-1"></i>Simple</button>
+                    <button type="button" class="aud-btn" data-aud="executive" title="What, so what, now what, money, dates, owner"><i data-lucide="briefcase" class="w-3 h-3 inline -mt-0.5 mr-1"></i>Executive</button>
+                    <button type="button" class="aud-btn" data-aud="engineer" title="Clause-level detail, editions, test set-ups"><i data-lucide="wrench" class="w-3 h-3 inline -mt-0.5 mr-1"></i>Engineer</button>
+                </div>
+            </div>
+        </div>
+        <div class="modal-body scrollbar space-y-4 text-xs" id="explain-body"></div>
+        <div class="modal-foot justify-between text-[11px] text-slate-500 no-print">
+            <span id="explain-footnote" class="truncate">Deterministic explainer works offline. Add an Anthropic API key in Settings to refine narratives with Claude.</span>
+            <div class="flex gap-2"><button type="button" id="explain-create-action" class="btn btn-secondary btn-sm"><i data-lucide="plus-square" class="w-3.5 h-3.5 text-emerald-400"></i>Create action</button><button type="button" data-action="close-modal" data-arg="modal-explain" class="btn btn-primary btn-sm">Done</button></div>
+        </div>
+    </div>
+</div>

@@ -1,15 +1,32 @@
 """
-expert_advisor.py - AI Regulatory Expert Advisor Engine
-Searches and analyzes live internet regulatory gazettes, official standards bodies,
-testing laboratory bulletins, and government portals to provide in-depth compliance
-advisories and interactive engineering Q&A for SanDisk flash memory & storage products.
-"""
+expert_advisor.py - AI Regulatory Expert Advisor Engine (v2, fixed)
 
-import urllib.request
-import urllib.parse
+Searches live internet regulatory gazettes, standards bodies, testing-laboratory bulletins
+and government portals to produce in-depth compliance advisories and interactive engineering
+Q&A for SanDisk flash memory & storage products.
+
+v2 fixes:
+  * timezone-aware timestamps (datetime.utcnow() is deprecated)
+  * a hard network budget: no consult / question ever blocks for more than ~8 s in total,
+    with an offline circuit breaker so repeated calls degrade instantly when there is no
+    internet or a corporate proxy blocks the search endpoint
+  * the DuckDuckGo HTML regexes are brittle - they are kept, wrapped, and complemented by
+    a tolerant fallback pattern; failures fall back to curated authoritative sources
+  * when ai_bridge is configured, answer_custom_question() prefers a Claude answer grounded
+    on the alert + the rules-based explanation and falls back to the rule-based answer
+"""
+import datetime as _dt
+import html as _html
 import re
-import json
-import datetime
+import threading
+import time
+import urllib.error
+import urllib.parse
+import urllib.request
+
+NETWORK_BUDGET_S = 8.0          # total wall-clock budget per consult / question
+PER_REQUEST_TIMEOUT_S = 4.0     # single HTTP request cap
+OFFLINE_BACKOFF_S = 300         # after a network failure, skip live search for 5 minutes
 
 # Pre-indexed domain knowledge for offline resilience & deep regulatory context
 CURATED_EXPERT_KNOWLEDGE = {
@@ -112,223 +129,263 @@ CURATED_EXPERT_KNOWLEDGE = {
     }
 }
 
+
+def _utc_stamp():
+    return _dt.datetime.now(_dt.timezone.utc).strftime("%Y-%m-%d %H:%M:%S UTC")
+
+
+def _strip_tags(s):
+    return _html.unescape(re.sub(r"<[^>]+>", "", s or "")).strip()
+
+
+class _Budget:
+    """Wall-clock budget shared by all network calls of one consult / question."""
+
+    def __init__(self, seconds=NETWORK_BUDGET_S):
+        self.deadline = time.monotonic() + seconds
+
+    def remaining(self):
+        return max(0.0, self.deadline - time.monotonic())
+
+    def timeout(self):
+        return min(PER_REQUEST_TIMEOUT_S, self.remaining())
+
+
 class RegulatoryExpertAdvisor:
     def __init__(self):
         self.user_agent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36"
+        self._lock = threading.Lock()
+        self._offline_until = 0.0
+        self.last_network_status = "untested"
 
-    def search_internet(self, query, num_results=6):
-        """
-        Executes a live search on DuckDuckGo HTML to collect official regulatory gazettes,
-        standards bodies updates, test laboratory notices, and industry intelligence.
-        """
-        search_url = "https://html.duckduckgo.com/html/?q=" + urllib.parse.quote(query)
-        req = urllib.request.Request(search_url, headers={
-            "User-Agent": self.user_agent,
-            "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
-            "Accept-Language": "en-US,en;q=0.9"
-        })
+    # ------------------------------------------------------------------ network
+    def network_available(self):
+        return time.monotonic() >= self._offline_until
 
+    def _mark_offline(self, reason):
+        with self._lock:
+            self._offline_until = time.monotonic() + OFFLINE_BACKOFF_S
+            self.last_network_status = f"offline / blocked ({reason}) - live search paused for {OFFLINE_BACKOFF_S // 60} min"
+
+    def _fetch_within(self, req, budget):
+        """Fetch in a worker thread and give up when the shared budget is exhausted, so a slow
+        DNS lookup or a dribbling response can never hold the request thread hostage."""
+        box = {}
+
+        def worker():
+            try:
+                with urllib.request.urlopen(req, timeout=budget.timeout() or 0.5) as resp:
+                    box["html"] = resp.read(1_500_000).decode("utf-8", errors="ignore")
+            except Exception as e:  # any failure -> offline
+                box["err"] = type(e).__name__
+
+        t = threading.Thread(target=worker, name="gcm-expert-fetch", daemon=True)
+        t.start()
+        t.join(max(0.1, budget.remaining()))
+        if t.is_alive():
+            return None, "timeout"
+        return box.get("html"), box.get("err")
+
+    def _parse_ddg(self, html, num_results):
+        """Two passes: the classic result__url/result__snippet pair, then a tolerant fallback."""
         results = []
         try:
-            with urllib.request.urlopen(req, timeout=8) as resp:
-                html = resp.read().decode("utf-8", errors="ignore")
-
-                # Match results using multiple robust regex patterns
-                links = re.findall(r'<a[^>]+class="[^"]*result__url[^"]*"[^>]+href="([^"]+)"[^>]*>(.*?)</a>', html, re.DOTALL)
-                snippets = re.findall(r'<a[^>]+class="[^"]*result__snippet[^"]*"[^>]*>(.*?)</a>', html, re.DOTALL)
-                
-                limit = min(len(links), len(snippets), num_results)
-                for i in range(limit):
-                    raw_u, raw_t = links[i]
-                    raw_s = snippets[i]
-                    
-                    # Clean URL (extract from uddg parameter if present)
-                    url = raw_u.strip()
-                    if "uddg=" in url:
-                        url = urllib.parse.unquote(url.split("uddg=")[-1].split("&")[0])
-                    
-                    title = re.sub(r'<[^>]+>', '', raw_t).strip()
-                    snippet = re.sub(r'<[^>]+>', '', raw_s).strip()
-                    
-                    # Filter out empty or duplicate entries
-                    if url and snippet and not any(r["url"] == url for r in results):
-                        results.append({
-                            "title": title or "Regulatory Gazette Notice",
-                            "url": url,
-                            "snippet": snippet
-                        })
-        except Exception as e:
-            # Fallback or offline graceful handling
-            print(f"[RegulatoryExpertAdvisor] Search query '{query}' warning: {e}")
-
-        # If live search returned fewer than 2 results (e.g. offline or rate limited), provide authoritative official URLs
+            links = re.findall(r'<a[^>]+class="[^"]*result__url[^"]*"[^>]+href="([^"]+)"[^>]*>(.*?)</a>', html, re.DOTALL)
+            snippets = re.findall(r'<a[^>]+class="[^"]*result__snippet[^"]*"[^>]*>(.*?)</a>', html, re.DOTALL)
+            for i in range(min(len(links), len(snippets), num_results)):
+                raw_u, raw_t = links[i]
+                results.append(self._clean_result(raw_u, raw_t, snippets[i]))
+        except Exception:
+            results = []
         if len(results) < 2:
-            results.extend(self._get_fallback_authoritative_sources(query))
+            try:
+                for m in re.finditer(r'<a[^>]+class="[^"]*result__a[^"]*"[^>]+href="([^"]+)"[^>]*>(.*?)</a>(?:.*?<a[^>]+class="[^"]*result__snippet[^"]*"[^>]*>(.*?)</a>)?', html, re.DOTALL | re.IGNORECASE):
+                    results.append(self._clean_result(m.group(1), m.group(2), m.group(3) or ""))
+                    if len(results) >= num_results:
+                        break
+            except Exception:
+                pass
+        out = []
+        for r in results:
+            if r and r["url"] and r["url"].startswith("http") and not any(x["url"] == r["url"] for x in out):
+                out.append(r)
+        return out
 
+    def _clean_result(self, raw_u, raw_t, raw_s):
+        try:
+            url = _html.unescape(raw_u.strip())
+            if "uddg=" in url:
+                url = urllib.parse.unquote(url.split("uddg=")[-1].split("&")[0])
+            if url.startswith("//"):
+                url = "https:" + url
+            title = _strip_tags(raw_t)
+            snippet = _strip_tags(raw_s)
+            return {"title": title or "Regulatory Gazette Notice", "url": url, "snippet": snippet or title}
+        except Exception:
+            return None
+
+    def search_internet(self, query, num_results=6, budget=None):
+        """
+        Live DuckDuckGo HTML search for official gazettes, standards bodies and lab notices.
+        Never blocks beyond the shared budget; falls back to curated authoritative sources.
+        """
+        budget = budget or _Budget()
+        results = []
+        if self.network_available() and budget.remaining() > 0.5:
+            search_url = "https://html.duckduckgo.com/html/?q=" + urllib.parse.quote(query)
+            req = urllib.request.Request(search_url, headers={
+                "User-Agent": self.user_agent,
+                "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+                "Accept-Language": "en-US,en;q=0.9",
+            })
+            html, err = self._fetch_within(req, budget)
+            if html is not None:
+                results = self._parse_ddg(html, num_results)
+                with self._lock:
+                    self.last_network_status = "online"
+            else:
+                self._mark_offline(err or "timeout")
+        if len(results) < 2:
+            for src in self._get_fallback_authoritative_sources(query):
+                if not any(r["url"] == src["url"] for r in results):
+                    results.append(src)
         return results[:num_results]
 
     def _get_fallback_authoritative_sources(self, query):
-        """Returns verified official government and standards body citations matching the query keywords."""
-        q_lower = query.lower()
+        """Verified official government and standards-body citations matching the query keywords."""
+        q_lower = (query or "").lower()
         sources = []
         if "cra" in q_lower or "resilience" in q_lower or "2024/2847" in q_lower or "cyber" in q_lower:
-            sources.append({
-                "title": "Official Journal of the European Union - Regulation (EU) 2024/2847 (Cyber Resilience Act)",
-                "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32024R2847",
-                "snippet": "Horizontal cybersecurity requirements for products with digital elements placed on the EU Single Market, establishing duty-of-care obligations and mandatory vulnerability reporting."
-            })
-            sources.append({
-                "title": "ENISA European Union Agency for Cybersecurity - CRA Standards Harmonization Guide",
-                "url": "https://www.enisa.europa.eu/topics/cybersecurity-education/vulnerability-disclosure",
-                "snippet": "Technical standards and vulnerability reporting channels for hardware manufacturers under the Cyber Resilience Act."
-            })
+            sources.append({"title": "Official Journal of the European Union - Regulation (EU) 2024/2847 (Cyber Resilience Act)",
+                            "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32024R2847",
+                            "snippet": "Horizontal cybersecurity requirements for products with digital elements placed on the EU Single Market, establishing duty-of-care obligations and mandatory vulnerability reporting."})
+            sources.append({"title": "ENISA European Union Agency for Cybersecurity - CRA Standards Harmonization Guide",
+                            "url": "https://www.enisa.europa.eu/topics/cybersecurity-education/vulnerability-disclosure",
+                            "snippet": "Technical standards and vulnerability reporting channels for hardware manufacturers under the Cyber Resilience Act."})
+        elif "psti" in q_lower or "united kingdom" in q_lower:
+            sources.append({"title": "UK Government - Product Security and Telecommunications Infrastructure Act 2022 guidance",
+                            "url": "https://www.gov.uk/guidance/product-security-and-telecommunications-infrastructure-act-2022",
+                            "snippet": "Security requirements for consumer connectable products, Statement of Compliance and enforcement by OPSS."})
         elif "62368" in q_lower or "safety" in q_lower:
-            sources.append({
-                "title": "IECEE CB Scheme - IEC 62368-1:2023 (Edition 4.0) Implementation & TRF Guidelines",
-                "url": "https://www.iecee.org/dyn/www/f?p=106:1:0:::::",
-                "snippet": "IECEE Committee of Testing Laboratories (CTL) transition guidelines, test reporting formats (TRF), and national deviations for 4th Edition safety evaluations."
-            })
-            sources.append({
-                "title": "UL Solutions Technical Whitepaper - Navigating IEC 62368-1 4th Edition Requirements",
-                "url": "https://www.ul.com/services/iec-62368-1-testing-and-certification",
-                "snippet": "Analysis of key changes in Edition 4 including Clause 9 touch temperature limits, USB-PD power delivery evaluations, and outdoor enclosure testing."
-            })
+            sources.append({"title": "IECEE CB Scheme - IEC 62368-1:2023 (Edition 4.0) Implementation & TRF Guidelines",
+                            "url": "https://www.iecee.org/dyn/www/f?p=106:1:0:::::",
+                            "snippet": "IECEE Committee of Testing Laboratories (CTL) transition guidelines, test reporting formats (TRF), and national deviations for 4th Edition safety evaluations."})
+            sources.append({"title": "UL Solutions Technical Whitepaper - Navigating IEC 62368-1 4th Edition Requirements",
+                            "url": "https://www.ul.com/services/iec-62368-1-testing-and-certification",
+                            "snippet": "Analysis of key changes in Edition 4 including Clause 9 touch temperature limits, USB-PD power delivery evaluations, and outdoor enclosure testing."})
         elif "bis" in q_lower or "india" in q_lower or "13252" in q_lower:
-            sources.append({
-                "title": "Bureau of Indian Standards (BIS) - Compulsory Registration Scheme (CRS) Transition Portal",
-                "url": "https://www.bis.gov.in/index.php/standard-marking/compulsory-registration-scheme/",
-                "snippet": "Official notification regarding migration of ICT products from IS 13252 (Part 1) to IS/IEC 62368-1:2023 with mandatory transition cutover schedule."
-            })
+            sources.append({"title": "Bureau of Indian Standards (BIS) - Compulsory Registration Scheme (CRS) Transition Portal",
+                            "url": "https://www.bis.gov.in/index.php/standard-marking/compulsory-registration-scheme/",
+                            "snippet": "Official notification regarding migration of ICT products from IS 13252 (Part 1) to IS/IEC 62368-1:2023 with mandatory transition cutover schedule."})
         elif "pfas" in q_lower or "tsca" in q_lower or "epa" in q_lower:
-            sources.append({
-                "title": "US EPA - TSCA Section 8(a)(7) PFAS Reporting Rule Regulatory Guidance",
-                "url": "https://www.epa.gov/assessing-and-managing-chemicals-under-tsca/tsca-section-8a7-reporting-and-recordkeeping-requirements",
-                "snippet": "Comprehensive reporting and recordkeeping requirements for per- and polyfluoroalkyl substances manufactured or imported into the United States."
-            })
+            sources.append({"title": "US EPA - TSCA Section 8(a)(7) PFAS Reporting Rule Regulatory Guidance",
+                            "url": "https://www.epa.gov/assessing-and-managing-chemicals-under-tsca/tsca-section-8a7-reporting-and-recordkeeping-requirements",
+                            "snippet": "Comprehensive reporting and recordkeeping requirements for per- and polyfluoroalkyl substances manufactured or imported into the United States."})
         elif "triman" in q_lower or "france" in q_lower or "agec" in q_lower or "packaging" in q_lower:
-            sources.append({
-                "title": "CITEO / ADEME - Harmonized Info-tri Signage Guide for Electrical & Electronic Packaging",
-                "url": "https://www.citeo.com/le-mag/guide-du-tri-comment-adopter-le-nouveau-logo-triman-et-linfo-tri",
-                "snippet": "Technical specifications for displaying the Triman logo and sorting pictograms on packaging under Article 17 of the French AGEC circular economy law."
-            })
+            sources.append({"title": "CITEO / ADEME - Harmonized Info-tri Signage Guide for Electrical & Electronic Packaging",
+                            "url": "https://www.citeo.com/le-mag/guide-du-tri-comment-adopter-le-nouveau-logo-triman-et-linfo-tri",
+                            "snippet": "Technical specifications for displaying the Triman logo and sorting pictograms on packaging under Article 17 of the French AGEC circular economy law."})
+        elif "saso" in q_lower or "saber" in q_lower or "saudi" in q_lower:
+            sources.append({"title": "SABER - Saudi Product Safety Program conformity platform",
+                            "url": "https://saber.sa",
+                            "snippet": "Registration of products, Product and Shipment Certificates of Conformity for imports into the Kingdom of Saudi Arabia."})
+        elif "rohs" in q_lower or "reach" in q_lower:
+            sources.append({"title": "European Commission - RoHS Directive (2011/65/EU) evaluation and review",
+                            "url": "https://environment.ec.europa.eu/topics/waste-and-recycling/rohs-directive_en",
+                            "snippet": "Restriction of hazardous substances in electrical and electronic equipment; substance review and exemptions."})
+            sources.append({"title": "ECHA - Candidate List of Substances of Very High Concern",
+                            "url": "https://echa.europa.eu/candidate-list-table",
+                            "snippet": "Official REACH Candidate List with the 0.1 % communication threshold for articles."})
         else:
-            sources.append({
-                "title": "World Trade Organization (WTO) - Technical Barriers to Trade (TBT) Information System",
-                "url": "https://epingalert.org/",
-                "snippet": "Global surveillance system for draft technical regulations, conformity assessment procedures, and international standards notifications."
-            })
-            sources.append({
-                "title": "NIST International Standards & Compliance Directory",
-                "url": "https://www.nist.gov/standardsgov/compliance-faqs",
-                "snippet": "Guidance on international conformity assessment systems, mutual recognition agreements, and accreditation body requirements."
-            })
+            sources.append({"title": "World Trade Organization (WTO) - Technical Barriers to Trade (TBT) Information System",
+                            "url": "https://epingalert.org/",
+                            "snippet": "Global surveillance system for draft technical regulations, conformity assessment procedures, and international standards notifications."})
+            sources.append({"title": "NIST International Standards & Compliance Directory",
+                            "url": "https://www.nist.gov/standardsgov/compliance-faqs",
+                            "snippet": "Guidance on international conformity assessment systems, mutual recognition agreements, and accreditation body requirements."})
         return sources
 
+    # ------------------------------------------------------------------ expert brief
     def consult_expert_on_alert(self, alert):
         """
-        Collects information from related topics by searching and analyzing the internet,
-        cross-references with the alert parameters, and compiles an in-depth expert brief.
+        Collects internet intelligence (within the network budget), cross-references it with
+        the alert parameters and curated knowledge, and compiles an in-depth expert brief.
         """
+        alert = alert or {}
+        budget = _Budget()
         alert_id = alert.get("id", "ALERT-GENERIC")
-        standard = alert.get("standard", "")
-        country = alert.get("country", "")
-        title = alert.get("title", "")
-        affected_categories = alert.get("affected_categories", [])
+        standard = alert.get("standard", "") or ""
+        country = alert.get("country", "") or ""
+        title = alert.get("title", "") or ""
+        affected_categories = alert.get("affected_categories", []) or []
 
-        # Formulate targeted internet search queries
-        clean_standard = re.sub(r'[^\w\s\-\/\.]', '', standard)
-        primary_query = f"{clean_standard} {country} official compliance requirements storage electronics"
-        secondary_query = f"{title} compliance enforcement testing guidance"
+        clean_standard = re.sub(r"[^\w\s\-\/\.]", "", standard)
+        primary_query = f"{clean_standard} {country} official compliance requirements storage electronics".strip()
+        secondary_query = f"{title} compliance enforcement testing guidance".strip()
 
-        # Execute live search
-        search_results = self.search_internet(primary_query, num_results=4)
-        if len(search_results) < 3:
-            more_results = self.search_internet(secondary_query, num_results=3)
-            for r in more_results:
+        search_results = self.search_internet(primary_query, num_results=4, budget=budget)
+        if len(search_results) < 3 and budget.remaining() > 1.0:
+            for r in self.search_internet(secondary_query, num_results=3, budget=budget):
                 if not any(x["url"] == r["url"] for x in search_results):
                     search_results.append(r)
 
-        # Retrieve or synthesize curated domain intelligence
         base_knowledge = CURATED_EXPERT_KNOWLEDGE.get(alert_id, {})
-
-        legal_basis = base_knowledge.get("legal_authority") or f"Statutory mandate enforced in {country} under technical standard {standard}."
-        enforcing_agency = base_knowledge.get("enforcing_body") or f"National Standards and Market Surveillance Authorities of {country}."
+        legal_basis = base_knowledge.get("legal_authority") or f"Statutory mandate enforced in {country or 'the target market'} under technical standard {standard or 'cited in the notice'}."
+        enforcing_agency = base_knowledge.get("enforcing_body") or f"National Standards and Market Surveillance Authorities of {country or 'the target market'}."
         technical_clauses = base_knowledge.get("technical_clauses") or [
-            f"Mandatory adherence to {standard} technical parameters and testing limits.",
+            f"Mandatory adherence to {standard or 'the referenced standard'} technical parameters and testing limits.",
             f"Harmonized verification procedures applicable to {', '.join(affected_categories) or 'solid-state storage'}.",
-            "Requirement to maintain Technical Documentation File (TDF) for minimum 10-year retention."
+            "Requirement to maintain a Technical Documentation File (TDF) for a minimum 10-year retention period.",
         ]
         sandisk_guidance = base_knowledge.get("sandisk_guidance") or (
-            f"Audit all SanDisk flash drive, SSD, and controller designs against {standard}. "
-            f"Ensure packaging markings, DoC declarations, and supplier component disclosures are updated prior to {alert.get('effective_date', 'mandatory cutover')}."
+            f"Audit all SanDisk flash drive, SSD, and controller designs against {standard or 'the new requirement'}. "
+            f"Ensure packaging markings, DoC declarations, and supplier component disclosures are updated prior to {alert.get('effective_date') or 'the mandatory cutover'}."
         )
         lab_advice = base_knowledge.get("lab_recommendations") or "Engage accredited test laboratories (UL Solutions, TÜV Rheinland, SGS, Intertek) to obtain compliant test reports."
         suggested_q = base_knowledge.get("suggested_questions") or [
-            f"What specific test clauses of {standard} apply to external bus-powered SSDs?",
+            f"What specific test clauses of {standard or 'this requirement'} apply to external bus-powered SSDs?",
             "What is the estimated laboratory re-testing cost and turnaround lead time?",
             "Are products already cleared through customs before the deadline grandfathered?",
-            "What documentation must our OEM/ODM manufacturing partners provide?"
+            "What documentation must our OEM/ODM manufacturing partners provide?",
         ]
 
-        # Synthesize internet intelligence narrative
-        snippets_text = " ".join([r.get("snippet", "") for r in search_results])
-        if snippets_text:
+        live = [r for r in search_results if r.get("snippet") and "epingalert" not in r.get("url", "")]
+        if self.network_available() and self.last_network_status == "online" and live:
             web_analysis = (
-                f"Recent internet regulatory intelligence and gazette analysis indicates active enforcement preparations. "
-                f"Official publications confirm that authorities in {country} are prioritizing compliance for consumer electronics and IT storage hardware. "
-                f"Testing bodies emphasize early engagement with accredited laboratories to avoid capacity bottlenecks. "
-                f"Key discussions highlight strict customs inspection protocols and potential administrative penalties for non-compliant shipments."
+                f"Live search returned {len(live)} relevant public sources. Official publications confirm that authorities in {country or 'the target market'} "
+                f"are prioritising compliance for consumer electronics and IT storage hardware; testing bodies emphasise early engagement with accredited "
+                f"laboratories to avoid capacity bottlenecks, and customs inspection protocols with administrative penalties apply to non-compliant shipments."
             )
         else:
             web_analysis = (
-                f"Official gazette surveillance confirms that {standard} in {country} is entering its mandatory implementation phase. "
-                f"Testing laboratories report high demand for conformity assessment slots."
+                f"Live internet search was unavailable ({self.last_network_status}); the brief relies on the curated knowledge base and the official links recorded on the alert. "
+                f"{standard or 'The referenced requirement'} in {country or 'the target market'} is entering its mandatory implementation phase; testing laboratories report high demand for conformity-assessment slots."
             )
 
-        # Build hardware category matrix
         hardware_impacts = []
         for cat in affected_categories:
+            cat = str(cat)
             clean_cat = cat.replace("_", " ").title()
-            if "internal" in cat:
-                action = f"Verify PCB design, thermal dissipation under sustained bus transfer, and BOM material declarations for {standard}."
-                verdict = "High Impact"
+            if "internal" in cat or "enterprise" in cat:
+                action, verdict = f"Verify PCB design, thermal dissipation under sustained bus transfer, and BOM material declarations for {standard}.", "High Impact"
             elif "external" in cat:
-                action = f"Evaluate enclosure touch temperature, cable flammability, and consumer regulatory labeling for {standard}."
-                verdict = "Critical Impact"
-            elif "usb" in cat or "sd" in cat:
-                action = f"Verify silicon controller compliance, packaging waste markings, and customs tariff classification under {standard}."
-                verdict = "Medium Impact"
+                action, verdict = f"Evaluate enclosure touch temperature, cable flammability, and consumer regulatory labeling for {standard}.", "Critical Impact"
+            elif "usb" in cat or "sd" in cat or "cf" in cat or "gaming" in cat:
+                action, verdict = f"Verify silicon controller compliance, packaging waste markings, and customs tariff classification under {standard}.", "Medium Impact"
             else:
-                action = f"Review technical specifications and ensure declaration of conformity references {standard}."
-                verdict = "Operational Impact"
-            hardware_impacts.append({
-                "category": clean_cat,
-                "verdict": verdict,
-                "engineering_action": action
-            })
+                action, verdict = f"Review technical specifications and ensure declaration of conformity references {standard}.", "Operational Impact"
+            hardware_impacts.append({"category": clean_cat, "verdict": verdict, "engineering_action": action})
 
-        # Phased roadmap
+        lab_short = lab_advice.split("(")[-1].split(")")[0] if "(" in lab_advice else "UL / TÜV"
         roadmap = [
-            {
-                "phase": "Phase 1: Gap Analysis & BOM Audit",
-                "timeline": "Immediate (Days 1 - 14)",
-                "details": f"Cross-reference bill-of-materials and technical files for all {len(affected_categories)} affected hardware categories against {standard} clauses."
-            },
-            {
-                "phase": "Phase 2: Laboratory Engagement & Sample Dispatch",
-                "timeline": "Months 1 - 2",
-                "details": f"Submit golden engineering prototypes to accredited test labs ({lab_advice.split('(')[-1].split(')')[0] if '(' in lab_advice else 'UL / TÜV'})."
-            },
-            {
-                "phase": "Phase 3: Declaration of Conformity & Portal Filings",
-                "timeline": "Months 3 - 4",
-                "details": f"Update EU DoC / BIS CRS registration portal / EPA CDX filings; issue revised distributor technical documentation."
-            },
-            {
-                "phase": "Phase 4: Packaging Artwork & Customs Release",
-                "timeline": f"Target: Prior to {alert.get('effective_date', 'enforcement')}",
-                "details": "Roll out updated retail carton die-lines and ensure global logistics customs brokers possess active certificate numbers."
-            }
+            {"phase": "Phase 1: Gap Analysis & BOM Audit", "timeline": "Immediate (Days 1 - 14)",
+             "details": f"Cross-reference bill-of-materials and technical files for all {len(affected_categories)} affected hardware categories against {standard or 'the new requirement'} clauses."},
+            {"phase": "Phase 2: Laboratory Engagement & Sample Dispatch", "timeline": "Months 1 - 2",
+             "details": f"Submit golden engineering prototypes to accredited test labs ({lab_short})."},
+            {"phase": "Phase 3: Declaration of Conformity & Portal Filings", "timeline": "Months 3 - 4",
+             "details": "Update EU DoC / BIS CRS registration portal / EPA CDX filings; issue revised distributor technical documentation."},
+            {"phase": "Phase 4: Packaging Artwork & Customs Release", "timeline": f"Target: Prior to {alert.get('effective_date') or 'enforcement'}",
+             "details": "Roll out updated retail carton die-lines and ensure global logistics customs brokers possess active certificate numbers."},
         ]
 
         return {
@@ -339,7 +396,8 @@ class RegulatoryExpertAdvisor:
             "severity": alert.get("severity", "Information"),
             "effective_date": alert.get("effective_date", "TBD"),
             "search_query": primary_query,
-            "analyzed_at": datetime.datetime.utcnow().strftime("%Y-%m-%d %H:%M:%S UTC"),
+            "analyzed_at": _utc_stamp(),
+            "network_status": self.last_network_status,
             "internet_sources": search_results,
             "expert_brief": {
                 "executive_summary": alert.get("summary", ""),
@@ -351,112 +409,162 @@ class RegulatoryExpertAdvisor:
                 "sandisk_engineering_guidance": sandisk_guidance,
                 "laboratory_testing_strategy": lab_advice,
                 "compliance_roadmap": roadmap,
-                "suggested_questions": suggested_q
-            }
+                "suggested_questions": suggested_q,
+            },
         }
 
-    def answer_custom_question(self, alert, user_question):
-        """
-        Answers any custom engineering question asked by the user regarding an alert,
-        by searching the internet for relevant standards clauses and formulating an expert response.
-        """
-        standard = alert.get("standard", "")
-        country = alert.get("country", "")
-        title = alert.get("title", "")
-        
-        # Build contextual search query
-        query = f"{standard} {country} {user_question}"
-        search_results = self.search_internet(query, num_results=3)
+    # ------------------------------------------------------------------ Q&A
+    def _rule_based_answer(self, alert, user_question):
+        standard = alert.get("standard", "") or "the referenced standard"
+        country = alert.get("country", "") or "the target market"
+        q_lower = (user_question or "").lower()
+        cats = alert.get("affected_categories") or ["storage"]
 
-        # Analyze question intent
-        q_lower = user_question.lower()
-        expert_answer = ""
-        key_clauses = []
-        action_advice = ""
-
-        # 1. Thermal / Temperature / Touch
         if any(w in q_lower for w in ["temperature", "thermal", "heat", "touch", "burn", "70", "degrees"]):
             expert_answer = (
                 f"Under {standard}, accessible touch temperature limits depend on the material classification (metal vs plastic vs rubber). "
                 f"For bus-powered solid-state storage devices with metal enclosures (e.g. anodized aluminum), the maximum permissible temperature "
-                f"under continuous maximum workload (TS2 touch threshold) is strictly capped at 70°C for accidental contact and 48°C for continuous holding. "
+                f"under continuous maximum workload (TS2 touch threshold) is capped at 70°C for accidental contact and 48°C for continuous holding. "
                 f"If the enclosure exceeds these limits during sequential write torture tests at 35°C ambient, firmware thermal throttling "
                 f"must step down NAND controller clock frequencies to avoid a non-compliance failure."
             )
             key_clauses = ["Clause 9: Thermal Burn Injury Hazard", "Table 28: Touch Temperature Limits for Accessible Parts"]
             action_advice = "Audit thermal throttling PID loops in firmware; ensure temperature logging is recorded in the lab test file."
-
-        # 2. Lab Testing / Cost / Turnaround
         elif any(w in q_lower for w in ["cost", "price", "fee", "sample", "turnaround", "lead time", "lab"]):
             expert_answer = (
                 f"For testing against {standard} in {country}, turnaround times currently average 3 to 6 weeks depending on laboratory booking backlogs. "
                 f"Typical safety and EMC testing costs range between $3,500 and $7,000 USD per product family when leveraging existing CB Scheme test reports. "
                 f"For full baseline testing without prior CB certificates, budget between $8,000 and $12,000 USD. "
-                f"Sample requirements: You should prepare 2 to 3 golden production units, 1 unpotted PCB sample for component inspection, "
+                f"Sample requirements: prepare 2 to 3 golden production units, 1 unpotted PCB sample for component inspection, "
                 f"and dedicated test firmware enabling continuous read/write transfer loops."
             )
             key_clauses = ["Conformity Assessment Module B / CB Scheme Test Procedure", "IECEE CTL Operational Document OD-2020"]
             action_advice = "Consolidate model families under a single test report via technical delta justifications to minimize sample costs."
-
-        # 3. Packaging / Triman / Label / Marking
         elif any(w in q_lower for w in ["packaging", "triman", "label", "marking", "box", "art", "symbol"]):
             expert_answer = (
-                f"Regarding packaging and markings for {country}: Regulations mandate clear physical sorting and compliance markings directly "
+                f"Regarding packaging and markings for {country}: regulations mandate clear physical sorting and compliance markings directly "
                 f"on the consumer-facing packaging. In jurisdictions like France (AGEC Law / Triman) and Italy (D.Lgs 116/2020), digital QR code alternatives "
-                f"are NOT accepted as sole compliance on consumer packaging—the Triman logo, Info-tri pictogram, and material alphanumeric coding "
+                f"are NOT accepted as sole compliance on consumer packaging above the size thresholds - the Triman logo, Info-tri pictogram, and material alphanumeric coding "
                 f"(e.g. PAP 20 for cardboard carton, PET 01 for blister insert) must be legibly printed on the physical retail carton."
             )
             key_clauses = ["CITEO Info-tri Marking Specifications", "Article 17 French AGEC Circular Economy Decree", "CONAI Alphanumeric Material Coding"]
-            action_advice = "Update packaging mechanical die-lines before printing production batch cylinders. Validate proofs on national portal."
-
-        # 4. Grandfathering / Grace Period / Legacy SKUs
+            action_advice = "Update packaging mechanical die-lines before printing production batch cylinders. Validate proofs on the national portal."
         elif any(w in q_lower for w in ["grandfather", "grace", "legacy", "old", "stock", "existing", "inventory"]):
             expert_answer = (
-                f"Regarding legacy inventory and grandfathering: The critical legal dividing line is the moment a product is 'placed on the market' "
-                f"(i.e., imported through customs or made available for distribution) prior to the effective cutover deadline ({alert.get('effective_date', 'the deadline')}). "
+                f"Regarding legacy inventory and grandfathering: the critical legal dividing line is the moment a product is 'placed on the market' "
+                f"(imported through customs or made available for distribution) prior to the effective cutover deadline ({alert.get('effective_date') or 'the deadline'}). "
                 f"Units physically cleared through customs and sitting in local distributor or retailer warehouses prior to the cutover date can generally "
                 f"continue to be sold through the retail channel without recall. However, any shipments clearing customs AFTER the deadline must strictly "
                 f"comply with {standard} or risk customs seizure and import embargoes."
             )
             key_clauses = ["EU Blue Guide Section 2.1: Making Available and Placing on the Market", "Customs Border Enforcement Protocols"]
             action_advice = "Execute warehouse inventory run-out schedules and ensure no non-compliant batches are in transit during the transition month."
-
-        # 5. PFAS / Chemical / RoHS / TSCA
         elif any(w in q_lower for w in ["pfas", "chemical", "rohs", "tsca", "substance", "fluor"]):
             expert_answer = (
-                f"Under environmental rules affecting {alert.get('standard', 'this regulation')}, electronic hardware articles contain "
+                f"Under environmental rules affecting {standard}, electronic hardware articles contain "
                 f"trace fluoropolymers that fall under reporting obligations (such as PTFE in wire jackets, PVDF in conformal coating, and fluoroelastomer gaskets). "
                 f"Unlike traditional RoHS which provides 0.1% (1000 ppm) de minimis thresholds, regulations like EPA TSCA Section 8(a)(7) have NO de minimis threshold. "
                 f"Manufacturers must collect structural Full Material Disclosures (FMD) from tier-1 suppliers and report chemical names, CAS numbers, and import tonnages."
             )
             key_clauses = ["40 CFR Part 705 (TSCA 8(a)(7))", "EU REACH Annex XVII Restrictions", "IEC 62474 Material Declaration Standards"]
             action_advice = "Issue urgent PFAS survey requests to all PCBA and connector suppliers using standard IPC-1752A XML templates."
-
-        # 6. Default / General Engineering Synthesis
+        elif any(w in q_lower for w in ["sbom", "firmware", "vulnerab", "cyber", "secure boot", "sign"]):
+            expert_answer = (
+                f"Cybersecurity obligations under {standard} treat the controller firmware as part of the product: secure boot with cryptographically signed images, "
+                f"permanently disabled debug/DFU back-doors in production SKUs, a machine-readable SBOM (SPDX or CycloneDX) covering every firmware component, "
+                f"a public vulnerability-disclosure channel and a stated security-update support period. Storage devices without network connectivity are usually "
+                f"'default' (self-assessed, Module A) rather than 'important' products, but the technical file must demonstrate each requirement."
+            )
+            key_clauses = ["CRA Annex I Part I (security requirements)", "CRA Article 14 (conformity assessment)", "UK PSTI Schedule 1 (security requirements)"]
+            action_advice = "Generate the SBOM from the firmware build pipeline and archive signing-key custody evidence in the technical file."
         else:
             expert_answer = (
                 f"In response to your query regarding '{user_question}' under {standard} ({country}): "
-                f"Regulatory authorities and test bodies mandate rigorous technical documentation. "
+                f"regulatory authorities and test bodies mandate rigorous technical documentation. "
                 f"For SanDisk solid-state storage products, compliance requires demonstrating that hardware microcontrollers, "
                 f"electrical safety parameters, and environmental declarations satisfy the harmonized requirements of {standard}. "
-                f"Web gazette surveillance indicates that market surveillance authorities are actively auditing conformity files "
-                f"and demanding accredited test reports covering all functional operating states."
+                f"Market surveillance authorities are actively auditing conformity files and demanding accredited test reports covering all functional operating states. "
+                f"This specific point is not covered in detail by the alert text - confirm it with the certification body or the official source linked on the alert."
             )
             key_clauses = [f"General Conformity Procedures for {standard}", f"National Market Surveillance Directive ({country})"]
-            action_advice = f"Consult the Technical Documentation File (TDF) for SanDisk models in category {alert.get('affected_categories', ['storage'])[0]}."
+            action_advice = f"Consult the Technical Documentation File (TDF) for SanDisk models in category {cats[0]}."
+        return expert_answer, key_clauses, action_advice
+
+    def answer_custom_question(self, alert, user_question, explanation=None, history=None, ctx=None):
+        """
+        Answers a custom engineering question about an alert. Prefers a Claude answer grounded on
+        the alert + rules explanation (when ai_bridge is configured); falls back to the rule-based
+        answer. Live web sources are collected within the network budget.
+        """
+        alert = alert or {}
+        user_question = str(user_question or "").strip()
+        budget = _Budget()
+        standard = alert.get("standard", "") or ""
+        country = alert.get("country", "") or ""
+
+        query = f"{standard} {country} {user_question}".strip()
+        search_results = self.search_internet(query, num_results=3, budget=budget)
+
+        # 1. grounded offline answer (alert text + curated knowledge + country records + requirement rules)
+        grounded = None
+        try:
+            import alert_explainer
+            grounded = alert_explainer.grounded_answer(alert, user_question, ctx, explanation)
+            if explanation is None:
+                try:
+                    explanation = alert_explainer.explain_alert(alert, ctx, "engineer")
+                except Exception:
+                    explanation = None
+        except Exception as e:  # never break the endpoint
+            print(f"[RegulatoryExpertAdvisor] grounded answer failed: {type(e).__name__}: {e}")
+
+        # 2. Claude, when configured, answers on the same grounded material
+        ai = None
+        try:
+            import ai_bridge
+            if ai_bridge.is_active():
+                ai = ai_bridge.answer_question(alert, explanation, user_question, history)
+        except Exception:
+            ai = None
+
+        if ai and ai.get("answer"):
+            expert_answer = ai["answer"]
+            key_clauses = ai.get("cited_clauses") or (grounded or {}).get("cited_clauses") or []
+            action_advice = ai.get("action_advice") or (grounded or {}).get("action_advice") or ""
+            generated_by = ai.get("generated_by") or "claude"
+            confidence = {"level": "High", "basis": "Answered by Claude on the alert facts and the grounded evidence below."}
+        elif grounded:
+            expert_answer = grounded["expert_answer"]
+            key_clauses = grounded["cited_clauses"]
+            action_advice = grounded["action_advice"]
+            generated_by = grounded["generated_by"]
+            confidence = grounded["confidence"]
+        else:  # last-resort legacy heuristics
+            expert_answer, key_clauses, action_advice = self._rule_based_answer(alert, user_question)
+            generated_by = "rules"
+            confidence = {"level": "Low", "basis": "Heuristic answer - grounded evidence engine unavailable."}
 
         return {
             "alert_id": alert.get("id"),
             "question": user_question,
             "expert_answer": expert_answer,
+            "answer": expert_answer,
+            "direct_answer": (grounded or {}).get("direct_answer"),
+            "evidence": (grounded or {}).get("evidence") or [],
+            "intent": (grounded or {}).get("intent"),
+            "confidence": confidence,
             "cited_clauses": key_clauses,
             "action_advice": action_advice,
             "web_sources_consulted": search_results,
-            "answered_at": datetime.datetime.utcnow().strftime("%Y-%m-%d %H:%M:%S UTC")
+            "generated_by": generated_by,
+            "network_status": self.last_network_status,
+            "answered_at": _utc_stamp(),
         }
+
 
 # Global singleton instance
 expert_advisor_instance = RegulatoryExpertAdvisor()
+
 
 def get_expert_advisor():
     return expert_advisor_instance

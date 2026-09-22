@@ -30,3 +30,8 @@ Desktop.ini
 # Temporary / Scratch files
 scratch/
 *.log
+
+# GCM 2.0 local state
+data/
+.devdata/
+tools/node_modules/

@@ -1,105 +1,96 @@
-# Storage & Memory Global Compliance Management (GCM) Platform
+# Storage & Memory GCM Platform 2.0 “Horizon”
 
-[![Release](https://img.shields.io/badge/Release-v1.0.0-emerald.svg)](https://github.com/convey2sathish/SanDisk-GCM/releases/tag/v1.0.0)
-[![Download EXE](https://img.shields.io/badge/Download-Standalone%20EXE-blue.svg)](https://github.com/convey2sathish/SanDisk-GCM/releases/download/v1.0.0/GCM_Platform.exe)
-[![Download ZIP](https://img.shields.io/badge/Download-ZIP%20Archive-sky.svg)](https://github.com/convey2sathish/SanDisk-GCM/releases/download/v1.0.0/GCM_Platform.zip)
-[![Coverage](https://img.shields.io/badge/Jurisdictions-205%20Countries-rose.svg)](#)
-[![Pillars](https://img.shields.io/badge/Pillars-Safety%20%7C%20EMC%20%7C%20Environmental-amber.svg)](#)
+**Global Compliance Management for flash memory, SSDs and storage peripherals — 205 jurisdictions,
+11 product categories, four regulatory pillars (Safety · EMC · Environmental · Cyber), fully offline,
+one executable.**
 
-> **Quick Download for Office Laptops (Zero-Install / No Python Required):**
-> * 🚀 **[Download Standalone Executable (GCM_Platform.exe)](https://github.com/convey2sathish/SanDisk-GCM/releases/download/v1.0.0/GCM_Platform.exe)** *(10.8 MB)*
-> * 📦 **[Download Portable ZIP Package (GCM_Platform.zip)](https://github.com/convey2sathish/SanDisk-GCM/releases/download/v1.0.0/GCM_Platform.zip)** *(10.6 MB)*
-
-An enterprise-grade **Global Compliance Management (GCM)** system built specifically for **Information Technology Equipment (ITE)**, focusing on Flash Memory, Removable Media, Solid State Drives, and Storage Peripherals.
-
-Covering **205 countries and territories** across all 3 key compliance pillars: **Electrical Safety**, **EMC & Radio Frequency**, and **Environmental & Chemical Regulations (RoHS / REACH / EPR)**.
+> Built for compliance engineers, test-lab coordinators, packaging teams and directors who need one
+> answer to three questions for every market: *What applies? What changed? What do we do, by when?*
 
 ---
 
-## Key Capabilities
+## What it does
 
-### 1. 205 Countries & Jurisdictions Directory (GMA Matrix)
-* Full international market access coverage across:
-  * **Americas (45+ countries)**: US (FCC/NRTL), Canada (ISED/CSA), Mexico (NOM/NYCE), Brazil (ANATEL/INMETRO), Argentina (ENACOM/IRAM), Chile, Colombia, etc.
-  * **Europe & Eurasia (50+ countries)**: EU 27 (CE: LVD, EMCD, RED, RoHS, CRA), UK (UKCA), Switzerland, Norway, EAEU (EAC TR CU 004/020/037: Russia, Belarus, Kazakhstan, Armenia, Kyrgyzstan), Ukraine, Turkey, etc.
-  * **Asia-Pacific (42+ countries)**: China (CCC, China RoHS), India (BIS CRS, WPC, TEC), Japan (VCCI, PSE, JATE), South Korea (KC Safety & EMC), Taiwan (BSMI, NCC), Australia/NZ (RCM), Singapore (Safety Mark, IMDA), Malaysia (SIRIM), Vietnam, etc.
-  * **Middle East & North Africa (22+ countries)**: Saudi Arabia (SASO SABER, CITC), UAE (MoIAT ECAS, TDRA), Israel (SII), Egypt (NTRA, GOIEC), Qatar, Kuwait, etc.
-  * **Sub-Saharan Africa (45+ countries)**: South Africa (SABS, ICASA, NRCS), Nigeria (SONCAP), Kenya (KEBS), Ghana, etc.
-* Tailored requirement classification for each country: **Testing Required**, **Document / CB Scheme Acceptance**, or **Supplier's Declaration of Conformity (SDoC) / Exemption**.
+| Area | What you get |
+|---|---|
+| **Compliance Command Centre** (Overview) | Live KPIs, Compliance Risk Index, everything due in the next 90 days, alert pressure by pillar, regional coverage, action items. |
+| **Testing vs. Document Matrix** | For any product category, every jurisdiction's route: in-country lab testing, document / CB Scheme filing, or supplier declaration — with the exact document checklist, standards for all pillars, local-representative rule, lead time and pending standard transitions. One-click Excel export (18 columns). |
+| **Global Access Map** | Heat layers for readiness, testing barriers, lead time, environmental regimes, active alerts and pending transitions. Click any of 205 territories (incl. 39 island markers) for its dossier. |
+| **Regulation Alerts + Explainer** | Every alert explained in plain English for three audiences (simple / executive / engineer): what changed, why it matters, who is affected (categories, SKUs, markets), what to do by when, cost & effort, risk if ignored, jargon glossary, confidence and sources — plus a grounded Q&A console. Triage workflow and one-click action items. Optional Claude enhancement. |
+| **Regulatory Horizon & Risk** | One timeline of deadlines, milestones, certificate expiries, actions and surveillance history; Compliance Risk Index per product, region and pillar with an explainable formula; top risks. |
+| **Product Portfolio** | Products with readiness per market, certificates health (expiry countdown), linked alerts, and an engineering-change (ECO) impact analyser. |
+| **Document Impact Audit** | Point at a folder (or drag one into the browser). The engine reads PDFs, DOCX, XLSX, CSV/TXT, identifies standards & editions, labs, SKUs, markets and expiry dates, and produces a health score, a re-test / re-sign / packaging / portal directive per document, a gap analysis per product × market, a remediation plan with cost roll-up and a four-sheet Excel directive. |
+| **Regulatory Surveillance** | Scans WTO TBT, US Federal Register (OSHA NRTL, FCC, EPA), EUR-Lex, EAEU, GSO and national gazettes for storage-relevant notices; records them as standard *transitions* in a tamper-evident, hash-chained ledger; creates fully enriched alerts with product impact. What-if simulation for any country or all 205. |
+| **Everywhere** | Ctrl+K search across countries, standards, alerts, SKUs and actions; keyboard shortcuts; deep links; first-run guide; all data persisted locally and preserved across upgrades. |
 
-### 2. 11 Specialized Storage & Memory Product Classifications
-1. **SD Card** (Standard, UHS-I, UHS-II)
-2. **MicroSD Card**
-3. **SD Express Card** (PCIe Gen3/Gen4 NVMe protocol over SD 7.0/8.0/9.0, thermal & high-frequency RF emission profile)
-4. **CF / CFexpress Card** (CompactFlash, CFast, CFexpress Type A/B/C)
-5. **Gaming Expansion Card** (Dedicated console NVMe cartridges, e.g., Xbox Velocity / PS5)
-6. **USB Flash Drive** (USB 3.2 Gen 1/2, Type-C Dual Drive, encrypted FIPS drives)
-7. **Internal SSD** (M.2 NVMe, 2.5-inch SATA)
-8. **External SSD (Without Power Adaptor)** (Host bus-powered via USB-C / Thunderbolt)
-9. **External SSD (With Power Adaptor)** (Mains-powered desktop units triggering mandatory in-country safety: BIS, CCC, PSE, NOM, UL, and US DoE Level VI energy efficiency)
-10. **Enterprise SSD** (U.2, U.3, E1.S, E3.S, SED / TCG Enterprise / FIPS 140-3)
-11. **Memory Card Reader** (Multi-slot USB-C peripheral reader docking stations)
+## Quick start
 
-### 3. Autonomous Real-Time Regulatory Surveillance Engine
-* **Multi-Gateway Crawler**: Continuously monitors global regulatory gazettes, government portals, and standards clearinghouses:
-  * **WTO TBT Early Warning System (ePing)**: Technical barriers to trade notices across 164+ WTO member states.
-  * **US Federal Register API**: Live FCC (Part 15B/RF), OSHA NRTL (UL 62368-1), EPA/RoHS.
-  * **EU EUR-Lex / Official Journal**: CE Directives (LVD, EMCD, RED, RoHS, Cyber Resilience Act, Ecodesign).
-  * **India MeitY / BIS Watcher**: IS/IEC 62368-1, Compulsory Registration Scheme (CRS) additions.
-  * **East Asia Watchers**: South Korea RRA/KATS notices, Taiwan BSMI announcements.
-* **Auto-Ingestion & Ledger**: Automatically parses standards, transition dates, and affected categories, updating the matrix and logging an immutable audit trail (surveillance_log.json).
+### Standalone (no Python needed)
+Run `GCM_Platform.exe`. A console window shows the local address (default `http://localhost:5000`) and
+the browser opens automatically. Your data lives in `%LOCALAPPDATA%\GCM_Platform\data`.
 
-### 4. Interactive Expandable Regulatory Alerts & Official Source Links
-* **Compact View**: Instant high-level alert summary, severity status, jurisdiction, and engineering action.
-* **Expandable Intelligence Briefs**: One-click deep-dive accordion providing:
-  * **In-Depth Legal Context & Scope**: Full regulatory background and legal mandate.
-  * **Specific Testing Clauses & Thresholds**: Specific test parameters (e.g. Clause 9 touch temperatures: 70°C metal / 85°C plastic; high-frequency PCIe radiated emissions up to 6 GHz).
-  * **Enforcement Timeline Milestones**: Chronological phases with status badges (Draft, Active, Recommended, Mandatory Cutover).
-  * **Direct Official Links**: Instant access to official gazette circulars and regulatory portals (EUR-Lex, BIS, FCC, SASO SABER, BSMI, RRA).
-  * **Actionable Engineering Verification Checklist**: 4-step actionable audit and testing procedures.
+### From source
+```bash
+git clone https://github.com/convey2sathish/SanDisk-GCM.git
+cd SanDisk-GCM
+pip install -r requirements.txt
+python app.py            # or run.bat on Windows
+```
+Environment variables: `GCM_PORT` (default 5000), `GCM_HOST` (default 127.0.0.1), `GCM_DATA_DIR`
+(default `./data` in source mode), `GCM_NO_BROWSER=1` (don't auto-open a browser),
+`ANTHROPIC_API_KEY` (enables Claude-enhanced explanations; can also be set in Settings).
 
-### 5. 14-Column Excel Compliance Matrix Export
-* Generates an audit-ready compliance matrix spreadsheet with product specifications, country requirements, test standards, sample requirements, lead times, certificate validity, and **Column 14: Live Surveillance Source Stamp**.
+### Build the executable
+```bash
+build_exe.bat            # = pip install -r requirements.txt, build_assets.bat, pyinstaller GCM_Platform.spec
+```
+Output: `dist\GCM_Platform.exe`.
 
----
+### Rebuild the stylesheet (after editing templates or JS)
+```bash
+build_assets.bat         # Tailwind v4 CLI -> static/css/app.css (needs Node.js once, to install the CLI)
+```
 
-## System Architecture
+## Architecture
 
-* **Backend**: Python 3.10+ / Flask / openpyxl
-* **Frontend**: HTML5, Tailwind CSS, Lucide Icons, Vanilla JavaScript
-* **Database**: In-memory compliance knowledge graph with JSON persistence (compliance_db.py, countries_data.json)
-* **Surveillance**: Autonomous asynchronous polling engine (eg_surveillance.py)
+```
+app.py                 Flask composition root: registers routes_core / routes_alerts / routes_docaudit / routes_risk
+config.py              bundle vs. data directory, settings, atomic JSON IO
+store.py               thread-safe persisted state (user alerts, triage, products, certificates, actions, last audit) + ledger hashing
+compliance_db.py       seed knowledge base: 11 categories, 205 countries, 17 alerts, portfolio, requirement engine
+reg_surveillance.py    surveillance engine (scan / simulate / transitions / hash-chained ledger)
+surveillance_data.py   monitored gateways, relevance keywords, demo scenarios
+alert_explainer.py     deterministic plain-English explanation engine
+ai_bridge.py           optional Claude enhancement (anthropic SDK, claude-opus-5, server-side fallbacks)
+expert_advisor.py      web-search-backed expert brief and Q&A
+doc_audit_engine.py    document ingestion, metadata, dynamic rulebook, gap analysis, Excel directive
+risk_engine.py         Compliance Risk Index, horizon, certificate health, portfolio readiness
+excel_export.py        compliance matrix workbook
+templates/             index.html shell + partials/ per tab and shared modals
+static/js/app/         core.js runtime + one module per tab
+static/css/            tailwind.src.css -> app.css (generated), custom.css (design system)
+docs/                  ARCHITECTURE_CONTRACT.md, REVIEW_REPORT.md
+```
 
----
+Design rules: no external network calls except optional surveillance scans and the optional Claude
+API; never write into the bundle directory; every dynamic string is HTML-escaped; every API error is
+JSON with a correct status code. See `docs/ARCHITECTURE_CONTRACT.md`.
 
-## Quick Start Guide
+## Data & privacy
 
-### Prerequisites
-* Python 3.10 or higher
-* pip
+* The shipped knowledge base (`countries_data.json`, alerts, portfolio) is read-only. Everything you
+  change is stored in the local data folder and merged on read, so upgrading the executable never
+  loses your work. Settings → “data folder” shows the location.
+* The surveillance ledger is hash-chained (SHA-256). Integrity is verified on every read and shown in
+  the ledger dialog. “Reset knowledge base” restores the shipped country data without touching the ledger.
+* An Anthropic API key, if provided, is stored only in that local folder and used only for the calls
+  you trigger (explain / ask). Without a key, the built-in explainer does everything offline.
 
-### Installation & Run
-1. Clone the repository:
-   `ash
-   git clone https://github.com/convey2sathish/SanDisk-GCM.git
-   cd SanDisk-GCM
-   `
-2. Install dependencies:
-   `ash
-   pip install -r requirements.txt
-   `
-3. Run the application:
-   `ash
-   python app.py
-   `
-4. Access the platform in your browser at:
-   `
-   http://localhost:5000
-   `
+## Versioning
 
-### Standalone Executable (Windows)
-To build a portable zero-install single-file executable for corporate laptops without Python:
-`ash
-pyinstaller GCM_Platform.spec --clean -y
-`
-The compiled binary will be generated in dist/GCM_Platform.exe.
+See `CHANGELOG.md`. The 1.0 defects and how they were fixed are documented in `docs/REVIEW_REPORT.md`.
+
+## License / trademarks
+
+Internal tool. SanDisk, WD_BLACK, G-DRIVE and Ultrastar are trademarks of their respective owners;
+standards names (IEC, CISPR, EN, UL, GB, CNS, KS, IS) belong to their issuing bodies.

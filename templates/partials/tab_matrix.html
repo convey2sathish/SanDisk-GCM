@@ -1,0 +1,47 @@
+<!-- Product-based Testing vs. Document Matrix -->
+<div class="card space-y-5">
+    <div class="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-4 border-b border-slate-800 pb-4">
+        <div>
+            <h2 class="text-base font-bold text-white flex items-center gap-2"><i data-lucide="layers" class="w-5 h-5 text-amber-400"></i>Product-based Testing vs. Document Compliance Matrix</h2>
+            <p class="text-xs text-slate-400 mt-1 max-w-3xl">Pick a storage or memory product. For every one of the 205 jurisdictions the engine tells you whether you need <span class="text-rose-300 font-semibold">in-country lab testing</span>, a <span class="text-amber-300 font-semibold">document / CB Scheme filing</span>, or just a <span class="text-emerald-300 font-semibold">supplier declaration</span> — plus the exact document checklist, standards and any pending regulatory transition.</p>
+        </div>
+        <div class="flex flex-col sm:flex-row items-stretch sm:items-end gap-3 w-full lg:w-auto">
+            <div class="w-full sm:w-80">
+                <label class="label text-amber-400"><i data-lucide="filter" class="w-3.5 h-3.5 inline mr-1"></i>Product classification</label>
+                <select id="matrix-product-selector" class="select !border-amber-500/60 !font-semibold"></select>
+            </div>
+            <div class="flex items-center gap-2">
+                <button type="button" id="btn-export-excel" class="btn btn-success" data-action="matrix-export-view" title="Export the current filtered view to Excel"><i data-lucide="file-spreadsheet" class="w-4 h-4"></i>Export view</button>
+                <button type="button" class="btn btn-secondary" data-action="matrix-export-all" title="Export all 205 jurisdictions for this product"><i data-lucide="download" class="w-4 h-4"></i>All 205</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- KPI counters (clickable filters) -->
+    <div class="grid grid-cols-2 sm:grid-cols-5 gap-3" id="matrix-kpi-banner">
+        <button type="button" class="kpi text-left" data-mfilter="all"><div class="kpi-label">Total jurisdictions</div><div class="kpi-value" id="kpi-total">—</div><div class="kpi-sub">Global markets</div></button>
+        <button type="button" class="kpi text-left border-rose-800/60" style="--kpi-glow: rgba(225,29,72,.22)" data-mfilter="testing"><div class="kpi-label text-rose-300 flex items-center justify-between"><span>Testing required</span><span class="w-2 h-2 rounded-full bg-rose-500 animate-pulse"></span></div><div class="kpi-value text-rose-400" id="kpi-testing">—</div><div class="kpi-sub">In-country lab testing</div></button>
+        <button type="button" class="kpi text-left border-amber-800/60" style="--kpi-glow: rgba(245,158,11,.22)" data-mfilter="document"><div class="kpi-label text-amber-300">Document required</div><div class="kpi-value text-amber-400" id="kpi-document">—</div><div class="kpi-sub">CB Scheme / accredited report</div></button>
+        <button type="button" class="kpi text-left border-emerald-800/60" style="--kpi-glow: rgba(16,185,129,.22)" data-mfilter="sdoc"><div class="kpi-label text-emerald-300">SDoC / exempt</div><div class="kpi-value text-emerald-400" id="kpi-sdoc">—</div><div class="kpi-sub">Self-declaration / customs</div></button>
+        <button type="button" class="kpi text-left border-indigo-800/60" style="--kpi-glow: rgba(99,102,241,.22)" data-mfilter="transition"><div class="kpi-label text-indigo-300">Pending transitions</div><div class="kpi-value text-indigo-400" id="kpi-transition">—</div><div class="kpi-sub">Standards changing soon</div></button>
+    </div>
+
+    <!-- Filters -->
+    <div class="grid grid-cols-1 sm:grid-cols-4 gap-3 pt-2">
+        <div><label class="label">Requirement</label><select id="matrix-type-filter" class="select"><option value="all">All requirement types</option><option value="testing">🔴 In-country testing required</option><option value="document">🟡 Document only (CB Scheme / report)</option><option value="sdoc">🟢 Supplier declaration / exempt</option><option value="local_rep">👤 Local representative mandatory</option><option value="transition">🔄 Pending standard transition</option></select></div>
+        <div><label class="label">Region</label><select id="matrix-region-filter" class="select"><option value="all">All regions</option><option value="Europe & Eurasia">Europe &amp; Eurasia</option><option value="Americas">Americas</option><option value="Asia-Pacific">Asia-Pacific</option><option value="Middle East & North Africa">Middle East &amp; North Africa</option><option value="Sub-Saharan Africa">Sub-Saharan Africa</option></select></div>
+        <div class="sm:col-span-2"><label class="label">Search country, authority, standard, document or mark</label><div class="relative"><input type="text" id="matrix-search-input" class="input pl-8" placeholder="e.g. India, BIS, PFAS, Triman, 62368, CISPR, UKCA…"><i data-lucide="search" class="w-3.5 h-3.5 text-slate-400 absolute left-2.5 top-2.5"></i></div></div>
+    </div>
+</div>
+
+<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 px-1 text-xs">
+    <div class="flex items-center gap-2 text-slate-400"><span class="w-2 h-2 rounded-full bg-amber-400"></span><span>Showing <strong id="matrix-display-count" class="text-white mono">—</strong> jurisdictions for <strong id="matrix-cat-name" class="text-slate-200"></strong></span></div>
+    <div class="flex items-center gap-3 text-[11px] text-slate-400"><span class="flex items-center gap-1"><span class="badge badge-critical">Testing</span> hardware samples to a local lab</span><span class="flex items-center gap-1"><span class="badge badge-warning">Document</span> paperwork / CB report accepted</span><span class="flex items-center gap-1"><span class="badge badge-success">SDoC</span> self-declaration</span></div>
+</div>
+
+<div class="table-wrap max-h-[720px]">
+    <table class="table">
+        <thead><tr><th>Jurisdiction</th><th>Authority</th><th>Requirement</th><th>Applicable standards</th><th>Mandatory documentation</th><th class="text-center">Local rep</th><th class="text-center">Lead time</th><th class="text-right">Details</th></tr></thead>
+        <tbody id="matrix-table-body"></tbody>
+    </table>
+</div>

@@ -50,6 +50,10 @@ def export_product_matrix_excel(category_id="external_ssd_powered", type_filter=
                 continue
             elif tf == "sdoc" and not ("supplier declaration" in req or "exempt" in req):
                 continue
+            elif tf == "local_rep" and not c.get("local_rep_required"):
+                continue
+            elif tf == "transition" and not c.get("transitions"):
+                continue
 
             if rf != "all" and rf not in c["region"].lower():
                 continue
@@ -62,6 +66,11 @@ def export_product_matrix_excel(category_id="external_ssd_powered", type_filter=
                     sq in c.get("safety_std", "").lower() or
                     sq in c.get("emc_std", "").lower() or
                     sq in c.get("env_std", "").lower() or
+                    sq in (c.get("rohs_std") or "").lower() or
+                    sq in (c.get("pfas_std") or "").lower() or
+                    sq in (c.get("packaging_std") or "").lower() or
+                    sq in (c.get("epr_std") or "").lower() or
+                    sq in (c.get("notes") or "").lower() or
                     any(sq in d.lower() for d in c.get("required_documents", [])) or
                     any(sq in m.lower() for m in c.get("marks", []))
                 )
@@ -98,17 +107,17 @@ def export_product_matrix_excel(category_id="external_ssd_powered", type_filter=
     header_border = Border(left=thin_border_side, right=thin_border_side, top=thin_border_side, bottom=Side(border_style="medium", color="0F172A"))
 
     # 1. Main Title Banner (Row 1)
-    ws.merge_cells("A1:N1")
+    ws.merge_cells("A1:R1")
     title_cell = ws["A1"]
-    title_cell.value = "GLOBAL COMPLIANCE MANAGEMENT (GCM) - PRODUCT COMPLIANCE & TESTING MATRIX"
+    title_cell.value = "GCM PLATFORM - PRODUCT COMPLIANCE & TESTING MATRIX (SAFETY | EMC | ENVIRONMENTAL | CYBER)"
     title_cell.font = Font(name="Calibri", size=13, bold=True, color="FFFFFF")
     title_cell.fill = navy_fill
     title_cell.alignment = Alignment(horizontal="left", vertical="center", indent=1)
     ws.row_dimensions[1].height = 34
 
     # 2. Metadata Banner (Row 2)
-    now_str = datetime.datetime.now().strftime("%Y-%m-%d %H:%M UTC")
-    ws.merge_cells("A2:N2")
+    now_str = datetime.datetime.now().strftime("%Y-%m-%d %H:%M (local)")
+    ws.merge_cells("A2:R2")
     sub_cell = ws["A2"]
     sub_cell.value = f"Product Classification: {cat_name.upper()}   |   Active Scope: {filter_desc}   |   Export Date: {now_str}"
     sub_cell.font = Font(name="Calibri", size=10, italic=True, color="334155")
@@ -117,7 +126,7 @@ def export_product_matrix_excel(category_id="external_ssd_powered", type_filter=
     ws.row_dimensions[2].height = 20
 
     # 3. Category Executive Summary Counts (Row 3)
-    ws.merge_cells("A3:N3")
+    ws.merge_cells("A3:R3")
     stats_cell = ws["A3"]
     stats_cell.value = (
         f"Category Metrics: {len(filtered_countries)} jurisdictions displayed.  "
@@ -149,7 +158,11 @@ def export_product_matrix_excel(category_id="external_ssd_powered", type_filter=
         "Est. Lead Time (Wks)",
         "Compliance Marks",
         "Regulatory Notes & Scope",
-        "Live Surveillance Source"
+        "Live Surveillance Source",
+        "PFAS / Chemical Regime",
+        "Packaging & Plastics Mandate",
+        "EPR / WEEE Registry",
+        "Pending Standard Transition"
     ]
 
     ws.row_dimensions[5].height = 28
@@ -266,6 +279,21 @@ def export_product_matrix_excel(category_id="external_ssd_powered", type_filter=
         surv_cell.font = Font(name="Calibri", size=9, color="047857" if c.get("last_surveilled_date") else "64748B")
         surv_cell.border = cell_border
 
+        # Col 15-17: environmental sub-pillars
+        for col_num, key in ((15, "pfas_std"), (16, "packaging_std"), (17, "epr_std")):
+            cell = ws.cell(row=row_idx, column=col_num, value=c.get(key, ""))
+            cell.alignment = Alignment(horizontal="left", vertical="center", wrap_text=True)
+            cell.font = Font(name="Calibri", size=9)
+            cell.border = cell_border
+
+        # Col 18: pending standard transition(s) recorded by surveillance
+        transitions = c.get("transitions") or []
+        tr_txt = "; ".join(f"{t.get('pillar')}: {t.get('from') or 'current'} -> {t.get('to')} by {t.get('deadline') or 'TBD'}" for t in transitions[-3:])
+        tr_cell = ws.cell(row=row_idx, column=18, value=tr_txt or "None recorded")
+        tr_cell.alignment = Alignment(horizontal="left", vertical="center", wrap_text=True)
+        tr_cell.font = Font(name="Calibri", size=9, bold=bool(transitions), color="4338CA" if transitions else "64748B")
+        tr_cell.border = cell_border
+
         row_idx += 1
 
     # Freeze header panes (Freeze at row 6, col 1)
@@ -273,7 +301,7 @@ def export_product_matrix_excel(category_id="external_ssd_powered", type_filter=
 
     # Auto-filter on data table headers
     if row_idx > 6:
-        ws.auto_filter.ref = f"A5:N{row_idx-1}"
+        ws.auto_filter.ref = f"A5:R{row_idx-1}"
 
     # Optimized Column Widths
     col_widths = {
@@ -290,7 +318,11 @@ def export_product_matrix_excel(category_id="external_ssd_powered", type_filter=
         11: 16,  # Lead Time
         12: 20,  # Marks
         13: 42,  # Notes
-        14: 36   # Live Surveillance Source
+        14: 36,  # Live Surveillance Source
+        15: 34,  # PFAS
+        16: 36,  # Packaging
+        17: 32,  # EPR
+        18: 40   # Transition
     }
     for col_num, width in col_widths.items():
         col_letter = get_column_letter(col_num)

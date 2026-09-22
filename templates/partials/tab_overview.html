@@ -1,0 +1,61 @@
+<!-- Overview: executive command centre -->
+<div class="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-3">
+    <div>
+        <h1 class="text-xl font-bold text-white tracking-tight">Compliance Command Centre</h1>
+        <p class="text-xs text-slate-400 mt-1">Live status of market access, regulatory change and portfolio risk for <span id="ov-company" class="text-slate-200 font-semibold">SanDisk</span> storage &amp; memory products. Updated <span id="ov-updated" class="mono text-slate-300">—</span>.</p>
+    </div>
+    <div class="flex flex-wrap items-center gap-2 no-print">
+        <button type="button" class="btn btn-secondary" data-action="tab" data-arg="matrix"><i data-lucide="layers" class="w-4 h-4 text-amber-400"></i>Open matrix</button>
+        <button type="button" class="btn btn-secondary" data-action="matrix-export"><i data-lucide="file-spreadsheet" class="w-4 h-4 text-emerald-400"></i>Export matrix (.xlsx)</button>
+        <button type="button" class="btn btn-primary" data-action="tab" data-arg="alerts"><i data-lucide="bell" class="w-4 h-4"></i>Review alerts</button>
+    </div>
+</div>
+
+<!-- KPI row -->
+<div id="ov-kpis" class="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-6 gap-3">
+    <div class="kpi" style="--kpi-glow: rgba(56,189,248,.2)"><div class="kpi-label flex items-center justify-between"><span>Jurisdictions</span><i data-lucide="globe" class="w-4 h-4 text-sky-400"></i></div><div class="kpi-value" id="ov-countries">—</div><div class="kpi-sub"><span id="ov-in-country">—</span> require in-country testing</div></div>
+    <div class="kpi" style="--kpi-glow: rgba(225,29,72,.22)"><div class="kpi-label flex items-center justify-between"><span>Active alerts</span><i data-lucide="bell-ring" class="w-4 h-4 text-rose-400"></i></div><div class="kpi-value" id="ov-alerts">—</div><div class="kpi-sub"><span class="text-rose-300 font-semibold" id="ov-critical">—</span> critical · <span id="ov-warning">—</span> warning</div></div>
+    <div class="kpi" style="--kpi-glow: rgba(99,102,241,.22)"><div class="kpi-label flex items-center justify-between"><span>Compliance Risk Index</span><i data-lucide="gauge" class="w-4 h-4 text-indigo-400"></i></div><div class="kpi-value" id="ov-risk">—</div><div class="kpi-sub" id="ov-risk-sub">Loading…</div></div>
+    <div class="kpi" style="--kpi-glow: rgba(245,158,11,.22)"><div class="kpi-label flex items-center justify-between"><span>Due in 90 days</span><i data-lucide="calendar-clock" class="w-4 h-4 text-amber-400"></i></div><div class="kpi-value" id="ov-due90">—</div><div class="kpi-sub"><span id="ov-overdue" class="text-rose-300 font-semibold">—</span> overdue items</div></div>
+    <div class="kpi" style="--kpi-glow: rgba(16,185,129,.2)"><div class="kpi-label flex items-center justify-between"><span>Portfolio</span><i data-lucide="hard-drive" class="w-4 h-4 text-emerald-400"></i></div><div class="kpi-value" id="ov-products">—</div><div class="kpi-sub"><span id="ov-certs">—</span> certificates · <span id="ov-expiring" class="text-amber-300">—</span> expiring</div></div>
+    <div class="kpi" style="--kpi-glow: rgba(168,85,247,.2)"><div class="kpi-label flex items-center justify-between"><span>Open actions</span><i data-lucide="check-square" class="w-4 h-4 text-purple-400"></i></div><div class="kpi-value" id="ov-actions">—</div><div class="kpi-sub">Triage: <span id="ov-triage">—</span></div></div>
+</div>
+
+<div class="grid grid-cols-1 xl:grid-cols-3 gap-5">
+    <!-- Needs attention -->
+    <div class="card xl:col-span-2">
+        <div class="card-header"><div class="card-title"><i data-lucide="alert-triangle" class="w-4 h-4 text-rose-400"></i>Needs attention now</div><button type="button" class="btn btn-ghost btn-sm" data-action="tab" data-arg="horizon">Full horizon <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i></button></div>
+        <div id="ov-attention" class="space-y-2"></div>
+    </div>
+    <!-- Pillars & regions -->
+    <div class="space-y-5">
+        <div class="card">
+            <div class="card-header"><div class="card-title"><i data-lucide="pie-chart" class="w-4 h-4 text-sky-400"></i>Alert pressure by pillar</div></div>
+            <div id="ov-pillars" class="space-y-2.5"></div>
+        </div>
+        <div class="card">
+            <div class="card-header"><div class="card-title"><i data-lucide="map" class="w-4 h-4 text-cyan-400"></i>Regional coverage</div><span class="text-[11px] text-slate-400" id="ov-regions-total"></span></div>
+            <div id="ov-regions" class="space-y-2"></div>
+        </div>
+    </div>
+</div>
+
+<div class="grid grid-cols-1 xl:grid-cols-3 gap-5">
+    <!-- Recent intelligence -->
+    <div class="card xl:col-span-2">
+        <div class="card-header"><div class="card-title"><i data-lucide="rss" class="w-4 h-4 text-rose-400"></i>Latest regulatory intelligence</div><button type="button" class="btn btn-ghost btn-sm" data-action="tab" data-arg="alerts">View all <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i></button></div>
+        <div id="ov-recent" class="grid grid-cols-1 md:grid-cols-2 gap-3"></div>
+    </div>
+    <!-- Actions -->
+    <div class="card">
+        <div class="card-header"><div class="card-title"><i data-lucide="check-square" class="w-4 h-4 text-purple-400"></i>Action items</div><div class="flex items-center gap-2"><select id="ov-actions-filter" class="select !w-auto !py-1 !text-[11px]"><option value="open">Open</option><option value="all">All</option><option value="Blocked">Blocked</option><option value="Done">Done</option></select><button type="button" class="btn btn-secondary btn-sm" data-action="new-action"><i data-lucide="plus" class="w-3.5 h-3.5"></i>New</button></div></div>
+        <div id="ov-actions-list" class="space-y-2 max-h-[520px] overflow-y-auto scrollbar pr-1"></div>
+    </div>
+</div>
+
+<!-- Quick access -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-3">
+    <button type="button" class="card text-left hover:border-amber-500/50 transition" data-action="tab" data-arg="matrix"><div class="flex items-center gap-3"><div class="w-10 h-10 rounded-xl bg-amber-950/60 border border-amber-800/60 flex items-center justify-center"><i data-lucide="layers" class="w-5 h-5 text-amber-400"></i></div><div><div class="text-xs font-bold text-white">Testing vs. Document Matrix</div><div class="text-[11px] text-slate-400">Which of 205 markets need in-country testing, documents or a self-declaration for each product</div></div></div></button>
+    <button type="button" class="card text-left hover:border-purple-500/50 transition" data-action="tab" data-arg="docaudit"><div class="flex items-center gap-3"><div class="w-10 h-10 rounded-xl bg-purple-950/60 border border-purple-800/60 flex items-center justify-center"><i data-lucide="file-search-2" class="w-5 h-5 text-purple-400"></i></div><div><div class="text-xs font-bold text-white">Document Impact Audit</div><div class="text-[11px] text-slate-400">Scan a folder of reports &amp; declarations; get a health score, re-test list and gap analysis</div></div></div></button>
+    <button type="button" class="card text-left hover:border-indigo-500/50 transition" data-action="tab" data-arg="horizon"><div class="flex items-center gap-3"><div class="w-10 h-10 rounded-xl bg-indigo-950/60 border border-indigo-800/60 flex items-center justify-center"><i data-lucide="radar" class="w-5 h-5 text-indigo-400"></i></div><div><div class="text-xs font-bold text-white">Regulatory Horizon &amp; Risk</div><div class="text-[11px] text-slate-400">Every deadline and certificate expiry on one timeline, with a risk index per product and region</div></div></div></button>
+</div>

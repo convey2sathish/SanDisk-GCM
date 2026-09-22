@@ -1,0 +1,16 @@
+/* Tailwind v4 source. Build with build_assets.bat -> static/css/app.css (committed, served offline). */
+@import "../../tools/node_modules/tailwindcss/index.css";
+@source "../../templates";
+@source "../js/app";
+@source "./safelist.txt";
+@custom-variant dark (&:where(.dark, .dark *));
+@theme {
+  --color-brand-50: #f0f7ff;
+  --color-brand-100: #e0effe;
+  --color-brand-500: #0284c7;
+  --color-brand-600: #0369a1;
+  --color-brand-700: #075985;
+  --color-brand-900: #0c4a6e;
+  --color-sandisk-red: #e11d48;
+  --color-sandisk-darkred: #be123c;
+}

@@ -1,0 +1,18 @@
+<div class="border-b border-slate-800 bg-slate-950/60 px-4 py-2">
+    <div class="max-w-[1600px] mx-auto flex flex-wrap items-center justify-between gap-3 text-xs">
+        <div class="flex items-center gap-3 min-w-0">
+            <span class="relative flex h-3 w-3 shrink-0"><span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span><span class="relative inline-flex rounded-full h-3 w-3 bg-emerald-500"></span></span>
+            <span class="font-bold text-slate-200 whitespace-nowrap">Regulatory Surveillance</span>
+            <span id="surv-status-badge" class="badge badge-success">Listening</span>
+            <span class="hidden lg:inline text-slate-500">•</span>
+            <span class="hidden lg:inline text-[11px] text-slate-400 truncate">Monitoring <strong class="text-slate-200" id="surv-sources-count">12</strong> global &amp; regional gateways across Safety, EMC &amp; Environmental for all 205 jurisdictions</span>
+            <span class="hidden sm:inline text-slate-500">•</span>
+            <span class="text-[11px] text-slate-400 whitespace-nowrap">Last sync <span id="surv-last-scan" class="text-slate-200 mono">—</span></span>
+        </div>
+        <div class="flex items-center gap-2">
+            <button type="button" id="btn-surv-scan" data-action="surveillance-scan" class="btn btn-success btn-sm"><i data-lucide="radar" class="w-3.5 h-3.5"></i><span>Scan feeds now</span></button>
+            <button type="button" data-action="surveillance-log" class="btn btn-secondary btn-sm"><i data-lucide="scroll-text" class="w-3.5 h-3.5 text-emerald-400"></i><span>Ledger</span></button>
+            <button type="button" data-action="surveillance-simulate" class="btn btn-secondary btn-sm text-amber-300 border-amber-900/60"><i data-lucide="flask-conical" class="w-3.5 h-3.5"></i><span>Simulate notice</span></button>
+        </div>
+    </div>
+</div>

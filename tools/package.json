@@ -1,0 +1,14 @@
+{
+  "name": "gcm-platform-assets",
+  "private": true,
+  "version": "2.0.0",
+  "description": "Build tooling for the GCM Platform offline stylesheet (Tailwind v4).",
+  "scripts": {
+    "build:css": "tailwindcss -i ../static/css/tailwind.src.css -o ../static/css/app.css --minify",
+    "watch:css": "tailwindcss -i ../static/css/tailwind.src.css -o ../static/css/app.css --watch"
+  },
+  "devDependencies": {
+    "@tailwindcss/cli": "^4.1.0",
+    "tailwindcss": "^4.1.0"
+  }
+}

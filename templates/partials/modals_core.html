@@ -1,0 +1,190 @@
+<!-- Command palette -->
+<div id="modal-palette" class="modal hidden items-start pt-[10vh]" aria-hidden="true" role="dialog" aria-label="Search everything">
+    <div class="modal-panel max-w-2xl">
+        <div class="flex items-center gap-3 px-4 py-3 border-b border-slate-800">
+            <i data-lucide="search" class="w-5 h-5 text-sky-400"></i>
+            <input type="text" class="flex-1 bg-transparent outline-none text-sm text-white placeholder:text-slate-500" placeholder="Search countries, standards, alerts, SKUs, actions… or type a command" autocomplete="off" spellcheck="false">
+            <span class="kbd">Esc</span>
+        </div>
+        <div id="palette-results" class="p-2 max-h-[60vh] overflow-y-auto scrollbar space-y-0.5"></div>
+        <div class="px-4 py-2 border-t border-slate-800 text-[10px] text-slate-500 flex gap-4"><span><span class="kbd">↑↓</span> navigate</span><span><span class="kbd">Enter</span> open</span><span><span class="kbd">Alt 1-7</span> switch tab</span></div>
+    </div>
+</div>
+
+<!-- Confirm -->
+<div id="modal-confirm" class="modal hidden" aria-hidden="true" role="alertdialog">
+    <div class="modal-panel max-w-md">
+        <div class="modal-head"><h3 class="text-sm font-bold text-white" data-role="title">Please confirm</h3></div>
+        <div class="modal-body text-xs text-slate-300 leading-relaxed" data-role="message"></div>
+        <div class="modal-foot"><button type="button" class="btn btn-secondary" data-role="cancel">Cancel</button><button type="button" class="btn btn-primary" data-role="ok">Confirm</button></div>
+    </div>
+</div>
+
+<!-- Settings -->
+<div id="modal-settings" class="modal hidden" aria-hidden="true" role="dialog" aria-label="Settings">
+    <div class="modal-panel max-w-2xl">
+        <div class="modal-head">
+            <div class="flex items-center gap-3"><div class="w-9 h-9 rounded-xl bg-slate-800 border border-slate-700 flex items-center justify-center"><i data-lucide="settings" class="w-4 h-4 text-slate-300"></i></div><div><h3 class="text-sm font-bold text-white">Platform Settings</h3><p class="text-[11px] text-slate-400" data-role="version"></p></div></div>
+            <button type="button" data-action="close-modal" data-arg="modal-settings" class="btn btn-ghost btn-sm"><i data-lucide="x" class="w-4 h-4"></i></button>
+        </div>
+        <div class="modal-body space-y-5 text-xs">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div><label class="label">Company / brand name</label><input name="company_name" class="input" placeholder="SanDisk"></div>
+                <div><label class="label">Auto-scan regulatory feeds every (hours, 0 = manual)</label><input name="surveillance_auto_scan_hours" type="number" min="0" max="168" class="input"></div>
+            </div>
+            <div class="card !p-4 space-y-3 border-indigo-800/60">
+                <div class="section-title text-indigo-300"><i data-lucide="brain" class="w-3.5 h-3.5"></i> AI explanation engine</div>
+                <p class="text-slate-400 leading-relaxed">The platform always includes a built-in, deterministic explainer that turns every alert into plain-English guidance. Add an Anthropic API key to upgrade explanations and follow-up answers with Claude. The key is stored only in your local data folder and never leaves this machine except to call the Anthropic API.</p>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div><label class="label">Anthropic API key</label><input name="anthropic_api_key" type="password" class="input mono" autocomplete="off"></div>
+                    <div><label class="label">Model</label><select name="ai_model" class="select"><option value="claude-opus-5">Claude Opus 5 (recommended)</option><option value="claude-sonnet-5">Claude Sonnet 5 (faster)</option><option value="claude-fable-5-1">Claude Fable 5.1 (most capable)</option></select></div>
+                </div>
+                <div class="flex items-center gap-6">
+                    <label class="flex items-center gap-2 text-slate-300"><input type="checkbox" name="ai_enabled" class="checkbox"> Use Claude when a key is configured</label>
+                    <label class="flex items-center gap-2 text-slate-400"><input type="checkbox" name="clear_key" class="checkbox"> Remove saved key</label>
+                </div>
+            </div>
+            <div class="card !p-4 space-y-3">
+                <div class="section-title"><i data-lucide="database" class="w-3.5 h-3.5"></i> Data &amp; maintenance</div>
+                <div class="text-[11px] text-slate-400">Data folder (working copy of the knowledge base, ledger, actions, settings): <span class="mono text-slate-300 break-all" data-role="data-dir"></span></div>
+                <div class="flex flex-wrap gap-2">
+                    <button type="button" class="btn btn-secondary btn-sm" data-action="backup-download"><i data-lucide="archive" class="w-3.5 h-3.5 text-sky-400"></i>Download full backup (.zip)</button>
+                    <button type="button" class="btn btn-secondary btn-sm text-amber-300 border-amber-900/60" data-action="reset-knowledge-base"><i data-lucide="rotate-ccw" class="w-3.5 h-3.5"></i>Reset country knowledge base to shipped seed</button>
+                </div>
+                <p class="text-[10px] text-slate-500">Reset removes simulated / detected standard transitions from the 205 country records. Alerts, the ledger, actions, products and certificates are kept.</p>
+            </div>
+        </div>
+        <div class="modal-foot"><button type="button" data-action="close-modal" data-arg="modal-settings" class="btn btn-secondary">Cancel</button><button type="button" data-action="settings-save" class="btn btn-primary"><i data-lucide="save" class="w-4 h-4"></i>Save settings</button></div>
+    </div>
+</div>
+
+<!-- New action item -->
+<div id="modal-action" class="modal hidden" aria-hidden="true" role="dialog" aria-label="New action item">
+    <div class="modal-panel max-w-lg">
+        <div class="modal-head"><div><h3 class="text-sm font-bold text-white">New Action Item</h3><p class="text-[11px] text-slate-400">Linked to: <span data-role="linked" class="mono text-slate-300">Not linked</span></p></div><button type="button" data-action="close-modal" data-arg="modal-action" class="btn btn-ghost btn-sm"><i data-lucide="x" class="w-4 h-4"></i></button></div>
+        <div class="modal-body space-y-3 text-xs">
+            <div><label class="label">Title</label><input name="title" class="input" placeholder="e.g. Book UL India slot for G-DRIVE adapter re-test" autofocus></div>
+            <div class="grid grid-cols-3 gap-3">
+                <div><label class="label">Priority</label><select name="priority" class="select"><option>Critical</option><option selected>High</option><option>Medium</option><option>Low</option></select></div>
+                <div><label class="label">Owner</label><input name="owner" class="input" placeholder="Name / team"></div>
+                <div><label class="label">Due date</label><input name="due_date" type="date" class="input"></div>
+            </div>
+            <div><label class="label">Notes</label><textarea name="notes" rows="3" class="textarea" placeholder="Context, evidence needed, lab, cost…"></textarea></div>
+        </div>
+        <div class="modal-foot"><button type="button" data-action="close-modal" data-arg="modal-action" class="btn btn-secondary">Cancel</button><button type="button" data-action="action-submit" class="btn btn-primary"><i data-lucide="check" class="w-4 h-4"></i>Create action</button></div>
+    </div>
+</div>
+
+<!-- Help -->
+<div id="modal-help" class="modal hidden" aria-hidden="true" role="dialog" aria-label="Help">
+    <div class="modal-panel max-w-3xl">
+        <div class="modal-head"><div class="flex items-center gap-3"><div class="w-9 h-9 rounded-xl bg-gradient-to-br from-rose-600 to-red-700 flex items-center justify-center"><i data-lucide="shield-check" class="w-4 h-4 text-white"></i></div><div><h3 class="text-sm font-bold text-white">Welcome to the GCM Platform</h3><p class="text-[11px] text-slate-400">Your compliance command centre for 205 markets. Everything runs locally and offline.</p></div></div><button type="button" data-action="close-modal" data-arg="modal-help" class="btn btn-ghost btn-sm"><i data-lucide="x" class="w-4 h-4"></i></button></div>
+        <div class="modal-body grid grid-cols-1 md:grid-cols-2 gap-4 text-xs">
+            <div class="space-y-3">
+                <div class="section-title">What you can do</div>
+                <ul class="space-y-2 text-slate-300">
+                    <li class="flex gap-2"><i data-lucide="layers" class="w-4 h-4 text-amber-400 shrink-0"></i><span><strong class="text-white">Matrix</strong> – pick a product, see which of 205 markets need in-country testing, documents or a self-declaration, and export it to Excel.</span></li>
+                    <li class="flex gap-2"><i data-lucide="globe-2" class="w-4 h-4 text-cyan-400 shrink-0"></i><span><strong class="text-white">Map</strong> – heatmaps for readiness, testing barriers, lead time, environmental rules and active alerts; click any country for its dossier.</span></li>
+                    <li class="flex gap-2"><i data-lucide="bell" class="w-4 h-4 text-rose-400 shrink-0"></i><span><strong class="text-white">Alerts</strong> – every regulation change explained in plain English, with who is affected, what to do and by when. Triage them, ask follow-up questions, turn them into actions.</span></li>
+                    <li class="flex gap-2"><i data-lucide="radar" class="w-4 h-4 text-indigo-400 shrink-0"></i><span><strong class="text-white">Horizon &amp; Risk</strong> – a single timeline of every deadline and certificate expiry, and a Compliance Risk Index per product and region.</span></li>
+                    <li class="flex gap-2"><i data-lucide="hard-drive" class="w-4 h-4 text-emerald-400 shrink-0"></i><span><strong class="text-white">Portfolio</strong> – products, certificates and market readiness in one place.</span></li>
+                    <li class="flex gap-2"><i data-lucide="file-search-2" class="w-4 h-4 text-purple-400 shrink-0"></i><span><strong class="text-white">Document Audit</strong> – point at a folder of test reports and declarations; get a health score, what must be re-tested or re-signed, gaps per market and an Excel directive.</span></li>
+                </ul>
+            </div>
+            <div class="space-y-3">
+                <div class="section-title">Keyboard shortcuts</div>
+                <div class="grid grid-cols-2 gap-2 text-slate-300">
+                    <div><span class="kbd">Ctrl K</span> search everything</div><div><span class="kbd">Alt 1…7</span> switch tabs</div>
+                    <div><span class="kbd">Esc</span> close dialogs</div><div><span class="kbd">?</span> this help</div>
+                </div>
+                <div class="section-title mt-4">Good to know</div>
+                <ul class="space-y-1.5 text-slate-400 list-disc pl-4">
+                    <li>The ledger of regulatory changes is tamper-evident (hash-chained). Its verification status is shown in the ledger dialog.</li>
+                    <li>All your changes are saved in the local data folder shown in Settings; the shipped knowledge base is never modified.</li>
+                    <li>Explanations work without internet. Adding an Anthropic API key in Settings enables Claude-enhanced briefs.</li>
+                </ul>
+            </div>
+        </div>
+        <div class="modal-foot"><button type="button" data-action="close-modal" data-arg="modal-help" class="btn btn-primary">Let's go</button></div>
+    </div>
+</div>
+
+<!-- Surveillance ledger -->
+<div id="modal-surveillance-log" class="modal hidden" aria-hidden="true" role="dialog" aria-label="Surveillance ledger">
+    <div class="modal-panel max-w-5xl">
+        <div class="modal-head">
+            <div class="flex items-center gap-3"><div class="w-9 h-9 rounded-xl bg-emerald-950 border border-emerald-800 flex items-center justify-center"><i data-lucide="scroll-text" class="w-4 h-4 text-emerald-400"></i></div><div><h3 class="text-sm font-bold text-white">Regulatory Surveillance Ledger</h3><p class="text-[11px] text-slate-400">Tamper-evident record of every regulatory change detected, simulated or applied to the knowledge base</p></div></div>
+            <div class="flex items-center gap-2"><span id="ledger-integrity" class="badge badge-neutral">Verifying…</span><button type="button" data-action="close-modal" data-arg="modal-surveillance-log" class="btn btn-ghost btn-sm"><i data-lucide="x" class="w-4 h-4"></i></button></div>
+        </div>
+        <div class="modal-body p-0">
+            <div class="table-wrap rounded-none border-0"><table class="table"><thead><tr><th>When</th><th>Jurisdiction</th><th>Authority &amp; source</th><th>Pillar</th><th>Standard &amp; deadline</th><th>Summary</th><th>Hash</th></tr></thead><tbody id="surveillance-log-tbody"></tbody></table></div>
+        </div>
+        <div class="modal-foot justify-between text-[11px] text-slate-400"><span>Sources: WTO TBT ePing · US Federal Register · EUR-Lex · EAEU · COPANT · BIS · RRA · BSMI · SAMR · GSO · ARSO</span><button type="button" data-action="close-modal" data-arg="modal-surveillance-log" class="btn btn-secondary btn-sm">Close</button></div>
+    </div>
+</div>
+
+<!-- Simulate gazette notice -->
+<div id="modal-simulate-notice" class="modal hidden" aria-hidden="true" role="dialog" aria-label="Simulate gazette notice">
+    <div class="modal-panel max-w-2xl">
+        <div class="modal-head">
+            <div class="flex items-center gap-3"><div class="w-9 h-9 rounded-xl bg-amber-500/20 border border-amber-500/40 flex items-center justify-center"><i data-lucide="flask-conical" class="w-4 h-4 text-amber-400"></i></div><div><h3 class="text-sm font-bold text-white">Simulate a Gazette Notice</h3><p class="text-[11px] text-slate-400">Test how the platform reacts to a new regulation: updates the matrix, creates an alert, computes product impact and writes to the ledger.</p></div></div>
+            <button type="button" data-action="close-modal" data-arg="modal-simulate-notice" class="btn btn-ghost btn-sm"><i data-lucide="x" class="w-4 h-4"></i></button>
+        </div>
+        <form id="sim-form" class="modal-body space-y-3 text-xs">
+            <div class="grid grid-cols-2 sm:grid-cols-4 gap-2" id="sim-presets">
+                <button type="button" class="card !p-2.5 text-left hover:border-rose-500/50" data-preset="safety_62368"><div class="text-rose-400 font-semibold text-[11px] flex items-center gap-1"><i data-lucide="shield" class="w-3 h-3"></i>Safety</div><div class="text-[10px] text-slate-400 truncate">IEC 62368-1 Ed. 4</div></button>
+                <button type="button" class="card !p-2.5 text-left hover:border-sky-500/50" data-preset="emc_cispr32"><div class="text-sky-400 font-semibold text-[11px] flex items-center gap-1"><i data-lucide="radio" class="w-3 h-3"></i>EMC</div><div class="text-[10px] text-slate-400 truncate">CISPR 32 Class B</div></button>
+                <button type="button" class="card !p-2.5 text-left hover:border-emerald-500/50" data-preset="env_rohs"><div class="text-emerald-400 font-semibold text-[11px] flex items-center gap-1"><i data-lucide="leaf" class="w-3 h-3"></i>Environmental</div><div class="text-[10px] text-slate-400 truncate">RoHS 4 / PFAS</div></button>
+                <button type="button" class="card !p-2.5 text-left hover:border-purple-500/50" data-preset="tri_pillar"><div class="text-purple-400 font-semibold text-[11px] flex items-center gap-1"><i data-lucide="refresh-cw" class="w-3 h-3"></i>All pillars</div><div class="text-[10px] text-slate-400 truncate">Safety + EMC + Env</div></button>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+                <div><label class="label">Target jurisdiction</label><select id="sim-country" class="select"><option value="ALL">🌍 All 205 countries (worldwide harmonisation)</option></select></div>
+                <div><label class="label">Regulatory pillar</label><select id="sim-pillar" class="select"><option value="Safety">Electrical Safety</option><option value="EMC">EMC &amp; Radio</option><option value="Environmental">Environmental (RoHS / REACH / PFAS / Packaging)</option><option value="All">All three pillars</option></select></div>
+                <div><label class="label">Regulatory authority</label><input id="sim-authority" class="input" value="Global Harmonization Council (WTO TBT / International Clearinghouse)" required></div>
+                <div><label class="label">New / mandated standard</label><input id="sim-standard" class="input" value="IEC 62368-1:2023 (Edition 4.0)" required></div>
+                <div><label class="label">Mandatory enforcement deadline</label><input id="sim-deadline" type="date" class="input" value="2028-12-31" required></div>
+                <div><label class="label">Affected product categories</label><select id="sim-categories" class="select" multiple size="4"></select></div>
+            </div>
+            <div><label class="label">Executive notice summary</label><textarea id="sim-summary" rows="2" class="textarea" required>Worldwide Harmonization Notice: Mandating transition to IEC 62368-1 4th Edition covering updated touch temperature thresholds, external power adapter test limits, and fire enclosure barriers across all market access jurisdictions.</textarea></div>
+            <div class="flex items-center justify-between pt-2 border-t border-slate-800">
+                <span id="sim-scope-status" class="text-[11px] text-slate-400 flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>Target: all 205 countries</span>
+                <div class="flex gap-2"><button type="button" data-action="close-modal" data-arg="modal-simulate-notice" class="btn btn-secondary">Cancel</button><button type="submit" id="btn-sim-submit" class="btn btn-success"><i data-lucide="zap" class="w-4 h-4"></i><span>Ingest notice</span></button></div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- Add alert -->
+<div id="modal-add-alert" class="modal hidden" aria-hidden="true" role="dialog" aria-label="Publish alert">
+    <div class="modal-panel max-w-xl">
+        <div class="modal-head"><div><h3 class="text-sm font-bold text-white">Publish a Regulatory Alert</h3><p class="text-[11px] text-slate-400">Missing fields are enriched automatically (timeline, checklist, impacted products).</p></div><button type="button" data-action="close-modal" data-arg="modal-add-alert" class="btn btn-ghost btn-sm"><i data-lucide="x" class="w-4 h-4"></i></button></div>
+        <form id="add-alert-form" class="modal-body space-y-3 text-xs">
+            <div><label class="label">Title</label><input name="title" class="input" placeholder="e.g. Mexico NOM-019 update for external power supplies" required></div>
+            <div class="grid grid-cols-2 gap-3">
+                <div><label class="label">Country / jurisdiction</label><input name="country" class="input" list="country-datalist" placeholder="Start typing…"></div>
+                <div><label class="label">Region</label><select name="region" class="select"><option>Global</option><option>Europe &amp; Eurasia</option><option>Americas</option><option>Asia-Pacific</option><option>Middle East &amp; North Africa</option><option>Sub-Saharan Africa</option></select></div>
+                <div><label class="label">Severity</label><select name="severity" class="select"><option>Critical</option><option selected>Warning</option><option>Info</option></select></div>
+                <div><label class="label">Pillar</label><select name="pillar" class="select"><option>Safety</option><option>EMC</option><option>Environmental</option><option>Cyber</option><option>All</option></select></div>
+                <div><label class="label">Standard reference</label><input name="standard" class="input" placeholder="e.g. IEC 62368-1:2023"></div>
+                <div><label class="label">Effective / enforcement date</label><input name="effective_date" type="date" class="input"></div>
+            </div>
+            <div><label class="label">Affected categories</label><select name="affected_categories" class="select" multiple size="4"></select><p class="text-[10px] text-slate-500 mt-1">Leave empty to apply to all storage categories.</p></div>
+            <div><label class="label">Summary</label><textarea name="summary" rows="3" class="textarea" placeholder="What changed, in one or two sentences" required></textarea></div>
+            <div><label class="label">Required action</label><input name="action_required" class="input" placeholder="What engineering / compliance must do"></div>
+            <div><label class="label">Official source URL (optional)</label><input name="source_url" class="input" placeholder="https://…"></div>
+            <div class="flex justify-end gap-2 pt-2 border-t border-slate-800"><button type="button" data-action="close-modal" data-arg="modal-add-alert" class="btn btn-secondary">Cancel</button><button type="submit" class="btn btn-primary"><i data-lucide="megaphone" class="w-4 h-4"></i>Publish alert</button></div>
+        </form>
+        <datalist id="country-datalist"></datalist>
+    </div>
+</div>
+
+<!-- Country fact sheet (opened from matrix / portfolio) -->
+<div id="modal-country-factsheet" class="modal hidden" aria-hidden="true" role="dialog" aria-label="Country fact sheet">
+    <div class="modal-panel max-w-4xl">
+        <div class="modal-head">
+            <div class="flex items-center gap-3"><span id="factsheet-flag" class="text-3xl"></span><div><h3 id="factsheet-country-name" class="text-sm font-bold text-white">Country</h3><p id="factsheet-country-region" class="text-[11px] text-slate-400"></p></div></div>
+            <div class="flex items-center gap-2"><button type="button" id="factsheet-open-map" class="btn btn-secondary btn-sm"><i data-lucide="globe-2" class="w-3.5 h-3.5"></i>Open on map</button><button type="button" data-action="close-modal" data-arg="modal-country-factsheet" class="btn btn-ghost btn-sm"><i data-lucide="x" class="w-4 h-4"></i></button></div>
+        </div>
+        <div class="modal-body space-y-5 text-xs" id="factsheet-body"></div>
+    </div>
+</div>
