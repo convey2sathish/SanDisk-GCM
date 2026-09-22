@@ -1493,6 +1493,213 @@
         </div>
     </div>
 
+    
+    <!-- Modal: AI Regulatory Expert Advisor with Live Web Search & Interactive Q&A -->
+    <div id="modal-expert-advisor" class="fixed inset-0 z-50 hidden bg-slate-950/85 backdrop-blur-md flex items-center justify-center p-3 sm:p-4">
+        <div class="bg-slate-900 border border-indigo-700/60 rounded-2xl max-w-4xl w-full max-h-[92vh] flex flex-col shadow-2xl overflow-hidden">
+            
+            <!-- Header -->
+            <div class="px-6 py-4 border-b border-slate-800 bg-gradient-to-r from-slate-900 via-indigo-950/60 to-purple-950/40 flex items-center justify-between">
+                <div class="flex items-center space-x-3">
+                    <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center text-white shadow-lg shadow-indigo-500/20">
+                        <i data-lucide="brain" class="w-5 h-5"></i>
+                    </div>
+                    <div>
+                        <div class="flex items-center gap-2">
+                            <h3 class="text-base font-bold text-white flex items-center gap-2">
+                                <span>Regulatory Expert AI Advisor</span>
+                            </h3>
+                            <span id="expert-modal-badge" class="px-2 py-0.5 rounded text-[10px] font-bold uppercase tracking-wider bg-rose-950/80 text-rose-300 border border-rose-800">CRITICAL</span>
+                            <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded text-[10px] font-semibold bg-emerald-950/80 text-emerald-300 border border-emerald-800">
+                                <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+                                <i data-lucide="globe" class="w-3 h-3 text-emerald-400"></i>
+                                <span>Live Internet Intelligence</span>
+                            </span>
+                        </div>
+                        <p id="expert-modal-subtitle" class="text-xs text-slate-300 mt-0.5 font-medium truncate max-w-xl">Loading regulatory intelligence...</p>
+                    </div>
+                </div>
+                <div class="flex items-center space-x-2">
+                    <button onclick="refreshExpertAnalysis()" title="Re-query internet gazettes" class="p-2 text-slate-400 hover:text-white bg-slate-800 hover:bg-slate-700 rounded-lg transition border border-slate-700 flex items-center gap-1.5 text-xs cursor-pointer">
+                        <i data-lucide="refresh-cw" class="w-3.5 h-3.5"></i>
+                        <span class="hidden sm:inline">Refresh Search</span>
+                    </button>
+                    <button onclick="closeModal('modal-expert-advisor')" class="text-slate-400 hover:text-white p-2 rounded-lg hover:bg-slate-800 transition cursor-pointer">
+                        <i data-lucide="x" class="w-5 h-5"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Scrollable Content Body -->
+            <div id="expert-modal-body" class="p-6 overflow-y-auto space-y-5 custom-scrollbar text-xs">
+                <!-- Loading State -->
+                <div id="expert-loading-state" class="py-16 flex flex-col items-center justify-center space-y-4">
+                    <div class="relative">
+                        <div class="w-14 h-14 rounded-full border-4 border-indigo-500/20 border-t-indigo-500 animate-spin"></div>
+                        <div class="absolute inset-0 flex items-center justify-center text-indigo-400">
+                            <i data-lucide="sparkles" class="w-6 h-6 animate-pulse"></i>
+                        </div>
+                    </div>
+                    <div class="text-center space-y-1">
+                        <div class="text-sm font-bold text-white" id="expert-loading-status">Searching Live Internet Gazettes & Official Standards...</div>
+                        <div class="text-xs text-slate-400">Querying EUR-Lex, EPA TSCA, BIS India, IECEE CTL, and accredited laboratory technical bulletins</div>
+                    </div>
+                </div>
+
+                <!-- Content Details (Populated dynamically) -->
+                <div id="expert-content-container" class="hidden space-y-5">
+                    <!-- Search Query & Status Pill -->
+                    <div class="flex flex-wrap items-center justify-between gap-2 p-3 rounded-xl bg-slate-950/70 border border-slate-800 text-[11px]">
+                        <div class="flex items-center gap-2 text-slate-400">
+                            <i data-lucide="search" class="w-3.5 h-3.5 text-sky-400"></i>
+                            <span>Search Query Executed:</span>
+                            <code id="expert-query-tag" class="text-sky-300 font-mono bg-sky-950/60 px-2 py-0.5 rounded border border-sky-900/60"></code>
+                        </div>
+                        <div class="flex items-center gap-1.5 text-slate-500 font-mono text-[10px]">
+                            <i data-lucide="clock" class="w-3 h-3"></i>
+                            <span id="expert-timestamp"></span>
+                        </div>
+                    </div>
+
+                    <!-- Executive Summary & Legal Authority -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-3.5">
+                        <div class="p-4 rounded-xl bg-slate-800/50 border border-slate-700/70 space-y-2">
+                            <div class="text-[11px] font-bold uppercase tracking-wider text-amber-400 flex items-center gap-1.5">
+                                <i data-lucide="scale" class="w-3.5 h-3.5"></i>
+                                <span>Statutory Legal Basis & Enforcing Body</span>
+                            </div>
+                            <div class="space-y-1 text-slate-200">
+                                <div><strong class="text-slate-400">Legal Authority:</strong> <span id="expert-legal-authority" class="font-medium"></span></div>
+                                <div><strong class="text-slate-400">Enforcing Body:</strong> <span id="expert-enforcing-body" class="font-medium"></span></div>
+                                <div><strong class="text-slate-400">Target Jurisdiction:</strong> <span id="expert-jurisdiction" class="font-medium"></span></div>
+                            </div>
+                        </div>
+
+                        <div class="p-4 rounded-xl bg-indigo-950/30 border border-indigo-800/40 space-y-2">
+                            <div class="text-[11px] font-bold uppercase tracking-wider text-indigo-400 flex items-center gap-1.5">
+                                <i data-lucide="activity" class="w-3.5 h-3.5"></i>
+                                <span>Internet Regulatory Intelligence Synthesis</span>
+                            </div>
+                            <p id="expert-web-synthesis" class="text-slate-300 leading-relaxed"></p>
+                        </div>
+                    </div>
+
+                    <!-- Live Internet Sources Discovered -->
+                    <div class="space-y-2">
+                        <div class="text-[11px] font-bold uppercase tracking-wider text-sky-400 flex items-center gap-1.5">
+                            <i data-lucide="link" class="w-3.5 h-3.5"></i>
+                            <span>Live Internet Sources & Official Gazette Citations Discovered</span>
+                        </div>
+                        <div id="expert-sources-list" class="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+                            <!-- Filled by JS -->
+                        </div>
+                    </div>
+
+                    <!-- Key Technical Clauses & Thresholds -->
+                    <div class="space-y-2">
+                        <div class="text-[11px] font-bold uppercase tracking-wider text-emerald-400 flex items-center gap-1.5">
+                            <i data-lucide="list-checks" class="w-3.5 h-3.5"></i>
+                            <span>Key Technical Clauses & Enforcement Thresholds</span>
+                        </div>
+                        <div id="expert-clauses-list" class="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                            <!-- Filled by JS -->
+                        </div>
+                    </div>
+
+                    <!-- SanDisk Hardware Portfolio Impact -->
+                    <div class="space-y-2">
+                        <div class="text-[11px] font-bold uppercase tracking-wider text-purple-400 flex items-center gap-1.5">
+                            <i data-lucide="hard-drive" class="w-3.5 h-3.5"></i>
+                            <span>SanDisk Hardware Portfolio Scope & Impact Breakdown</span>
+                        </div>
+                        <div class="border border-slate-800 rounded-xl overflow-hidden">
+                            <table class="w-full text-left text-xs">
+                                <thead class="bg-slate-950 text-slate-400 border-b border-slate-800">
+                                    <tr>
+                                        <th class="p-2.5 font-semibold">Product Family</th>
+                                        <th class="p-2.5 font-semibold">Impact Verdict</th>
+                                        <th class="p-2.5 font-semibold">Required Engineering Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="expert-hardware-tbody" class="divide-y divide-slate-800/60 bg-slate-900/80">
+                                    <!-- Filled by JS -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <!-- Lab Strategy & Guidance -->
+                    <div class="p-4 rounded-xl bg-slate-800/40 border border-slate-700/60 space-y-2">
+                        <div class="text-[11px] font-bold uppercase tracking-wider text-cyan-400 flex items-center gap-1.5">
+                            <i data-lucide="flask-conical" class="w-3.5 h-3.5"></i>
+                            <span>Accredited Test Lab Strategy & Sample Recommendations</span>
+                        </div>
+                        <div id="expert-lab-strategy" class="text-slate-300 leading-relaxed"></div>
+                    </div>
+
+                    <!-- Compliance Phased Roadmap -->
+                    <div class="space-y-2">
+                        <div class="text-[11px] font-bold uppercase tracking-wider text-emerald-400 flex items-center gap-1.5">
+                            <i data-lucide="milestone" class="w-3.5 h-3.5"></i>
+                            <span>Phased Compliance Execution Roadmap</span>
+                        </div>
+                        <div id="expert-roadmap-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-2.5">
+                            <!-- Filled by JS -->
+                        </div>
+                    </div>
+
+                    <!-- Interactive Q&A Console Section -->
+                    <div class="pt-4 border-t border-slate-800 space-y-3">
+                        <div class="flex items-center justify-between">
+                            <div class="text-[11px] font-bold uppercase tracking-wider text-indigo-400 flex items-center gap-1.5">
+                                <i data-lucide="messages-square" class="w-4 h-4"></i>
+                                <span>Ask Follow-up Questions to the Regulatory Expert</span>
+                            </div>
+                            <span class="text-[10px] text-slate-400">Real-time answers citing standard clauses & internet gazettes</span>
+                        </div>
+
+                        <!-- Quick Prompt Chips -->
+                        <div class="space-y-1.5">
+                            <span class="text-[10px] text-slate-400 uppercase font-semibold">Suggested Expert Inquiries:</span>
+                            <div id="expert-prompt-chips" class="flex flex-wrap gap-2">
+                                <!-- Filled by JS -->
+                            </div>
+                        </div>
+
+                        <!-- Chat Stream -->
+                        <div id="expert-chat-stream" class="space-y-3 max-h-72 overflow-y-auto custom-scrollbar p-3 rounded-xl bg-slate-950/70 border border-slate-800">
+                            <!-- Filled by JS -->
+                        </div>
+
+                        <!-- Chat Input Box -->
+                        <div class="flex items-center gap-2 pt-1">
+                            <div class="relative flex-1">
+                                <input id="expert-chat-input" type="text" placeholder="Ask specific question (e.g. Can we use CB Scheme report? What is the penalty for non-compliance?)..." onkeydown="if(event.key==='Enter') sendExpertQuestion()" class="w-full bg-slate-950 border border-slate-800 focus:border-indigo-500 rounded-xl pl-4 pr-10 py-2.5 text-xs text-white placeholder-slate-500 focus:outline-none focus:ring-1 focus:ring-indigo-500 transition">
+                            </div>
+                            <button id="btn-expert-ask" onclick="sendExpertQuestion()" class="px-4 py-2.5 rounded-xl bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-500 hover:to-purple-500 text-white font-semibold text-xs transition flex items-center gap-1.5 shadow-lg shadow-indigo-600/20 cursor-pointer">
+                                <i data-lucide="send" class="w-3.5 h-3.5"></i>
+                                <span>Ask Expert</span>
+                            </button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- Footer -->
+            <div class="px-6 py-3 border-t border-slate-800 bg-slate-900/90 flex items-center justify-between text-xs text-slate-400">
+                <span class="text-[11px] text-slate-400 flex items-center gap-1.5">
+                    <i data-lucide="shield-check" class="w-3.5 h-3.5 text-emerald-400"></i>
+                    <span>SanDisk Global Regulatory Intelligence Network & Expert Advisory</span>
+                </span>
+                <button onclick="closeModal('modal-expert-advisor')" class="px-3.5 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 font-medium transition cursor-pointer">
+                    Close Advisor
+                </button>
+            </div>
+
+        </div>
+    </div>
+
     <!-- Top-Center Floating Notification Banner -->
     <div id="top-notification-banner" class="fixed top-5 left-1/2 -translate-x-1/2 z-[9999] hidden max-w-xl w-[92vw] sm:w-full bg-slate-900/95 border-2 border-emerald-500 text-white p-4 rounded-2xl shadow-2xl backdrop-blur-md transition-all duration-300">
         <div class="flex items-start justify-between gap-3">
@@ -2543,10 +2750,14 @@
                                     <span class="font-semibold text-slate-500">Affected Hardware:</span>
                                     ${affectedPills}
                                 </div>
-                                <div class="flex items-center space-x-3 shrink-0">
-                                    <span class="text-[11px] text-slate-500 hidden md:inline">Source: ${escapeHtml(a.source || 'Regulatory Gazette')}</span>
-                                    <button onclick="toggleAlertDetails('${a.id}')" id="btn-toggle-${a.id}" class="inline-flex items-center space-x-2 px-3 py-1.5 rounded-lg bg-sky-950/70 hover:bg-sky-900 border border-sky-800/80 text-sky-300 hover:text-white text-xs font-semibold transition cursor-pointer shadow-sm">
-                                        <span id="btn-text-${a.id}">View Detailed Regulatory Brief & Official Sources</span>
+                                <div class="flex items-center space-x-2 shrink-0">
+                                    <span class="text-[11px] text-slate-500 hidden lg:inline mr-1">Source: ${escapeHtml(a.source || 'Regulatory Gazette')}</span>
+                                    <button onclick="openAskExpertModal('${a.id}')" class="inline-flex items-center space-x-1.5 px-3 py-1.5 rounded-lg bg-gradient-to-r from-indigo-950/90 to-purple-950/90 hover:from-indigo-900 hover:to-purple-900 border border-indigo-700/80 hover:border-indigo-500 text-indigo-300 hover:text-white text-xs font-bold transition cursor-pointer shadow-sm group">
+                                        <i data-lucide="brain" class="w-3.5 h-3.5 text-indigo-400 group-hover:scale-110 transition-transform"></i>
+                                        <span>Ask an Expert</span>
+                                    </button>
+                                    <button onclick="toggleAlertDetails('${a.id}')" id="btn-toggle-${a.id}" class="inline-flex items-center space-x-1.5 px-3 py-1.5 rounded-lg bg-sky-950/70 hover:bg-sky-900 border border-sky-800/80 text-sky-300 hover:text-white text-xs font-semibold transition cursor-pointer shadow-sm">
+                                        <span id="btn-text-${a.id}">View Detailed Brief</span>
                                         <i data-lucide="chevron-down" id="icon-toggle-${a.id}" class="w-4 h-4 transition-transform duration-300"></i>
                                     </button>
                                 </div>
@@ -2554,6 +2765,22 @@
 
                             <!-- Expandable Panel -->
                             <div id="details-${a.id}" class="hidden mt-4 pt-4 border-t border-slate-800 space-y-4 transition-all duration-300">
+                                <!-- Expert Consultation Prompt Banner -->
+                                <div class="p-3.5 bg-gradient-to-r from-indigo-950/60 via-purple-950/40 to-slate-900 border border-indigo-700/60 rounded-xl flex flex-col sm:flex-row sm:items-center justify-between gap-3 shadow-md">
+                                    <div class="flex items-start sm:items-center space-x-3">
+                                        <div class="w-8 h-8 rounded-lg bg-indigo-600/30 border border-indigo-500/50 flex items-center justify-center text-indigo-300 shrink-0">
+                                            <i data-lucide="brain" class="w-4 h-4"></i>
+                                        </div>
+                                        <div>
+                                            <div class="text-xs font-bold text-indigo-200">Need specific compliance guidance for SanDisk engineering?</div>
+                                            <div class="text-[11px] text-slate-400">Consult our AI Regulatory Expert backed by live internet gazette search, testing standards analysis, and interactive Q&A.</div>
+                                        </div>
+                                    </div>
+                                    <button onclick="openAskExpertModal('${a.id}')" class="px-3.5 py-1.5 rounded-lg bg-indigo-600 hover:bg-indigo-500 text-white font-semibold text-xs transition flex items-center justify-center space-x-1.5 shadow-md shadow-indigo-600/30 cursor-pointer shrink-0">
+                                        <i data-lucide="sparkles" class="w-3.5 h-3.5"></i>
+                                        <span>Consult Expert Now</span>
+                                    </button>
+                                </div>
                                 ${detailedSummaryHtml}
                                 ${technicalImpactHtml}
                                 ${milestonesHtml}
@@ -3316,6 +3543,12 @@ async function openCountryDrawer(code) {
                                 <span class="text-[10px] font-mono uppercase px-1.5 py-0.2 rounded ${a.severity === 'Critical' ? 'bg-rose-900 text-rose-100' : 'bg-amber-900 text-amber-100'}">${a.severity}</span>
                             </div>
                             <div class="text-[11px] mt-1 line-clamp-2">${escapeHtml(a.title)}</div>
+                            <div class="mt-2 pt-1.5 border-t border-slate-800/60 flex justify-end">
+                                <button type="button" onclick="openAskExpertModal('${a.id}')" class="px-2 py-1 rounded bg-indigo-950/90 hover:bg-indigo-900 border border-indigo-700/80 text-indigo-300 hover:text-white text-[10px] font-bold flex items-center gap-1 transition shadow cursor-pointer">
+                                    <i data-lucide="brain" class="w-3 h-3 text-indigo-400"></i>
+                                    <span>Ask Expert</span>
+                                </button>
+                            </div>
                         </div>
                     `).join("")}
                 </div>
@@ -3424,6 +3657,316 @@ function getFlagEmoji(countryCode) {
         .map(char => 127397 + char.charCodeAt());
     return String.fromCodePoint(...codePoints);
 }
+
+    
+        // ==========================================
+        // REGULATORY EXPERT AI ADVISOR & INTERNET SEARCH
+        // ==========================================
+        let currentExpertAlertId = null;
+        let currentExpertAlertData = null;
+
+        async function openAskExpertModal(alertId) {
+            currentExpertAlertId = alertId;
+            openModal('modal-expert-advisor');
+            
+            const loadingEl = document.getElementById('expert-loading-state');
+            const contentEl = document.getElementById('expert-content-container');
+            const statusEl = document.getElementById('expert-loading-status');
+            const chatStreamEl = document.getElementById('expert-chat-stream');
+            
+            if (loadingEl) loadingEl.classList.remove('hidden');
+            if (contentEl) contentEl.classList.add('hidden');
+            if (statusEl) statusEl.innerText = "Searching Live Internet Gazettes & Official Standards...";
+            
+            // Reset Chat stream with welcome
+            if (chatStreamEl) {
+                chatStreamEl.innerHTML = `
+                    <div class="flex items-start space-x-2.5 text-xs text-slate-300">
+                        <div class="w-6 h-6 rounded-full bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center text-white shrink-0 mt-0.5 text-[10px] font-bold shadow">AI</div>
+                        <div class="bg-slate-900 border border-slate-800 rounded-xl p-3 space-y-1 leading-relaxed shadow-sm flex-1">
+                            <p class="text-slate-200">Hello! I am your <strong>SanDisk Regulatory Expert Advisor</strong>. I have searched live gazette registries, international testing bulletins, and regulatory databases for this alert. Feel free to click any inquiry chip below or ask any specific technical compliance question.</p>
+                        </div>
+                    </div>
+                `;
+            }
+
+            try {
+                const res = await fetch(`/api/alerts/${alertId}/expert-consult`);
+                if (!res.ok) throw new Error('Expert consultation request failed: ' + res.status);
+                const data = await res.json();
+                currentExpertAlertData = data;
+                
+                // Populate Modal Header
+                const badgeEl = document.getElementById('expert-modal-badge');
+                if (badgeEl) {
+                    badgeEl.innerText = (data.severity || 'CRITICAL').toUpperCase();
+                    if (data.severity === 'Critical') {
+                        badgeEl.className = "px-2 py-0.5 rounded text-[10px] font-bold uppercase tracking-wider bg-rose-950/80 text-rose-300 border border-rose-800";
+                    } else if (data.severity === 'Warning') {
+                        badgeEl.className = "px-2 py-0.5 rounded text-[10px] font-bold uppercase tracking-wider bg-amber-950/80 text-amber-300 border border-amber-800";
+                    } else {
+                        badgeEl.className = "px-2 py-0.5 rounded text-[10px] font-bold uppercase tracking-wider bg-sky-950/80 text-sky-300 border border-sky-800";
+                    }
+                }
+                
+                const subtitleEl = document.getElementById('expert-modal-subtitle');
+                if (subtitleEl) {
+                    subtitleEl.innerText = `${data.alert_id} • ${data.alert_title} (${data.standard})`;
+                }
+                
+                // Search tag & timestamp
+                const queryTagEl = document.getElementById('expert-query-tag');
+                if (queryTagEl) queryTagEl.innerText = data.search_query || `${data.standard} ${data.country}`;
+                
+                const timestampEl = document.getElementById('expert-timestamp');
+                if (timestampEl) timestampEl.innerText = data.analyzed_at || 'Just now';
+                
+                const eb = data.expert_brief || {};
+                
+                // Legal basis & authority
+                const legalEl = document.getElementById('expert-legal-authority');
+                if (legalEl) legalEl.innerText = eb.legal_authority || 'Statutory regulatory order';
+                
+                const enforcingEl = document.getElementById('expert-enforcing-body');
+                if (enforcingEl) enforcingEl.innerText = eb.enforcing_agency || 'Designated National Authority';
+                
+                const jurisEl = document.getElementById('expert-jurisdiction');
+                if (jurisEl) jurisEl.innerText = `${data.country} (${data.effective_date ? 'Effective: ' + data.effective_date : 'Active'})`;
+                
+                // Internet intelligence synthesis
+                const synthEl = document.getElementById('expert-web-synthesis');
+                if (synthEl) synthEl.innerText = eb.internet_intelligence_synthesis || 'Surveillance confirms active gazette notifications and testing updates.';
+                
+                // Live Internet Sources
+                const sourcesContainer = document.getElementById('expert-sources-list');
+                if (sourcesContainer) {
+                    const sources = data.internet_sources || [];
+                    if (sources.length === 0) {
+                        sourcesContainer.innerHTML = '<div class="text-slate-500 text-xs col-span-2">No external web links discovered.</div>';
+                    } else {
+                        sourcesContainer.innerHTML = sources.map((s, idx) => `
+                            <div class="p-3 rounded-xl bg-slate-950/70 border border-slate-800/90 hover:border-sky-700/60 transition space-y-1.5 flex flex-col justify-between">
+                                <div class="space-y-1">
+                                    <div class="flex items-center justify-between gap-1 text-[10px]">
+                                        <span class="font-mono text-slate-500 font-semibold">Web Citation 0${idx+1}</span>
+                                        <span class="px-1.5 py-0.5 rounded bg-sky-950/80 text-sky-300 border border-sky-800/60 text-[9px] font-mono">Live Source</span>
+                                    </div>
+                                    <div class="font-bold text-slate-200 text-xs line-clamp-1">${escapeHtml(s.title || 'Official Gazette Link')}</div>
+                                    <p class="text-slate-400 text-[11px] line-clamp-2 leading-relaxed">${escapeHtml(s.snippet || '')}</p>
+                                </div>
+                                <div class="pt-2 border-t border-slate-800/60 flex items-center justify-between">
+                                    <a href="${escapeHtml(s.url)}" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 text-sky-400 hover:text-sky-300 text-[11px] font-medium transition cursor-pointer group">
+                                        <i data-lucide="globe" class="w-3 h-3 text-sky-400"></i>
+                                        <span class="group-hover:underline truncate max-w-[240px] font-mono text-[10px]">${escapeHtml(s.url)}</span>
+                                        <i data-lucide="external-link" class="w-3 h-3 text-slate-500 group-hover:text-sky-300"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        `).join('');
+                    }
+                }
+                
+                // Key Technical Clauses
+                const clausesContainer = document.getElementById('expert-clauses-list');
+                if (clausesContainer) {
+                    const clauses = eb.key_technical_clauses || [];
+                    clausesContainer.innerHTML = clauses.map(c => `
+                        <div class="p-2.5 rounded-lg bg-slate-950/80 border border-slate-800 text-xs flex items-start space-x-2 text-slate-300">
+                            <i data-lucide="check-circle" class="w-4 h-4 text-emerald-400 shrink-0 mt-0.5"></i>
+                            <span class="leading-relaxed">${escapeHtml(c)}</span>
+                        </div>
+                    `).join('');
+                }
+                
+                // SanDisk Hardware Portfolio Scope Table
+                const hwTbody = document.getElementById('expert-hardware-tbody');
+                if (hwTbody) {
+                    const impacts = eb.sandisk_hardware_impact || [];
+                    if (impacts.length === 0) {
+                        hwTbody.innerHTML = '<tr><td colspan="3" class="p-3 text-center text-slate-500">No hardware categories flagged.</td></tr>';
+                    } else {
+                        hwTbody.innerHTML = impacts.map(item => {
+                            let vBadge = 'bg-slate-800 text-slate-300 border-slate-700';
+                            if (item.verdict.includes('Critical')) vBadge = 'bg-rose-950 text-rose-300 border-rose-800 font-bold';
+                            else if (item.verdict.includes('High')) vBadge = 'bg-amber-950 text-amber-300 border-amber-800 font-semibold';
+                            else if (item.verdict.includes('Medium')) vBadge = 'bg-sky-950 text-sky-300 border-sky-800';
+                            return `
+                                <tr class="hover:bg-slate-800/40 transition">
+                                    <td class="p-2.5 font-bold text-white">${escapeHtml(item.category)}</td>
+                                    <td class="p-2.5"><span class="px-2 py-0.5 rounded border text-[10px] ${vBadge}">${escapeHtml(item.verdict)}</span></td>
+                                    <td class="p-2.5 text-slate-300 leading-relaxed">${escapeHtml(item.engineering_action)}</td>
+                                </tr>
+                            `;
+                        }).join('');
+                    }
+                }
+                
+                // Lab Strategy & SanDisk Guidance
+                const labStratEl = document.getElementById('expert-lab-strategy');
+                if (labStratEl) {
+                    labStratEl.innerHTML = `
+                        <div class="space-y-1.5">
+                            <div><strong class="text-white">SanDisk Engineering Guidance:</strong> <span class="text-slate-200">${escapeHtml(eb.sandisk_engineering_guidance || '')}</span></div>
+                            <div class="pt-1"><strong class="text-cyan-400">Test Lab Strategy:</strong> <span class="text-slate-300">${escapeHtml(eb.laboratory_testing_strategy || '')}</span></div>
+                        </div>
+                    `;
+                }
+                
+                // Compliance Phased Roadmap
+                const roadmapGrid = document.getElementById('expert-roadmap-grid');
+                if (roadmapGrid) {
+                    const phases = eb.compliance_roadmap || [];
+                    roadmapGrid.innerHTML = phases.map((p, idx) => `
+                        <div class="p-3 rounded-xl bg-slate-950/80 border border-slate-800/90 flex flex-col justify-between space-y-2">
+                            <div class="space-y-1">
+                                <div class="flex items-center justify-between text-[10px]">
+                                    <span class="text-slate-500 font-mono font-semibold">Milestone 0${idx+1}</span>
+                                    <span class="px-1.5 py-0.5 rounded bg-emerald-950/80 text-emerald-300 border border-emerald-800 text-[9px] font-medium font-mono">${escapeHtml(p.timeline)}</span>
+                                </div>
+                                <div class="text-xs font-bold text-white">${escapeHtml(p.phase)}</div>
+                                <p class="text-slate-400 text-[11px] leading-relaxed">${escapeHtml(p.details)}</p>
+                            </div>
+                        </div>
+                    `).join('');
+                }
+                
+                // Suggested prompt chips
+                const promptChipsEl = document.getElementById('expert-prompt-chips');
+                if (promptChipsEl) {
+                    const chips = eb.suggested_questions || [];
+                    promptChipsEl.innerHTML = chips.map(q => {
+                        const safeQ = escapeHtml(q).replace(/'/g, "\'");
+                        return `
+                            <button onclick="askPresetExpertQuestion('${safeQ}')" class="px-2.5 py-1 rounded-lg bg-indigo-950/70 hover:bg-indigo-900 border border-indigo-800/70 hover:border-indigo-600 text-indigo-300 hover:text-white text-[11px] font-medium transition cursor-pointer flex items-center gap-1.5 shadow-sm">
+                                <i data-lucide="help-circle" class="w-3 h-3 text-indigo-400"></i>
+                                <span>${escapeHtml(q)}</span>
+                            </button>
+                        `;
+                    }).join('');
+                }
+                
+                if (loadingEl) loadingEl.classList.add('hidden');
+                if (contentEl) contentEl.classList.remove('hidden');
+                lucide.createIcons();
+            } catch (err) {
+                console.error("Expert consult error:", err);
+                if (statusEl) statusEl.innerText = "Error loading expert intelligence: " + err.message;
+            }
+        }
+
+        function refreshExpertAnalysis() {
+            if (currentExpertAlertId) {
+                openAskExpertModal(currentExpertAlertId);
+            }
+        }
+
+        function askPresetExpertQuestion(question) {
+            const inputEl = document.getElementById('expert-chat-input');
+            if (inputEl) inputEl.value = question;
+            sendExpertQuestion(question);
+        }
+
+        async function sendExpertQuestion(forcedQuestion) {
+            const inputEl = document.getElementById('expert-chat-input');
+            const q = forcedQuestion || (inputEl ? inputEl.value.trim() : '');
+            if (!q || !currentExpertAlertId) return;
+            
+            if (inputEl) inputEl.value = '';
+            
+            const streamEl = document.getElementById('expert-chat-stream');
+            if (!streamEl) return;
+            
+            // Append User message
+            const userMsgHtml = `
+                <div class="flex items-start space-x-2.5 text-xs justify-end">
+                    <div class="bg-indigo-600 text-white rounded-xl p-3 max-w-xl leading-relaxed shadow-sm">
+                        <p class="font-medium">${escapeHtml(q)}</p>
+                    </div>
+                    <div class="w-6 h-6 rounded-full bg-slate-700 flex items-center justify-center text-slate-200 shrink-0 mt-0.5 text-[10px] font-bold">ME</div>
+                </div>
+            `;
+            streamEl.insertAdjacentHTML('beforeend', userMsgHtml);
+            
+            // Append Thinking indicator
+            const thinkingId = 'thinking-' + Date.now();
+            const thinkingHtml = `
+                <div id="${thinkingId}" class="flex items-start space-x-2.5 text-xs text-slate-400 animate-pulse">
+                    <div class="w-6 h-6 rounded-full bg-indigo-600 flex items-center justify-center text-white shrink-0 mt-0.5 text-[10px] font-bold">AI</div>
+                    <div class="bg-slate-900 border border-slate-800 rounded-xl p-3 flex items-center gap-2">
+                        <i data-lucide="loader-2" class="w-3.5 h-3.5 animate-spin text-indigo-400"></i>
+                        <span>Analyzing standard clauses & internet gazettes for this query...</span>
+                    </div>
+                </div>
+            `;
+            streamEl.insertAdjacentHTML('beforeend', thinkingHtml);
+            streamEl.scrollTop = streamEl.scrollHeight;
+            lucide.createIcons();
+            
+            try {
+                const res = await fetch(`/api/alerts/${currentExpertAlertId}/expert-chat`, {
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify({ question: q })
+                });
+                if (!res.ok) throw new Error('Chat API returned ' + res.status);
+                const data = await res.json();
+                
+                // Remove thinking indicator
+                const thinkEl = document.getElementById(thinkingId);
+                if (thinkEl) thinkEl.remove();
+                
+                // Clauses badges
+                const clausesPills = (data.cited_clauses || []).map(c => `
+                    <span class="px-2 py-0.5 rounded bg-emerald-950/80 text-emerald-300 border border-emerald-800 text-[10px] font-mono">${escapeHtml(c)}</span>
+                `).join(' ');
+                
+                // Build answer bubble
+                const aiMsgHtml = `
+                    <div class="flex items-start space-x-2.5 text-xs text-slate-300">
+                        <div class="w-6 h-6 rounded-full bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center text-white shrink-0 mt-0.5 text-[10px] font-bold shadow">AI</div>
+                        <div class="bg-slate-900 border border-slate-800 rounded-xl p-3.5 space-y-2.5 leading-relaxed shadow-md max-w-2xl flex-1">
+                            <p class="text-slate-200">${escapeHtml(data.expert_answer)}</p>
+                            
+                            ${data.cited_clauses && data.cited_clauses.length > 0 ? `
+                                <div class="pt-1 flex flex-wrap items-center gap-1.5">
+                                    <span class="text-[10px] text-slate-500 font-semibold uppercase">Applicable Clauses:</span>
+                                    ${clausesPills}
+                                </div>
+                            ` : ''}
+                            
+                            ${data.action_advice ? `
+                                <div class="p-2.5 rounded-lg bg-indigo-950/40 border border-indigo-800/50 text-[11px] text-indigo-200">
+                                    <strong class="text-indigo-400">Engineering Recommendation:</strong> ${escapeHtml(data.action_advice)}
+                                </div>
+                            ` : ''}
+                            
+                            ${data.web_sources_consulted && data.web_sources_consulted.length > 0 ? `
+                                <div class="pt-1 text-[10px] text-slate-400 border-t border-slate-800/60 flex items-center justify-between">
+                                    <span class="flex items-center gap-1 text-slate-500">
+                                        <i data-lucide="globe" class="w-3 h-3 text-sky-400"></i>
+                                        <span>Verified via Internet Gazettes</span>
+                                    </span>
+                                    <span class="font-mono text-slate-500">${escapeHtml(data.answered_at)}</span>
+                                </div>
+                            ` : ''}
+                        </div>
+                    </div>
+                `;
+                streamEl.insertAdjacentHTML('beforeend', aiMsgHtml);
+                streamEl.scrollTop = streamEl.scrollHeight;
+                lucide.createIcons();
+            } catch (err) {
+                const thinkEl = document.getElementById(thinkingId);
+                if (thinkEl) {
+                    thinkEl.innerHTML = `
+                        <div class="w-6 h-6 rounded-full bg-rose-600 flex items-center justify-center text-white shrink-0 mt-0.5 text-[10px] font-bold">!</div>
+                        <div class="bg-rose-950/60 border border-rose-800 rounded-xl p-3 text-rose-300 text-xs">
+                            Failed to get expert response: ${escapeHtml(err.message)}
+                        </div>
+                    `;
+                }
+            }
+        }
 
     </script>
 </body>

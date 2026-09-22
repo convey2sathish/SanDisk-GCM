@@ -6,6 +6,7 @@ import compliance_db as db
 import excel_export
 import reg_surveillance
 import doc_audit_engine
+import expert_advisor
 import datetime
 
 surveillance_engine = reg_surveillance.get_surveillance_engine(db)
@@ -308,6 +309,35 @@ def api_create_alert():
     }
     alerts_store.insert(0, new_alert)
     return jsonify({"success": True, "alert": new_alert})
+
+@app.route("/api/alerts/<alert_id>/expert-consult")
+def api_alert_expert_consult(alert_id):
+    alert = next((a for a in alerts_store if a.get("id") == alert_id), None)
+    if not alert:
+        alert = next((a for a in db.REGULATION_ALERTS if a.get("id") == alert_id), None)
+    if not alert:
+        return jsonify({"error": "Alert not found"}), 404
+    
+    ea = expert_advisor.get_expert_advisor()
+    consult_result = ea.consult_expert_on_alert(alert)
+    return jsonify(consult_result)
+
+@app.route("/api/alerts/<alert_id>/expert-chat", methods=["POST"])
+def api_alert_expert_chat(alert_id):
+    alert = next((a for a in alerts_store if a.get("id") == alert_id), None)
+    if not alert:
+        alert = next((a for a in db.REGULATION_ALERTS if a.get("id") == alert_id), None)
+    if not alert:
+        return jsonify({"error": "Alert not found"}), 404
+    
+    data = request.json or {}
+    question = data.get("question", "").strip()
+    if not question:
+        return jsonify({"error": "Question parameter is required"}), 400
+    
+    ea = expert_advisor.get_expert_advisor()
+    answer_result = ea.answer_custom_question(alert, question)
+    return jsonify(answer_result)
 
 @app.route("/api/products")
 def api_products():
