@@ -43,7 +43,6 @@
     const list = alertsFor(code);
     if (list.some(a => a.severity === 'Critical')) return { status: 'Action required (critical alert)', color: '#f43f5e', tone: 'critical', alerts: list };
     if (list.some(a => a.severity === 'Warning')) return { status: 'Review required (warning)', color: '#f59e0b', tone: 'warning', alerts: list };
-    if ((c.transitions || []).length) return { status: 'Standard transition pending', color: '#818cf8', tone: 'info', alerts: list };
     return { status: 'Certified / market ready', color: '#10b981', tone: 'success', alerts: list };
   }
 
@@ -66,9 +65,6 @@
       } else if (metric === 'alerts') {
         const list = alertsFor(code);
         if (list.some(a => a.severity === 'Critical')) { color = '#f43f5e'; k.a++; } else if (list.some(a => a.severity === 'Warning')) { color = '#f59e0b'; k.b++; } else if (list.length) { color = '#38bdf8'; k.c++; } else { k.d++; }
-      } else if (metric === 'transitions') {
-        const tr = c.transitions || [];
-        if (!tr.length) { color = '#1e293b'; k.d++; } else { const soonest = Math.min(...tr.map(t => GCM.ui.daysUntil(t.deadline) ?? 9999)); if (soonest < 180) { color = '#f43f5e'; k.a++; } else if (soonest < 365) { color = '#f59e0b'; k.b++; } else { color = '#818cf8'; k.c++; } }
       }
       cm[code] = color;
     }
@@ -81,7 +77,6 @@
     lead_time: [['Fast track (<4 wks)', 'zap', 'text-emerald-400'], ['Standard (4-8 wks)', 'calendar', 'text-sky-400'], ['Extended (8-12 wks)', 'hourglass', 'text-amber-400'], ['Critical path (>12 wks)', 'alert-octagon', 'text-purple-400']],
     environmental: [['PFAS mandates & bans', 'leaf', 'text-emerald-400'], ['Packaging & plastics laws', 'package', 'text-cyan-400'], ['Dedicated RoHS regimes', 'test-tube-2', 'text-amber-400'], ['Baseline environmental', 'globe-2', 'text-slate-400']],
     alerts: [['Critical alerts', 'flame', 'text-rose-400'], ['Warning notices', 'alert-circle', 'text-amber-400'], ['Informational', 'info', 'text-sky-400'], ['No active alerts', 'check', 'text-emerald-400']],
-    transitions: [['Cutover < 180 days', 'alarm-clock', 'text-rose-400'], ['Cutover < 1 year', 'calendar-clock', 'text-amber-400'], ['Cutover later', 'git-branch', 'text-indigo-400'], ['No pending transition', 'check', 'text-emerald-400']],
   };
   const LEGEND = {
     readiness: [['bg-emerald-500', 'Certified / compliant'], ['bg-amber-500', 'Warning or transition pending'], ['bg-rose-500', 'Critical alert – action required']],
@@ -89,7 +84,6 @@
     lead_time: [['bg-emerald-500', '< 4 weeks'], ['bg-sky-600', '4 – 8 weeks'], ['bg-amber-500', '8 – 12 weeks'], ['bg-purple-500', '> 12 weeks']],
     environmental: [['bg-emerald-600', 'PFAS bans & TSCA reporting'], ['bg-cyan-600', 'Packaging (Triman, AGEC, PPWR)'], ['bg-amber-600', 'Dedicated RoHS marks'], ['bg-slate-600', 'International baseline']],
     alerts: [['bg-rose-500', 'Critical'], ['bg-amber-500', 'Warning'], ['bg-sky-500', 'Informational'], ['bg-slate-700', 'None']],
-    transitions: [['bg-rose-500', 'Cutover < 180 days'], ['bg-amber-500', 'Cutover < 1 year'], ['bg-indigo-400', 'Cutover later'], ['bg-slate-700', 'None recorded']],
   };
 
   function render() {
@@ -113,7 +107,6 @@
       <div><b style="color:#f1f5f9">Lead time:</b> ${c.lead_time_weeks || 4} weeks</div>
       <div><b style="color:#f1f5f9">Status:</b> <span style="color:${s.color};font-weight:600">${s.status}</span></div>
       ${(s.alerts || []).length ? `<div style="color:#fb7185;font-weight:600;font-size:10px">⚠ ${s.alerts.length} active alert(s) for this product</div>` : ''}
-      ${(c.transitions || []).length ? `<div style="color:#a5b4fc;font-size:10px">🔄 ${c.transitions.length} pending standard transition(s)</div>` : ''}
       <div style="font-size:9px;color:#64748b;margin-top:4px;border-top:1px solid #334155;padding-top:2px">Click to open the compliance dossier</div></div>`;
   }
 
@@ -161,8 +154,8 @@
       ${rule ? `<div class="bg-amber-950/20 border border-amber-900/50 rounded-lg p-3 text-xs"><div class="section-title text-amber-300 mb-1">For ${GCM.ui.esc(prod?.name || pid)}</div><div class="flex items-center gap-2 mb-1"><span class="${rule.requirement_type && rule.requirement_type.includes('Testing') ? 'badge badge-critical' : rule.requirement_type && rule.requirement_type.includes('Document') ? 'badge badge-warning' : 'badge badge-success'}">${GCM.ui.esc(rule.requirement_type || '')}</span><span class="text-[11px] text-slate-400">${GCM.ui.esc(rule.testing_location || '')}</span></div>${rule.applicable_summary ? `<div class="text-[11px] text-amber-200/90 font-medium mb-1">${GCM.ui.esc(rule.applicable_summary)}</div>` : ''}<div class="text-[11px] text-slate-300">${GCM.ui.esc(rule.notes || '')}</div><div class="mt-1.5 flex flex-wrap gap-1">${(rule.required_documents || []).slice(0, 4).map(d => `<span class="pill">${GCM.ui.esc(d)}</span>`).join('')}${(rule.required_documents || []).length > 4 ? `<span class="pill">+${rule.required_documents.length - 4} more</span>` : ''}</div></div>` : ''}
       <div class="space-y-2 text-xs">
         <div class="section-title">Regulatory standards dossier</div>
-        <div class="bg-slate-800/40 border border-slate-800 rounded-lg p-2.5"><div class="flex items-center justify-between text-[10px] uppercase font-semibold mb-1"><span class="flex items-center gap-1 text-amber-400"><i data-lucide="zap" class="w-3 h-3"></i>Electrical safety</span></div><div class="text-slate-200 mono text-[11px]">${GCM.ui.esc(c.safety_std || '')}</div>${c.safety_std_next ? `<div class="text-[10px] text-indigo-300 mt-1">→ ${GCM.ui.esc(c.safety_std_next)} by ${GCM.ui.esc(c.safety_std_transition_deadline || '')}</div>` : ''}</div>
-        <div class="bg-slate-800/40 border border-slate-800 rounded-lg p-2.5"><div class="flex items-center justify-between text-[10px] uppercase font-semibold mb-1"><span class="flex items-center gap-1 text-sky-400"><i data-lucide="radio" class="w-3 h-3"></i>EMC &amp; radio</span></div><div class="text-slate-200 mono text-[11px]">${GCM.ui.esc(c.emc_std || '')}</div>${c.emc_std_next ? `<div class="text-[10px] text-indigo-300 mt-1">→ ${GCM.ui.esc(c.emc_std_next)} by ${GCM.ui.esc(c.emc_std_transition_deadline || '')}</div>` : ''}</div>
+        <div class="bg-slate-800/40 border border-slate-800 rounded-lg p-2.5"><div class="flex items-center justify-between text-[10px] uppercase font-semibold mb-1"><span class="flex items-center gap-1 text-amber-400"><i data-lucide="zap" class="w-3 h-3"></i>Electrical safety</span></div><div class="text-slate-200 mono text-[11px]">${GCM.ui.esc(c.safety_std || '')}</div></div>
+        <div class="bg-slate-800/40 border border-slate-800 rounded-lg p-2.5"><div class="flex items-center justify-between text-[10px] uppercase font-semibold mb-1"><span class="flex items-center gap-1 text-sky-400"><i data-lucide="radio" class="w-3 h-3"></i>EMC &amp; radio</span></div><div class="text-slate-200 mono text-[11px]">${GCM.ui.esc(c.emc_std || '')}</div></div>
         <div class="bg-emerald-950/20 border border-emerald-900/40 rounded-lg p-2.5 space-y-1 text-[11px]"><div class="text-[10px] uppercase font-semibold text-emerald-400 flex items-center gap-1"><i data-lucide="leaf" class="w-3 h-3"></i>Environmental &amp; material pillars</div>
           <div><span class="text-teal-300">RoHS:</span> <span class="text-slate-300">${GCM.ui.esc(c.rohs_std || c.env_std || '')}</span></div><div><span class="text-emerald-300">PFAS / hazmat:</span> <span class="text-slate-300">${GCM.ui.esc(c.pfas_std || '')}</span></div><div><span class="text-amber-300">Packaging:</span> <span class="text-slate-300">${GCM.ui.esc(c.packaging_std || '')}</span></div><div><span class="text-cyan-300">EPR / WEEE:</span> <span class="text-slate-300">${GCM.ui.esc(c.epr_std || '')}</span></div></div>
       </div>

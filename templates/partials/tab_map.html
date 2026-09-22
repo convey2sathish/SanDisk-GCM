@@ -3,11 +3,11 @@
     <div class="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-4">
         <div>
             <h2 class="text-base font-bold text-white flex items-center gap-2"><span class="w-2.5 h-2.5 rounded-full bg-cyan-400 animate-pulse"></span>Interactive Global Market Access Map <span class="pill text-cyan-300 border-cyan-800">205 jurisdictions</span></h2>
-            <p class="text-xs text-slate-400 mt-1">Geospatial view of testing barriers, lead times, environmental mandates, live alerts and pending standard transitions. Click any country or island marker for its compliance dossier.</p>
+            <p class="text-xs text-slate-400 mt-1">Geospatial view of testing barriers, lead times, environmental mandates, and live alerts. Click any country or island marker for its compliance dossier.</p>
         </div>
         <div class="flex flex-wrap items-end gap-2.5 w-full lg:w-auto">
             <div class="flex-1 sm:flex-initial min-w-[210px]"><label class="label">Target product</label><select id="map-product-select" class="select"></select></div>
-            <div class="flex-1 sm:flex-initial min-w-[200px]"><label class="label">Heatmap layer</label><select id="map-metric-select" class="select"><option value="readiness">🎯 Compliance readiness</option><option value="testing_barrier">🔬 In-country testing barrier</option><option value="lead_time">⏱️ Certification lead time</option><option value="environmental">🌿 Environmental, PFAS &amp; packaging</option><option value="alerts">🔔 Active regulatory alerts</option><option value="transitions">🔄 Pending standard transitions</option></select></div>
+            <div class="flex-1 sm:flex-initial min-w-[200px]"><label class="label">Heatmap layer</label><select id="map-metric-select" class="select"><option value="readiness">🎯 Compliance readiness</option><option value="testing_barrier">🔬 In-country testing barrier</option><option value="lead_time">⏱️ Certification lead time</option><option value="environmental">🌿 Environmental, PFAS &amp; packaging</option><option value="alerts">🔔 Active regulatory alerts</option></select></div>
             <div class="flex-1 sm:flex-initial min-w-[170px]"><label class="label">Quick search</label><div class="relative"><input type="text" id="map-search-input" class="input pl-7" placeholder="Country or authority…"><i data-lucide="search" class="w-3 h-3 text-slate-400 absolute left-2.5 top-2.5"></i></div></div>
             <button type="button" id="map-reset" class="btn btn-secondary" title="Reset view"><i data-lucide="rotate-ccw" class="w-3.5 h-3.5"></i>Reset</button>
         </div>

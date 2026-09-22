@@ -20,7 +20,7 @@ Press `?` at any time for shortcuts, `Ctrl+K` to search anything.
 ## 2. Testing vs. Document Matrix
 1. Choose a **product classification** (e.g. *External SSD with power adaptor*).
 2. Read the counters: how many of the 205 markets need **in-country testing**, a **document / CB
-   Scheme filing**, or only a **supplier declaration**; how many have a **pending standard transition**.
+   Scheme filing**, or only a **supplier declaration**.
 3. Filter by requirement, region, or search any country, authority, standard, document or mark
    (e.g. `PFAS`, `Triman`, `UKCA`, `62368`).
 4. Every row shows the authority, the route, the standards for Safety, EMC, RoHS, PFAS, packaging and

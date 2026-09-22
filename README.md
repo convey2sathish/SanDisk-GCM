@@ -14,7 +14,7 @@ one executable.**
 | Area | What you get |
 |---|---|
 | **Compliance Command Centre** (Overview) | Live KPIs, Compliance Risk Index, everything due in the next 90 days, alert pressure by pillar, regional coverage, action items. |
-| **Testing vs. Document Matrix** | For any product category, every jurisdiction's route: in-country lab testing, document / CB Scheme filing, or supplier declaration — with the exact document checklist, standards for all pillars, local-representative rule, lead time and pending standard transitions. One-click Excel export (18 columns). |
+| **Testing vs. Document Matrix** | For any product category, every jurisdiction's route: in-country lab testing, document / CB Scheme filing, or supplier declaration — with the exact document checklist, standards for all pillars, local-representative rule, lead time and . One-click Excel export (18 columns). |
 | **Global Access Map** | Heat layers for readiness, testing barriers, lead time, environmental regimes, active alerts and pending transitions. Click any of 205 territories (incl. 39 island markers) for its dossier. |
 | **Regulation Alerts + Explainer** | Every alert explained in plain English for three audiences (simple / executive / engineer): what changed, why it matters, who is affected (categories, SKUs, markets), what to do by when, cost & effort, risk if ignored, jargon glossary, confidence and sources — plus a grounded Q&A console. Triage workflow and one-click action items. Optional Claude enhancement. |
 | **Regulatory Horizon & Risk** | One timeline of deadlines, milestones, certificate expiries, actions and surveillance history; Compliance Risk Index per product, region and pillar with an explainable formula; top risks. |

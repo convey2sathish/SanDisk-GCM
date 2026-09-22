@@ -162,8 +162,6 @@ def register(app, ctx):
                 continue
             if type_filter == "local_rep" and not c.get("local_rep_required"):
                 continue
-            if type_filter == "transition" and not c.get("transitions"):
-                continue
             if region not in ("", "all") and region not in c["region"].lower():
                 continue
             if search:
@@ -348,12 +346,6 @@ def register(app, ctx):
         ok, bad = verify_ledger(surveillance.get_audit_log(limit=100000))
         return jsonify({"audit_log": entries, "status": surveillance.get_status(light=True), "ledger_ok": ok, "ledger_first_bad_index": bad,
                         "ledger_entries": len(surveillance.get_audit_log(limit=100000))})
-
-    @app.post("/api/surveillance/reset-knowledge-base")
-    def core_surv_reset():
-        """Restore the working copy of the country knowledge base from the shipped seed."""
-        result = surveillance.reset_to_seed()
-        return jsonify({"success": True, **result})
 
     # ------------------------------------------------------------------ actions
     def _action_view(a):

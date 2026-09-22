@@ -47,19 +47,15 @@ class Store:
         self._certs_user = config.read_json(config.data_path("certificates_user.json"), []) or []
         self._actions = config.read_json(config.data_path("actions.json"), []) or []
         self._last_audit = config.read_json(config.data_path("last_audit.json"), {}) or {}
-        # Working copy of countries replaces the seed copy loaded by compliance_db
-        working = config.read_json(config.data_path("countries_data.json"), None)
-        if isinstance(working, dict) and working:
-            db.COUNTRIES_DB.clear()
-            db.COUNTRIES_DB.update(working)
+        # Drop simulated alerts left over from earlier versions
+        before = len(self._alerts_user)
+        self._alerts_user = [a for a in self._alerts_user if not (a.get("simulated") or "(simulated)" in str(a.get("source", "")).lower())]
+        if len(self._alerts_user) != before:
+            self._save("alerts_user.json", self._alerts_user)
 
     # ------------------------------------------------------------------ persistence
     def _save(self, name, payload):
         config.atomic_write_json(config.data_path(name), payload)
-
-    def save_countries(self):
-        with self._lock:
-            self._save("countries_data.json", db.COUNTRIES_DB)
 
     # ------------------------------------------------------------------ alerts
     def alerts(self):

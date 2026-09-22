@@ -37,7 +37,7 @@ def _default_data_dir():
 
 
 DATA_DIR = _default_data_dir()
-SEED_FILES = ("countries_data.json", "surveillance_log.json")
+SEED_FILES = ("surveillance_log.json",)
 
 DEFAULT_SETTINGS = {
     "company_name": "SanDisk",

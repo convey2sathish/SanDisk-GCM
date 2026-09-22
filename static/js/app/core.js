@@ -344,11 +344,6 @@
         case 'new-action': GCM.actions.createFor(null, null, {}); break;
         case 'dismiss-notification': document.getElementById('top-notification')?.classList.add('hidden'); break;
         case 'backup-download': GCM.api.download('/api/backup', 'Preparing backup…'); break;
-        case 'reset-knowledge-base':
-          GCM.ui.confirm('Restore the shipped country knowledge base? All detected standard transitions on the 205 country records will be removed. Alerts, ledger, actions, products and certificates are kept.', { title: 'Reset knowledge base', okLabel: 'Reset', danger: true })
-            .then(ok => { if (!ok) return; return GCM.api.post('/api/surveillance/reset-knowledge-base', {}).then(r => { GCM.ui.toast('Knowledge base restored', `${r.restored} country records reset to the shipped seed.`); GCM.bus.emit('countries:changed'); }); })
-            .catch(err => GCM.ui.toast('Reset failed', err.message, 'error'));
-          break;
         case 'deeplink-alert': GCM.deeplink.alert(arg); break;
         case 'deeplink-country': GCM.deeplink.country(arg); break;
         case 'deeplink-product': GCM.deeplink.product(arg); break;

@@ -4,10 +4,8 @@ reg_surveillance.py - Autonomous Regulatory Surveillance Engine (v2)
 Watches global / regional regulatory gateways (WTO TBT ePing, US Federal Register,
 EUR-Lex, BIS, RRA, BSMI, SAMR, GSO, ARSO, ...) for storage-relevant notices,
 turns them into structured events, records them in a tamper-evident ledger and
-applies them to the working copy of the country knowledge base as *transitions*
-(the current mandatory standard stays valid until the notice's deadline; the
-incoming standard is recorded alongside it). Every applied event also produces
-a fully enriched regulation alert with resolved product impacts.
+records them in a tamper-evident ledger and creates fully enriched regulation alerts
+with resolved product impacts. Country requirement records are never modified.
 
 v2 fixes versus v1:
   * never writes into the read-only bundle directory (uses config.DATA_DIR)
@@ -430,30 +428,8 @@ class RegulatorySurveillanceEngine:
         event["no_deadline"] = not has_deadline
         # A detected notice without an explicit cutover date is informational: it is ledgered and
         # alerted but must not be recorded as a standard transition on the country records.
-        records_transition = has_deadline
-        if self.db and records_transition:
-            with self._lock:
-                for code in codes:
-                    c = self.db.COUNTRIES_DB[code]
-                    transitions = [t for t in c.get("transitions", []) if t.get("event_id") != event["event_id"]]
-                    for p in pillars:
-                        field = PILLAR_FIELD.get(p)
-                        transitions.append({
-                            "event_id": event["event_id"], "pillar": p, "from": c.get(field) if field else None, "to": new_std,
-                            "deadline": deadline, "effective_date": event.get("effective_date"), "source": event.get("source_name"),
-                            "source_url": event.get("source_url"), "applied_at": applied_at,
-                        })
-                        if field:
-                            c[f"{field}_next"] = new_std
-                            c[f"{field}_transition_deadline"] = deadline
-                    c["transitions"] = transitions[-12:]
-                    c["last_surveilled_date"] = applied_at
-                    c["last_surveilled_pillar"] = pillar
-                    c["surveillance_source"] = event.get("source_name")
-                if self.store and codes:
-                    self.store.save_countries()
-        event["affected_countries_count"] = len(codes) if records_transition else len(codes)
-        event["transition_recorded"] = records_transition
+        # Country records are never modified by surveillance: notices live in the ledger and as alerts only.
+        event["affected_countries_count"] = len(codes)
         event["impacted_products"] = event.get("impacted_products") or resolve_product_impacts(
             event.get("affected_categories", []), country_code=event.get("country_code"), region=event.get("country_name"),
             products=self.store.products() if self.store else None)
@@ -511,19 +487,6 @@ class RegulatorySurveillanceEngine:
             "surveillance_event_id": event.get("event_id"),
         }
         return self.store.add_alert(alert)
-
-    # ------------------------------------------------------------------ maintenance
-    def reset_to_seed(self):
-        """Discard recorded transitions: reload the shipped country knowledge base into the working copy."""
-        seed = config.read_json(config.bundle_path("countries_data.json"), None)
-        if not isinstance(seed, dict) or not seed or not self.db:
-            return {"restored": 0}
-        with self._lock:
-            self.db.COUNTRIES_DB.clear()
-            self.db.COUNTRIES_DB.update(seed)
-            if self.store:
-                self.store.save_countries()
-        return {"restored": len(seed)}
 
 
 _engine = None
