@@ -1192,14 +1192,14 @@
     "env_std": "TSCA / Prop 65 / DoE Level VI",
     "cb_scheme_accepted": true,
     "in_country_testing": false,
-    "local_rep_required": false,
+    "local_rep_required": true,
     "cert_validity": "Permanent (Design Life)",
     "marks": [
       "FCC",
       "cULus / NRTL"
     ],
     "lead_time_weeks": 2,
-    "notes": "FCC SDoC for un-intentional radiators. NRTL (UL/CSA/ETL) safety mark expected for powered units. DoE Level VI mandatory for external power supply.",
+    "notes": "FCC Part 15B SDoC for unintentional radiators; the SDoC requires a US-based responsible party (47 CFR 2.1077). NRTL (UL/CSA/ETL) safety mark expected for mains-powered units. DoE Level VI mandatory for external power supplies.",
     "rohs_std": "US RoHS (State-Level: CA, NY, NJ) | TSCA Section 6 Restrictions",
     "pfas_std": "TSCA Sec. 8(a)(7) Mandatory PFAS Reporting | State PFAS Bans (Maine LD 1503 / MN Amara's Law)",
     "packaging_std": "California SB 54 (Plastic Pollution Prevention Act) | Toxics in Packaging Clearinghouse (TPCH)",
@@ -1235,7 +1235,7 @@
     "region": "Americas",
     "bloc": "USMCA",
     "authority": "IFT / DGN / NYCE / ANCE",
-    "safety_std": "NOM-019-SCFI / NOM-001-SCFI-2018",
+    "safety_std": "NOM-001-SCFI-2018 (replaced NOM-019-SCFI-1998)",
     "emc_std": "IFT-008 / NOM-208",
     "env_std": "Mexican RoHS / Energy Law",
     "cb_scheme_accepted": true,
@@ -2047,15 +2047,15 @@
     "region": "Asia-Pacific",
     "bloc": "East Asia",
     "authority": "BSMI / NCC",
-    "safety_std": "CNS 14336-1 / CNS 15598-1",
-    "emc_std": "CNS 13438 (EMC)",
+    "safety_std": "CNS 15598-1 (IEC 62368-1)",
+    "emc_std": "CNS 15936 (CISPR 32)",
     "env_std": "CNS 15663 Section 5 (RoHS)",
     "cb_scheme_accepted": true,
     "in_country_testing": true,
     "local_rep_required": true,
     "cert_validity": "3 Years",
     "marks": [
-      "BSMI (R33008)"
+      "BSMI Commodity Inspection Mark (RPC / DoC)"
     ],
     "lead_time_weeks": 6,
     "notes": "BSMI registration of product certification (RPC) mandatory for SSDs and power adapters. Section 5 restricted substance declaration required on packaging.",
@@ -2140,15 +2140,15 @@
     "region": "Asia-Pacific",
     "bloc": "South Asia",
     "authority": "BIS / MeitY / WPC",
-    "safety_std": "IS 13252 (Part 1):2010 / IS 16333",
-    "emc_std": "IS 13252 / TEC",
+    "safety_std": "IS 13252 (Part 1):2010 [IEC 60950-1] – transition to IS/IEC 62368-1 under BIS CRS",
+    "emc_std": "No mandatory EMC approval for wired storage (TEC MTCTE applies to telecom equipment only)",
     "env_std": "E-Waste (Management) Rules RoHS",
     "cb_scheme_accepted": true,
     "in_country_testing": true,
     "local_rep_required": true,
     "cert_validity": "2 Years",
     "marks": [
-      "BIS (IS 13252 / IS 16169)"
+      "BIS Standard Mark with CRS R-number"
     ],
     "lead_time_weeks": 10,
     "notes": "Mandatory BIS CRS registration for External SSDs and AC power adapters. Local testing at BIS accredited laboratory in India. Authorized Indian Representative (AIR) required.",

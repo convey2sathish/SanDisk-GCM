@@ -187,7 +187,7 @@ REGULATION_ALERTS = [
         "country": "European Union (EU 27)",
         "standard": "Regulation (EU) 2024/2847 / EN 18031",
         "severity": "Critical",
-        "effective_date": "2027-01-01",
+        "effective_date": "2027-12-11",
         "affected_categories": ["internal_ssd", "external_ssd_bus", "external_ssd_powered", "enterprise_ssd", "usb_drive"],
         "summary": "The EU Cyber Resilience Act mandates horizontal cybersecurity rules for products with digital elements. Hardware storage devices with onboard microcontrollers must feature vulnerability reporting mechanisms, secure default firmware, and Software Bill of Materials (SBOM).",
         "action_required": "Establish SBOM documentation and ensure cryptographically signed firmware procedures are documented for Technical Documentation File.",
@@ -196,9 +196,11 @@ REGULATION_ALERTS = [
         "detailed_summary": "The European Union has enacted Regulation (EU) 2024/2847 (Cyber Resilience Act), introducing the world's first mandatory horizontal cybersecurity baseline for hardware products with digital elements placed on the EU Single Market. For solid-state drives, external drives, and intelligent USB storage controllers, the regulation imposes legal duty-of-care obligations throughout the product lifecycle. Manufacturers must certify that flash microcontrollers are designed without known exploitable vulnerabilities, incorporate secure boot mechanisms, support cryptographically authenticated firmware updates, and maintain a verifiable Software Bill of Materials (SBOM). Furthermore, manufacturers are legally required to report actively exploited vulnerabilities to ENISA and relevant national CSIRTs within 24 hours of discovery.",
         "technical_impact": "Requires hardware root-of-trust or authenticated ECDSA/RSA firmware signing keys on flash memory controllers (NVMe/SATA/USB bridge ASICs). Unsigned firmware flashing via DFU or vendor diagnostic commands must be permanently disabled in production SKUs. SBOM must be maintained in CycloneDX or SPDX machine-readable formats covering all firmware components.",
         "timeline_milestones": [
-            {"phase": "Regulation Entry into Force", "date": "2024-11-20", "status": "Completed"},
-            {"phase": "Mandatory Vulnerability Reporting to ENISA (24hr SLA)", "date": "2026-05-11", "status": "Upcoming"},
-            {"phase": "Full Mandatory Conformity Assessment & CE Marking Enforcement", "date": "2027-01-01", "status": "Enforcement Deadline"}
+            {"phase": "Regulation (EU) 2024/2847 published in the Official Journal", "date": "2024-11-20", "status": "Completed"},
+            {"phase": "Entry into force", "date": "2024-12-10", "status": "Completed"},
+            {"phase": "Provisions on notification of conformity assessment bodies apply", "date": "2026-06-11", "status": "Completed"},
+            {"phase": "Reporting obligations for actively exploited vulnerabilities and severe incidents (Art. 14) apply", "date": "2026-09-11", "status": "Active"},
+            {"phase": "Full application: conformity assessment, CE marking and all manufacturer obligations", "date": "2027-12-11", "status": "Enforcement Deadline"}
         ],
         "official_links": [
             {"label": "Official Journal Regulation (EU) 2024/2847 (EUR-Lex)", "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32024R2847"},
@@ -231,7 +233,7 @@ REGULATION_ALERTS = [
             {"phase": "Publication of IEC 62368-1:2023 Standard", "date": "2023-05-26", "status": "Completed"},
             {"phase": "IECEE CTL TRF 62368-1_4 Available for Lab Accreditation", "date": "2024-03-15", "status": "Active"},
             {"phase": "CENELEC Harmonization in Europe (EN IEC 62368-1:2024)", "date": "2025-12-31", "status": "In Progress"},
-            {"phase": "Mandatory Sunset of Edition 3 in Major NCBs", "date": "2026-12-31", "status": "Target Cutover"}
+            {"phase": "Indicative sunset of Edition 3 at major NCBs – confirm with your certification body", "date": "2026-12-31", "status": "Indicative"}
         ],
         "official_links": [
             {"label": "IECEE CB Scheme Official CTL Portal", "url": "https://www.iecee.org/dyn/www/f?p=106:1:0:::::"},
@@ -328,7 +330,7 @@ REGULATION_ALERTS = [
         "timeline_milestones": [
             {"phase": "FCC 22-84 Order Effective Date", "date": "2023-02-06", "status": "Completed"},
             {"phase": "KDB 986446 D01 Attestation Procedures Enforced", "date": "2024-01-01", "status": "Active"},
-            {"phase": "Mandatory Annual Re-Verification of US Agent & Attestations", "date": "2026-08-01", "status": "Annual Audit"}
+            {"phase": "Indicative annual re-verification of US agent & attestations – confirm with TCB", "date": "2026-08-01", "status": "Indicative"}
         ],
         "official_links": [
             {"label": "FCC Official Covered List Database", "url": "https://www.fcc.gov/supplychain/coveredlist"},
@@ -360,7 +362,7 @@ REGULATION_ALERTS = [
         "timeline_milestones": [
             {"phase": "SASO RoHS Technical Regulation Publication", "date": "2021-07-09", "status": "Completed"},
             {"phase": "Phase 1-3 IT Equipment Enforcement", "date": "2022-2024", "status": "Completed"},
-            {"phase": "Mandatory Customs Enforcement on All 8523.51 Storage SKUs", "date": "2026-10-01", "status": "Enforcement Deadline"}
+            {"phase": "Indicative customs enforcement on HS 8523.51 storage SKUs – confirm with SASO / SABER", "date": "2026-10-01", "status": "Indicative"}
         ],
         "official_links": [
             {"label": "Saudi Standards (SASO) Official Portal", "url": "https://www.saso.gov.sa/en/pages/default.aspx"},
@@ -411,7 +413,7 @@ REGULATION_ALERTS = [
         "title": "Taiwan BSMI CNS 15663 Section 5 - Marking Presence Condition Scrutiny",
         "region": "Asia-Pacific",
         "country": "Taiwan",
-        "standard": "CNS 15663 Section 5 / CNS 13438",
+        "standard": "CNS 15663 Section 5 / CNS 15936 (CISPR 32)",
         "severity": "Warning",
         "effective_date": "2026-09-30",
         "affected_categories": ["internal_ssd", "external_ssd_bus", "external_ssd_powered", "usb_drive", "card_reader"],
@@ -456,7 +458,7 @@ REGULATION_ALERTS = [
         "timeline_milestones": [
             {"phase": "Publication of GB 4943.1-2022", "date": "2022-07-19", "status": "Completed"},
             {"phase": "Mandatory Implementation for New Submissions", "date": "2023-08-01", "status": "Completed"},
-            {"phase": "Final Transition Deadline for Existing CCC Certificate Upgrades", "date": "2026-10-31", "status": "Cutoff Deadline"}
+            {"phase": "Indicative final transition for existing CCC certificates – confirm with CQC / CNCA", "date": "2026-10-31", "status": "Indicative"}
         ],
         "official_links": [
             {"label": "State Administration for Market Regulation (SAMR)", "url": "https://www.samr.gov.cn"},
@@ -479,7 +481,7 @@ REGULATION_ALERTS = [
         "severity": "Critical",
         "effective_date": "Enforced",
         "affected_categories": ["external_ssd_bus", "external_ssd_powered", "enterprise_ssd", "card_reader"],
-        "summary": "UK law requires all connectable consumer hardware products sold in Great Britain to have a published Statement of Compliance (SoC), explicit vulnerability disclosure policy, and a defined minimum support period for security patches.",
+        "summary": "Scope note: PSTI applies to internet-connectable and network-connectable consumer products; plain USB/SD storage without network connectivity is out of scope, network-attached or wireless storage is in scope. UK law requires all connectable consumer hardware products sold in Great Britain to have a published Statement of Compliance (SoC), explicit vulnerability disclosure policy, and a defined minimum support period for security patches.",
         "action_required": "Maintain up-to-date Statements of Compliance on public website and verify packaging includes customer support URLs.",
         "status": "Active Enforcement",
         "source": "Office for Product Safety and Standards (OPSS)",
@@ -509,7 +511,7 @@ REGULATION_ALERTS = [
         "country": "United States",
         "standard": "TSCA 40 CFR Part 705 (PFAS Reporting Rule)",
         "severity": "Critical",
-        "effective_date": "2026-05-08",
+        "effective_date": "2026-10-13",
         "affected_categories": ["sd_card", "micro_sd", "sd_express", "cf_card", "gaming_card", "usb_drive", "internal_ssd", "external_ssd_bus", "external_ssd_powered", "enterprise_ssd", "card_reader"],
         "summary": "EPA final rule under TSCA Section 8(a)(7) mandates one-time retrospective reporting of manufactured or imported articles containing per- and polyfluoroalkyl substances (PFAS) since 2011, including electronic storage drives, cables, and packaging.",
         "action_required": "Execute supply chain chemical inquiry to identify all PFAS-containing components (thermal pads, fluoropolymer wire jackets, lubricants, mold compounds) and prepare EPA CDX reporting submission.",
@@ -519,8 +521,9 @@ REGULATION_ALERTS = [
         "technical_impact": "Article importers must report chemical identity, specific CAS numbers, trade names, quantities imported per year since 2011, customer exposure scenarios, and disposal pathways using EPA Central Data Exchange (CDX). Due diligence requires issuing IPC-1752A Class D inquiries to all NAND wafer suppliers, PCB assemblers, and enclosure molders.",
         "timeline_milestones": [
             {"phase": "EPA TSCA 8(a)(7) Final Rule Promulgation", "date": "2023-10-11", "status": "Completed"},
-            {"phase": "EPA Central Data Exchange (CDX) Portal Opens for Submissions", "date": "2025-11-12", "status": "Active"},
-            {"phase": "Mandatory Electronic Submission Deadline for Article Importers", "date": "2026-05-08", "status": "Enforcement Deadline"}
+            {"phase": "EPA CDX submission period opens (per EPA extension rule)", "date": "2026-04-13", "status": "Completed"},
+            {"phase": "Submission deadline for manufacturers and importers (incl. articles)", "date": "2026-10-13", "status": "Enforcement Deadline"},
+            {"phase": "Extended deadline for small-business article importers", "date": "2027-04-13", "status": "Upcoming"}
         ],
         "official_links": [
             {"label": "US EPA TSCA Section 8(a)(7) Official PFAS Reporting Portal", "url": "https://www.epa.gov/assessing-and-managing-chemicals-under-tsca/tsca-section-8a7-reporting-and-recordkeeping-requirements"},
@@ -539,9 +542,9 @@ REGULATION_ALERTS = [
         "title": "EU Packaging & Packaging Waste Regulation (PPWR) — Recycled Plastic Content & Heavy Metal Limits",
         "region": "Europe & Eurasia",
         "country": "European Union (EU 27)",
-        "standard": "EU PPWR (Repealing Directive 94/62/EC)",
+        "standard": "Regulation (EU) 2025/40 – PPWR (repealing Directive 94/62/EC)",
         "severity": "Critical",
-        "effective_date": "2026-12-31",
+        "effective_date": "2026-08-12",
         "affected_categories": ["sd_card", "micro_sd", "sd_express", "cf_card", "gaming_card", "usb_drive", "internal_ssd", "external_ssd_bus", "external_ssd_powered", "card_reader"],
         "summary": "European Parliament and Council adopted the new Packaging and Packaging Waste Regulation (PPWR). Mandates 100% recyclable packaging by 2030, minimum post-consumer recycled plastic thresholds, and strict ban on PFAS in food/consumer contact packaging.",
         "action_required": "Redesign retail blister packs and drive cartons to incorporate minimum 35% post-consumer recycled (PCR) plastic content, eliminate unnecessary voids (>50% empty space ban), and audit heavy metal limits (<100 ppm).",
@@ -551,8 +554,9 @@ REGULATION_ALERTS = [
         "technical_impact": "Requires transition from virgin thermoformed PVC/PET blister trays to verified post-consumer recycled (rPET) or certified cellulose/paper pulp trays. Packaging engineering must recalculate box volume-to-drive ratios to satisfy maximum 50% void ratio limits.",
         "timeline_milestones": [
             {"phase": "EU Council & Parliament Formal Political Agreement", "date": "2024-04-24", "status": "Completed"},
-            {"phase": "Official Journal Publication & 18-Month Entry into Force", "date": "2024-12-01", "status": "Active"},
-            {"phase": "Mandatory Packaging Heavy Metal & Empty Space Ratio Enforcement", "date": "2026-12-31", "status": "Enforcement Cutover"},
+            {"phase": "Regulation (EU) 2025/40 published in the Official Journal", "date": "2025-01-22", "status": "Completed"},
+            {"phase": "Entry into force", "date": "2025-02-11", "status": "Completed"},
+            {"phase": "PPWR applies (general application date; several obligations phase in later)", "date": "2026-08-12", "status": "Active"},
             {"phase": "Mandatory Minimum Recycled Plastic Content Enforcement", "date": "2030-01-01", "status": "Future Target"}
         ],
         "official_links": [
@@ -697,7 +701,7 @@ REGULATION_ALERTS = [
     },
     {
         "id": "ALERT-ENV-07",
-        "title": "EU RoHS Recast (RoHS 4) & REACH Candidate List — Restrictions on TBBP-A and MCCPs in PCBAs",
+        "title": "EU RoHS Review (proposed recast) & REACH Candidate List — Possible Restrictions on TBBP-A and MCCPs in PCBAs",
         "region": "Europe & Eurasia",
         "country": "European Union (EU 27)",
         "standard": "RoHS Recast Review (Directive 2011/65/EU Amendment) / REACH SVHC",
@@ -714,7 +718,7 @@ REGULATION_ALERTS = [
             {"phase": "Oeko-Institut Pack 15 Chemical Assessment Final Report", "date": "2021-03-01", "status": "Completed"},
             {"phase": "European Commission RoHS Review Public Consultation", "date": "2024-06-30", "status": "Completed"},
             {"phase": "Draft Delegated Directive for Substance Inclusion", "date": "2026-06-30", "status": "Upcoming"},
-            {"phase": "Earliest Enforcement Date with Typical 24-Month Transition Window", "date": "2027-01-01", "status": "Anticipated Cutover"}
+            {"phase": "Earliest conceivable application date (proposal not yet adopted)", "date": "2027-01-01", "status": "Indicative"}
         ],
         "official_links": [
             {"label": "European Commission RoHS Directive Evaluation & Review", "url": "https://environment.ec.europa.eu/topics/waste-and-recycling/rohs-directive_en"},
@@ -990,7 +994,7 @@ SAMPLE_CERTIFICATES = [
         "id": "CERT-005",
         "cert_no": "EXAMPLE-BSMI-0005",
         "scheme": "Taiwan BSMI RPC Certification",
-        "standard": "CNS 13438 / CNS 15663 Section 5",
+        "standard": "CNS 15936 / CNS 15663 Section 5",
         "issuing_body": _EXAMPLE_ISSUER,
         "product_id": "PROD-007",
         "product_name": "Example product – internal SSD (M.2 NVMe)",
