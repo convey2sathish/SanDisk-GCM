@@ -378,3 +378,37 @@ def register(app, ctx):
     def alerts_ai_cache_clear():
         ai_bridge.clear_cache()
         return jsonify({"success": True})
+
+    register_research(app, ctx)
+
+
+# ---------------------------------------------------------------------- Ask the Expert (general research)
+def register_research(app, ctx):
+    """General regulatory research assistant (not tied to one alert). See expert_research.py."""
+    import expert_research
+
+    @app.post("/api/expert/research")
+    def research_ask():
+        data = request.get_json(silent=True)
+        if not isinstance(data, dict):
+            return jsonify({"error": "JSON body required"}), 400
+        question = re.sub(r"\s+", " ", str(data.get("question") or "")).strip()
+        if not question:
+            return jsonify({"error": "question is required"}), 400
+        if len(question) > expert_research.MAX_QUESTION:
+            return jsonify({"error": f"question too long (max {expert_research.MAX_QUESTION} characters)"}), 400
+        history = data.get("history") if isinstance(data.get("history"), list) else []
+        history = [h for h in history if isinstance(h, dict) and h.get("role") in ("user", "assistant") and isinstance(h.get("content"), str)][-8:]
+        allow_ai = data.get("ai", True) not in (False, 0, "0", "false", "no")
+        allow_web = data.get("web", True) not in (False, 0, "0", "false", "no")
+        try:
+            result = expert_research.research(question, history=history, ctx=ctx, allow_ai=allow_ai, allow_web=allow_web)
+        except Exception as e:  # never 500 without JSON
+            return jsonify({"error": f"research failed: {type(e).__name__}: {e}"}), 500
+        if (data.get("format") or "").lower() == "text":
+            return Response(expert_research.brief_text(result), mimetype="text/plain; charset=utf-8")
+        return jsonify(result)
+
+    @app.get("/api/expert/suggestions")
+    def research_suggestions():
+        return jsonify({"suggestions": expert_research.suggestions()})

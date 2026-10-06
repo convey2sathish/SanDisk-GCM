@@ -33,6 +33,9 @@
                     <button type="button" data-action="palette" class="btn btn-secondary hidden md:inline-flex" title="Search everything (Ctrl+K)">
                         <i data-lucide="search" class="w-4 h-4 text-sky-400"></i><span>Search</span><span class="kbd ml-1">Ctrl K</span>
                     </button>
+                    <button type="button" data-action="open-expert" class="btn btn-indigo hidden sm:inline-flex" title="Ask the Expert - research any regulatory question">
+                        <i data-lucide="sparkles" class="w-4 h-4"></i><span>Ask the Expert</span>
+                    </button>
                     <button type="button" data-action="new-action" class="btn btn-ghost" title="Create action item">
                         <i data-lucide="plus-square" class="w-4 h-4 text-emerald-400"></i><span class="hidden lg:inline">Action</span>
                     </button>
@@ -82,6 +85,7 @@
     <!-- ===================================================== SHARED MODALS -->
     {% include 'partials/modals_core.html' %}
     {% include 'partials/modal_explain.html' %}
+    {% include 'partials/modal_expert_research.html' %}
 
     <!-- Top notification banner -->
     <div id="top-notification" class="fixed top-5 left-1/2 -translate-x-1/2 z-[60] hidden max-w-xl w-[92vw] sm:w-full glass border-2 border-emerald-500 text-white p-4 rounded-2xl shadow-2xl">
@@ -114,6 +118,7 @@
     <script src="{{ url_for('static', filename='js/app/map.js') }}?v={{ version }}"></script>
     <script src="{{ url_for('static', filename='js/app/alerts.js') }}?v={{ version }}"></script>
     <script src="{{ url_for('static', filename='js/app/expert.js') }}?v={{ version }}"></script>
+    <script src="{{ url_for('static', filename='js/app/research.js') }}?v={{ version }}"></script>
     <script src="{{ url_for('static', filename='js/app/horizon.js') }}?v={{ version }}"></script>
     <script src="{{ url_for('static', filename='js/app/portfolio.js') }}?v={{ version }}"></script>
     <script src="{{ url_for('static', filename='js/app/docaudit.js') }}?v={{ version }}"></script>

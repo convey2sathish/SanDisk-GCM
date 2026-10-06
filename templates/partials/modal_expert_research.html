@@ -1,0 +1,59 @@
+<!-- Ask the Expert - general regulatory research assistant (owner: alerts module, research.js) -->
+<style>
+    .rs-msg { max-width: 94%; border-radius: 1rem; padding: .7rem .95rem; font-size: 12px; line-height: 1.55; }
+    .rs-user { margin-left: auto; background: linear-gradient(135deg, #4f46e5, #7c3aed); color: #fff; border-bottom-right-radius: .25rem; }
+    .rs-bot { margin-right: auto; width: 94%; background: rgba(2,6,23,.6); border: 1px solid #334155; color: #e2e8f0; border-bottom-left-radius: .25rem; }
+    .rs-section { border: 1px solid #1e293b; border-radius: .65rem; background: rgba(15,23,42,.7); }
+    .rs-section > summary { cursor: pointer; list-style: none; padding: .5rem .75rem; font-size: 11px; font-weight: 700; color: #cbd5e1; display: flex; align-items: center; gap: .5rem; }
+    .rs-section > summary::-webkit-details-marker { display: none; }
+    .rs-section > summary .rs-chev { margin-left: auto; transition: transform .15s ease; color: #64748b; }
+    .rs-section[open] > summary .rs-chev { transform: rotate(180deg); }
+    .rs-section > .rs-body { padding: .25rem .85rem .75rem; font-size: 11.5px; color: #cbd5e1; white-space: pre-wrap; line-height: 1.55; }
+    .rs-chip { display: inline-flex; align-items: center; gap: .3rem; padding: .3rem .65rem; border-radius: 999px; font-size: 11px; font-weight: 600; color: #c7d2fe; background: rgba(49,46,129,.35); border: 1px solid rgba(99,102,241,.45); cursor: pointer; transition: all .15s ease; text-align: left; }
+    .rs-chip:hover { color: #fff; background: rgba(79,70,229,.5); border-color: #818cf8; }
+    .rs-step { display: flex; align-items: center; gap: .5rem; font-size: 11px; color: #64748b; }
+    .rs-step.active { color: #c7d2fe; } .rs-step.done { color: #6ee7b7; }
+    .rs-step .dot { width: 8px; height: 8px; border-radius: 999px; background: #334155; }
+    .rs-step.active .dot { background: #818cf8; animation: rs-pulse 1s infinite ease-in-out; } .rs-step.done .dot { background: #34d399; }
+    @keyframes rs-pulse { 0%, 100% { transform: scale(.8); opacity: .6; } 50% { transform: scale(1.2); opacity: 1; } }
+    .rs-table th { font-size: 10px; text-transform: uppercase; letter-spacing: .06em; color: #94a3b8; font-weight: 700; padding: .35rem .5rem; text-align: left; border-bottom: 1px solid #334155; }
+    .rs-table td { padding: .45rem .5rem; vertical-align: top; border-bottom: 1px solid #1e293b; font-size: 11px; color: #cbd5e1; }
+</style>
+
+<div id="modal-expert-research" class="modal hidden" aria-hidden="true" role="dialog" aria-label="Ask the Expert - regulatory research assistant">
+    <div class="modal-panel max-w-5xl">
+        <div class="modal-head !items-start">
+            <div class="flex items-start gap-3 min-w-0">
+                <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-indigo-600 to-purple-700 flex items-center justify-center shadow-lg shadow-indigo-900/50 shrink-0"><i data-lucide="sparkles" class="w-5 h-5 text-white"></i></div>
+                <div class="min-w-0">
+                    <h3 class="text-sm font-bold text-white leading-snug">Ask the Expert</h3>
+                    <p class="text-[11px] text-slate-400 mt-0.5">A diligent compliance researcher: understands your question, consults the knowledge base and alert register, searches the web when online, and returns a sourced brief.</p>
+                </div>
+            </div>
+            <div class="flex flex-col items-end gap-2 shrink-0">
+                <div class="flex items-center gap-1">
+                    <button type="button" id="rs-copy" class="btn btn-ghost btn-sm" title="Copy the latest brief as plain text" disabled><i data-lucide="copy" class="w-3.5 h-3.5"></i><span class="hidden sm:inline">Copy brief</span></button>
+                    <button type="button" id="rs-action" class="btn btn-ghost btn-sm" title="Create an action item from the latest brief" disabled><i data-lucide="plus-square" class="w-3.5 h-3.5 text-emerald-400"></i><span class="hidden sm:inline">Create action</span></button>
+                    <button type="button" id="rs-clear" class="btn btn-ghost btn-sm" title="Start a new research thread"><i data-lucide="eraser" class="w-3.5 h-3.5"></i><span class="hidden sm:inline">New thread</span></button>
+                    <button type="button" data-action="close-modal" data-arg="modal-expert-research" class="btn btn-ghost btn-sm" aria-label="Close"><i data-lucide="x" class="w-4 h-4"></i></button>
+                </div>
+                <div class="flex items-center gap-1.5 flex-wrap justify-end">
+                    <span id="rs-engine-pill" class="pill gap-1.5" title="Which engine writes the brief"><span class="w-1.5 h-1.5 rounded-full bg-slate-500"></span><span>Engine: rules (grounded)</span></span>
+                    <span id="rs-net-pill" class="pill gap-1.5" title="Web research availability"><span class="w-1.5 h-1.5 rounded-full bg-slate-500"></span><span>Web: unknown</span></span>
+                </div>
+            </div>
+        </div>
+        <div class="modal-body scrollbar space-y-3 text-xs" id="rs-transcript" aria-live="polite"></div>
+        <div class="modal-foot flex-col !items-stretch gap-2">
+            <div id="rs-suggestions" class="flex flex-wrap gap-1.5"></div>
+            <form id="rs-form" class="flex items-end gap-2" autocomplete="off">
+                <textarea id="rs-input" class="input flex-1 resize-none !py-2 text-xs leading-snug" rows="2" maxlength="1000" placeholder="Ask any regulatory question - e.g. 'Does a bus-powered SSD need KC certification in Korea?' (Enter to research, Shift+Enter for a new line)" autofocus></textarea>
+                <button type="submit" id="rs-send" class="btn btn-indigo"><i data-lucide="search-check" class="w-4 h-4"></i><span>Research</span></button>
+            </form>
+            <div class="flex items-center justify-between text-[10.5px] text-slate-500">
+                <span>Answers are grounded on the shipped knowledge base, alert register and (when online) web sources. Verify against the official text before certifying.</span>
+                <span id="rs-count" class="mono">0 / 1000</span>
+            </div>
+        </div>
+    </div>
+</div>
