@@ -379,7 +379,6 @@ def register(app, ctx):
         ai_bridge.clear_cache()
         return jsonify({"success": True})
 
-    register_research(app, ctx)
 
 
 # ---------------------------------------------------------------------- Ask the Expert (general research)
