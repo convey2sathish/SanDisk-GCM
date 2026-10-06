@@ -229,7 +229,7 @@ def register(app, ctx):
                 "category_name": cat["name"], "requirement_type": rule.get("requirement_type"),
                 "is_exempt_from_mains_safety": rule.get("is_safety_exempt"), "safety_status": rule.get("safety_status"),
                 "testing_location": rule.get("testing_location"), "badge": rule.get("badge"),
-                "applicable_marks": country.get("marks", []), "lead_time": f"{rule.get('lead_time', country.get('lead_time_weeks', 2))} weeks",
+                "applicable_marks": rule.get("applicable_marks") or country.get("marks", []), "lead_time": f"{rule.get('lead_time', country.get('lead_time_weeks', 2))} weeks",
                 "required_documents": rule.get("required_documents", []), "notes": rule.get("notes"),
                 "applicable_requirements": rule.get("applicable_requirements", []),
                 "applicable_summary": rule.get("applicable_summary", ""),

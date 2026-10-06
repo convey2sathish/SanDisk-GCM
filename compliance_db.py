@@ -157,6 +157,7 @@ PRODUCT_CATEGORIES = {
 
 
 import os
+import re
 import sys
 import json
 
@@ -1947,7 +1948,43 @@ def get_country_product_requirement(country_code, category_id):
     if exempt_parts:
         applicable_summary += " · Exempt: " + ", ".join(exempt_parts)
 
+    # ---- applicable marks / logos: only marks whose regime actually applies to this product here
+    _status = {r['pillar']: r['status'] for r in reqs}
+    _safety_emc_exempt = _status.get('Safety') == 'Exempt' and _status.get('EMC') in ('Exempt', None)
+    _emc_exempt = _status.get('EMC') == 'Exempt'
+    _safety_exempt = _status.get('Safety') == 'Exempt'
+    _SAFETY_ONLY = ('PSE', 'NRTL', 'CULUS', 'CUL', 'CSA', 'NOM', 'NYCE', 'ANCE', 'INMETRO', 'SAFETY MARK', 'TISI', 'SIRIM', 'SNI', 'S-MARK', 'SEC', 'SII', 'NRCS', 'SABS', 'BIS', 'KC 62368', 'IRAM', 'CCC')
+    _EMC_ONLY = ('FCC', 'VCCI', 'ISED', 'ICES', 'ANATEL', 'MCMC', 'NCC', 'NTRA', 'SDPPI', 'TDRA', 'CST', 'ICASA', 'KC MARK', 'KC', 'BSMI', 'SONCAP')
+    _ENV = ('WEEE', 'ROHS', 'EFUP', 'TRIMAN', 'INFO-TRI')
+    applicable_marks = []
+    for m in country.get('marks', []):
+        mu = m.upper()
+        reason = None
+        if any(k in mu for k in _ENV) or mu.startswith(('CE', 'UKCA', 'EAC', 'RCM', 'SASO', 'G-MARK', 'ECAS', 'EQM', 'GOEIC', 'UA TR', 'KVALITET', 'BAS', 'SABER')):
+            status = 'Required'
+        elif any(k in mu for k in _EMC_ONLY) and any(k in mu for k in _SAFETY_ONLY):
+            status = 'Not required' if _safety_emc_exempt else 'Required'
+            reason = 'Safety and EMC approval both exempt for this product' if _safety_emc_exempt else None
+        elif any(k in mu for k in _EMC_ONLY):
+            status = 'Not required' if _emc_exempt else 'Required'
+            reason = 'EMC registration exempt for this product (passive media)' if _emc_exempt else None
+        elif any(k in mu for k in _SAFETY_ONLY):
+            status = 'Not required' if _safety_exempt else 'Required'
+            reason = 'No mains safety approval for SELV / bus-powered product' if _safety_exempt else None
+        else:
+            status = 'Required'
+        applicable_marks.append({'mark': m, 'status': status, 'reason': reason})
+
+    # Labelling line must only cite marks that are actually required for this product
+    _req_marks = [m['mark'] for m in applicable_marks if m['status'] == 'Required']
+    for r in reqs:
+        if r.get('pillar') == 'Labelling':
+            r['standard'] = ", ".join(_req_marks) if _req_marks else "Statutory packaging / product label (no national approval mark)"
+            note = re.sub(r";?\s*mandatory marks:.*$", "", str(r.get('note') or "")).strip().rstrip(';')
+            r['note'] = (note + (f"; required marks: {', '.join(_req_marks)}" if _req_marks else "; no national approval mark applies to this product")).strip('; ')
+
     return {
+        'applicable_marks': applicable_marks,
         'applicable_requirements': reqs,
         'applicable_summary': applicable_summary,
         'country_code': country['code'],

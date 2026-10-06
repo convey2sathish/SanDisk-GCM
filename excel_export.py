@@ -1,340 +1,197 @@
 """
-Excel Export Engine for Global Compliance Management (GCM)
-Generates professionally formatted, styled .xlsx workbooks for
-the Product-Based Testing vs. Document Compliance Matrix.
-"""
+Excel Export Engine for the GCM Platform compliance matrix.
 
-import io
+The workbook mirrors the on-screen matrix one-to-one: same rows (same filters), same
+columns in the same order, same applicable-requirements / exemption wording and the
+same applicable marks, so what you see in the browser is what you get in Excel.
+"""
 import datetime
+import io
+
 import openpyxl
-from openpyxl.styles import Font, PatternFill, Alignment, Border, Side
+from openpyxl.styles import Alignment, Border, Font, PatternFill, Side
 from openpyxl.utils import get_column_letter
 
 import compliance_db as db
 
+HEADERS = [
+    ("ISO", 8), ("Jurisdiction", 22), ("Region", 20), ("Regulatory Authority", 24),
+    ("Requirement Route", 30), ("Testing Location", 26),
+    ("Applicable Requirements & Exemptions", 60), ("Applicable Summary", 42),
+    ("Mandatory Documentation", 60), ("Applicable Marks / Logos", 30),
+    ("Local Rep", 12), ("Lead Time (wks)", 10),
+    ("RoHS", 34), ("PFAS / Chemicals", 34), ("Packaging", 34), ("EPR / WEEE", 34),
+    ("Regulatory Notes & Scope", 50),
+]
+
+
+def filter_countries(countries, type_filter="all", region_filter="all", search=""):
+    """Same filter semantics as the matrix API so the export matches the display."""
+    tf = (type_filter or "all").lower().strip()
+    rf = (region_filter or "all").lower().strip()
+    sq = (search or "").lower().strip()
+    out = []
+    for c in countries:
+        req = c["requirement_type"]
+        if tf == "testing" and "Testing Required" not in req:
+            continue
+        if tf == "document" and "Document Required" not in req:
+            continue
+        if tf == "sdoc" and ("Supplier Declaration" not in req and "Exempt" not in req):
+            continue
+        if tf == "local_rep" and not c.get("local_rep_required"):
+            continue
+        if rf not in ("", "all") and rf not in c["region"].lower():
+            continue
+        if sq:
+            hay = " ".join(str(c.get(k, "")) for k in (
+                "country_name", "country_code", "authority", "safety_std", "national_safety_std", "emc_std", "env_std",
+                "rohs_std", "pfas_std", "packaging_std", "epr_std", "notes", "bloc", "applicable_summary")).lower()
+            hay += " " + " ".join(c.get("required_documents", [])).lower() + " " + " ".join(c.get("marks", [])).lower()
+            if sq not in hay:
+                continue
+        out.append(c)
+    return out
+
+
+def _requirements_text(c):
+    lines = []
+    for r in c.get("applicable_requirements") or []:
+        if r.get("status") == "Not applicable":
+            continue
+        if r.get("status") == "Exempt":
+            lines.append(f"{r['pillar']}: EXEMPT – {r.get('note') or 'not applicable to this product'}")
+        else:
+            std = r.get("standard") or "—"
+            route = f" [{r['route']}]" if r.get("route") else ""
+            note = f" – {r['note']}" if r.get("note") and r.get("pillar") != "Environmental" else ""
+            lines.append(f"{r['pillar']}: Required – {std}{route}{note}")
+    if not lines:
+        lines = [f"Safety: {c.get('safety_std', '')}", f"EMC: {c.get('emc_std', '')}", f"Environmental: {c.get('env_std', '')}"]
+    return "\n".join(lines)
+
+
+def _marks_text(c):
+    marks = c.get("applicable_marks") or [{"mark": m, "status": "Required"} for m in c.get("marks", [])]
+    req = [m["mark"] for m in marks if m.get("status") == "Required"]
+    not_req = [m["mark"] for m in marks if m.get("status") != "Required"]
+    txt = ", ".join(req) if req else "No national mark required"
+    if not_req:
+        txt += "\nNot required for this product: " + ", ".join(not_req)
+    return txt
+
+
 def export_product_matrix_excel(category_id="external_ssd_powered", type_filter="all", region_filter="all", search="", export_all=False):
-    """
-    Generates an Excel workbook (.xlsx) for the compliance matrix of a given product category.
-    Supports filtering by requirement type, region, and search term.
-    Returns (io.BytesIO, filename_string).
-    """
+    """Returns (io.BytesIO, filename) for the filtered (or full) matrix of one product category."""
     breakdown = db.get_product_market_breakdown(category_id)
     cat_name = breakdown.get("category_name", category_id)
     summary = breakdown.get("summary", {})
     all_countries = breakdown.get("countries", [])
 
-    # Filter countries unless export_all is True
     if export_all:
-        filtered_countries = list(all_countries)
-        filter_desc = "All 205 Jurisdictions (Unfiltered)"
+        rows = list(all_countries)
+        filter_desc = "All 205 jurisdictions (unfiltered)"
     else:
-        filtered_countries = []
-        tf = (type_filter or "all").lower().strip()
-        rf = (region_filter or "all").lower().strip()
-        sq = (search or "").lower().strip()
+        rows = filter_countries(all_countries, type_filter, region_filter, search)
+        parts = []
+        if (type_filter or "all").lower() != "all":
+            parts.append(f"Requirement: {type_filter}")
+        if (region_filter or "all").lower() != "all":
+            parts.append(f"Region: {region_filter}")
+        if (search or "").strip():
+            parts.append(f"Search: '{search.strip()}'")
+        filter_desc = " | ".join(parts) if parts else "All 205 jurisdictions"
 
-        filter_parts = []
-        if tf != "all":
-            filter_parts.append(f"Type: {tf.title()}")
-        if rf != "all":
-            filter_parts.append(f"Region: {rf.title()}")
-        if sq:
-            filter_parts.append(f"Search: '{sq}'")
-        filter_desc = " | ".join(filter_parts) if filter_parts else "All 205 Jurisdictions"
-
-        for c in all_countries:
-            req = c["requirement_type"].lower()
-            if tf == "testing" and "testing required" not in req:
-                continue
-            elif tf == "document" and "document required" not in req:
-                continue
-            elif tf == "sdoc" and not ("supplier declaration" in req or "exempt" in req):
-                continue
-            elif tf == "local_rep" and not c.get("local_rep_required"):
-                continue
-
-            if rf != "all" and rf not in c["region"].lower():
-                continue
-
-            if sq:
-                match = (
-                    sq in c["country_name"].lower() or
-                    sq in c["country_code"].lower() or
-                    sq in c["authority"].lower() or
-                    sq in c.get("safety_std", "").lower() or
-                    sq in c.get("emc_std", "").lower() or
-                    sq in c.get("env_std", "").lower() or
-                    sq in (c.get("rohs_std") or "").lower() or
-                    sq in (c.get("pfas_std") or "").lower() or
-                    sq in (c.get("packaging_std") or "").lower() or
-                    sq in (c.get("epr_std") or "").lower() or
-                    sq in (c.get("notes") or "").lower() or
-                    any(sq in d.lower() for d in c.get("required_documents", [])) or
-                    any(sq in m.lower() for m in c.get("marks", []))
-                )
-                if not match:
-                    continue
-
-            filtered_countries.append(c)
-
-    # Initialize OpenPyXL Workbook
     wb = openpyxl.Workbook()
     ws = wb.active
     ws.title = "Compliance Matrix"
-    ws.views.sheetView[0].showGridLines = True
 
-    # Palette Definitions (Corporate Dark Navy & Professional Accents)
-    navy_fill = PatternFill(start_color="0F172A", end_color="0F172A", fill_type="solid")
+    navy = PatternFill(start_color="0F172A", end_color="0F172A", fill_type="solid")
     header_fill = PatternFill(start_color="1E293B", end_color="1E293B", fill_type="solid")
-    subhdr_fill = PatternFill(start_color="F8FAFC", end_color="F8FAFC", fill_type="solid")
+    sub_fill = PatternFill(start_color="F8FAFC", end_color="F8FAFC", fill_type="solid")
+    fills = {
+        "testing": (PatternFill(start_color="FEE2E2", end_color="FEE2E2", fill_type="solid"), Font(name="Calibri", size=10, bold=True, color="991B1B")),
+        "document": (PatternFill(start_color="FEF3C7", end_color="FEF3C7", fill_type="solid"), Font(name="Calibri", size=10, bold=True, color="92400E")),
+        "sdoc": (PatternFill(start_color="D1FAE5", end_color="D1FAE5", fill_type="solid"), Font(name="Calibri", size=10, bold=True, color="065F46")),
+        "exempt": (PatternFill(start_color="E0F2FE", end_color="E0F2FE", fill_type="solid"), Font(name="Calibri", size=10, bold=True, color="0369A1")),
+    }
+    thin = Side(border_style="thin", color="CBD5E1")
+    border = Border(left=thin, right=thin, top=thin, bottom=thin)
+    last_col = get_column_letter(len(HEADERS))
 
-    testing_fill = PatternFill(start_color="FEE2E2", end_color="FEE2E2", fill_type="solid")
-    testing_font = Font(name="Calibri", size=10, bold=True, color="991B1B")
+    ws.merge_cells(f"A1:{last_col}1")
+    ws["A1"].value = "GCM PLATFORM – PRODUCT TESTING vs. DOCUMENT COMPLIANCE MATRIX (SAFETY | EMC | ENVIRONMENTAL | CYBER)"
+    ws["A1"].font = Font(name="Calibri", size=13, bold=True, color="FFFFFF")
+    ws["A1"].fill = navy
+    ws["A1"].alignment = Alignment(horizontal="left", vertical="center", indent=1)
+    ws.row_dimensions[1].height = 32
 
-    doc_fill = PatternFill(start_color="FEF3C7", end_color="FEF3C7", fill_type="solid")
-    doc_font = Font(name="Calibri", size=10, bold=True, color="92400E")
+    ws.merge_cells(f"A2:{last_col}2")
+    ws["A2"].value = (f"Product classification: {cat_name}   |   Scope: {filter_desc}   |   Exported: "
+                      f"{datetime.datetime.now().strftime('%Y-%m-%d %H:%M')} (local time)   |   Rows: {len(rows)}")
+    ws["A2"].font = Font(name="Calibri", size=10, italic=True, color="334155")
+    ws["A2"].fill = sub_fill
+    ws["A2"].alignment = Alignment(horizontal="left", vertical="center", indent=1)
 
-    sdoc_fill = PatternFill(start_color="D1FAE5", end_color="D1FAE5", fill_type="solid")
-    sdoc_font = Font(name="Calibri", size=10, bold=True, color="065F46")
-
-    exempt_fill = PatternFill(start_color="E0F2FE", end_color="E0F2FE", fill_type="solid")
-    exempt_font = Font(name="Calibri", size=10, bold=True, color="0369A1")
-
-    thin_border_side = Side(border_style="thin", color="CBD5E1")
-    cell_border = Border(left=thin_border_side, right=thin_border_side, top=thin_border_side, bottom=thin_border_side)
-    header_border = Border(left=thin_border_side, right=thin_border_side, top=thin_border_side, bottom=Side(border_style="medium", color="0F172A"))
-
-    # 1. Main Title Banner (Row 1)
-    ws.merge_cells("A1:Q1")
-    title_cell = ws["A1"]
-    title_cell.value = "GCM PLATFORM - PRODUCT COMPLIANCE & TESTING MATRIX (SAFETY | EMC | ENVIRONMENTAL | CYBER)"
-    title_cell.font = Font(name="Calibri", size=13, bold=True, color="FFFFFF")
-    title_cell.fill = navy_fill
-    title_cell.alignment = Alignment(horizontal="left", vertical="center", indent=1)
-    ws.row_dimensions[1].height = 34
-
-    # 2. Metadata Banner (Row 2)
-    now_str = datetime.datetime.now().strftime("%Y-%m-%d %H:%M (local)")
-    ws.merge_cells("A2:Q2")
-    sub_cell = ws["A2"]
-    sub_cell.value = f"Product Classification: {cat_name.upper()}   |   Active Scope: {filter_desc}   |   Export Date: {now_str}"
-    sub_cell.font = Font(name="Calibri", size=10, italic=True, color="334155")
-    sub_cell.fill = subhdr_fill
-    sub_cell.alignment = Alignment(horizontal="left", vertical="center", indent=1)
-    ws.row_dimensions[2].height = 20
-
-    # 3. Category Executive Summary Counts (Row 3)
-    ws.merge_cells("A3:Q3")
-    stats_cell = ws["A3"]
-    stats_cell.value = (
-        f"Category Metrics: {len(filtered_countries)} jurisdictions displayed.  "
-        f"[In-Country Testing Required: {summary.get('testing_required', 0)}]   "
-        f"[Document Acceptance / CB Scheme: {summary.get('document_required', 0)}]   "
-        f"[Supplier Declaration (SDoC): {summary.get('sdoc_required', 0)}]   "
-        f"[Exempt / Standard Customs: {summary.get('exempt', 0)}]"
-    )
-    stats_cell.font = Font(name="Calibri", size=10, bold=True, color="0F172A")
-    stats_cell.fill = subhdr_fill
-    stats_cell.alignment = Alignment(horizontal="left", vertical="center", indent=1)
-    ws.row_dimensions[3].height = 22
-
-    # Row 4: Spacer
+    ws.merge_cells(f"A3:{last_col}3")
+    ws["A3"].value = (f"Category totals (all 205): In-country testing {summary.get('testing_required', 0)}  |  "
+                      f"Document / CB Scheme {summary.get('document_required', 0)}  |  Supplier declaration {summary.get('sdoc_required', 0)}  |  "
+                      f"Exempt / customs {summary.get('exempt', 0)}.  'EXEMPT' entries mean the pillar does not apply to this product in that market; "
+                      f"struck marks are listed under 'Not required for this product'.")
+    ws["A3"].font = Font(name="Calibri", size=9, color="0F172A")
+    ws["A3"].fill = sub_fill
+    ws["A3"].alignment = Alignment(horizontal="left", vertical="center", indent=1, wrap_text=True)
+    ws.row_dimensions[3].height = 30
     ws.row_dimensions[4].height = 6
 
-    # 4. Table Column Headers (Row 5)
-    headers = [
-        "ISO Code",
-        "Jurisdiction",
-        "Region",
-        "Regulatory Authority",
-        "Requirement Status",
-        "Applicable Safety Standard",
-        "Applicable EMC Standard",
-        "Environmental / Chemical",
-        "Mandatory Documentation Checklist",
-        "Local Rep Required",
-        "Est. Lead Time (Wks)",
-        "Compliance Marks",
-        "Regulatory Notes & Scope",
-        "PFAS / Chemical Regime",
-        "Packaging & Plastics Mandate",
-        "EPR / WEEE Registry",
-        "Applicable summary"
-    ]
-
-    def _pillar_text(c, pillar, fallback):
-        """Applicable-requirements text for one pillar; Exempt rows render as 'Exempt – reason'."""
-        for r in c.get("applicable_requirements") or []:
-            if r.get("pillar") != pillar:
-                continue
-            if r.get("status") == "Exempt":
-                return f"Exempt – {r.get('note') or 'not applicable to this product'}"
-            if r.get("status") == "Not applicable":
-                return "Not applicable"
-            std = r.get("standard") or fallback
-            return f"{std} ({r['route']})" if r.get("route") else std
-        return fallback
-
-    ws.row_dimensions[5].height = 28
-    for col_idx, h in enumerate(headers, 1):
-        cell = ws.cell(row=5, column=col_idx, value=h)
+    for col, (title, width) in enumerate(HEADERS, 1):
+        cell = ws.cell(row=5, column=col, value=title)
         cell.font = Font(name="Calibri", size=10, bold=True, color="FFFFFF")
         cell.fill = header_fill
-        cell.alignment = Alignment(horizontal="center" if col_idx in [1, 5, 10, 11] else "left", vertical="center", wrap_text=True)
-        cell.border = header_border
+        cell.alignment = Alignment(horizontal="center" if col in (1, 5, 11, 12) else "left", vertical="center", wrap_text=True)
+        cell.border = border
+        ws.column_dimensions[get_column_letter(col)].width = width
+    ws.row_dimensions[5].height = 28
 
-    # 5. Populate Data Rows (Starting Row 6)
-    row_idx = 6
-    for c in filtered_countries:
-        ws.row_dimensions[row_idx].height = 24
+    body = Font(name="Calibri", size=9)
+    r_idx = 6
+    for c in rows:
+        req = c["requirement_type"]
+        key = "testing" if "Testing Required" in req else "document" if "Document Required" in req else "sdoc" if "Supplier Declaration" in req else "exempt"
+        values = [
+            c["country_code"], c["country_name"], c["region"], c["authority"],
+            req, c.get("testing_location", ""),
+            _requirements_text(c), c.get("applicable_summary", ""),
+            "\n".join(f"• {d}" for d in c.get("required_documents", [])),
+            _marks_text(c),
+            "Mandatory" if c.get("local_rep_required") else "No",
+            c.get("lead_time", ""),
+            c.get("rohs_std") or c.get("env_std", ""), c.get("pfas_std", ""), c.get("packaging_std", ""), c.get("epr_std", ""),
+            c.get("notes", ""),
+        ]
+        for col, v in enumerate(values, 1):
+            cell = ws.cell(row=r_idx, column=col, value=v)
+            cell.font = body
+            cell.border = border
+            cell.alignment = Alignment(horizontal="center" if col in (1, 5, 11, 12) else "left", vertical="top", wrap_text=col not in (1, 2, 3))
+        fill, font = fills[key]
+        ws.cell(row=r_idx, column=5).fill = fill
+        ws.cell(row=r_idx, column=5).font = font
+        ws.cell(row=r_idx, column=2).font = Font(name="Calibri", size=10, bold=True)
+        ws.cell(row=r_idx, column=1).font = Font(name="Consolas", size=9, bold=True)
+        if c.get("local_rep_required"):
+            ws.cell(row=r_idx, column=11).font = Font(name="Calibri", size=9, bold=True, color="991B1B")
+        n_lines = max(_requirements_text(c).count("\n"), len(c.get("required_documents", [])) - 1, 2) + 1
+        ws.row_dimensions[r_idx].height = min(15 * n_lines + 6, 220)
+        r_idx += 1
 
-        # Col 1: ISO Code
-        code_cell = ws.cell(row=row_idx, column=1, value=c["country_code"])
-        code_cell.alignment = Alignment(horizontal="center", vertical="center")
-        code_cell.font = Font(name="Consolas", size=9, bold=True)
-        code_cell.border = cell_border
+    ws.freeze_panes = "C6"
+    if r_idx > 6:
+        ws.auto_filter.ref = f"A5:{last_col}{r_idx - 1}"
 
-        # Col 2: Country Name
-        name_cell = ws.cell(row=row_idx, column=2, value=c["country_name"])
-        name_cell.alignment = Alignment(horizontal="left", vertical="center")
-        name_cell.font = Font(name="Calibri", size=10, bold=True)
-        name_cell.border = cell_border
-
-        # Col 3: Region
-        reg_cell = ws.cell(row=row_idx, column=3, value=c["region"])
-        reg_cell.alignment = Alignment(horizontal="left", vertical="center")
-        reg_cell.font = Font(name="Calibri", size=9)
-        reg_cell.border = cell_border
-
-        # Col 4: Authority
-        auth_cell = ws.cell(row=row_idx, column=4, value=c["authority"])
-        auth_cell.alignment = Alignment(horizontal="left", vertical="center")
-        auth_cell.font = Font(name="Calibri", size=9)
-        auth_cell.border = cell_border
-
-        # Col 5: Requirement Status (Color-coded badge)
-        req_val = c["requirement_type"]
-        req_cell = ws.cell(row=row_idx, column=5, value=req_val)
-        req_cell.alignment = Alignment(horizontal="center", vertical="center")
-        req_cell.border = cell_border
-        if "Testing Required" in req_val:
-            req_cell.fill = testing_fill
-            req_cell.font = testing_font
-        elif "Document Required" in req_val:
-            req_cell.fill = doc_fill
-            req_cell.font = doc_font
-        elif "Supplier Declaration" in req_val:
-            req_cell.fill = sdoc_fill
-            req_cell.font = sdoc_font
-        else:
-            req_cell.fill = exempt_fill
-            req_cell.font = exempt_font
-
-        # Col 6: Applicable Safety Standard
-        safety_cell = ws.cell(row=row_idx, column=6, value=_pillar_text(c, "Safety", c.get("safety_std", "Exempt")))
-        safety_cell.alignment = Alignment(horizontal="left", vertical="center")
-        safety_cell.font = Font(name="Calibri", size=9)
-        safety_cell.border = cell_border
-
-        # Col 7: Applicable EMC Standard
-        emc_cell = ws.cell(row=row_idx, column=7, value=_pillar_text(c, "EMC", c.get("emc_std", "CISPR 32 Class B")))
-        emc_cell.alignment = Alignment(horizontal="left", vertical="center")
-        emc_cell.font = Font(name="Calibri", size=9)
-        emc_cell.border = cell_border
-
-        # Col 8: Environmental / Chemical
-        env_cell = ws.cell(row=row_idx, column=8, value=_pillar_text(c, "Environmental", c.get("env_std", "RoHS / REACH")))
-        env_cell.alignment = Alignment(horizontal="left", vertical="center")
-        env_cell.font = Font(name="Calibri", size=9)
-        env_cell.border = cell_border
-
-        # Col 9: Documentation Checklist
-        docs_str = "; ".join(c.get("required_documents", []))
-        docs_cell = ws.cell(row=row_idx, column=9, value=docs_str)
-        docs_cell.alignment = Alignment(horizontal="left", vertical="center", wrap_text=True)
-        docs_cell.font = Font(name="Calibri", size=9)
-        docs_cell.border = cell_border
-
-        # Col 10: Local Rep Required
-        rep_str = "Mandatory (Yes)" if c.get("local_rep_required") else "No"
-        rep_cell = ws.cell(row=row_idx, column=10, value=rep_str)
-        rep_cell.alignment = Alignment(horizontal="center", vertical="center")
-        rep_cell.font = Font(name="Calibri", size=9, bold=(rep_str != "No"), color="991B1B" if rep_str != "No" else "475569")
-        rep_cell.border = cell_border
-
-        # Col 11: Est. Lead Time
-        lead_cell = ws.cell(row=row_idx, column=11, value=c.get("lead_time", 2))
-        lead_cell.alignment = Alignment(horizontal="center", vertical="center")
-        lead_cell.font = Font(name="Calibri", size=9)
-        lead_cell.border = cell_border
-
-        # Col 12: Compliance Marks
-        marks_str = ", ".join(c.get("marks", []))
-        marks_cell = ws.cell(row=row_idx, column=12, value=marks_str)
-        marks_cell.alignment = Alignment(horizontal="left", vertical="center")
-        marks_cell.font = Font(name="Consolas", size=9)
-        marks_cell.border = cell_border
-
-        # Col 13: Regulatory Notes & Scope
-        notes_cell = ws.cell(row=row_idx, column=13, value=c.get("notes", ""))
-        notes_cell.alignment = Alignment(horizontal="left", vertical="center", wrap_text=True)
-        notes_cell.font = Font(name="Calibri", size=9, color="475569")
-        notes_cell.border = cell_border
-
-        # Col 14-16: environmental sub-pillars
-        for col_num, key in ((14, "pfas_std"), (15, "packaging_std"), (16, "epr_std")):
-            cell = ws.cell(row=row_idx, column=col_num, value=c.get(key, ""))
-            cell.alignment = Alignment(horizontal="left", vertical="center", wrap_text=True)
-            cell.font = Font(name="Calibri", size=9)
-            cell.border = cell_border
-
-        # Col 17: applicable requirements & exemptions summary
-        sum_cell = ws.cell(row=row_idx, column=17, value=c.get("applicable_summary", ""))
-        sum_cell.alignment = Alignment(horizontal="left", vertical="center", wrap_text=True)
-        sum_cell.font = Font(name="Calibri", size=9)
-        sum_cell.border = cell_border
-
-        row_idx += 1
-
-    # Freeze header panes (Freeze at row 6, col 1)
-    ws.freeze_panes = "A6"
-
-    # Auto-filter on data table headers
-    if row_idx > 6:
-        ws.auto_filter.ref = f"A5:Q{row_idx-1}"
-
-    # Optimized Column Widths
-    col_widths = {
-        1: 10,   # ISO Code
-        2: 24,   # Country Name
-        3: 20,   # Region
-        4: 25,   # Authority
-        5: 28,   # Requirement Status
-        6: 32,   # Safety Standard
-        7: 28,   # EMC Standard
-        8: 24,   # Env / Chemical
-        9: 48,   # Documentation Checklist
-        10: 18,  # Local Rep
-        11: 16,  # Lead Time
-        12: 20,  # Marks
-        13: 42,  # Notes
-        14: 34,  # PFAS
-        15: 36,  # Packaging
-        16: 32,  # EPR
-        17: 48   # Applicable summary
-    }
-    for col_num, width in col_widths.items():
-        col_letter = get_column_letter(col_num)
-        ws.column_dimensions[col_letter].width = width
-
-    # Save to BytesIO buffer
     buf = io.BytesIO()
     wb.save(buf)
     buf.seek(0)
-
-    # Clean file name
-    date_stamp = datetime.datetime.now().strftime("%Y%m%d_%H%M%S")
-    clean_cat_id = category_id.replace(" ", "_").lower()
-    filename = f"GCM_Compliance_Matrix_{clean_cat_id}_{date_stamp}.xlsx"
-
-    return buf, filename
+    stamp = datetime.datetime.now().strftime("%Y%m%d_%H%M%S")
+    scope = "all205" if export_all else "view"
+    return buf, f"GCM_Compliance_Matrix_{category_id}_{scope}_{stamp}.xlsx"

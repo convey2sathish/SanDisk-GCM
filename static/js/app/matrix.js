@@ -28,6 +28,26 @@
     Energy: 'text-amber-300 border-amber-800', Cyber: 'text-violet-300 border-violet-800', Labelling: 'text-indigo-300 border-indigo-800',
   };
 
+  const MARK_STYLE = [
+    [/^CE/, 'from-sky-600 to-blue-700'], [/UKCA/, 'from-indigo-600 to-violet-700'], [/FCC/, 'from-slate-500 to-slate-700'], [/NRTL|CUL|CSA|UL/, 'from-rose-600 to-red-700'],
+    [/KC/, 'from-blue-600 to-indigo-700'], [/BSMI/, 'from-amber-600 to-orange-700'], [/CCC/, 'from-red-600 to-rose-800'], [/PSE/, 'from-emerald-600 to-teal-700'], [/VCCI/, 'from-cyan-600 to-sky-700'],
+    [/RCM/, 'from-teal-600 to-emerald-700'], [/EAC/, 'from-slate-600 to-zinc-700'], [/BIS/, 'from-orange-600 to-amber-700'], [/NOM|NYCE|ANCE/, 'from-lime-600 to-green-700'], [/INMETRO|ANATEL/, 'from-green-600 to-emerald-800'],
+    [/SASO|SABER|G-MARK|ECAS|EQM/, 'from-emerald-700 to-green-800'], [/WEEE/, 'from-slate-700 to-slate-800'], [/ROHS|EFUP/, 'from-green-700 to-emerald-800'], [/TRIMAN/, 'from-sky-700 to-cyan-800'],
+  ];
+  function markBadge(m) {
+    const name = typeof m === 'string' ? m : m.mark; const status = typeof m === 'string' ? 'Required' : m.status; const reason = (typeof m === 'string') ? '' : (m.reason || '');
+    const grad = (MARK_STYLE.find(([re]) => re.test(name.toUpperCase())) || [null, 'from-slate-600 to-slate-700'])[1];
+    const short = name.replace(/\s*\(.*?\)\s*/g, '').replace(/ Commodity Inspection Mark/i, '').replace(/ Standard Mark with CRS R-number/i, '').replace(/ Mark$/i, '').trim();
+    if (status !== 'Required') return `<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded border border-dashed border-slate-700 text-[10px] text-slate-500 line-through" title="${GCM.ui.esc(reason || 'Not required for this product')}">${GCM.ui.esc(short)}</span>`;
+    return `<span class="inline-flex items-center gap-1 px-2 py-1 rounded-md bg-gradient-to-br ${grad} text-white font-black text-[10px] tracking-wide shadow-sm border border-white/10" title="${GCM.ui.esc(name)}"><i data-lucide="badge-check" class="w-3 h-3 opacity-80"></i>${GCM.ui.esc(short)}</span>`;
+  }
+  function marksHtml(c) {
+    const list = (c.applicable_marks && c.applicable_marks.length) ? c.applicable_marks : (c.marks || []);
+    if (!list.length) return '<span class="text-[10px] text-slate-500">No national mark</span>';
+    const req = list.filter(m => typeof m === 'string' || m.status === 'Required'); const not = list.filter(m => typeof m !== 'string' && m.status !== 'Required');
+    return `<div class="flex flex-wrap gap-1">${req.map(markBadge).join('')}</div>${not.length ? `<div class="flex flex-wrap gap-1 mt-1">${not.map(markBadge).join('')}</div><div class="text-[9px] text-slate-500 mt-0.5">struck-through = not required for this product</div>` : ''}`;
+  }
+
   function requirementsHtml(c) {
     const reqs = (c.applicable_requirements || []).filter(r => r.status !== 'Not applicable');
     if (!reqs.length) {
@@ -62,6 +82,7 @@
         </div>
       </div></td>
       <td><div class="max-w-md">${docs}</div></td>
+      <td class="min-w-[140px]">${marksHtml(c)}</td>
       <td class="text-center whitespace-nowrap">${c.local_rep_required ? '<span class="badge badge-critical">Mandatory</span>' : '<span class="text-slate-500 text-[10px]">No</span>'}</td>
       <td class="text-center whitespace-nowrap mono text-slate-300">${GCM.ui.esc(c.lead_time)} wk</td>
       <td class="text-right whitespace-nowrap"><div class="flex flex-col gap-1 items-end"><button class="btn btn-secondary btn-sm" data-action="country-factsheet" data-arg="${GCM.ui.esc(c.country_code)}">Fact sheet</button><button class="btn btn-ghost btn-sm" data-action="deeplink-country" data-arg="${GCM.ui.esc(c.country_code)}"><i data-lucide="globe-2" class="w-3.5 h-3.5"></i>Map</button></div></td>
@@ -70,16 +91,16 @@
 
   async function load() {
     const tbody = $('matrix-table-body'); if (!tbody) return;
-    tbody.innerHTML = `<tr><td colspan="8">${GCM.ui.skeleton(4)}</td></tr>`;
+    tbody.innerHTML = `<tr><td colspan="9">${GCM.ui.skeleton(4)}</td></tr>`;
     try {
       data = await GCM.api.get(`/api/gma/by-product?${params(false)}`);
       const s = data.summary || {};
       $('kpi-total').textContent = s.total ?? '—'; $('kpi-testing').textContent = s.testing_required ?? 0; $('kpi-document').textContent = s.document_required ?? 0;
       $('kpi-sdoc').textContent = (s.sdoc_required || 0) + (s.exempt || 0);
       $('matrix-display-count').textContent = data.countries.length; $('matrix-cat-name').textContent = data.category_name;
-      tbody.innerHTML = data.countries.length ? data.countries.map(rowHtml).join('') : `<tr><td colspan="8">${GCM.ui.empty('No jurisdictions match the current filters.', 'filter-x')}</td></tr>`;
+      tbody.innerHTML = data.countries.length ? data.countries.map(rowHtml).join('') : `<tr><td colspan="9">${GCM.ui.empty('No jurisdictions match the current filters.', 'filter-x')}</td></tr>`;
       GCM.ui.icons();
-    } catch (e) { tbody.innerHTML = `<tr><td colspan="8" class="text-center text-rose-400 py-6">${GCM.ui.esc(e.message)}</td></tr>`; }
+    } catch (e) { tbody.innerHTML = `<tr><td colspan="9" class="text-center text-rose-400 py-6">${GCM.ui.esc(e.message)}</td></tr>`; }
   }
 
   function exportExcel(all) { GCM.api.download(`/api/gma/export-excel?${params(!!all)}`, all ? 'Exporting all 205 jurisdictions…' : 'Exporting current view…'); }
