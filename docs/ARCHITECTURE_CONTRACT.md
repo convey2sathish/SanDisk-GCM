@@ -44,6 +44,8 @@ pieces integrate without conflicts.
 | `routes_docaudit.py` | docaudit | `/api/documents/*` |
 | `risk_engine.py` | risk | Compliance Risk Index, regulatory horizon, certificate health, portfolio readiness |
 | `routes_risk.py` | risk | `/api/risk/*`, `/api/horizon`, `/api/portfolio` |
+| `kb_review.py` | review | overrides, verification, review queue, hash-chained audit trail (all persisted in DATA_DIR; reads shipped `kb_sources.json`) |
+| `routes_review.py` | review | `/api/review/*`, `/api/verification/*`, `/api/overrides/*` |
 | `app.py` | core | Flask app creation; imports each `routes_*.py` and calls `register(app, ctx)` |
 
 Each `routes_*.py` exposes exactly:
@@ -124,6 +126,24 @@ last_surveilled_date?, last_surveilled_pillar?, surveillance_source?
 | PATCH | `/api/actions/<id>` | `{success, action}` |
 | DELETE | `/api/actions/<id>` | `{success}` |
 | GET | `/api/search?q=` | `{results: [{type, id, title, subtitle, tab, payload}]}` (countries, alerts, products, standards) |
+
+### Review (`routes_review.py`)
+Reviewer = `settings.reviewer_name` (self-declared; 400 "Set your reviewer name in Settings" when empty). With `settings.require_second_reviewer` the approver must differ from `proposed_by`.
+
+| Method | Path | Returns |
+|---|---|---|
+| GET | `/api/review/queue?status=Pending\|Approved\|Rejected\|all` | `{items[], count, counts{}}` item = `{id "REV-xxxxxxxx", type surveillance_notice\|kb_change, status, created_at, proposed_by, payload, source_url, decided_by, decided_on, decision_note}` |
+| GET | `/api/review/stats` | `{pending, approved, rejected, coverage{key_markets_total, verified, needs_reverification, unverified}, audit_ok, audit_entries, reviewer_name, require_second_reviewer, global_sources[], fields{}}` |
+| GET | `/api/review/audit?limit` | `{entries[], total, ok, first_bad_index}` (entries `{audit_id, when, who, what, item_id, country_code, before, after, detail, prev_hash, hash}`) |
+| POST | `/api/review/proposals` `{country_code, changes{field: value}, reason, source_url, source_label?}` | `{success, item}` (201, Pending). Fields: safety_std, emc_std, env_std, rohs_std, pfas_std, packaging_std, epr_std, notes, authority, in_country_testing, local_rep_required, lead_time_weeks, cert_validity, cb_scheme_accepted |
+| POST | `/api/review/queue/<id>/approve` `{note?}` | `{success, item}`. kb_change: write override + apply in memory + mark the pillar(s) Verified with the item's source. surveillance_notice: ledger entry + enriched alert. 409 if already decided |
+| POST | `/api/review/queue/<id>/reject` `{note}` (required) | `{success, item}`; rejected notices are never re-queued |
+| POST | `/api/verification/<code>` `{scope Safety\|EMC\|Environmental\|Record, status Verified\|Needs review, source_url (required for Verified), source_label?, note?}` | `{success, entry, verification}` |
+| DELETE | `/api/overrides/<code>/<field>` | `{success, restored, verification}`; restores the shipped seed value, marks a Verified pillar "Needs review" |
+
+`verification` block (on `/api/gma/by-product` rows and `/api/countries/<code>`): `{overall: Verified\|Needs re-verification\|Partly verified\|Unverified, per_pillar{Safety,EMC,Environmental,Record}, sources[{label,url,kind}], overrides[fields], verified_on, verified_by}`. Source `kind` is "Reviewer citation" (human-recorded) or "Authority portal" (shipped starting point, not a rule citation).
+
+Data files (DATA_DIR): `kb_overrides.json`, `kb_verification.json`, `review_queue.json`, `audit_trail.json`. Shipped (read-only): `kb_sources.json`. `POST /api/surveillance/scan` now returns `queued_for_review`; detected notices are queued, not applied.
 
 ### Alerts (`routes_alerts.py`)
 | Method | Path | Returns |
@@ -211,6 +231,7 @@ last_surveilled_date?, last_surveilled_pillar?, surveillance_source?
 | `horizon` | `tab_horizon.html` | `horizon.js` | risk |
 | `portfolio` | `tab_portfolio.html` | `portfolio.js` | risk |
 | `docaudit` | `tab_docaudit.html` | `docaudit.js` | docaudit |
+| `review` | `tab_review.html` + `modal_review.html` | `review.js` | review |
 
 Shared modals (core): settings, surveillance log, add alert, actions drawer,
 command palette, toast/notification.
@@ -234,7 +255,7 @@ GCM.api.upload(url, formData)
 GCM.api.download(url, filename?)             // triggers browser download + toast
 GCM.ui.esc(str)                              // HTML escape
 GCM.ui.icons(root?)                          // lucide.createIcons scoped
-GCM.ui.toast(title, sub?, kind?)             // kind: success|info|warning|error
+GCM.ui.toast(title, sub?, kind?, action?)    // kind: success|info|warning|error; action: {label, run}
 GCM.ui.notify({title, body, scope?, actions?[]})   // top banner
 GCM.ui.openModal(id) / GCM.ui.closeModal(id)
 GCM.ui.confirm(message) -> Promise<bool>
@@ -247,7 +268,7 @@ GCM.tabs.switchTo(id), GCM.tabs.current
 GCM.state.categories[], GCM.state.countries{code: country}, GCM.state.settings{}
 GCM.bus.on(evt, fn), GCM.bus.emit(evt, payload)
    events: 'alerts:changed', 'countries:changed', 'products:changed', 'actions:changed',
-           'audit:completed', 'settings:changed', 'tab:shown'
+           'audit:completed', 'settings:changed', 'tab:shown', 'review:changed'
 GCM.palette.register({label, hint, keywords[], run})  // command palette (Ctrl+K)
 GCM.actions.createFor(linked_type, linked_id, defaults)  // opens the "new action" drawer prefilled
 GCM.deeplink.alert(id) / GCM.deeplink.country(code) / GCM.deeplink.product(id)

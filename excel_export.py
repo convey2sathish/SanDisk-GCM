@@ -13,12 +13,14 @@ from openpyxl.styles import Alignment, Border, Font, PatternFill, Side
 from openpyxl.utils import get_column_letter
 
 import compliance_db as db
+import kb_review
 
 HEADERS = [
     ("ISO", 8), ("Jurisdiction", 22), ("Region", 20), ("Regulatory Authority", 24),
     ("Requirement Route", 30), ("Testing Location", 26),
     ("Applicable Requirements & Exemptions", 60), ("Applicable Summary", 42),
     ("Mandatory Documentation", 60), ("Applicable Marks / Logos", 30),
+    ("Verification & sources", 48),
     ("Local Rep", 12), ("Lead Time (wks)", 10),
     ("RoHS", 34), ("PFAS / Chemicals", 34), ("Packaging", 34), ("EPR / WEEE", 34),
     ("Regulatory Notes & Scope", 50),
@@ -81,12 +83,29 @@ def _marks_text(c):
     return txt
 
 
+def _verification_text(c):
+    v = c.get("verification") or {}
+    lines = [f"Status: {v.get('overall', 'Unverified')}"]
+    if v.get("verified_on"):
+        lines.append(f"Verified {v['verified_on']} by {v.get('verified_by') or 'n/a'}")
+    per = v.get("per_pillar") or {}
+    lines.append("Pillars: " + ", ".join(f"{k} {per[k].get('status', 'Unverified')}" for k in per))
+    if v.get("overrides"):
+        lines.append("Edited & approved fields: " + ", ".join(v["overrides"]))
+    srcs = v.get("sources") or []
+    if srcs:
+        lines.extend(f"{s.get('kind', 'Source')}: {s.get('label', '')} - {s.get('url', '')}" for s in srcs)
+    else:
+        lines.append("No source recorded")
+    return "\n".join(lines)
+
+
 def export_product_matrix_excel(category_id="external_ssd_powered", type_filter="all", region_filter="all", search="", export_all=False):
     """Returns (io.BytesIO, filename) for the filtered (or full) matrix of one product category."""
     breakdown = db.get_product_market_breakdown(category_id)
     cat_name = breakdown.get("category_name", category_id)
     summary = breakdown.get("summary", {})
-    all_countries = breakdown.get("countries", [])
+    all_countries = kb_review.attach(breakdown.get("countries", []))
 
     if export_all:
         rows = list(all_countries)
@@ -148,7 +167,7 @@ def export_product_matrix_excel(category_id="external_ssd_powered", type_filter=
         cell = ws.cell(row=5, column=col, value=title)
         cell.font = Font(name="Calibri", size=10, bold=True, color="FFFFFF")
         cell.fill = header_fill
-        cell.alignment = Alignment(horizontal="center" if col in (1, 5, 11, 12) else "left", vertical="center", wrap_text=True)
+        cell.alignment = Alignment(horizontal="center" if col in (1, 5, 12, 13) else "left", vertical="center", wrap_text=True)
         cell.border = border
         ws.column_dimensions[get_column_letter(col)].width = width
     ws.row_dimensions[5].height = 28
@@ -164,6 +183,7 @@ def export_product_matrix_excel(category_id="external_ssd_powered", type_filter=
             _requirements_text(c), c.get("applicable_summary", ""),
             "\n".join(f"• {d}" for d in c.get("required_documents", [])),
             _marks_text(c),
+            _verification_text(c),
             "Mandatory" if c.get("local_rep_required") else "No",
             c.get("lead_time", ""),
             c.get("rohs_std") or c.get("env_std", ""), c.get("pfas_std", ""), c.get("packaging_std", ""), c.get("epr_std", ""),
@@ -173,14 +193,14 @@ def export_product_matrix_excel(category_id="external_ssd_powered", type_filter=
             cell = ws.cell(row=r_idx, column=col, value=v)
             cell.font = body
             cell.border = border
-            cell.alignment = Alignment(horizontal="center" if col in (1, 5, 11, 12) else "left", vertical="top", wrap_text=col not in (1, 2, 3))
+            cell.alignment = Alignment(horizontal="center" if col in (1, 5, 12, 13) else "left", vertical="top", wrap_text=col not in (1, 2, 3))
         fill, font = fills[key]
         ws.cell(row=r_idx, column=5).fill = fill
         ws.cell(row=r_idx, column=5).font = font
         ws.cell(row=r_idx, column=2).font = Font(name="Calibri", size=10, bold=True)
         ws.cell(row=r_idx, column=1).font = Font(name="Consolas", size=9, bold=True)
         if c.get("local_rep_required"):
-            ws.cell(row=r_idx, column=11).font = Font(name="Calibri", size=9, bold=True, color="991B1B")
+            ws.cell(row=r_idx, column=12).font = Font(name="Calibri", size=9, bold=True, color="991B1B")
         n_lines = max(_requirements_text(c).count("\n"), len(c.get("required_documents", [])) - 1, 2) + 1
         ws.row_dimensions[r_idx].height = min(15 * n_lines + 6, 220)
         r_idx += 1

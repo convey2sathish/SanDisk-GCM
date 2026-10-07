@@ -12,6 +12,7 @@ datas = [
     ('static', 'static'),
     ('countries_data.json', '.'),
     ('surveillance_log.json', '.'),
+    ('kb_sources.json', '.'),
 ]
 # python-docx needs its default template; anthropic ships type/JSON data
 datas += collect_data_files('docx')
@@ -24,7 +25,7 @@ hiddenimports = [
     'routes_core', 'routes_alerts', 'routes_docaudit', 'routes_risk',
     'risk_engine', 'alert_explainer', 'ai_bridge', 'expert_advisor',
     'surveillance_data', 'reg_surveillance', 'doc_audit_engine', 'excel_export',
-    'compliance_db', 'config', 'store',
+    'compliance_db', 'config', 'store', 'kb_review', 'routes_review',
     'pypdf', 'docx', 'openpyxl', 'tkinter', 'tkinter.filedialog',
 ]
 try:

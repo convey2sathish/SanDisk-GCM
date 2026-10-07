@@ -124,7 +124,7 @@
     empty(msg, icon = 'inbox') {
       return `<div class="empty-state"><i data-lucide="${GCM.ui.esc(icon)}" class="w-8 h-8 text-slate-600 mx-auto mb-2"></i><div>${GCM.ui.esc(msg)}</div></div>`;
     },
-    toast(title, sub, kind = 'success') {
+    toast(title, sub, kind = 'success', action) {
       const host = document.getElementById('toast-host'); if (!host) return;
       const colors = { success: 'border-emerald-500 text-emerald-300', info: 'border-sky-500 text-sky-300', warning: 'border-amber-500 text-amber-300', error: 'border-rose-500 text-rose-300' };
       const icons = { success: 'check-circle-2', info: 'info', warning: 'alert-triangle', error: 'x-circle' };
@@ -132,8 +132,13 @@
       el.className = `toast ${colors[kind] || colors.info}`;
       el.innerHTML = `<i data-lucide="${icons[kind] || 'info'}" class="w-5 h-5 shrink-0"></i><div class="min-w-0"><div class="text-xs font-bold text-white truncate">${GCM.ui.esc(title)}</div>${sub ? `<div class="text-[11px] text-slate-300 leading-snug">${GCM.ui.esc(sub)}</div>` : ''}</div><button class="ml-2 text-slate-400 hover:text-white" aria-label="Dismiss"><i data-lucide="x" class="w-4 h-4"></i></button>`;
       el.querySelector('button').onclick = () => el.remove();
+      if (action && action.label) {
+        const ab = document.createElement('button'); ab.type = 'button'; ab.className = 'btn btn-sm btn-secondary ml-2 shrink-0'; ab.textContent = action.label;
+        ab.onclick = () => { el.remove(); try { action.run && action.run(); } catch (e) { console.error(e); } };
+        el.insertBefore(ab, el.querySelector('button'));
+      }
       host.appendChild(el); GCM.ui.icons();
-      setTimeout(() => { el.classList.add('toast-out'); setTimeout(() => el.remove(), 300); }, kind === 'error' ? 8000 : 4500);
+      setTimeout(() => { el.classList.add('toast-out'); setTimeout(() => el.remove(), 300); }, (kind === 'error' || action) ? 9000 : 4500);
     },
     notify({ title, body, scope, actions = [] }) {
       const banner = document.getElementById('top-notification'); if (!banner) return;
@@ -283,6 +288,8 @@
       m.querySelector('[name=anthropic_api_key]').value = '';
       m.querySelector('[name=anthropic_api_key]').placeholder = s.api_key_configured ? `Configured (${s.anthropic_api_key})${s.api_key_from_env ? ' via environment variable' : ''} — leave blank to keep` : 'sk-ant-… (optional: enables Claude AI explanations)';
       m.querySelector('[name=surveillance_auto_scan_hours]').value = s.surveillance_auto_scan_hours || 0;
+      m.querySelector('[name=reviewer_name]').value = s.reviewer_name || '';
+      m.querySelector('[name=require_second_reviewer]').checked = !!s.require_second_reviewer;
       m.querySelector('[data-role=data-dir]').textContent = s.data_dir || '';
       m.querySelector('[data-role=version]').textContent = `v${s.version || ''} ${s.codename ? '“' + s.codename + '”' : ''} ${s.frozen ? '(standalone build)' : '(developer mode)'}`;
       GCM.ui.openModal('modal-settings');
@@ -294,6 +301,8 @@
         ai_model: m.querySelector('[name=ai_model]').value,
         ai_enabled: m.querySelector('[name=ai_enabled]').checked,
         surveillance_auto_scan_hours: Number(m.querySelector('[name=surveillance_auto_scan_hours]').value) || 0,
+        reviewer_name: m.querySelector('[name=reviewer_name]').value.trim(),
+        require_second_reviewer: m.querySelector('[name=require_second_reviewer]').checked,
       };
       const key = m.querySelector('[name=anthropic_api_key]').value.trim();
       if (key) body.anthropic_api_key = key;
@@ -356,7 +365,7 @@
       if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'k') { e.preventDefault(); GCM.palette.open(); return; }
       if (e.key === 'Escape') { const open = [...document.querySelectorAll('.modal:not(.hidden)')].pop(); if (open) GCM.ui.closeModal(open.id); return; }
       if (e.target && ['INPUT', 'TEXTAREA', 'SELECT'].includes(e.target.tagName)) return;
-      const tabKeys = { '1': 'overview', '2': 'matrix', '3': 'map', '4': 'alerts', '5': 'horizon', '6': 'portfolio', '7': 'docaudit' };
+      const tabKeys = { '1': 'overview', '2': 'matrix', '3': 'map', '4': 'alerts', '5': 'horizon', '6': 'portfolio', '7': 'docaudit', '8': 'review' };
       if (e.altKey && tabKeys[e.key]) { e.preventDefault(); GCM.tabs.switchTo(tabKeys[e.key]); }
       if (e.key === '?' ) { GCM.ui.openModal('modal-help'); }
     });
@@ -371,7 +380,7 @@
 
   function registerCoreCommands() {
     const tabs = [['overview', 'Go to Overview', 'layout-dashboard'], ['matrix', 'Go to Testing vs. Document Matrix', 'layers'], ['map', 'Go to Global Access Map', 'globe-2'],
-      ['alerts', 'Go to Regulation Alerts', 'bell'], ['horizon', 'Go to Regulatory Horizon & Risk', 'radar'], ['portfolio', 'Go to Product Portfolio', 'hard-drive'], ['docaudit', 'Go to Document Impact Audit', 'file-search-2']];
+      ['alerts', 'Go to Regulation Alerts', 'bell'], ['horizon', 'Go to Regulatory Horizon & Risk', 'radar'], ['portfolio', 'Go to Product Portfolio', 'hard-drive'], ['docaudit', 'Go to Document Impact Audit', 'file-search-2'], ['review', 'Go to Review & Approvals', 'clipboard-check']];
     tabs.forEach(([id, label, icon]) => GCM.palette.register({ label, hint: `Alt+${tabs.findIndex(t => t[0] === id) + 1}`, icon, keywords: [id, 'tab', 'go'], run: () => GCM.tabs.switchTo(id) }));
     GCM.palette.register({ label: 'Open Settings', icon: 'settings', keywords: ['settings', 'api key', 'claude', 'ai'], run: () => GCM.settings.open() });
     GCM.palette.register({ label: 'Create action item', icon: 'plus-square', keywords: ['task', 'todo', 'action'], run: () => GCM.actions.createFor(null, null, {}) });

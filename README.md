@@ -20,7 +20,8 @@ one executable.**
 | **Regulatory Horizon & Risk** | One timeline of deadlines, milestones, certificate expiries, actions and surveillance history; Compliance Risk Index per product, region and pillar with an explainable formula; top risks. |
 | **Product Portfolio** | Products with readiness per market, certificates health (expiry countdown), linked alerts, and an engineering-change (ECO) impact analyser. |
 | **Document Impact Audit** | Point at a folder (or drag one into the browser). The engine reads PDFs, DOCX, XLSX, CSV/TXT, identifies standards & editions, labs, SKUs, markets and expiry dates, and produces a health score, a re-test / re-sign / packaging / portal directive per document, a gap analysis per product × market, a remediation plan with cost roll-up and a four-sheet Excel directive. |
-| **Regulatory Surveillance** | Scans WTO TBT, US Federal Register (OSHA NRTL, FCC, EPA), EUR-Lex, EAEU, GSO and national gazettes for storage-relevant notices; records them as standard *transitions* in a tamper-evident, hash-chained ledger; creates fully enriched alerts with product impact. |
+| **Regulatory Surveillance** | Scans WTO TBT, US Federal Register (OSHA NRTL, FCC, EPA), EUR-Lex, EAEU, GSO and national gazettes for storage-relevant notices; queues relevant notices for human review; on approval records them in a tamper-evident, hash-chained ledger and creates fully enriched alerts with product impact. |
+| **Review & approvals** | Human-controlled knowledge base: detected notices and proposed changes wait in a queue until a person approves them; every decision lands in a hash-chained audit trail. Each country shows official authority portals (starting points) and a verification status that only becomes *Verified* when a reviewer records a citation URL. |
 | **Everywhere** | Ctrl+K search across countries, standards, alerts, SKUs and actions; keyboard shortcuts; deep links; first-run guide; all data persisted locally and preserved across upgrades. |
 
 ## Quick start
@@ -81,8 +82,9 @@ JSON with a correct status code. See `docs/ARCHITECTURE_CONTRACT.md`.
 * The shipped knowledge base (`countries_data.json`, alerts, portfolio) is read-only. Everything you
   change is stored in the local data folder and merged on read, so upgrading the executable never
   loses your work. Settings → “data folder” shows the location.
+* Human review data lives in the same folder and is applied on top of the read-only seed: `kb_overrides.json` (approved edits, revertible), `kb_verification.json` (per-pillar verification with citation, reviewer, date), `review_queue.json` (pending/approved/rejected items) and `audit_trail.json` (hash-chained decisions). `kb_sources.json` (authority portals) ships with the app. The reviewer is a **self-declared name** in Settings; there are no logins, so the audit trail proves what was decided and that it was not altered, not who typed the name.
 * The surveillance ledger is hash-chained (SHA-256). Integrity is verified on every read and shown in
-  the ledger dialog. “Reset knowledge base” restores the shipped country data without touching the ledger.
+  the ledger dialog. Approved edits are stored as overrides on top of the shipped country data and can be reverted individually.
 * An Anthropic API key, if provided, is stored only in that local folder and used only for the calls
   you trigger (explain / ask). Without a key, the built-in explainer does everything offline.
 

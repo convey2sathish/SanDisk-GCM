@@ -1,0 +1,50 @@
+<!-- Review & approvals tab (owner: review module) -->
+<div class="card !p-0 overflow-hidden">
+    <div class="p-5 flex flex-col lg:flex-row lg:items-start lg:justify-between gap-4 bg-gradient-to-br from-slate-900 via-slate-900 to-teal-950/30">
+        <div class="flex items-start gap-3 min-w-0">
+            <div class="w-11 h-11 rounded-xl bg-gradient-to-br from-teal-600 to-emerald-700 flex items-center justify-center shadow-lg shadow-teal-900/40 shrink-0"><i data-lucide="clipboard-check" class="w-5 h-5 text-white"></i></div>
+            <div class="min-w-0">
+                <h2 class="text-base font-bold text-white tracking-tight">Review &amp; approvals <span class="text-slate-500 font-normal">&middot;</span> <span class="text-teal-400">human-controlled knowledge base</span></h2>
+                <p class="text-xs text-slate-400 leading-relaxed mt-0.5 max-w-3xl">Detected regulatory notices and proposed data changes wait here. Nothing changes the knowledge base or creates an alert until a person approves it. Every decision is written to a tamper-evident audit trail.</p>
+            </div>
+        </div>
+        <div class="flex flex-wrap items-center gap-2 shrink-0">
+            <span class="text-[11px] text-slate-400">Reviewing as <strong id="review-reviewer" class="text-slate-200">(not set)</strong></span>
+            <button type="button" data-action="settings" class="btn btn-ghost btn-sm"><i data-lucide="user-cog" class="w-3.5 h-3.5"></i>Set name</button>
+            <button type="button" data-action="review-refresh" class="btn btn-secondary btn-sm"><i data-lucide="refresh-cw" class="w-3.5 h-3.5"></i>Refresh</button>
+        </div>
+    </div>
+</div>
+
+<div class="grid grid-cols-2 lg:grid-cols-5 gap-3" id="review-kpis">
+    <div class="kpi"><div class="kpi-label">Pending</div><div class="kpi-value text-amber-400" id="review-kpi-pending">-</div><div class="kpi-sub">awaiting a decision</div></div>
+    <div class="kpi"><div class="kpi-label">Approved</div><div class="kpi-value text-emerald-400" id="review-kpi-approved">-</div><div class="kpi-sub">applied</div></div>
+    <div class="kpi"><div class="kpi-label">Rejected</div><div class="kpi-value text-rose-400" id="review-kpi-rejected">-</div><div class="kpi-sub">never re-queued</div></div>
+    <div class="kpi"><div class="kpi-label">Key-market verification</div><div class="kpi-value text-sky-400" id="review-kpi-coverage">-</div><div class="kpi-sub" id="review-kpi-coverage-sub">human-verified with citation</div></div>
+    <div class="kpi"><div class="kpi-label">Audit trail integrity</div><div class="kpi-value" id="review-kpi-audit">-</div><div class="kpi-sub" id="review-kpi-audit-sub">hash chain</div></div>
+</div>
+
+<div class="card space-y-3">
+    <div class="card-header"><h3 class="card-title"><i data-lucide="inbox" class="w-4 h-4 text-amber-400"></i>Pending queue</h3><span class="text-[11px] text-slate-500" id="review-pending-label"></span></div>
+    <div id="review-pending" class="space-y-3"></div>
+</div>
+
+<div class="card space-y-3">
+    <div class="card-header"><h3 class="card-title"><i data-lucide="history" class="w-4 h-4 text-slate-400"></i>History</h3></div>
+    <div class="table-wrap max-h-[360px]"><table class="table"><thead><tr><th>Decided</th><th>Item</th><th>Summary</th><th>Status</th><th>Proposed by</th><th>Decided by</th><th>Note</th></tr></thead><tbody id="review-history"></tbody></table></div>
+</div>
+
+<div class="card space-y-3">
+    <div class="card-header"><h3 class="card-title"><i data-lucide="scroll-text" class="w-4 h-4 text-emerald-400"></i>Audit trail</h3><span id="review-audit-badge" class="badge badge-neutral">checking</span></div>
+    <div class="table-wrap max-h-[360px]"><table class="table"><thead><tr><th>When</th><th>Who (self-declared)</th><th>Action</th><th>Item</th><th>Country</th><th>Before / after</th><th>Detail</th><th>Hash</th></tr></thead><tbody id="review-audit"></tbody></table></div>
+</div>
+
+<div class="card !p-4 border-teal-800/60 text-xs text-slate-300 space-y-1.5">
+    <div class="font-bold text-teal-300 flex items-center gap-1.5"><i data-lucide="info" class="w-3.5 h-3.5"></i>How this works</div>
+    <ul class="list-disc pl-5 space-y-1 text-slate-400 leading-relaxed">
+        <li>Surveillance scans put detected notices in this queue. Approving one writes the ledger entry and creates the alert; rejecting one records why, and the same notice is never queued again.</li>
+        <li>Proposed changes (from the matrix or a country fact sheet) become <em>edited &amp; approved</em> overrides on top of the shipped data when approved, and can be reverted to the shipped value.</li>
+        <li>Source links pre-filled in the matrix are <strong class="text-slate-200">authority portals (starting points)</strong>, not citations of a specific rule. A record shows <strong class="text-emerald-300">Verified</strong> only when a reviewer has recorded it with a citation URL; it needs re-verification after 12 months.</li>
+        <li><strong class="text-slate-200">Limitation:</strong> the reviewer is a self-declared name (Settings). This single-user tool has no logins, so the audit trail shows what was decided and proves it was not altered afterwards, but it cannot prove who typed the name. You can require a different name for approver and proposer.</li>
+    </ul>
+</div>

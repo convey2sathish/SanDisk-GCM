@@ -1,0 +1,41 @@
+<!-- Review workflow dialogs: verify a record, propose a change (owner: review module) -->
+<div id="modal-review-verify" class="modal hidden" aria-hidden="true" role="dialog" aria-label="Record verification">
+    <div class="modal-panel max-w-lg">
+        <div class="modal-head">
+            <div><h3 class="text-sm font-bold text-white">Record verification</h3><p class="text-[11px] text-slate-400" data-role="country">Country</p></div>
+            <button type="button" data-action="close-modal" data-arg="modal-review-verify" class="btn btn-ghost btn-sm" aria-label="Close"><i data-lucide="x" class="w-4 h-4"></i></button>
+        </div>
+        <div class="modal-body space-y-3 text-xs">
+            <p class="text-slate-400 leading-relaxed">Mark a pillar <strong class="text-emerald-300">Verified</strong> only after you have checked it against the official text. A citation URL is required; it is stored with your self-declared reviewer name and the date. Verification expires after 12 months.</p>
+            <div class="grid grid-cols-2 gap-3">
+                <div><label class="label">Scope</label><select name="scope" class="select"><option>Safety</option><option>EMC</option><option>Environmental</option><option>Record</option></select></div>
+                <div><label class="label">Status</label><select name="status" class="select"><option value="Verified">Verified</option><option value="Needs review">Needs review</option></select></div>
+            </div>
+            <div><label class="label">Citation URL (official source, https://...)</label><input name="source_url" class="input mono" placeholder="https://" autocomplete="off"></div>
+            <div><label class="label">Citation label</label><input name="source_label" maxlength="120" class="input" placeholder="e.g. BIS Order 2024, Schedule 1 item 12" autocomplete="off"></div>
+            <div><label class="label">Note (optional)</label><textarea name="note" rows="2" maxlength="500" class="input"></textarea></div>
+            <div class="text-[11px] text-slate-500">Reviewing as <strong class="text-slate-300" data-role="reviewer">(not set)</strong> (self-declared in Settings).</div>
+        </div>
+        <div class="modal-foot"><button type="button" data-action="close-modal" data-arg="modal-review-verify" class="btn btn-secondary">Cancel</button><button type="button" data-action="review-verify-submit" class="btn btn-primary"><i data-lucide="badge-check" class="w-4 h-4"></i>Save verification</button></div>
+    </div>
+</div>
+
+<div id="modal-review-propose" class="modal hidden" aria-hidden="true" role="dialog" aria-label="Propose a change">
+    <div class="modal-panel max-w-lg">
+        <div class="modal-head">
+            <div><h3 class="text-sm font-bold text-white">Propose a change</h3><p class="text-[11px] text-slate-400" data-role="country">Country</p></div>
+            <button type="button" data-action="close-modal" data-arg="modal-review-propose" class="btn btn-ghost btn-sm" aria-label="Close"><i data-lucide="x" class="w-4 h-4"></i></button>
+        </div>
+        <div class="modal-body space-y-3 text-xs">
+            <p class="text-slate-400 leading-relaxed">A proposal changes nothing by itself. It enters the Review queue and only an approval writes it as an <em>edited &amp; approved</em> override on top of the shipped data (it can be reverted at any time).</p>
+            <div><label class="label">Field</label><select name="field" class="select"></select></div>
+            <div class="text-[11px] text-slate-400">Current value: <span class="text-slate-200" data-role="current">-</span></div>
+            <div><label class="label">New value</label><input name="value" class="input" autocomplete="off"><select name="bool" class="select hidden"><option value="true">Yes</option><option value="false">No</option></select></div>
+            <div><label class="label">Reason (required)</label><textarea name="reason" rows="2" maxlength="1000" class="input"></textarea></div>
+            <div><label class="label">Source URL (required, https://...)</label><input name="source_url" class="input mono" placeholder="https://" autocomplete="off"></div>
+            <div><label class="label">Source label (optional)</label><input name="source_label" maxlength="120" class="input" autocomplete="off"></div>
+            <div class="text-[11px] text-slate-500">Proposing as <strong class="text-slate-300" data-role="reviewer">(not set)</strong> (self-declared in Settings).</div>
+        </div>
+        <div class="modal-foot"><button type="button" data-action="close-modal" data-arg="modal-review-propose" class="btn btn-secondary">Cancel</button><button type="button" data-action="review-propose-submit" class="btn btn-primary"><i data-lucide="send" class="w-4 h-4"></i>Submit for review</button></div>
+    </div>
+</div>

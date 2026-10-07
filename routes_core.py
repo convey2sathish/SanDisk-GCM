@@ -9,6 +9,7 @@ from flask import jsonify, request, send_file
 
 import config
 import excel_export
+import kb_review
 import reg_surveillance
 from store import ALERT_STATUSES, ACTION_STATUSES, verify_ledger
 
@@ -50,7 +51,7 @@ def register(app, ctx):
     def core_settings_post():
         data = request.get_json(silent=True) or {}
         allowed = {}
-        for k in ("company_name", "ai_model", "ai_enabled", "anthropic_api_key", "surveillance_auto_scan_hours", "open_browser", "default_category", "port"):
+        for k in ("company_name", "ai_model", "ai_enabled", "anthropic_api_key", "surveillance_auto_scan_hours", "open_browser", "default_category", "port", "reviewer_name", "require_second_reviewer"):
             if k in data:
                 allowed[k] = data[k]
         if "surveillance_auto_scan_hours" in allowed:
@@ -58,6 +59,13 @@ def register(app, ctx):
                 allowed["surveillance_auto_scan_hours"] = max(0, min(168, float(allowed["surveillance_auto_scan_hours"])))
             except (TypeError, ValueError):
                 return jsonify({"error": "surveillance_auto_scan_hours must be a number"}), 400
+        if "reviewer_name" in allowed:
+            allowed["reviewer_name"] = str(allowed["reviewer_name"] or "").strip()
+            if len(allowed["reviewer_name"]) > 60:
+                return jsonify({"error": "reviewer_name must be 60 characters or fewer"}), 400
+        if "require_second_reviewer" in allowed:
+            if not isinstance(allowed["require_second_reviewer"], bool):
+                return jsonify({"error": "require_second_reviewer must be true or false"}), 400
         if "ai_model" in allowed and allowed["ai_model"] not in ("claude-opus-5", "claude-sonnet-5", "claude-fable-5-1"):
             return jsonify({"error": "Unsupported model"}), 400
         config.save_settings(allowed)
@@ -180,6 +188,7 @@ def register(app, ctx):
         if cat_id not in db.PRODUCT_CATEGORIES:
             return jsonify({"error": f"Unknown category '{cat_id}'"}), 400
         breakdown, filtered = _filter_matrix(cat_id, _q("type", "all"), _q("region", "all"), _q("search"))
+        kb_review.attach(filtered)
         return jsonify({
             "category_id": breakdown["category_id"], "category_name": breakdown["category_name"],
             "summary": breakdown["summary"], "countries_count": len(filtered), "countries": filtered,
@@ -237,7 +246,7 @@ def register(app, ctx):
             }
         alerts = [a for a in store.alerts() if reg_surveillance.alert_matches_country(a, country)]
         products = [p for p in store.products() if code in [m.upper() for m in p.get("target_markets", [])]]
-        return jsonify({"country": country, "category_rules": category_rules,
+        return jsonify({"country": country, "category_rules": category_rules, "verification": kb_review.verification_for(code),
                         "alerts": [{"id": a["id"], "title": a["title"], "severity": a.get("severity"), "effective_date": a.get("effective_date"),
                                     "standard": a.get("standard"), "pillar": a.get("pillar") or reg_surveillance.infer_pillar(a)} for a in alerts],
                         "products": [{"id": p["id"], "sku": p["sku"], "name": p["name"], "category_id": p["category_id"]} for p in products]})

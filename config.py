@@ -49,6 +49,8 @@ DEFAULT_SETTINGS = {
     "surveillance_auto_scan_hours": 0,
     "default_category": "external_ssd_powered",
     "theme": "dark",
+    "reviewer_name": "",
+    "require_second_reviewer": False,
 }
 
 _settings_lock = threading.RLock()

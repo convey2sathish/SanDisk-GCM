@@ -65,6 +65,16 @@
     }).join('');
   }
 
+  function verifyCell(c) {
+    const v = c.verification || {};
+    const code = GCM.ui.esc(c.country_code);
+    const edited = (v.overrides || []).length ? `<div class="text-[9px] text-sky-300 mt-0.5">edited &amp; approved: ${GCM.ui.esc(v.overrides.length)} field(s)</div>` : '';
+    return `<div class="space-y-1">${GCM.ui.verifyBadge(v)}${edited}
+      <div class="space-y-0.5">${GCM.ui.sourceLinks(v, 3)}</div>
+      <div class="text-[9px] text-slate-600 leading-tight">Authority portals are starting points, not rule citations.</div>
+      <button type="button" class="btn btn-ghost btn-sm !py-0.5 !px-1.5" data-action="review-verify" data-arg="${code}" data-scope="Record"><i data-lucide="badge-check" class="w-3 h-3"></i>Verify</button></div>`;
+  }
+
   function rowHtml(c) {
     const docs = (c.required_documents || []).map(d => `<span class="inline-block px-2 py-0.5 m-0.5 rounded bg-slate-800/90 border border-slate-700 text-slate-200 text-[10px] leading-tight">${GCM.ui.esc(d)}</span>`).join('');
     return `<tr>
@@ -83,6 +93,7 @@
       </div></td>
       <td><div class="max-w-md">${docs}</div></td>
       <td class="min-w-[140px]">${marksHtml(c)}</td>
+      <td class="min-w-[190px] max-w-[240px]">${verifyCell(c)}</td>
       <td class="text-center whitespace-nowrap">${c.local_rep_required ? '<span class="badge badge-critical">Mandatory</span>' : '<span class="text-slate-500 text-[10px]">No</span>'}</td>
       <td class="text-center whitespace-nowrap mono text-slate-300">${GCM.ui.esc(c.lead_time)} wk</td>
       <td class="text-right whitespace-nowrap"><div class="flex flex-col gap-1 items-end"><button class="btn btn-secondary btn-sm" data-action="country-factsheet" data-arg="${GCM.ui.esc(c.country_code)}">Fact sheet</button><button class="btn btn-ghost btn-sm" data-action="deeplink-country" data-arg="${GCM.ui.esc(c.country_code)}"><i data-lucide="globe-2" class="w-3.5 h-3.5"></i>Map</button></div></td>
@@ -91,16 +102,16 @@
 
   async function load() {
     const tbody = $('matrix-table-body'); if (!tbody) return;
-    tbody.innerHTML = `<tr><td colspan="9">${GCM.ui.skeleton(4)}</td></tr>`;
+    tbody.innerHTML = `<tr><td colspan="10">${GCM.ui.skeleton(4)}</td></tr>`;
     try {
       data = await GCM.api.get(`/api/gma/by-product?${params(false)}`);
       const s = data.summary || {};
       $('kpi-total').textContent = s.total ?? '—'; $('kpi-testing').textContent = s.testing_required ?? 0; $('kpi-document').textContent = s.document_required ?? 0;
       $('kpi-sdoc').textContent = (s.sdoc_required || 0) + (s.exempt || 0);
       $('matrix-display-count').textContent = data.countries.length; $('matrix-cat-name').textContent = data.category_name;
-      tbody.innerHTML = data.countries.length ? data.countries.map(rowHtml).join('') : `<tr><td colspan="9">${GCM.ui.empty('No jurisdictions match the current filters.', 'filter-x')}</td></tr>`;
+      tbody.innerHTML = data.countries.length ? data.countries.map(rowHtml).join('') : `<tr><td colspan="10">${GCM.ui.empty('No jurisdictions match the current filters.', 'filter-x')}</td></tr>`;
       GCM.ui.icons();
-    } catch (e) { tbody.innerHTML = `<tr><td colspan="9" class="text-center text-rose-400 py-6">${GCM.ui.esc(e.message)}</td></tr>`; }
+    } catch (e) { tbody.innerHTML = `<tr><td colspan="10" class="text-center text-rose-400 py-6">${GCM.ui.esc(e.message)}</td></tr>`; }
   }
 
   function exportExcel(all) { GCM.api.download(`/api/gma/export-excel?${params(!!all)}`, all ? 'Exporting all 205 jurisdictions…' : 'Exporting current view…'); }
@@ -108,7 +119,7 @@
   /* ------------------------------------------------------------- country fact sheet */
   async function openFactSheet(code) {
     const cat = $('matrix-product-selector')?.value || 'external_ssd_powered';
-    GCM.ui.openModal('modal-country-factsheet');
+    GCM.ui.openModal('modal-country-factsheet'); { const fm = $('modal-country-factsheet'); if (fm) fm.dataset.code = code; }
     const body = $('factsheet-body'); body.innerHTML = GCM.ui.skeleton(4);
     try {
       const d = await GCM.api.get(`/api/countries/${code}`);
@@ -116,6 +127,19 @@
       $('factsheet-flag').textContent = GCM.ui.flag(c.code); $('factsheet-country-name').textContent = `${c.name} (${c.code})`;
       $('factsheet-country-region').textContent = `${c.region} · ${c.authority} · Bloc: ${c.bloc || 'None'}`;
       $('factsheet-open-map').onclick = () => { GCM.ui.closeModal('modal-country-factsheet'); GCM.deeplink.country(c.code); };
+      const ver = d.verification || { overall: 'Unverified', per_pillar: {}, sources: [], overrides: [] };
+      const safeHref = (u) => (/^https?:\/\//i.test(String(u || '')) ? u : '#');
+      const editedTag = (f) => (ver.overrides || []).includes(f) ? ` <span class="pill text-sky-300 border-sky-800" title="Changed from the shipped value by an approved review item">edited &amp; approved</span> <button type="button" class="text-[10px] text-slate-500 hover:text-rose-300 underline" data-action="review-revert" data-arg="${GCM.ui.esc(c.code)}" data-field="${GCM.ui.esc(f)}">revert</button>` : '';
+      const pillarCell = (scope, field, label, cc) => {
+        const pv = (ver.per_pillar || {})[scope] || { status: 'Unverified' };
+        const cite = pv.source_url ? `<div class="leading-tight"><a href="${GCM.ui.esc(safeHref(pv.source_url))}" target="_blank" rel="noopener noreferrer" class="text-[11px] text-sky-400 hover:underline">${GCM.ui.esc(pv.source_label || 'Citation')}</a> <span class="text-[9px] text-slate-500">Reviewer citation</span></div>` : '';
+        const portals = (ver.sources || []).filter(s => s.kind !== 'Reviewer citation').slice(0, 2).map(s => `<div class="leading-tight"><a href="${GCM.ui.esc(safeHref(s.url))}" target="_blank" rel="noopener noreferrer" class="text-[11px] text-sky-400 hover:underline">${GCM.ui.esc(s.label)}</a> <span class="text-[9px] text-slate-500">${GCM.ui.esc(s.kind)}</span></div>`).join('');
+        return `<div class="bg-slate-800/40 border border-slate-700/70 rounded-lg p-3 space-y-1.5"><div class="text-[11px] text-slate-400">${label}</div>
+          <div class="text-slate-100 font-semibold">${GCM.ui.esc(cc[field])}${editedTag(field)}</div>
+          <div class="flex items-center gap-1.5 flex-wrap">${GCM.ui.verifyBadge({ verified_on: pv.verified_on, verified_by: pv.verified_by }, pv.status)}${pv.verified_by ? `<span class="text-[9px] text-slate-500">${GCM.ui.esc(pv.verified_by)}</span>` : ''}</div>
+          ${cite}${cite ? '' : (portals || '<div class="text-[10px] text-slate-500">No source recorded</div>')}
+          <div class="flex gap-1 pt-0.5"><button type="button" class="btn btn-ghost btn-sm !py-0.5 !px-1.5" data-action="review-verify" data-arg="${GCM.ui.esc(cc.code)}" data-scope="${scope}"><i data-lucide="badge-check" class="w-3 h-3"></i>Verify</button><button type="button" class="btn btn-ghost btn-sm !py-0.5 !px-1.5" data-action="review-propose" data-arg="${GCM.ui.esc(cc.code)}" data-field="${field}"><i data-lucide="pencil-line" class="w-3 h-3"></i>Propose change</button></div></div>`;
+      };
       const kv = (k, v, cls = '') => `<div class="bg-slate-800/70 border border-slate-700 p-3 rounded-lg"><div class="text-[10px] uppercase font-semibold text-slate-400">${k}</div><div class="text-xs font-bold mt-1 ${cls}">${v}</div></div>`;
       body.innerHTML = `
         <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
@@ -124,17 +148,22 @@
           ${kv('Local representative', c.local_rep_required ? 'Local legal entity mandatory' : 'Foreign applicant accepted', c.local_rep_required ? 'text-amber-300' : 'text-slate-200')}
           ${kv('Certificate validity', GCM.ui.esc(c.cert_validity || '—'), 'text-slate-200')}
         </div>
-        <div class="card !p-4 space-y-2">
-          <div class="section-title text-sky-400">Mandatory technical standards</div>
+        <div class="card !p-4 space-y-3">
+          <div class="flex items-center justify-between gap-2 flex-wrap"><div class="section-title text-sky-400">Mandatory technical standards, sources &amp; verification</div><div class="flex items-center gap-2">${GCM.ui.verifyBadge(ver)}<span class="text-[10px] text-slate-500">overall</span></div></div>
           <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs">
-            <div><div class="text-[11px] text-slate-400">Safety</div><div class="text-slate-100 font-semibold">${GCM.ui.esc(c.safety_std)}</div></div>
-            <div><div class="text-[11px] text-slate-400">EMC / Radio</div><div class="text-slate-100 font-semibold">${GCM.ui.esc(c.emc_std)}</div></div>
-            <div><div class="text-[11px] text-slate-400">Environmental</div><div class="text-slate-100 font-semibold">${GCM.ui.esc(c.env_std)}</div></div>
+            ${pillarCell('Safety', 'safety_std', 'Safety', c)}${pillarCell('EMC', 'emc_std', 'EMC / Radio', c)}${pillarCell('Environmental', 'env_std', 'Environmental', c)}
           </div>
-          <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 pt-2 text-[11px] text-slate-300">
-            <div><span class="text-slate-500">RoHS:</span> ${GCM.ui.esc(c.rohs_std || '—')}</div><div><span class="text-slate-500">PFAS / chemicals:</span> ${GCM.ui.esc(c.pfas_std || '—')}</div>
-            <div><span class="text-slate-500">Packaging:</span> ${GCM.ui.esc(c.packaging_std || '—')}</div><div><span class="text-slate-500">EPR / WEEE:</span> ${GCM.ui.esc(c.epr_std || '—')}</div>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 pt-2 text-[11px] text-slate-300 border-t border-slate-800">
+            <div><span class="text-slate-500">RoHS:</span> ${GCM.ui.esc(c.rohs_std || '—')}${editedTag('rohs_std')}</div><div><span class="text-slate-500">PFAS / chemicals:</span> ${GCM.ui.esc(c.pfas_std || '—')}${editedTag('pfas_std')}</div>
+            <div><span class="text-slate-500">Packaging:</span> ${GCM.ui.esc(c.packaging_std || '—')}${editedTag('packaging_std')}</div><div><span class="text-slate-500">EPR / WEEE:</span> ${GCM.ui.esc(c.epr_std || '—')}${editedTag('epr_std')}</div>
           </div>
+          <div class="flex flex-wrap items-center gap-2 pt-2 border-t border-slate-800 text-[11px]">
+            <span class="text-slate-500">Record (authority, notes, testing, lead time):</span>${GCM.ui.verifyBadge({ verified_on: (ver.per_pillar.Record || {}).verified_on, verified_by: (ver.per_pillar.Record || {}).verified_by }, (ver.per_pillar.Record || {}).status)}
+            <button type="button" class="btn btn-ghost btn-sm" data-action="review-verify" data-arg="${GCM.ui.esc(c.code)}" data-scope="Record"><i data-lucide="badge-check" class="w-3 h-3"></i>Verify</button>
+            <button type="button" class="btn btn-ghost btn-sm" data-action="review-propose" data-arg="${GCM.ui.esc(c.code)}" data-field="notes"><i data-lucide="pencil-line" class="w-3 h-3"></i>Propose change</button>
+            ${(ver.overrides || []).filter(f => !['safety_std', 'emc_std', 'env_std', 'rohs_std', 'pfas_std', 'packaging_std', 'epr_std'].includes(f)).map(f => `<span class="pill text-sky-300 border-sky-800">${GCM.ui.esc(f)}: edited &amp; approved</span><button type="button" class="text-[10px] text-slate-500 hover:text-rose-300 underline" data-action="review-revert" data-arg="${GCM.ui.esc(c.code)}" data-field="${GCM.ui.esc(f)}">revert</button>`).join('')}
+          </div>
+          <div class="text-[10px] text-slate-500 leading-snug">Pre-filled links are <strong class="text-slate-300">authority portals (starting points)</strong>, not citations of a specific rule. <em>Verified</em> only appears when a reviewer has recorded a citation URL (self-declared reviewer name, valid 12 months).</div>
         </div>
         <div><div class="section-title mb-2">Mandatory marks</div><div class="flex flex-wrap gap-2">${(c.marks || []).map(m => `<span class="px-3 py-1 rounded-lg bg-sky-950 border border-sky-800 text-sky-300 mono font-bold text-xs">${GCM.ui.esc(m)}</span>`).join('') || '<span class="text-slate-500 text-xs">None</span>'}</div></div>
         <div><div class="section-title mb-2">Requirement by product category</div><div class="table-wrap"><table class="table"><thead><tr><th>Category</th><th>Route</th><th>Applicable requirements &amp; exemptions</th><th>Lead time</th><th>Key documents</th></tr></thead><tbody>
@@ -163,6 +192,13 @@
       GCM.bus.on('action:action-for-country', ({ arg }) => GCM.actions.createFor('country', arg, { title: `Review market access requirements for ${GCM.state.countries[arg]?.name || arg}` }));
       GCM.bus.on('matrix:search', (q) => { $('matrix-search-input').value = q || ''; $('matrix-type-filter').value = 'all'; load(); });
       GCM.bus.on('matrix:category', (id) => { if ([...sel.options].some(o => o.value === id)) { sel.value = id; load(); } });
+      GCM.bus.on('countries:changed', () => { load(); const fm = $('modal-country-factsheet'); if (fm && !fm.classList.contains('hidden') && fm.dataset.code) setTimeout(() => openFactSheet(fm.dataset.code), 300); });
+      GCM.bus.on('action:review-revert', async ({ arg, el }) => {
+        const field = el.dataset.field;
+        if (!await GCM.ui.confirm(`Revert the approved edit of "${field}" for ${arg} to the shipped value? The revert is recorded in the audit trail.`, { okLabel: 'Revert', danger: true })) return;
+        try { await GCM.api.del(`/api/overrides/${encodeURIComponent(arg)}/${encodeURIComponent(field)}`); GCM.ui.toast('Reverted to shipped value', `${arg} · ${field}`, 'info'); GCM.bus.emit('review:changed'); GCM.bus.emit('countries:changed'); }
+        catch (e) { GCM.ui.toast('Could not revert', e.message, 'error'); }
+      });
       GCM.palette.register({ label: 'Export all 205 markets for current product (.xlsx)', icon: 'download', keywords: ['excel', 'export', '205'], run: () => exportExcel(true) });
     },
     onFirstShow() { load(); },

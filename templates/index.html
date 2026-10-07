@@ -56,6 +56,7 @@
                     <button type="button" role="tab" data-action="tab" data-arg="horizon" id="tab-btn-horizon" class="tab-btn"><i data-lucide="radar" class="w-4 h-4 text-indigo-400"></i><span>Horizon &amp; Risk</span></button>
                     <button type="button" role="tab" data-action="tab" data-arg="portfolio" id="tab-btn-portfolio" class="tab-btn"><i data-lucide="hard-drive" class="w-4 h-4 text-emerald-400"></i><span>Product Portfolio</span></button>
                     <button type="button" role="tab" data-action="tab" data-arg="docaudit" id="tab-btn-docaudit" class="tab-btn"><i data-lucide="file-search-2" class="w-4 h-4 text-purple-400"></i><span>Document Impact Audit</span></button>
+                    <button type="button" role="tab" data-action="tab" data-arg="review" id="tab-btn-review" class="tab-btn"><i data-lucide="clipboard-check" class="w-4 h-4 text-teal-400"></i><span>Review</span><span id="badge-review-pending" class="tab-count">0</span></button>
                 </nav>
             </div>
         </div>
@@ -73,6 +74,7 @@
         <section id="tab-content-horizon" class="tab-content hidden space-y-6" role="tabpanel">{% include 'partials/tab_horizon.html' %}</section>
         <section id="tab-content-portfolio" class="tab-content hidden space-y-6" role="tabpanel">{% include 'partials/tab_portfolio.html' %}</section>
         <section id="tab-content-docaudit" class="tab-content hidden space-y-6" role="tabpanel">{% include 'partials/tab_docaudit.html' %}</section>
+        <section id="tab-content-review" class="tab-content hidden space-y-6" role="tabpanel">{% include 'partials/tab_review.html' %}</section>
     </main>
 
     <footer class="border-t border-slate-800 py-4 text-center text-[11px] text-slate-500">
@@ -82,6 +84,7 @@
     <!-- ===================================================== SHARED MODALS -->
     {% include 'partials/modals_core.html' %}
     {% include 'partials/modal_explain.html' %}
+    {% include 'partials/modal_review.html' %}
 
     <!-- Top notification banner -->
     <div id="top-notification" class="fixed top-5 left-1/2 -translate-x-1/2 z-[60] hidden max-w-xl w-[92vw] sm:w-full glass border-2 border-emerald-500 text-white p-4 rounded-2xl shadow-2xl">
@@ -117,5 +120,6 @@
     <script src="{{ url_for('static', filename='js/app/horizon.js') }}?v={{ version }}"></script>
     <script src="{{ url_for('static', filename='js/app/portfolio.js') }}?v={{ version }}"></script>
     <script src="{{ url_for('static', filename='js/app/docaudit.js') }}?v={{ version }}"></script>
+    <script src="{{ url_for('static', filename='js/app/review.js') }}?v={{ version }}"></script>
 </body>
 </html>

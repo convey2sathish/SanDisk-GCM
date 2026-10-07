@@ -1,5 +1,19 @@
 # Changelog
 
+## Unreleased — Traceable, human-controlled regulatory content
+
+### Added
+* **Review tab** (Alt+8): a human approval queue. Nothing changes the knowledge base or creates an alert until a person approves it. KPI strip, pending cards, history, hash-chained audit trail with integrity badge.
+* **Source & verification column** in the matrix (and Excel: final column "Verification & sources") and per-pillar verification in every country fact sheet. Status is Verified / Needs re-verification / Partly verified / Unverified.
+* **Authority portals** (`kb_sources.json`, shipped): official home pages of the competent authorities for the key markets (US, CA, MX, BR, AR, CL, CO, GB, EU via one shared entry, CH, NO, TR, EAEU, UA, IN, CN, JP, KR, TW, AU/NZ, SG, MY, TH, VN, ID, SA, AE, IL, EG, ZA, NG, KE). They are starting points, not citations of a specific rule; countries without an entry show "No source recorded".
+* **Verification** by a human reviewer with a mandatory citation URL; expires after 12 months. **Proposals** to change a country field (reason + source URL required) become *edited & approved* overrides (`kb_overrides.json`) on top of the read-only seed when approved, and can be reverted.
+* Settings: **reviewer name** (self-declared, no logins in this tool) and optional **second-reviewer rule**.
+* API: `/api/review/queue|stats|audit|proposals`, `/api/review/queue/<id>/approve|reject`, `/api/verification/<code>`, `/api/overrides/<code>/<field>`; `verification` block on `/api/gma/by-product` rows and `/api/countries/<code>`.
+
+### Changed
+* Surveillance scans now **queue** detected notices for review (`queued_for_review`) instead of writing ledger entries and alerts directly; approval applies them. Rejected notices are never re-queued.
+* New data files in the data folder: `kb_overrides.json`, `kb_verification.json`, `review_queue.json`, `audit_trail.json`.
+
 ## 2.0.0 "Horizon" — 2026-09-22
 
 A ground-up rebuild on the same knowledge base. See `docs/REVIEW_REPORT.md` for every defect that

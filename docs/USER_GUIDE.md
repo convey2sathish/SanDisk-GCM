@@ -83,13 +83,24 @@ certificates with the buttons at the top.
 ## 8. Regulatory Surveillance
 The bar under the header shows the engine status. **Scan feeds now** queries the monitored gateways
 (WTO TBT, US Federal Register – OSHA NRTL / FCC / EPA, EUR-Lex, EAEU, GSO, …); relevant notices are
-scored, recorded in the **ledger** and turned into alerts with product impact. The ledger starts empty
-and is hash-chained; the dialog shows whether its integrity verifies. Settings → *Reset knowledge base*
-removes detected transitions from the country records.
+scored and queued for human review; once approved they are recorded in the **ledger** and turned into alerts with product impact. The ledger starts empty
+and is hash-chained; the dialog shows whether its integrity verifies. Detected notices are **not** applied
+automatically: they are queued in the **Review** tab and only an approval writes the ledger entry and creates the alert.
+
+## 9. Review & approvals (Alt+8)
+The Review tab keeps the knowledge base under human control.
+
+* **Pending queue** – cards for detected surveillance notices (title, authority, source link, pillar, detected standard, what approval would do) and for proposed data changes (country, field, current value *to* new value, reason, citation). Add a note and press **Approve** or **Reject** (a note is required to reject). Approving a change writes an *edited & approved* override and records the pillar as Verified with the proposal's source; approving a notice writes the ledger entry and creates the alert. A rejected notice is never queued again.
+* **Propose a change** – from a country fact sheet (or the matrix) press *Propose change*, pick the field, give the new value, a reason and a source URL. It changes nothing until approved. Edited fields show an *edited & approved* tag and a *revert* link that restores the shipped value.
+* **Verify** – press *Verify* next to a pillar (Safety, EMC, Environmental) or the whole Record, enter the citation URL of the official text you checked and save. The matrix shows Verified / Needs re-verification (older than 12 months) / Partly verified / Unverified.
+* **Source links** in the matrix are *authority portals (starting points)* – home pages of the competent authority, not citations of a specific rule. Countries without one show "No source recorded". Only a reviewer-recorded citation turns a record into *Verified*.
+* **Audit trail** – every proposal, decision, verification and revert is appended to a hash-chained trail; the badge shows whether the chain still verifies.
+* **Reviewer identity** – set your name in Settings. It is **self-declared**: this single-user tool has no logins, so the name is a label, not proof of identity. Optionally tick *Require a second reviewer* so the approver must use a different name than the proposer.
+* The Excel export adds a final column *Verification & sources* with the same status and links.
 
 ## Settings
-Company name, Anthropic API key and model (optional), auto-scan interval. The data folder path is shown;
+Company name, Anthropic API key and model (optional), auto-scan interval, reviewer name (self-declared) and the second-reviewer option. The data folder path is shown;
 copying that folder is a full backup.
 
 ## Keyboard shortcuts
-`Ctrl+K` search · `Alt+1…7` tabs · `Esc` close · `?` help
+`Ctrl+K` search · `Alt+1…8` tabs · `Esc` close · `?` help

@@ -22,11 +22,15 @@
       const r = await GCM.api.post('/api/surveillance/scan', {});
       const res = r.result || {};
       const online = res.network_reachable;
-      GCM.ui.toast(online ? 'Feed scan complete' : 'Scan finished offline',
-        online ? `${(res.sources_reachable || []).length}/${res.sources_scanned} gateways reachable · ${res.notices_detected} relevant notices · ${res.newly_applied_count} new` : 'No gateway reachable (offline or proxy). Knowledge base unchanged.', online ? 'success' : 'warning');
-      if (res.newly_applied_count > 0) {
-        GCM.ui.notify({ title: `${res.newly_applied_count} new regulatory notice(s) ingested`, body: (res.new_events || []).map(e => e.summary).join(' · ').slice(0, 220), scope: 'Applied to matrix, alerts and ledger', actions: [{ label: 'View alerts', run: () => GCM.tabs.switchTo('alerts') }] });
-        GCM.bus.emit('alerts:changed'); GCM.bus.emit('countries:changed');
+      const queued = res.queued_for_review || 0;
+      const openReview = { label: 'Open Review', run: () => GCM.tabs.switchTo('review') };
+      if (queued > 0) {
+        GCM.ui.toast(`${queued} notice(s) queued for human review`, `${(res.sources_reachable || []).length}/${res.sources_scanned} gateways reachable · ${res.notices_detected} relevant notices. Nothing is applied until you approve it.`, 'info', openReview);
+        GCM.ui.notify({ title: `${queued} regulatory notice(s) awaiting human review`, body: (res.new_events || []).map(e => e.summary).join(' · ').slice(0, 220), scope: 'Not applied yet: approve in the Review tab', actions: [openReview] });
+        GCM.bus.emit('review:changed');
+      } else {
+        GCM.ui.toast(online ? 'Feed scan complete' : 'Scan finished offline',
+          online ? `${(res.sources_reachable || []).length}/${res.sources_scanned} gateways reachable · ${res.notices_detected} relevant notices · none new to review` : 'No gateway reachable (offline or proxy). Knowledge base unchanged.', online ? 'success' : 'warning');
       }
       await loadStatus();
     } catch (e) { GCM.ui.toast('Scan failed', e.message, 'error'); }

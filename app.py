@@ -30,6 +30,8 @@ def create_app():
     config.ensure_data_dir()
     the_store = store_module.get_store()
     surveillance = reg_surveillance.get_surveillance_engine(db, store=the_store)
+    import kb_review
+    kb_review.init(db)  # apply human-approved overrides on top of the read-only seed
 
     app = Flask(
         __name__,
@@ -88,8 +90,9 @@ def create_app():
     import routes_alerts
     import routes_docaudit
     import routes_risk
+    import routes_review
 
-    for mod in (routes_core, routes_alerts, routes_docaudit, routes_risk):
+    for mod in (routes_core, routes_alerts, routes_docaudit, routes_risk, routes_review):
         mod.register(app, ctx)
         log.info("Registered %s", mod.__name__)
 

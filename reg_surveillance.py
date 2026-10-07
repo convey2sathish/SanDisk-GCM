@@ -252,7 +252,7 @@ class RegulatorySurveillanceEngine:
             "monitored_sources_count": len(self.active_sources),
             "total_jurisdictions_covered": 205,
             "pillars_monitored": ["Electrical Safety", "EMC & Radio", "Environmental & Chemical", "Cybersecurity"],
-            "auto_applied_events_count": len(log),
+            "auto_applied_events_count": len(log),  # events a human approved (kept key for compatibility)
             "ledger_ok": ok,
             "latest_event": log[0] if log else None,
         }
@@ -287,23 +287,27 @@ class RegulatorySurveillanceEngine:
             except Exception as e:  # parser must never break a scan
                 print(f"[Surveillance] parse error {source['id']}: {e}")
 
-        existing = {e.get("event_id") for e in self.get_audit_log(limit=10 ** 6)}
-        applied = []
+        # Detected notices never change the knowledge base or create alerts by themselves: they go to the
+        # human review queue (kb_review) and only an approval applies them (apply_approved_event).
+        import kb_review
+        existing = {e.get("event_id") for e in self.get_audit_log(limit=10 ** 6)} | kb_review.queued_event_ids()
+        queued = []
         for ev in detected:
-            if ev["event_id"] in existing or len(applied) >= max_new_events:
+            if ev.get("simulated") or ev["event_id"] in existing or len(queued) >= max_new_events:
                 continue
-            self._apply_event(ev, create_alert=True)
-            applied.append(ev)
+            if kb_review.enqueue_notice(ev):
+                existing.add(ev["event_id"])
+                queued.append(ev)
 
         self.last_scan_time = scan_ts
         network = "online" if reachable else "offline / corporate proxy"
         self.last_scan_status = (f"Completed {scan_ts}: {len(reachable)}/{len(self.active_sources)} gateways reachable ({network}); "
-                                 f"{len(detected)} storage-relevant notices found, {len(applied)} new event(s) ingested.")
+                                 f"{len(detected)} storage-relevant notices found, {len(queued)} queued for human review.")
         self.last_scan_result = {
             "scan_timestamp": scan_ts, "duration_s": round(time.time() - started, 1), "network_reachable": bool(reachable),
             "sources_reachable": reachable, "sources_unreachable": unreachable, "sources_scanned": len(self.active_sources),
-            "notices_detected": len(detected), "newly_applied_count": len(applied),
-            "new_events": [{"event_id": e["event_id"], "summary": e.get("summary"), "pillar": e.get("pillar"), "source_name": e.get("source_name")} for e in applied],
+            "notices_detected": len(detected), "newly_applied_count": 0, "queued_for_review": len(queued),
+            "new_events": [{"event_id": e["event_id"], "summary": e.get("summary"), "pillar": e.get("pillar"), "source_name": e.get("source_name")} for e in queued],
             "status": self.last_scan_status, "total_surveilled_events": len(self.get_audit_log(limit=10 ** 6)),
         }
         return self.last_scan_result
@@ -438,6 +442,10 @@ class RegulatorySurveillanceEngine:
             event["alert"] = self._create_alert_from_event(event)
         self._append_to_audit_log({k: v for k, v in event.items() if k not in ("alert",)})
         return event
+
+    def apply_approved_event(self, event):
+        """Called only after a human approved the queued notice: ledger entry + enriched alert."""
+        return self._apply_event(event, create_alert=True)
 
     def _create_alert_from_event(self, event):
         pillar = event.get("pillar", "Safety")

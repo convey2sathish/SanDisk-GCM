@@ -1,0 +1,457 @@
+{
+  "_note": "Authority portals are STARTING POINTS (home pages of the competent authorities), not citations of any specific rule. A country shows 'Verified' only when a human reviewer records a citation URL in the Review workflow. Only portal home pages are listed; no deep links.",
+  "groups": {
+    "EU": {
+      "label": "European Union (shared across all member states)",
+      "members": [
+        "AT",
+        "BE",
+        "BG",
+        "HR",
+        "CY",
+        "CZ",
+        "DK",
+        "EE",
+        "FI",
+        "FR",
+        "DE",
+        "GR",
+        "HU",
+        "IE",
+        "IT",
+        "LV",
+        "LT",
+        "LU",
+        "MT",
+        "NL",
+        "PL",
+        "PT",
+        "RO",
+        "SK",
+        "SI",
+        "ES",
+        "SE"
+      ],
+      "sources": [
+        {
+          "label": "EUR-Lex (EU law)",
+          "url": "https://eur-lex.europa.eu",
+          "kind": "Authority portal"
+        },
+        {
+          "label": "ECHA (chemicals: REACH / SCIP / POPs)",
+          "url": "https://echa.europa.eu",
+          "kind": "Authority portal"
+        },
+        {
+          "label": "European Commission - product rules",
+          "url": "https://single-market-economy.ec.europa.eu",
+          "kind": "Authority portal"
+        }
+      ]
+    },
+    "EAEU": {
+      "label": "Eurasian Economic Union (EAC)",
+      "members": [
+        "RU",
+        "BY",
+        "KZ",
+        "AM",
+        "KG"
+      ],
+      "sources": [
+        {
+          "label": "Eurasian Economic Commission (EAEU technical regulations)",
+          "url": "https://eec.eaeunion.org",
+          "kind": "Authority portal"
+        }
+      ]
+    }
+  },
+  "countries": {
+    "US": [
+      {
+        "label": "FCC (equipment authorization)",
+        "url": "https://www.fcc.gov",
+        "kind": "Authority portal"
+      },
+      {
+        "label": "OSHA (NRTL program)",
+        "url": "https://www.osha.gov",
+        "kind": "Authority portal"
+      },
+      {
+        "label": "US EPA (TSCA / chemicals)",
+        "url": "https://www.epa.gov",
+        "kind": "Authority portal"
+      }
+    ],
+    "CA": [
+      {
+        "label": "ISED Canada (radio / EMC)",
+        "url": "https://ised-isde.canada.ca",
+        "kind": "Authority portal"
+      },
+      {
+        "label": "Standards Council of Canada",
+        "url": "https://www.scc.ca",
+        "kind": "Authority portal"
+      }
+    ],
+    "MX": [
+      {
+        "label": "Secretaria de Economia (NOM)",
+        "url": "https://www.gob.mx/se",
+        "kind": "Authority portal"
+      },
+      {
+        "label": "IFT (telecom / radio)",
+        "url": "https://www.ift.org.mx",
+        "kind": "Authority portal"
+      }
+    ],
+    "BR": [
+      {
+        "label": "ANATEL (telecom homologation)",
+        "url": "https://www.gov.br/anatel",
+        "kind": "Authority portal"
+      },
+      {
+        "label": "INMETRO (conformity)",
+        "url": "https://www.gov.br/inmetro",
+        "kind": "Authority portal"
+      }
+    ],
+    "AR": [
+      {
+        "label": "ENACOM (telecom)",
+        "url": "https://www.enacom.gob.ar",
+        "kind": "Authority portal"
+      }
+    ],
+    "CL": [
+      {
+        "label": "SEC Chile (electrical safety)",
+        "url": "https://www.sec.cl",
+        "kind": "Authority portal"
+      },
+      {
+        "label": "SUBTEL (telecom)",
+        "url": "https://www.subtel.gob.cl",
+        "kind": "Authority portal"
+      }
+    ],
+    "CO": [
+      {
+        "label": "SIC Colombia (technical regulations)",
+        "url": "https://www.sic.gov.co",
+        "kind": "Authority portal"
+      },
+      {
+        "label": "Ministerio de Minas y Energia (RETIE)",
+        "url": "https://www.minenergia.gov.co",
+        "kind": "Authority portal"
+      }
+    ],
+    "GB": [
+      {
+        "label": "GOV.UK (UKCA / product safety)",
+        "url": "https://www.gov.uk",
+        "kind": "Authority portal"
+      },
+      {
+        "label": "legislation.gov.uk",
+        "url": "https://www.legislation.gov.uk",
+        "kind": "Authority portal"
+      }
+    ],
+    "CH": [
+      {
+        "label": "SECO (technical trade barriers)",
+        "url": "https://www.seco.admin.ch",
+        "kind": "Authority portal"
+      },
+      {
+        "label": "BAKOM / OFCOM (radio, EMC)",
+        "url": "https://www.bakom.admin.ch",
+        "kind": "Authority portal"
+      }
+    ],
+    "NO": [
+      {
+        "label": "Nkom (radio / EMC)",
+        "url": "https://www.nkom.no",
+        "kind": "Authority portal"
+      },
+      {
+        "label": "DSB (electrical safety)",
+        "url": "https://www.dsb.no",
+        "kind": "Authority portal"
+      }
+    ],
+    "TR": [
+      {
+        "label": "Ministry of Trade",
+        "url": "https://www.ticaret.gov.tr",
+        "kind": "Authority portal"
+      },
+      {
+        "label": "BTK (telecom)",
+        "url": "https://www.btk.gov.tr",
+        "kind": "Authority portal"
+      },
+      {
+        "label": "TSE (standards)",
+        "url": "https://www.tse.org.tr",
+        "kind": "Authority portal"
+      }
+    ],
+    "UA": [
+      {
+        "label": "Ministry of Economy of Ukraine",
+        "url": "https://www.me.gov.ua",
+        "kind": "Authority portal"
+      }
+    ],
+    "IN": [
+      {
+        "label": "BIS (Bureau of Indian Standards)",
+        "url": "https://www.bis.gov.in",
+        "kind": "Authority portal"
+      },
+      {
+        "label": "BIS CRS portal",
+        "url": "https://www.crsbis.in",
+        "kind": "Authority portal"
+      },
+      {
+        "label": "MeitY",
+        "url": "https://meity.gov.in",
+        "kind": "Authority portal"
+      }
+    ],
+    "CN": [
+      {
+        "label": "SAMR",
+        "url": "https://www.samr.gov.cn",
+        "kind": "Authority portal"
+      },
+      {
+        "label": "CNCA (CCC certification)",
+        "url": "https://www.cnca.gov.cn",
+        "kind": "Authority portal"
+      }
+    ],
+    "JP": [
+      {
+        "label": "METI (PSE / DENAN)",
+        "url": "https://www.meti.go.jp",
+        "kind": "Authority portal"
+      },
+      {
+        "label": "VCCI (EMC)",
+        "url": "https://www.vcci.jp",
+        "kind": "Authority portal"
+      }
+    ],
+    "KR": [
+      {
+        "label": "KATS (KC safety)",
+        "url": "https://www.kats.go.kr",
+        "kind": "Authority portal"
+      },
+      {
+        "label": "RRA (KC EMC / radio)",
+        "url": "https://www.rra.go.kr",
+        "kind": "Authority portal"
+      }
+    ],
+    "TW": [
+      {
+        "label": "BSMI",
+        "url": "https://www.bsmi.gov.tw",
+        "kind": "Authority portal"
+      }
+    ],
+    "AU": [
+      {
+        "label": "ACMA (RCM / EMC)",
+        "url": "https://www.acma.gov.au",
+        "kind": "Authority portal"
+      },
+      {
+        "label": "ERAC (electrical safety)",
+        "url": "https://www.erac.gov.au",
+        "kind": "Authority portal"
+      }
+    ],
+    "NZ": [
+      {
+        "label": "ACMA (RCM / EMC, trans-Tasman)",
+        "url": "https://www.acma.gov.au",
+        "kind": "Authority portal"
+      },
+      {
+        "label": "ERAC (electrical safety, trans-Tasman)",
+        "url": "https://www.erac.gov.au",
+        "kind": "Authority portal"
+      },
+      {
+        "label": "RSM New Zealand (radio spectrum)",
+        "url": "https://www.rsm.govt.nz",
+        "kind": "Authority portal"
+      }
+    ],
+    "SG": [
+      {
+        "label": "IMDA (telecom / radio)",
+        "url": "https://www.imda.gov.sg",
+        "kind": "Authority portal"
+      },
+      {
+        "label": "Enterprise Singapore",
+        "url": "https://www.enterprisesg.gov.sg",
+        "kind": "Authority portal"
+      }
+    ],
+    "MY": [
+      {
+        "label": "MCMC (SIRIM / telecom)",
+        "url": "https://www.mcmc.gov.my",
+        "kind": "Authority portal"
+      },
+      {
+        "label": "Energy Commission Malaysia",
+        "url": "https://www.st.gov.my",
+        "kind": "Authority portal"
+      }
+    ],
+    "TH": [
+      {
+        "label": "NBTC (telecom)",
+        "url": "https://www.nbtc.go.th",
+        "kind": "Authority portal"
+      },
+      {
+        "label": "TISI (industrial standards)",
+        "url": "https://www.tisi.go.th",
+        "kind": "Authority portal"
+      }
+    ],
+    "VN": [
+      {
+        "label": "Ministry of Industry and Trade",
+        "url": "https://www.moit.gov.vn",
+        "kind": "Authority portal"
+      }
+    ],
+    "ID": [
+      {
+        "label": "SDPPI / Postel (telecom)",
+        "url": "https://www.postel.go.id",
+        "kind": "Authority portal"
+      },
+      {
+        "label": "BSN (SNI standards)",
+        "url": "https://www.bsn.go.id",
+        "kind": "Authority portal"
+      }
+    ],
+    "SA": [
+      {
+        "label": "SASO",
+        "url": "https://www.saso.gov.sa",
+        "kind": "Authority portal"
+      },
+      {
+        "label": "SABER platform",
+        "url": "https://saber.sa",
+        "kind": "Authority portal"
+      }
+    ],
+    "AE": [
+      {
+        "label": "MoIAT (ECAS / EQM)",
+        "url": "https://www.moiat.gov.ae",
+        "kind": "Authority portal"
+      },
+      {
+        "label": "TDRA (radio / telecom)",
+        "url": "https://tdra.gov.ae",
+        "kind": "Authority portal"
+      }
+    ],
+    "IL": [
+      {
+        "label": "Standards Institution of Israel",
+        "url": "https://www.sii.org.il",
+        "kind": "Authority portal"
+      }
+    ],
+    "EG": [
+      {
+        "label": "EOS (Egyptian Organization for Standardization)",
+        "url": "https://www.eos.org.eg",
+        "kind": "Authority portal"
+      },
+      {
+        "label": "NTRA (telecom)",
+        "url": "https://www.ntra.gov.eg",
+        "kind": "Authority portal"
+      }
+    ],
+    "ZA": [
+      {
+        "label": "NRCS (compulsory specifications)",
+        "url": "https://www.nrcs.org.za",
+        "kind": "Authority portal"
+      },
+      {
+        "label": "ICASA (telecom)",
+        "url": "https://www.icasa.org.za",
+        "kind": "Authority portal"
+      }
+    ],
+    "NG": [
+      {
+        "label": "SON (Standards Organisation of Nigeria)",
+        "url": "https://son.gov.ng",
+        "kind": "Authority portal"
+      },
+      {
+        "label": "NCC (telecom)",
+        "url": "https://www.ncc.gov.ng",
+        "kind": "Authority portal"
+      }
+    ],
+    "KE": [
+      {
+        "label": "KEBS (Kenya Bureau of Standards)",
+        "url": "https://www.kebs.org",
+        "kind": "Authority portal"
+      },
+      {
+        "label": "Communications Authority of Kenya",
+        "url": "https://www.ca.go.ke",
+        "kind": "Authority portal"
+      }
+    ]
+  },
+  "global": [
+    {
+      "label": "IECEE CB Scheme",
+      "url": "https://www.iecee.org",
+      "kind": "Standards body"
+    },
+    {
+      "label": "IEC (International Electrotechnical Commission)",
+      "url": "https://www.iec.ch",
+      "kind": "Standards body"
+    },
+    {
+      "label": "CISPR (EMC standards, published via IEC)",
+      "url": "https://www.iec.ch",
+      "kind": "Standards body"
+    }
+  ]
+}
